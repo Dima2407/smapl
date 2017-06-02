@@ -1,9 +1,9 @@
-package com.smapl_android;
+package com.smapl_android.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import com.smapl_android.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
