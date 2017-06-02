@@ -1,6 +1,8 @@
 package com.smapl_android.core;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import com.smapl_android.R;
 import com.smapl_android.net.NetworkService;
@@ -13,9 +15,12 @@ public class CoreService {
 
     private final NetworkService networkServiceImpl;
 
+    private Handler uiHandler;
+
     public CoreService(Context rootContext) {
         this.rootContext = rootContext;
         this.networkServiceImpl = NetworkServiceFactory.create(true);
+        this.uiHandler = new Handler(Looper.getMainLooper());
     }
 
     public void login(String login, String password, final Callback<Boolean, String> callback) {
@@ -35,12 +40,23 @@ public class CoreService {
         }
         networkServiceImpl.login(login, password, new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
             @Override
-            public void onResult(LoginResponse result, Throwable error) {
+            public void onResult(LoginResponse result, final Throwable error) {
                 if (callback != null) {
                     if(error != null){
-                        callback.onError(error.getMessage());
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onError(error.getMessage());
+                            }
+                        });
+
                     }else {
-                        callback.onSuccess(true);
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onSuccess(true);
+                            }
+                        });
                     }
                 }
             }

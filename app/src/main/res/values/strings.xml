@@ -2,4 +2,6 @@
     <string name="app_name">smapl-android</string>
     <string name="error_empty_login">Login can\'t be empty</string>
     <string name="error_empty_password">Password can\'t be empty</string>
+    <string name="login">Login</string>
+    <string name="wait_login">Waiting!</string>
 </resources>
