@@ -2,6 +2,8 @@ package com.smapl_android.net;
 
 import android.util.Log;
 import com.smapl_android.net.responses.LoginResponse;
+import com.smapl_android.net.responses.RegistrationResponse;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,6 +55,39 @@ class NetworkServiceImpl implements NetworkService {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void registration(String phoneNumber, String password, final OnResultCallback<RegistrationResponse, Throwable> callback) {
+        final Call<RegistrationResponse> responseCall = apiService.registration(phoneNumber, password);
+        responseCall.enqueue(new Callback<RegistrationResponse>() {
+            @Override
+            public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
+                if (response.isSuccessful()){
+                    if (callback != null){
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                           errorMessage = e.getMessage();
+                            Log.e(TAG,"onResponse: ", e);
+                        }
+                        callback.onResult(null, new Exception(errorMessage));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegistrationResponse> call, Throwable t) {
+                if (callback != null){
                     callback.onResult(null, t);
                 }
             }

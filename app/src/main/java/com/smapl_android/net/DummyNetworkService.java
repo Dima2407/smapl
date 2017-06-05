@@ -1,6 +1,7 @@
 package com.smapl_android.net;
 
 import com.smapl_android.net.responses.LoginResponse;
+import com.smapl_android.net.responses.RegistrationResponse;
 
 class DummyNetworkService implements NetworkService{
     @Override
@@ -14,6 +15,25 @@ class DummyNetworkService implements NetworkService{
                         callback.onResult(new LoginResponse(), null);
                     }else {
                         callback.onResult(null, new Exception("hoho"));
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    @Override
+    public void registration(final String phoneNumber, String password, final OnResultCallback<RegistrationResponse, Throwable> callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    if ("1111111111".equals(phoneNumber)){
+                        callback.onResult(new RegistrationResponse(), null);
+                    } else {
+                        callback.onResult(null, new Exception("phoneNumber isn't equals 1111111111"));
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
