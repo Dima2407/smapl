@@ -32,6 +32,19 @@ public class LoginFragment extends BaseFragment {
             }
         });
 
+        view.findViewById(R.id.btn_go_to_registration).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toRegistration();
+            }
+        });
+    }
+
+    private void toRegistration() {
+        RegistrationFragment registrationFragment = new RegistrationFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(android.R.id.content, registrationFragment)
+                .commit();
     }
 
     private void handleLogin() {

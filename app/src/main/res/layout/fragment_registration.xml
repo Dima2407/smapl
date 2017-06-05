@@ -5,16 +5,19 @@
 
     <EditText
         android:id="@+id/edit_phone_number"
+        android:inputType="phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/edit_password"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btn_registration"
+        android:text="@string/registration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
