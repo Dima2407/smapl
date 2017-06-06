@@ -6,16 +6,26 @@
     <EditText
             android:id="@+id/edit_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            />
 
     <EditText
             android:id="@+id/edit_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            />
     <Button
             android:id="@+id/btn_login"
             android:text="@string/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_go_to_registration"
+        android:text="@string/registration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
