@@ -43,7 +43,7 @@ public class RegistrationFragment extends BaseFragment {
         String phoneNamber = phoneNumberEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         showProgress(getString(R.string.app_name), getString(R.string.wait_login));
-        getCoreService().registration(phoneNamber, password, new CoreService.Callback<Boolean, String>() {
+        getCoreService().registration(phoneNamber, password, new CoreService.Callback<Boolean>() {
             @Override
             public void onError(String error) {
                 hideProgress();

@@ -1,67 +1,53 @@
 package com.smapl_android.ui.fragments;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import com.smapl_android.R;
+import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.CoreService;
+import com.smapl_android.core.SuccessOutput;
+import com.smapl_android.databinding.FragmentLoginBinding;
+import com.smapl_android.model.LoginInfo;
+import com.smapl_android.ui.CoreActivity;
 
 public class LoginFragment extends BaseFragment {
-
-    private EditText loginEditText;
-    private EditText passwordEditText;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        FragmentLoginBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
+        binding.setUser(new LoginInfo());
+        binding.setPresenter(new Presenter());
+        return binding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        loginEditText = (EditText) view.findViewById(R.id.edit_login);
-        passwordEditText = (EditText) view.findViewById(R.id.edit_password);
-        view.findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleLogin();
-            }
-        });
+    public class Presenter {
+        public void onLoginClicked(LoginInfo loginInfo) {
 
-        view.findViewById(R.id.btn_go_to_registration).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toRegistration();
-            }
-        });
-    }
+            final CoreRequest<Boolean> request = getCoreService()
+                    .newRequest(getCoreActivity());
+            request
+                    .withLoading(R.string.wait_login)
+                    .handleErrorAsDialog()
+                    .handleSuccess(new SuccessOutput<Boolean>() {
+                        @Override
+                        public void onSuccess(Boolean result) {
 
-    private void toRegistration() {
-        RegistrationFragment registrationFragment = new RegistrationFragment();
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, registrationFragment)
-                .commit();
-    }
+                        }
+                    });
+            getCoreService()
+                    .login(loginInfo.getPhone().get(), loginInfo.getPassword().get(), request);
+        }
 
-    private void handleLogin() {
-        String login = loginEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        showProgress(getString(R.string.app_name), getString(R.string.wait_login));
-        getCoreService().login(login, password, new CoreService.Callback<Boolean, String>() {
-            @Override
-            public void onError(String error) {
-                hideProgress();
-                showMessage(getString(R.string.app_name), error);
-            }
-
-            @Override
-            public void onSuccess(Boolean result) {
-                hideProgress();
-            }
-        });
+        public void onRegistrationClicked() {
+            RegistrationFragment registrationFragment = new RegistrationFragment();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(android.R.id.content, registrationFragment)
+                    .commit();
+        }
     }
 }
