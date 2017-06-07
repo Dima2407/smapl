@@ -1,0 +1,14 @@
+package com.smapl_android.net.responses;
+
+
+import com.google.gson.annotations.SerializedName;
+
+public class SendMessageResponse {
+
+    @SerializedName("message")
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+}
