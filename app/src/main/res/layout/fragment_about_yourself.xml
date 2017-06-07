@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/edit_about_yourself_name"
+        android:text="@string/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RadioGroup
+        android:id="@+id/radio_group_about_yourself_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:text="@string/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/radio_about_yourself_man"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/radio_about_yourself_woman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spinner_about_yourself_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/age"
+        >
+    </Spinner>
+
+    <Spinner
+        android:id="@+id/spinner_about_yourself_car_brand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/car_brand"
+        >
+    </Spinner>
+
+    <EditText
+        android:id="@+id/edit_about_yourself_car_model"
+        android:text="@string/car_model"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
+    <EditText
+        android:id="@+id/edit_about_yourself_car_yaer_of_issue"
+        android:text="@string/car_year_of_issue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:maxLength="4"
+        />
+
+    <Spinner
+        android:id="@+id/spinner_about_yourself_car_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/car_color"
+        >
+    </Spinner>
+
+    <ListView
+        android:id="@+id/list_about_yourself_interests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/interests"
+        android:choiceMode="multipleChoice"
+        >
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+    <Button
+        android:id="@+id/btn_about_yourself_cancel"
+        android:text="@string/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_about_yourself_forward"
+        android:text="@string/forward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

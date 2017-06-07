@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validators;
+import com.smapl_android.models.User;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.responses.LoginResponse;
@@ -63,13 +64,13 @@ public class CoreService {
         });
     }
 
-    public void registration(String phoneNumber, String password, final CoreRequest<Boolean> successOutput) {
+    public void registration(User user, final CoreRequest<Boolean> successOutput) {
         try {
             Validators.getPhoneValidator(rootContext)
-                    .validate(phoneNumber);
+                    .validate(user.getPhoneNumber());
 
             Validators.getPasswordValidator(rootContext)
-                    .validate(password);
+                    .validate(user.getPassword());
         } catch (ValidationException e) {
             if (successOutput != null) {
                 successOutput.processError(e.getMessage());
@@ -77,7 +78,7 @@ public class CoreService {
             return;
         }
 
-        networkServiceImpl.registration(phoneNumber, password, new NetworkService.OnResultCallback<RegistrationResponse, Throwable>() {
+        networkServiceImpl.registration(user, new NetworkService.OnResultCallback<RegistrationResponse, Throwable>() {
             @Override
             public void onResult(RegistrationResponse result, final Throwable error) {
                 if (successOutput != null) {
