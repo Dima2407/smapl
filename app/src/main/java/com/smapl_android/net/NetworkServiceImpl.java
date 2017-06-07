@@ -1,6 +1,8 @@
 package com.smapl_android.net;
 
 import android.util.Log;
+
+import com.smapl_android.models.User;
 import com.smapl_android.net.responses.LoginResponse;
 import com.smapl_android.net.responses.RegistrationResponse;
 
@@ -15,6 +17,8 @@ import java.io.IOException;
 class NetworkServiceImpl implements NetworkService {
 
     private final static String TAG = NetworkServiceImpl.class.getSimpleName();
+    private static final String GENDER_MAN = "man";
+    private static final String GENDER_WOMAN = "woman";
 
     private final ApiService apiService;
 
@@ -62,8 +66,15 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void registration(String phoneNumber, String password, final OnResultCallback<RegistrationResponse, Throwable> callback) {
-        final Call<RegistrationResponse> responseCall = apiService.registration(phoneNumber, password);
+    public void registration(User user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
+
+        int age = 18; //dummy
+
+        String interests = user.getInterests().toString(); // dummy
+
+        final Call<RegistrationResponse> responseCall = apiService.registration(user.getPhoneNumber(), user.getPassword(),
+                user.getName(), user.isGender() ? GENDER_MAN : GENDER_WOMAN, age, user.getCarBrand(), user.getCarModel(),
+                user.getCarYearOfIssue(), user.getColor(), interests);
         responseCall.enqueue(new Callback<RegistrationResponse>() {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {

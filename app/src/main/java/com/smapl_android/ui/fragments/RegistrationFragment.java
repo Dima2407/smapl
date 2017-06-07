@@ -1,5 +1,6 @@
 package com.smapl_android.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -42,19 +43,16 @@ public class RegistrationFragment extends BaseFragment {
     private void handleRegistration() {
         String phoneNamber = phoneNumberEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-        showProgress(getString(R.string.app_name), getString(R.string.wait_login));
-        getCoreService().registration(phoneNamber, password, new CoreService.Callback<Boolean, String>() {
-            @Override
-            public void onError(String error) {
-                hideProgress();
-                showMessage(getString(R.string.app_name), error);
-            }
 
-            @Override
-            public void onSuccess(Boolean result) {
-                hideProgress();
-            }
-        });
+        AboutYourselfFragment aboutYourselfFragment = new AboutYourselfFragment();
 
+        Bundle bundle = new Bundle();
+        bundle.putString("phoneNumber", phoneNamber);
+        bundle.putString("password", password);
+        aboutYourselfFragment.setArguments(bundle);
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(android.R.id.content, aboutYourselfFragment)
+                .commit();
     }
 }

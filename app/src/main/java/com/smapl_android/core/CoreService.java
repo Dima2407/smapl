@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 import com.smapl_android.R;
+import com.smapl_android.models.User;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.responses.LoginResponse;
@@ -72,15 +73,15 @@ public class CoreService {
         });
     }
 
-    public void registration(String phoneNumber, String password, final Callback<Boolean, String> callback){
-        if (TextUtils.isEmpty(phoneNumber)){
+    public void registration(User user, final Callback<Boolean, String> callback){
+        if (TextUtils.isEmpty(user.getPhoneNumber())){
 
             if (callback != null){
                 callback.onError(rootContext.getString(R.string.error_empty_phone_number));
             }
             return;
         }
-        if (TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(user.getPassword())){
 
             if (callback != null){
                 callback.onError(rootContext.getString(R.string.error_empty_password));
@@ -88,25 +89,25 @@ public class CoreService {
             return;
         }
 
-        if (phoneNumber.length() < MIN_PHONE_NUMBER_LENGHT){
+        if (user.getPhoneNumber().length() < MIN_PHONE_NUMBER_LENGHT){
             if (callback != null)
                 callback.onError(rootContext.getString(R.string.error_phone_number_short));
             return;
         }
 
-        if (!Patterns.PHONE.matcher(phoneNumber).matches()){
+        if (!Patterns.PHONE.matcher(user.getPhoneNumber()).matches()){
             if (callback != null)
                 callback.onError(rootContext.getString(R.string.error_wrong_phone_number));
             return;
         }
 
-        if (password.length() < MIN_PASSWORD_LENGHT){
+        if (user.getPassword().length() < MIN_PASSWORD_LENGHT){
             if (callback != null)
                 callback.onError(rootContext.getString(R.string.error_password_short));
             return;
         }
 
-        networkServiceImpl.registration(phoneNumber, password, new NetworkService.OnResultCallback<RegistrationResponse, Throwable>() {
+        networkServiceImpl.registration(user, new NetworkService.OnResultCallback<RegistrationResponse, Throwable>() {
             @Override
             public void onResult(RegistrationResponse result, final Throwable error) {
                 if (callback != null){

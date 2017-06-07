@@ -1,5 +1,6 @@
 package com.smapl_android.net;
 
+import com.smapl_android.models.User;
 import com.smapl_android.net.responses.LoginResponse;
 import com.smapl_android.net.responses.RegistrationResponse;
 
@@ -24,7 +25,9 @@ class DummyNetworkService implements NetworkService{
     }
 
     @Override
-    public void registration(final String phoneNumber, String password, final OnResultCallback<RegistrationResponse, Throwable> callback) {
+    public void registration(User user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
+        final String phoneNumber = user.getPhoneNumber();
+        final String password = user.getPassword();
         new Thread(new Runnable() {
             @Override
             public void run() {

@@ -9,4 +9,52 @@
     <string name="error_phone_number_short">The phone number is too short</string>
     <string name="error_password_short">The password is too short</string>
     <string name="registration">registration</string>
+    <string name="cancel">cancel</string>
+    <string name="forward">forward</string>
+    <string name="name">Имя</string>
+    <string name="gender">Пол</string>
+    <string name="car_model">Модель машины</string>
+    <string name="car_year_of_issue">Год выпуска</string>
+
+    <string-array name="age">
+        <item>до 18</item>
+        <item>18-25</item>
+        <item>25-30</item>
+        <item>30-35</item>
+        <item>35-40</item>
+        <item>40-50</item>
+        <item>больше 50</item>
+    </string-array>
+
+    <string-array name="car_brand">
+        <item>Acura</item>
+        <item>Alfa Romeo</item>
+        <item>Alpina</item>
+        <item>Aro</item>
+        <item>Asia</item>
+        <item>Aston Martin</item>
+        <item>Audi</item>
+        <item>Austin</item>
+        <item>BAW</item>
+    </string-array>
+
+    <string-array name="car_color">
+        <item>красный</item>
+        <item>оранжевый</item>
+        <item>желтый</item>
+        <item>зеленый</item>
+        <item>голубой</item>
+        <item>синий</item>
+        <item>фиолетовый</item>
+        <item>серый</item>
+        <item>белый</item>
+        <item>черный</item>
+    </string-array>
+
+    <string-array name="interests">
+        <item>спорт</item>
+        <item>игры</item>
+        <item>автомобили</item>
+        <item>активный отдых</item>
+    </string-array>
 </resources>
