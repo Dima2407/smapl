@@ -14,7 +14,9 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.smapl_android.R;
+import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.CoreService;
+import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.models.User;
 
 import java.util.ArrayList;
@@ -76,7 +78,7 @@ public class AboutYourselfFragment extends BaseFragment {
         user.setPhoneNumber(phoneNumber);
         user.setPassword(password);
         user.setName(name.getText().toString());
-        user.setGender(gender.getCheckedRadioButtonId() == R.id.radio_about_yourself_man ? true : false);
+        user.setGender(gender.getCheckedRadioButtonId() == R.id.radio_about_yourself_man);
         String strAge = age.getSelectedItem().toString();
         User.Age ageEnum = null;
         for (int i = 0; i < getResources().getStringArray(R.array.age).length; i++){
@@ -102,18 +104,18 @@ public class AboutYourselfFragment extends BaseFragment {
             stringInterests[i] = interests.get(i);
         }
         user.setInterests(stringInterests);
-        showProgress(getString(R.string.app_name), getString(R.string.wait_login));
-        getCoreService().registration(user, new CoreService.Callback<Boolean, String>() {
-            @Override
-            public void onError(String error) {
-                hideProgress();
-                showMessage(getString(R.string.app_name), error);
-            }
 
-            @Override
-            public void onSuccess(Boolean result) {
-                hideProgress();
-            }
-        });
+        final CoreRequest<Boolean> request = getCoreService()
+                .newRequest(getCoreActivity());
+        request
+                .withLoading(R.string.wait_login)
+                .handleErrorAsDialog()
+                .handleSuccess(new SuccessOutput<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean result) {
+
+                    }
+                });
+        getCoreService().registration(user, request);
     }
 }
