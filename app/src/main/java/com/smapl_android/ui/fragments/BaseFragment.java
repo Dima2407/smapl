@@ -1,49 +1,51 @@
 package com.smapl_android.ui.fragments;
 
-import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import com.smapl_android.core.CoreService;
-import com.smapl_android.ui.BaseActivity;
+import com.smapl_android.ui.CoreActivity;
 
 public abstract class BaseFragment extends Fragment {
 
     protected CoreService getCoreService() {
+        return getCoreActivity().getCoreService();
+    }
+
+    protected CoreActivity getCoreActivity() {
         final FragmentActivity activity = getActivity();
-        if (activity instanceof BaseActivity) {
-            BaseActivity baseActivity = (BaseActivity) activity;
-            return baseActivity.getCoreService();
+        if (activity instanceof CoreActivity) {
+            return  (CoreActivity) activity;
         }
-        throw new UnsupportedOperationException("Not in " + BaseActivity.class.getName());
+        throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
     }
 
     protected void showProgress(String title, String message) {
         final FragmentActivity activity = getActivity();
-        if (activity instanceof BaseActivity) {
-            BaseActivity baseActivity = (BaseActivity) activity;
-            baseActivity.showProgress(title, message);
+        if (activity instanceof CoreActivity) {
+            CoreActivity coreActivity = (CoreActivity) activity;
+            coreActivity.showProgress(title, message);
         }else {
-            throw new UnsupportedOperationException("Not in " + BaseActivity.class.getName());
+            throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
         }
     }
 
     protected void hideProgress() {
         final FragmentActivity activity = getActivity();
-        if (activity instanceof BaseActivity) {
-            BaseActivity baseActivity = (BaseActivity) activity;
-            baseActivity.hideProgress();
+        if (activity instanceof CoreActivity) {
+            CoreActivity coreActivity = (CoreActivity) activity;
+            coreActivity.hideProgress();
         }else {
-            throw new UnsupportedOperationException("Not in " + BaseActivity.class.getName());
+            throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
         }
     }
 
     protected void showMessage(String title, String message) {
         final FragmentActivity activity = getActivity();
-        if (activity instanceof BaseActivity) {
-            BaseActivity baseActivity = (BaseActivity) activity;
-            baseActivity.showMessage(title, message);
+        if (activity instanceof CoreActivity) {
+            CoreActivity coreActivity = (CoreActivity) activity;
+            coreActivity.showMessage(title, message);
         }else {
-            throw new UnsupportedOperationException("Not in " + BaseActivity.class.getName());
+            throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
         }
     }
 }

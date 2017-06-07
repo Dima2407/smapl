@@ -3,23 +3,15 @@ package com.smapl_android.core;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
-import android.util.Patterns;
-
-import com.smapl_android.R;
-import com.smapl_android.models.User;
+import com.smapl_android.core.validation.ValidationException;
+import com.smapl_android.core.validation.Validators;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.responses.LoginResponse;
 import com.smapl_android.net.responses.RegistrationResponse;
-
-import java.util.IllegalFormatCodePointException;
-import java.util.regex.Pattern;
+import com.smapl_android.ui.CoreActivity;
 
 public class CoreService {
-
-    private static final int MIN_PHONE_NUMBER_LENGHT = 10;
-    private static final int MIN_PASSWORD_LENGHT = 4;
 
     private final Context rootContext;
 
@@ -33,38 +25,36 @@ public class CoreService {
         this.uiHandler = new Handler(Looper.getMainLooper());
     }
 
-    public void login(String login, String password, final Callback<Boolean, String> callback) {
-        if (TextUtils.isEmpty(login)) {
+    public void login(String login, String password, final CoreRequest<Boolean> coreRequest) {
+        try {
+            Validators.getPhoneValidator(rootContext)
+                    .validate(login);
 
-            if (callback != null) {
-                callback.onError(rootContext.getString(R.string.error_empty_login));
-            }
-            return;
-        }
-        if (TextUtils.isEmpty(password)) {
-
-            if (callback != null) {
-                callback.onError(rootContext.getString(R.string.error_empty_password));
+            Validators.getPasswordValidator(rootContext)
+                    .validate(password);
+        } catch (ValidationException e) {
+            if (coreRequest != null) {
+                coreRequest.processError(e.getMessage());
             }
             return;
         }
         networkServiceImpl.login(login, password, new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
             @Override
             public void onResult(LoginResponse result, final Throwable error) {
-                if (callback != null) {
-                    if(error != null){
+                if (coreRequest != null) {
+                    if (error != null) {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                callback.onError(error.getMessage());
+                                coreRequest.processError(error.getMessage());
                             }
                         });
 
-                    }else {
+                    } else {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                callback.onSuccess(true);
+                                coreRequest.processResult(true);
                             }
                         });
                     }
@@ -73,56 +63,36 @@ public class CoreService {
         });
     }
 
-    public void registration(User user, final Callback<Boolean, String> callback){
-        if (TextUtils.isEmpty(user.getPhoneNumber())){
+    public void registration(String phoneNumber, String password, final CoreRequest<Boolean> successOutput) {
+        try {
+            Validators.getPhoneValidator(rootContext)
+                    .validate(phoneNumber);
 
-            if (callback != null){
-                callback.onError(rootContext.getString(R.string.error_empty_phone_number));
+            Validators.getPasswordValidator(rootContext)
+                    .validate(password);
+        } catch (ValidationException e) {
+            if (successOutput != null) {
+                successOutput.processError(e.getMessage());
             }
             return;
         }
-        if (TextUtils.isEmpty(user.getPassword())){
 
-            if (callback != null){
-                callback.onError(rootContext.getString(R.string.error_empty_password));
-            }
-            return;
-        }
-
-        if (user.getPhoneNumber().length() < MIN_PHONE_NUMBER_LENGHT){
-            if (callback != null)
-                callback.onError(rootContext.getString(R.string.error_phone_number_short));
-            return;
-        }
-
-        if (!Patterns.PHONE.matcher(user.getPhoneNumber()).matches()){
-            if (callback != null)
-                callback.onError(rootContext.getString(R.string.error_wrong_phone_number));
-            return;
-        }
-
-        if (user.getPassword().length() < MIN_PASSWORD_LENGHT){
-            if (callback != null)
-                callback.onError(rootContext.getString(R.string.error_password_short));
-            return;
-        }
-
-        networkServiceImpl.registration(user, new NetworkService.OnResultCallback<RegistrationResponse, Throwable>() {
+        networkServiceImpl.registration(phoneNumber, password, new NetworkService.OnResultCallback<RegistrationResponse, Throwable>() {
             @Override
             public void onResult(RegistrationResponse result, final Throwable error) {
-                if (callback != null){
-                    if (error != null){
+                if (successOutput != null) {
+                    if (error != null) {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                callback.onError(error.getMessage());
+                                successOutput.processError(error.getMessage());
                             }
                         });
                     } else {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                callback.onSuccess(true);
+                                successOutput.processResult(true);
                             }
                         });
                     }
@@ -131,12 +101,8 @@ public class CoreService {
         });
     }
 
-
-
-    public interface Callback<T, E> {
-        void onError(E error);
-
-        void onSuccess(T result);
+    public <T> CoreRequest<T> newRequest(CoreActivity activity){
+        return new CoreRequest<T>(activity, this);
     }
 
 }
