@@ -53,6 +53,7 @@ public class RegistrationFragment extends BaseFragment {
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, aboutYourselfFragment)
+                .addToBackStack(null)
                 .commit();
     }
 }

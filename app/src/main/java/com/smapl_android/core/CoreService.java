@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validators;
-import com.smapl_android.models.User;
+import com.smapl_android.model.User;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.responses.LoginResponse;

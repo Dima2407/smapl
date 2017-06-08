@@ -2,29 +2,25 @@ package com.smapl_android.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
-import com.smapl_android.core.CoreService;
 import com.smapl_android.core.SuccessOutput;
-import com.smapl_android.models.User;
+import com.smapl_android.model.User;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by dima on 05.06.17.
@@ -68,6 +64,7 @@ public class AboutYourselfFragment extends BaseFragment {
                 registration();
             }
         });
+
     }
 
     private void registration() {
@@ -105,17 +102,17 @@ public class AboutYourselfFragment extends BaseFragment {
         }
         user.setInterests(stringInterests);
 
-        final CoreRequest<Boolean> request = getCoreService()
-                .newRequest(getCoreActivity());
-        request
-                .withLoading(R.string.wait_login)
-                .handleErrorAsDialog()
-                .handleSuccess(new SuccessOutput<Boolean>() {
-                    @Override
-                    public void onSuccess(Boolean result) {
+        LoadCarPhotoFragment loadCarPhotoFragment = new LoadCarPhotoFragment();
 
-                    }
-                });
-        getCoreService().registration(user, request);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("user", user);
+
+        loadCarPhotoFragment.setArguments(bundle);
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(android.R.id.content, loadCarPhotoFragment)
+                .addToBackStack(null)
+                .commit();
+
     }
 }
