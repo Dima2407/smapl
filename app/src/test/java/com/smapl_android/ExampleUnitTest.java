@@ -1,6 +1,13 @@
 package com.smapl_android;
 
+import com.smapl_android.net.NetworkService;
+import com.smapl_android.net.NetworkServiceFactory;
+import com.smapl_android.net.responses.LoginResponse;
+
 import org.junit.Test;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +19,16 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+        NetworkService networkService = NetworkServiceFactory.create(true);
+        final CountDownLatch latch = new CountDownLatch(1);
+        networkService.login("bob", "qwerty", new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
+            @Override
+            public void onResult(LoginResponse result, Throwable error) {
+
+                assertNotNull(error);
+                latch.countDown();
+            }
+        });
+        latch.await(3, TimeUnit.SECONDS);
     }
 }

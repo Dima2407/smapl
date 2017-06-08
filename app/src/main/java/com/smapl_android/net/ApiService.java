@@ -13,7 +13,7 @@ public interface ApiService {
 
     String API_KEY = "keykey";
 
-    @POST
+    @POST("api/login")
     @FormUrlEncoded
     @Headers("api_key: " + API_KEY)
     Call<LoginResponse> login(@Query("phone") String login,

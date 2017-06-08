@@ -7,6 +7,14 @@ public class GetCompanyHistoryResponse {
     @SerializedName("cars")
     private Car[] cars;
 
+    public Car[] getCars() {
+        return cars;
+    }
+
+    public void setCars(Car[] cars) {
+        this.cars = cars;
+    }
+
     public static class Car {
 
         @SerializedName("mark")
@@ -43,6 +51,26 @@ public class GetCompanyHistoryResponse {
         public String getTerm() {
             return term;
         }
+
+        public void setMark(String mark) {
+            this.mark = mark;
+        }
+
+        public void setModel(String model) {
+            this.model = model;
+        }
+
+        public void setIncome(Income income) {
+            this.income = income;
+        }
+
+        public void setCarId(String carId) {
+            this.carId = carId;
+        }
+
+        public void setTerm(String term) {
+            this.term = term;
+        }
     }
 
     public static class Income {
@@ -66,6 +94,18 @@ public class GetCompanyHistoryResponse {
 
         public String getMaxWeak() {
             return maxWeak;
+        }
+
+        public void setAll(String all) {
+            this.all = all;
+        }
+
+        public void setMaxDay(String maxDay) {
+            this.maxDay = maxDay;
+        }
+
+        public void setMaxWeak(String maxWeak) {
+            this.maxWeak = maxWeak;
         }
     }
 

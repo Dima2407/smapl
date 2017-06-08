@@ -11,6 +11,10 @@ public class AdvCompaniesResponse {
         return companies;
     }
 
+    public void setCompanies(Company[] companies) {
+        this.companies = companies;
+    }
+
     public static class Service {
 
         @SerializedName("price")
@@ -25,6 +29,14 @@ public class AdvCompaniesResponse {
 
         public String getDescription() {
             return description;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
         }
     }
 
@@ -42,6 +54,14 @@ public class AdvCompaniesResponse {
 
         public String getTitle() {
             return title;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
         }
     }
 
@@ -87,6 +107,30 @@ public class AdvCompaniesResponse {
 
         public String getReserv() {
             return reserv;
+        }
+
+        public void setCompanyId(int companyId) {
+            this.companyId = companyId;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public void setService(Service service) {
+            this.service = service;
+        }
+
+        public void setStickers(Sticker[] stickers) {
+            this.stickers = stickers;
+        }
+
+        public void setReserv(String reserv) {
+            this.reserv = reserv;
         }
     }
 
