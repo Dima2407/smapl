@@ -22,9 +22,6 @@ import com.smapl_android.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dima on 05.06.17.
- */
 
 public class AboutYourselfFragment extends BaseFragment {
 

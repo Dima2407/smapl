@@ -3,9 +3,42 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="Main Screen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/linear_main_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"
+        android:background="@color/colorPrimary">
+    </LinearLayout>
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout_main_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/colorPrimaryDark"
+        >
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tab_item_main_screen_news"
+            android:text="Новости"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tab_item_main_screen_map"
+            android:text="Карта"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tab_item_main_screen_profile"
+            android:text="Профиль"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.design.widget.TabLayout>
+
 
 </LinearLayout>

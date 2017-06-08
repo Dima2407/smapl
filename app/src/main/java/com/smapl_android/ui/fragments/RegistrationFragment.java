@@ -12,10 +12,6 @@ import com.smapl_android.R;
 import com.smapl_android.core.CoreService;
 
 
-/**
- * Created by dima on 02.06.17.
- */
-
 public class RegistrationFragment extends BaseFragment {
 
     private EditText phoneNumberEditText;
