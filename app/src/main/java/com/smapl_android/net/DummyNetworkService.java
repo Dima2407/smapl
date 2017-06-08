@@ -1,5 +1,6 @@
 package com.smapl_android.net;
 
+import com.smapl_android.model.User;
 import com.smapl_android.models.User;
 import com.smapl_android.net.responses.AdvCompaniesResponse;
 import com.smapl_android.net.responses.EditCarResponse;
