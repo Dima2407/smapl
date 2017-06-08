@@ -3,8 +3,18 @@ package com.smapl_android.net;
 import android.util.Log;
 
 import com.smapl_android.model.User;
+import com.smapl_android.net.responses.AdvCompaniesResponse;
+import com.smapl_android.net.responses.EditCarResponse;
+import com.smapl_android.net.responses.EditPasswordResponse;
+import com.smapl_android.net.responses.EditProfileResponse;
+import com.smapl_android.net.responses.GetBeforeMessagesResponse;
+import com.smapl_android.net.responses.GetCompanyHistoryResponse;
+import com.smapl_android.net.responses.GetLastMessagesResponse;
+import com.smapl_android.net.responses.GetNewsResponse;
 import com.smapl_android.net.responses.LoginResponse;
 import com.smapl_android.net.responses.RegistrationResponse;
+import com.smapl_android.net.responses.RestorePasswordResponse;
+import com.smapl_android.net.responses.SendMessageResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -103,6 +113,56 @@ class NetworkServiceImpl implements NetworkService {
                 }
             }
         });
+    }
+
+    @Override
+    public void restorePassword(String login, OnResultCallback<RestorePasswordResponse, Throwable> callback) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void getAdvCompanies(OnResultCallback<AdvCompaniesResponse, Throwable> callback) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void getNews(OnResultCallback<GetNewsResponse, Throwable> callback) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void getCompanyHistory(OnResultCallback<GetCompanyHistoryResponse, Throwable> callback) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void editPassword(String oldPassword, String newPassword, OnResultCallback<EditPasswordResponse, Throwable> callback) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void editProfile(String phone, String name, String gender, Integer age, String hobby, OnResultCallback<EditProfileResponse, Throwable> callback) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void editCar(Integer carYear, String carMark, String carModel, String carColor, String carPhoto, OnResultCallback<EditCarResponse, Throwable> callback) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void getLastMessages(OnResultCallback<GetLastMessagesResponse, Throwable> callback) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void getBeforeMessages(OnResultCallback<GetBeforeMessagesResponse, Throwable> callback) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void sendMessage(String message, String senderId, String receiverId, String date, OnResultCallback<SendMessageResponse, Throwable> callback) {
+        throw new UnsupportedOperationException();
     }
 
 
