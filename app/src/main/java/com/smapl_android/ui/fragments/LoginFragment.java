@@ -47,6 +47,7 @@ public class LoginFragment extends BaseFragment {
             RegistrationFragment registrationFragment = new RegistrationFragment();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(android.R.id.content, registrationFragment)
+                    .addToBackStack(null)
                     .commit();
         }
     }

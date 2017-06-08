@@ -15,6 +15,14 @@
     <string name="gender">Пол</string>
     <string name="car_model">Модель машины</string>
     <string name="car_year_of_issue">Год выпуска</string>
+    <string name="load_car_photo">Загрузите фото вашего автомобиля</string>
+    <string name="skip">Пропустить</string>
+    <string name="back">Назад</string>
+    <string name="forward_rus">Вперёд</string>
+    <string name="dialog_message">Выберите, откуда загрузить фото</string>
+    <string name="dialog_title">Загрузка фото</string>
+    <string name="btn_text_from_gallery">Из галереи</string>
+    <string name="btn_text_make_photo">Сделать фото</string>
 
     <string-array name="age">
         <item>до 18</item>
