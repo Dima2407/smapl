@@ -11,6 +11,10 @@ public class GetLastMessagesResponse {
         return messages;
     }
 
+    public void setMessages(Message[] messages) {
+        this.messages = messages;
+    }
+
     public static class Message {
 
         @SerializedName("sender_id")
@@ -69,6 +73,36 @@ public class GetLastMessagesResponse {
             return created;
         }
 
+        public void setSenderId(String senderId) {
+            this.senderId = senderId;
+        }
 
+        public void setSenderName(String senderName) {
+            this.senderName = senderName;
+        }
+
+        public void setSenderPhoto(String senderPhoto) {
+            this.senderPhoto = senderPhoto;
+        }
+
+        public void setReceiverId(String receiverId) {
+            this.receiverId = receiverId;
+        }
+
+        public void setReceiverName(String receiverName) {
+            this.receiverName = receiverName;
+        }
+
+        public void setReceiverPhoto(String receiverPhoto) {
+            this.receiverPhoto = receiverPhoto;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public void setCreated(String created) {
+            this.created = created;
+        }
     }
 }

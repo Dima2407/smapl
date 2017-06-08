@@ -11,6 +11,10 @@ public class GetNewsResponse {
         return news;
     }
 
+    public void setNews(News[] news) {
+        this.news = news;
+    }
+
     public static class News {
 
         @SerializedName("title")
@@ -53,6 +57,30 @@ public class GetNewsResponse {
 
         public String getNewsId() {
             return newsId;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public void setCompany(String company) {
+            this.company = company;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public void setCompanyId(String companyId) {
+            this.companyId = companyId;
+        }
+
+        public void setNewsId(String newsId) {
+            this.newsId = newsId;
         }
     }
 }
