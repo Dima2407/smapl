@@ -17,9 +17,10 @@ import java.util.List;
 public class MainScreenFragment extends BaseFragment {
 
     private static final String TAG = MainScreenFragment.class.getSimpleName();
-    LinearLayout linearContent;
-    List<BaseFragment> fragmentsTabItems;
-    TabLayout tabLayout;
+    private LinearLayout linearContent;
+    private List<BaseFragment> fragmentsTabItems;
+    private TabLayout tabLayout;
+    private User user;
 
     @Nullable
     @Override
