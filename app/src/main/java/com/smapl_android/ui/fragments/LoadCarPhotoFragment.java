@@ -23,9 +23,6 @@ import java.io.IOException;
 
 import static android.app.Activity.RESULT_OK;
 
-/**
- * Created by dima on 07.06.17.
- */
 
 public class LoadCarPhotoFragment extends BaseFragment{
 

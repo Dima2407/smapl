@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_text_size">17dp</dimen>
+    <dimen name="edit_text_size">18dp</dimen>
+    <dimen name="btn_forgot_padding">25dp</dimen>
+    <dimen name="padding_frame">40dp</dimen>
+</resources>

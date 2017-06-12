@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_blue">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp">
+
+        <ImageView
+            android:id="@+id/img_map_car_photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/text_map_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/img_map_car_photo"
+            android:text="Петя"
+            android:textColor="@color/white"
+            android:textSize="45dp" />
+
+        <TextView
+            android:id="@+id/text_map_car_brand_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/text_map_user_name"
+            android:layout_below="@id/text_map_user_name"
+            android:text="Audi A6"
+            android:textColor="@color/white"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/btn_map_start"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/start"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+</LinearLayout>
