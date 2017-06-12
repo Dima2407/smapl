@@ -116,28 +116,167 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void restorePassword(String login, OnResultCallback<RestorePasswordResponse, Throwable> callback) {
-        throw new UnsupportedOperationException();
+    public void restorePassword(String login, final OnResultCallback<RestorePasswordResponse, Throwable> callback) {
+
+        final Call<RestorePasswordResponse> responseCall = apiService.restorePassword(login);
+        responseCall.enqueue(new Callback<RestorePasswordResponse>() {
+            @Override
+            public void onResponse(Call<RestorePasswordResponse> call, Response<RestorePasswordResponse> response) {
+                if (response.isSuccessful()) {
+                    if (callback != null) {
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+                            Log.e(TAG, "onResponse: ", e);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RestorePasswordResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
     }
 
     @Override
-    public void getAdvCompanies(OnResultCallback<AdvCompaniesResponse, Throwable> callback) {
-        throw new UnsupportedOperationException();
+    public void getAdvCompanies(final OnResultCallback<AdvCompaniesResponse, Throwable> callback) {
+
+        final Call<AdvCompaniesResponse> responseCall = apiService.advCompanies();
+        responseCall.enqueue(new Callback<AdvCompaniesResponse>() {
+            @Override
+            public void onResponse(Call<AdvCompaniesResponse> call, Response<AdvCompaniesResponse> response) {
+                if (response.isSuccessful()) {
+                    if (callback != null) {
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+                            Log.e(TAG, "onResponse: ", e);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AdvCompaniesResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
     }
 
     @Override
-    public void getNews(OnResultCallback<GetNewsResponse, Throwable> callback) {
-        throw new UnsupportedOperationException();
+    public void getNews(final OnResultCallback<GetNewsResponse, Throwable> callback) {
+
+        final Call<GetNewsResponse> responseCall = apiService.getNews();
+        responseCall.enqueue(new Callback<GetNewsResponse>() {
+            @Override
+            public void onResponse(Call<GetNewsResponse> call, Response<GetNewsResponse> response) {
+                if (response.isSuccessful()) {
+                    if (callback != null) {
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+                            Log.e(TAG, "onResponse: ", e);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetNewsResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
     }
 
     @Override
-    public void getCompanyHistory(OnResultCallback<GetCompanyHistoryResponse, Throwable> callback) {
-        throw new UnsupportedOperationException();
+    public void getCompanyHistory(final OnResultCallback<GetCompanyHistoryResponse, Throwable> callback) {
+        final Call<GetCompanyHistoryResponse> responseCall = apiService.getCompanyHistory();
+        responseCall.enqueue(new Callback<GetCompanyHistoryResponse>() {
+            @Override
+            public void onResponse(Call<GetCompanyHistoryResponse> call, Response<GetCompanyHistoryResponse> response) {
+                if (response.isSuccessful()) {
+                    if (callback != null) {
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+                            Log.e(TAG, "onResponse: ", e);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetCompanyHistoryResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
+
     }
 
     @Override
-    public void editPassword(String oldPassword, String newPassword, OnResultCallback<EditPasswordResponse, Throwable> callback) {
-        throw new UnsupportedOperationException();
+    public void editPassword(String oldPassword, String newPassword, final OnResultCallback<EditPasswordResponse, Throwable> callback) {
+        final Call<EditPasswordResponse> responseCall = apiService.editPassword(oldPassword, newPassword);
+        responseCall.enqueue(new Callback<EditPasswordResponse>() {
+            @Override
+            public void onResponse(Call<EditPasswordResponse> call, Response<EditPasswordResponse> response) {
+                if (response.isSuccessful()) {
+                    if (callback != null) {
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+                            Log.e(TAG, "onResponse: ", e);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EditPasswordResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
     }
 
     @Override
@@ -146,24 +285,130 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void editCar(Integer carYear, String carMark, String carModel, String carColor, String carPhoto, OnResultCallback<EditCarResponse, Throwable> callback) {
-        throw new UnsupportedOperationException();
+    public void editCar(Integer carYear, String carMark, String carModel, String carColor, String carPhoto, final OnResultCallback<EditCarResponse, Throwable> callback) {
+        Call<EditCarResponse> responseCall = apiService.editCar(carYear, carMark, carModel, carColor, carPhoto);
+        responseCall.enqueue(new Callback<EditCarResponse>() {
+            @Override
+            public void onResponse(Call<EditCarResponse> call, Response<EditCarResponse> response) {
+                if (response.isSuccessful()) {
+                    if (callback != null) {
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+                            Log.e(TAG, "onResponse: ", e);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EditCarResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
     }
 
     @Override
-    public void getLastMessages(OnResultCallback<GetLastMessagesResponse, Throwable> callback) {
-        throw new UnsupportedOperationException();
+    public void getLastMessages(final OnResultCallback<GetLastMessagesResponse, Throwable> callback) {
+        Call<GetLastMessagesResponse> responseCall = apiService.getLastMessages();
+        responseCall.enqueue(new Callback<GetLastMessagesResponse>() {
+            @Override
+            public void onResponse(Call<GetLastMessagesResponse> call, Response<GetLastMessagesResponse> response) {
+                if (response.isSuccessful()) {
+                    if (callback != null) {
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+                            Log.e(TAG, "onResponse: ", e);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetLastMessagesResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
     }
 
     @Override
-    public void getBeforeMessages(OnResultCallback<GetBeforeMessagesResponse, Throwable> callback) {
-        throw new UnsupportedOperationException();
+    public void getBeforeMessages(final OnResultCallback<GetBeforeMessagesResponse, Throwable> callback) {
+        final Call<GetBeforeMessagesResponse> responseCall = apiService.getBeforeMessages();
+        responseCall.enqueue(new Callback<GetBeforeMessagesResponse>() {
+            @Override
+            public void onResponse(Call<GetBeforeMessagesResponse> call, Response<GetBeforeMessagesResponse> response) {
+                if (response.isSuccessful()) {
+                    if (callback != null) {
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+                            Log.e(TAG, "onResponse: ", e);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetBeforeMessagesResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
     }
 
     @Override
-    public void sendMessage(String message, String senderId, String receiverId, String date, OnResultCallback<SendMessageResponse, Throwable> callback) {
-        throw new UnsupportedOperationException();
+    public void sendMessage(String message, String senderId, String receiverId, String date, final OnResultCallback<SendMessageResponse, Throwable> callback) {
+        Call<SendMessageResponse> responseCall = apiService.sendMessage(message, senderId, receiverId, date);
+        responseCall.enqueue(new Callback<SendMessageResponse>() {
+            @Override
+            public void onResponse(Call<SendMessageResponse> call, Response<SendMessageResponse> response) {
+                if (response.isSuccessful()) {
+                    if (callback != null) {
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+                            Log.e(TAG, "onResponse: ", e);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SendMessageResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
     }
-
-
 }
