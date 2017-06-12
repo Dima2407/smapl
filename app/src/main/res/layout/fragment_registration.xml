@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/edit_phone_number"
+        android:id="@+id/edit_registration_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_login_height"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableLeft="@drawable/image_login_teleaphone"
+        android:hint="@string/input_phone"
         android:inputType="phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textSize="@dimen/edit_text_size" />
 
     <EditText
-        android:id="@+id/edit_password"
-        android:inputType="textPassword"
+        android:id="@+id/edit_registration_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="@dimen/edit_login_height"
+        android:layout_below="@id/edit_registration_phone_number"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableLeft="@drawable/image_login_lock"
+        android:hint="@string/input_password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/color_login_hint"
+        android:textSize="@dimen/edit_text_size" />
 
-    <Button
-        android:id="@+id/btn_registration"
-        android:text="@string/registration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_registration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/edit_registration_password"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_login_background"
+            android:text="@string/registration_registration"
+            android:textAllCaps="false"
+            android:textSize="@dimen/btn_text_size"
+            android:textColor="@color/white"
+            />
 
-</LinearLayout>
+    </RelativeLayout>

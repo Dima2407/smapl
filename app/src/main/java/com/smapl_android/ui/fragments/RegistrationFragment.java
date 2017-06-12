@@ -26,8 +26,8 @@ public class RegistrationFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        phoneNumberEditText = (EditText) view.findViewById(R.id.edit_phone_number);
-        passwordEditText = (EditText) view.findViewById(R.id.edit_password);
+        phoneNumberEditText = (EditText) view.findViewById(R.id.edit_registration_phone_number);
+        passwordEditText = (EditText) view.findViewById(R.id.edit_registration_password);
         view.findViewById(R.id.btn_registration).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +49,6 @@ public class RegistrationFragment extends BaseFragment {
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, aboutYourselfFragment)
-                .addToBackStack(null)
                 .commit();
     }
 }

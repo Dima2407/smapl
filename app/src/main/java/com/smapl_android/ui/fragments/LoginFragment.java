@@ -6,15 +6,18 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+
 import com.smapl_android.R;
-import com.smapl_android.core.CoreRequest;
-import com.smapl_android.core.CoreService;
-import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.databinding.FragmentLoginBinding;
 import com.smapl_android.model.LoginInfo;
-import com.smapl_android.ui.CoreActivity;
+
 
 public class LoginFragment extends BaseFragment {
+
+    private RelativeLayout layoutContent;
+    private LoginMiniFragment loginMiniFragment;
+    private RegistrationFragment registrationFragment;
 
     @Nullable
     @Override
@@ -25,28 +28,33 @@ public class LoginFragment extends BaseFragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        layoutContent = (RelativeLayout) view.findViewById(R.id.relative_login_content);
+
+        loginMiniFragment = new LoginMiniFragment();
+        registrationFragment = new RegistrationFragment();
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .add(layoutContent.getId(), loginMiniFragment)
+                .commit();
+
+    }
+
+
     public class Presenter {
         public void onLoginClicked(LoginInfo loginInfo) {
 
-            final CoreRequest<Boolean> request = getCoreService()
-                    .newRequest(getCoreActivity());
-            request
-                    .withLoading(R.string.wait_login)
-                    .handleErrorAsDialog()
-                    .handleSuccess(new SuccessOutput<Boolean>() {
-                        @Override
-                        public void onSuccess(Boolean result) {
-
-                        }
-                    });
-            getCoreService()
-                    .login(loginInfo.getPhone().get(), loginInfo.getPassword().get(), request);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(layoutContent.getId(), loginMiniFragment)
+                    .commit();
         }
 
         public void onRegistrationClicked() {
-            RegistrationFragment registrationFragment = new RegistrationFragment();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(android.R.id.content, registrationFragment)
+                    .replace(layoutContent.getId(), registrationFragment)
                     .addToBackStack(null)
                     .commit();
         }

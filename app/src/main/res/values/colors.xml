@@ -8,4 +8,5 @@
     <color name="color_login_hint">#99CCFF</color>
     <color name="blue_dark">#2F66CC</color>
     <color name="transparent">#00000000</color>
+    <color name="grey">#f9f9f9</color>
 </resources>
