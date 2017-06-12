@@ -44,15 +44,6 @@ public interface NetworkService {
     void sendMessage(String message, String senderId, String receiverId, String date,
                      NetworkService.OnResultCallback<SendMessageResponse, Throwable> callback);
 
-    /*
-    YES	message	String
-YES	sender_id	String
-YES	receiver_id	String
-YES	date	String
-
-    */
-
-
     interface OnResultCallback<T, E> {
         void onResult(T result, E error);
     }
