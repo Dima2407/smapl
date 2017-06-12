@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.smapl_android.R;
+import com.smapl_android.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

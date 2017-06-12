@@ -1,24 +1,67 @@
-apply plugin: 'com.android.application'
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
 
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.21.6'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+
+    Properties props = new Properties()
+    props.load(new FileInputStream(file("../local.properties")))
+    signingConfigs {
+        release {
+            storeFile file(props['store.file'])
+            storePassword props['store.password']
+            keyAlias props['key.alias']
+            keyPassword props['key.password']
+        }
+    }
+
     defaultConfig {
         applicationId "com.smapl_android"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionName buildVersion()
+        versionCode buildNumber()
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
+            ext.betaDistributionEmails = "nikolay.dymura@gmail.com"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            versionNameSuffix '.release'
+        }
+        debug {
+            ext.enableCrashlytics = false
+            versionNameSuffix '.debug'
         }
     }
     dataBinding {
         enabled = true
+    }
+    productFlavors {
+        dev {
+            versionName buildVersion() + '.dev'
+        }
+        staging {
+            versionName buildVersion() + '.staging'
+        }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -27,10 +70,32 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true;
+    }
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.android.support:design:25.3.1'
+}
+
+def buildVersion() {
+    if (hasProperty('buildVersion')) {
+        println "build version = ${buildVersion}"
+        println ""
+        return buildVersion
+    } else {
+        return 'dev_version'
+    }
+}
+
+def buildNumber() {
+    if (hasProperty('buildNumber')) {
+        println "build number = ${buildNumber}"
+        return buildNumber as int
+    } else {
+        return 0
+    }
 }
