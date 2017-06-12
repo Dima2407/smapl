@@ -10,11 +10,14 @@ import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.responses.LoginResponse;
 import com.smapl_android.net.responses.RegistrationResponse;
+import com.smapl_android.storage.SessionStorage;
 import com.smapl_android.ui.CoreActivity;
 
 public class CoreService {
 
     private final Context rootContext;
+
+    private final SessionStorage sessionStorage;
 
     private final NetworkService networkServiceImpl;
 
@@ -24,6 +27,11 @@ public class CoreService {
         this.rootContext = rootContext;
         this.networkServiceImpl = NetworkServiceFactory.create(true);
         this.uiHandler = new Handler(Looper.getMainLooper());
+        this.sessionStorage = new SessionStorage(rootContext);
+    }
+
+    public boolean isLoggedIn(){
+        return sessionStorage.isLoggedIn();
     }
 
     public void login(String login, String password, final CoreRequest<Boolean> coreRequest) {
@@ -52,6 +60,7 @@ public class CoreService {
                         });
 
                     } else {
+                        sessionStorage.saveAuthKey(result.getAuthKey());
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -90,6 +99,7 @@ public class CoreService {
                             }
                         });
                     } else {
+                        sessionStorage.saveAuthKey(result.getToken());
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -100,6 +110,10 @@ public class CoreService {
                 }
             }
         });
+    }
+
+    public void logout(){
+        sessionStorage.logout();
     }
 
     public <T> CoreRequest<T> newRequest(CoreActivity activity){

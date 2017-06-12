@@ -15,6 +15,7 @@ import com.smapl_android.net.responses.RestorePasswordResponse;
 import com.smapl_android.net.responses.SendMessageResponse;
 
 import java.util.Random;
+import java.util.UUID;
 
 @Deprecated
 class DummyNetworkService implements NetworkService{
@@ -52,8 +53,10 @@ class DummyNetworkService implements NetworkService{
             public void run() {
                 try {
                     Thread.sleep(500);
-                    if("1111".equals(login)){
-                        callback.onResult(new LoginResponse(), null);
+                    if("1111111111".equals(login)){
+                        LoginResponse result = new LoginResponse();
+                        result.setAuthKey(UUID.randomUUID().toString());
+                        callback.onResult(result, null);
                     }else {
                         callback.onResult(null, new Exception("hoho"));
                     }
@@ -74,7 +77,10 @@ class DummyNetworkService implements NetworkService{
                 try {
                     Thread.sleep(2000);
                     if ("1111111111".equals(phoneNumber)){
-                        callback.onResult(new RegistrationResponse(), null);
+                        RegistrationResponse result = new RegistrationResponse();
+                        result.setToken(UUID.randomUUID().toString());
+                        result.setUserId(UUID.randomUUID().toString());
+                        callback.onResult(result, null);
                     } else {
                         callback.onResult(null, new Exception("phoneNumber isn't equals 1111111111"));
                     }
