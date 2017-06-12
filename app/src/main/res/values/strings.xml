@@ -26,7 +26,8 @@
     <string name="input_phone">Телефон</string>
     <string name="input_password">Пароль</string>
     <string name="start">Старт</string>
-    <string name="forgot_password">забыли?</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="registration_registration">Регистрация</string>
 
     <string-array name="age">
         <item>до 18</item>

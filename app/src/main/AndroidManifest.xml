@@ -15,13 +15,19 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".ui.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+        <activity android:name=".ui.SplashActivity"
+            android:noHistory="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+
+            <category android:name="android.intent.category.LAUNCHER"/>
+        </intent-filter>
         </activity>
+
+        <activity android:name=".ui.MainActivity">
+        </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="188c458887d8193e9c2712f1f3683c14fe315215" />

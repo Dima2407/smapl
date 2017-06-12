@@ -13,89 +13,63 @@
             type="com.smapl_android.ui.fragments.LoginFragment.Presenter" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_blue">
+        android:background="@color/white">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/img_login_logotip"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/padding_frame">
+            android:layout_height="220dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/logotip" />
 
-            <ImageView
-                android:id="@+id/img_login_logotip"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:layout_centerHorizontal="true"
-                android:background="@color/colorPrimaryDark" />
+        <LinearLayout
+            android:id="@+id/linear_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignBottom="@id/img_login_logotip"
+            android:weightSum="2">
 
-            <EditText
-                android:id="@+id/edit_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/img_login_logotip"
-                android:layout_marginTop="30dp"
-                android:addTextChangedListener="@{user.phoneTextWatcher}"
-                android:hint="@string/input_phone"
-                android:inputType="phone"
-                android:background="@drawable/edit_text_line_background"
-                android:textSize="@dimen/edit_text_size"
-                android:text="@{user.phone}"
-                android:textColorHint="@color/white" />
-
-            <EditText
-                android:id="@+id/edit_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/edit_login"
-                android:addTextChangedListener="@{user.passwordTextWatcher}"
-                android:hint="@string/input_password"
-                android:inputType="textPassword"
-                android:background="@drawable/edit_text_line_background"
-                android:text="@{user.password}"
-                android:textSize="@dimen/edit_text_size"
-                android:textColorHint="@color/color_login_hint" />
 
             <Button
                 android:id="@+id/btn_login"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edit_password"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/btn_login_background"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:drawableBottom="@drawable/btns_background"
                 android:onClick="@{() -> presenter.onLoginClicked(user)}"
                 android:text="@string/login"
-                android:textSize="@dimen/btn_text_size"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/btn_text_size" />
 
             <Button
                 android:id="@+id/btn_go_to_registration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:background="@color/background_blue"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:drawableBottom="@drawable/btns_background"
                 android:onClick="@{() -> presenter.onRegistrationClicked()}"
                 android:text="@string/registration"
-                android:textSize="@dimen/btn_text_size"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/btn_text_size" />
 
-            <Button
-                android:id="@+id/btn_login_forgot_password"
-                android:text="@string/forgot_password"
-                android:textSize="@dimen/edit_text_size"
-                android:paddingBottom="@dimen/btn_forgot_padding"
-                android:textAllCaps="false"
-                android:background="@color/transparent"
-                android:textColor="@color/color_login_hint"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@id/edit_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative_login_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/linear_buttons"
+            android:background="@color/grey"
+            android:padding="@dimen/padding_frame">
 
         </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </layout>
