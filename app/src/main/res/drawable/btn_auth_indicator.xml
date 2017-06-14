@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/indicator_triangle" android:state_checked="true"/>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent"/>
+            <size android:height="15dp" android:width="15dp"/>
+        </shape>
+    </item>
+</selector>

@@ -11,7 +11,7 @@ import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.responses.LoginResponse;
 import com.smapl_android.net.responses.RegistrationResponse;
 import com.smapl_android.storage.SessionStorage;
-import com.smapl_android.ui.CoreActivity;
+import com.smapl_android.ui.base.CoreActivity;
 
 public class CoreService {
 

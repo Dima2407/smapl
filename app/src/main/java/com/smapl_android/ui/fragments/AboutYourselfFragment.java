@@ -6,18 +6,14 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.smapl_android.R;
-import com.smapl_android.core.CoreRequest;
-import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.model.User;
+import com.smapl_android.ui.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

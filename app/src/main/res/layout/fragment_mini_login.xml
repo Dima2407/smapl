@@ -1,117 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/grey">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/white_rectangle_height"
-        android:src="@drawable/login_background_white_shape" />
+        <variable
+                name="user"
+                type="com.smapl_android.model.LoginInfo"/>
+
+        <variable
+                name="presenter"
+                type="com.smapl_android.ui.fragments.LoginMiniFragment.Presenter"/>
+    </data>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin_fragment_mini_login">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey">
 
-        <LinearLayout
-            android:id="@+id/linear_edit_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_background"
-            android:orientation="horizontal"
-            android:weightSum="10">
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/white_rectangle_height"
+                android:src="@drawable/login_background_white_shape"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
+        <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
-                android:padding="7dp"
-                android:layout_weight="1"
-                android:src="@drawable/image_login_teleaphone" />
+                android:layout_margin="@dimen/margin_fragment_mini_login">
+
 
             <EditText
-                android:id="@+id/edit_login"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/edit_login_height"
-                android:background="@color/transparent"
-                android:hint="@string/input_phone"
-                android:inputType="phone"
-                android:layout_weight="8"
-                android:textSize="@dimen/edit_login_text_size" />
-
-            <ImageView
-                android:id="@+id/img_login_chek_mark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_edit_password"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_background"
-            android:layout_below="@id/linear_edit_login"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="3dp"
-                android:padding="3dp"
-                android:layout_weight="1"
-                android:src="@drawable/image_login_lock" />
+                    android:id="@+id/edit_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_login_height"
+                    android:drawableLeft="@drawable/image_login_teleaphone"
+                    android:drawableRight="@drawable/edit_text_mark"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="@string/input_phone"
+                    android:inputType="phone"
+                    android:text="@{user.phone}"
+                    android:addTextChangedListener="@{user.phoneTextWatcher}"
+                    android:textSize="@dimen/edit_login_text_size"/>
 
             <EditText
-                android:id="@+id/edit_password"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/edit_login_height"
-                android:background="@color/transparent"
-                android:hint="@string/input_password"
-                android:inputType="textPassword"
-                android:textColorHint="@color/color_login_hint"
-                android:layout_weight="8"
-                android:textSize="@dimen/edit_text_size" />
-
-            <ImageView
-                android:id="@+id/img_password_check_mark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                />
-
-        </LinearLayout>
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/edit_password"
+                    android:layout_below="@id/edit_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_login_height"
+                    android:drawableLeft="@drawable/image_login_lock"
+                    android:drawableRight="@drawable/edit_text_mark"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="@string/input_password"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/color_login_hint"
+                    android:text="@{user.password}"
+                    android:addTextChangedListener="@{user.passwordTextWatcher}"
+                    android:textSize="@dimen/edit_text_size"/>
 
 
-        <Button
-            android:id="@+id/btn_login_forgot_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/linear_edit_password"
-            android:layout_marginTop="10dp"
-            android:background="@color/transparent"
-            android:text="@string/forgot_password"
-            android:textAllCaps="false"
-            android:textColor="@color/color_login_hint"
-            android:textSize="@dimen/edit_text_size" />
+            <Button
+                    android:id="@+id/btn_login_forgot_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/edit_password"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/transparent"
+                    android:text="@string/forgot_password"
+                    android:textAllCaps="false"
+                    android:textColor="@color/color_login_hint"
+                    android:textSize="@dimen/edit_text_size"/>
 
-        <ImageButton
-            android:id="@+id/btn_login_forward"
-            android:layout_width="@dimen/img_btn_login_forward_size"
-            android:layout_height="@dimen/img_btn_login_forward_size"
-            android:layout_below="@id/btn_login_forgot_password"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/img_btn_forward"
-            android:src="@drawable/arrow" />
+            <ImageButton
+                    android:id="@+id/btn_login_forward"
+                    android:layout_width="@dimen/img_btn_login_forward_size"
+                    android:layout_height="@dimen/img_btn_login_forward_size"
+                    android:layout_below="@id/btn_login_forgot_password"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/img_btn_forward"
+                    android:onClick="@{() -> presenter.onLoginClicked(user)}"
+                    android:src="@drawable/arrow"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
-
-</RelativeLayout>
+</layout>

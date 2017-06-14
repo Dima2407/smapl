@@ -5,10 +5,6 @@
     <data>
 
         <variable
-            name="user"
-            type="com.smapl_android.model.LoginInfo" />
-
-        <variable
             name="presenter"
             type="com.smapl_android.ui.fragments.LoginFragment.Presenter" />
     </data>
@@ -46,13 +42,13 @@
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     android:button="@color/transparent"
-                    android:drawableBottom="@drawable/selector_btns_login_background"
-                    android:onClick="@{() -> presenter.onLoginClicked(user)}"
+                    android:drawableBottom="@drawable/btn_auth_indicator"
+                    android:onClick="@{() -> presenter.onLoginClicked()}"
                     android:text="@string/login"
                     android:checked="true"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:textColor="@color/login_btn_checked"
+                    android:textColor="@color/btn_auth_text"
                     android:textSize="@dimen/btn_text_size" />
 
                 <RadioButton
@@ -62,12 +58,12 @@
                     android:layout_weight="1"
                     android:background="@color/transparent"
                     android:button="@color/transparent"
-                    android:drawableBottom="@drawable/selector_btns_login_background"
+                    android:drawableBottom="@drawable/btn_auth_indicator"
                     android:onClick="@{() -> presenter.onRegistrationClicked()}"
                     android:text="@string/registration"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"
+                    android:textColor="@color/btn_auth_text"
                     android:textSize="@dimen/btn_text_size" />
 
             </RadioGroup>

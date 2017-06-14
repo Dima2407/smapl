@@ -1,6 +1,5 @@
 package com.smapl_android.ui.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.smapl_android.R;
-import com.smapl_android.core.CoreService;
+import com.smapl_android.ui.base.BaseFragment;
 
 
 public class RegistrationFragment extends BaseFragment {

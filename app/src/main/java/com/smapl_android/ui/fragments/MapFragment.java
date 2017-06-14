@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.smapl_android.R;
 import com.smapl_android.model.User;
+import com.smapl_android.ui.base.BaseFragment;
 
 public class MapFragment extends BaseFragment {
 

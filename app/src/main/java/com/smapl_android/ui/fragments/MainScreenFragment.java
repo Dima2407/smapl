@@ -3,7 +3,6 @@ package com.smapl_android.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.smapl_android.R;
 import com.smapl_android.model.User;
+import com.smapl_android.ui.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

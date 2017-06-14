@@ -1,9 +1,9 @@
-package com.smapl_android.ui.fragments;
+package com.smapl_android.ui.base;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import com.smapl_android.core.CoreService;
-import com.smapl_android.ui.CoreActivity;
+import com.smapl_android.ui.base.CoreActivity;
 
 public abstract class BaseFragment extends Fragment {
 

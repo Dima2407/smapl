@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +17,14 @@ import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.model.User;
+import com.smapl_android.ui.base.BaseFragment;
 
 import java.io.IOException;
 
 import static android.app.Activity.RESULT_OK;
 
 
-public class LoadCarPhotoFragment extends BaseFragment{
+public class LoadCarPhotoFragment extends BaseFragment {
 
     private static final int GALLERY_REQUEST = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;

@@ -1,8 +1,9 @@
-package com.smapl_android.ui;
+package com.smapl_android.ui.base;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import com.smapl_android.R;
 import com.smapl_android.SmaplApplication;
@@ -47,5 +48,18 @@ public abstract class CoreActivity extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    public void replaceContent(Fragment fragment){
+        getSupportFragmentManager().beginTransaction()
+                .add(android.R.id.content, fragment)
+                .commit();
+    }
+
+    public void replaceContentWithHistory(Fragment fragment){
+        getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .add(android.R.id.content, fragment)
+                .commit();
     }
 }

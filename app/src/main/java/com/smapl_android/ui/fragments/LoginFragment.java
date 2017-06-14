@@ -6,13 +6,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.smapl_android.R;
 import com.smapl_android.databinding.FragmentLoginBinding;
 import com.smapl_android.model.LoginInfo;
+import com.smapl_android.ui.base.BaseFragment;
 
 
 public class LoginFragment extends BaseFragment {
@@ -20,14 +20,11 @@ public class LoginFragment extends BaseFragment {
     private RelativeLayout layoutContent;
     private LoginMiniFragment loginMiniFragment;
     private RegistrationFragment registrationFragment;
-    private RadioButton btnLogin;
-    private RadioButton btnRegistration;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentLoginBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
-        binding.setUser(new LoginInfo());
         binding.setPresenter(new Presenter());
         return binding.getRoot();
     }
@@ -41,9 +38,6 @@ public class LoginFragment extends BaseFragment {
         loginMiniFragment = new LoginMiniFragment();
         registrationFragment = new RegistrationFragment();
 
-        btnLogin = (RadioButton) view.findViewById(R.id.btn_login);
-        btnRegistration = (RadioButton) view.findViewById(R.id.btn_go_to_registration);
-
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(layoutContent.getId(), loginMiniFragment)
                 .commit();
@@ -52,17 +46,13 @@ public class LoginFragment extends BaseFragment {
 
 
     public class Presenter {
-        public void onLoginClicked(LoginInfo loginInfo) {
-            btnLogin.setTextColor(getResources().getColor(R.color.login_btn_checked));
-            btnRegistration.setTextColor(getResources().getColor(R.color.white));
+        public void onLoginClicked() {
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(layoutContent.getId(), loginMiniFragment)
                     .commit();
         }
 
         public void onRegistrationClicked() {
-            btnRegistration.setTextColor(getResources().getColor(R.color.login_btn_checked));
-            btnLogin.setTextColor(getResources().getColor(R.color.white));
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(layoutContent.getId(), registrationFragment)
                     .addToBackStack(null)

@@ -8,8 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.smapl_android.R;
+import com.smapl_android.ui.base.BaseFragment;
 
-public class NewsFragment extends BaseFragment{
+public class NewsFragment extends BaseFragment {
 
     @Nullable
     @Override

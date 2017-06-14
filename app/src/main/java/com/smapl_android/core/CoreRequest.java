@@ -1,7 +1,7 @@
 package com.smapl_android.core;
 
 import com.smapl_android.R;
-import com.smapl_android.ui.CoreActivity;
+import com.smapl_android.ui.base.CoreActivity;
 
 import java.lang.ref.WeakReference;
 

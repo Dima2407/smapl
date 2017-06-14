@@ -16,7 +16,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
-        <activity android:name=".ui.SplashActivity"
+        <activity android:name=".ui.activities.AuthActivity"
             android:noHistory="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN"/>
@@ -25,7 +25,7 @@
         </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.activities.MainActivity">
         </activity>
 
         <meta-data
