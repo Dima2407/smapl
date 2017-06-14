@@ -29,36 +29,48 @@
             android:id="@+id/linear_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_alignBottom="@id/img_login_logotip"
+            android:orientation="horizontal"
             android:weightSum="2">
 
-
-            <Button
-                android:id="@+id/btn_login"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/transparent"
-                android:drawableBottom="@drawable/btns_background"
-                android:onClick="@{() -> presenter.onLoginClicked(user)}"
-                android:text="@string/login"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/btn_text_size" />
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_go_to_registration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/transparent"
-                android:drawableBottom="@drawable/btns_background"
-                android:onClick="@{() -> presenter.onRegistrationClicked()}"
-                android:text="@string/registration"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/btn_text_size" />
+
+                <RadioButton
+                    android:id="@+id/btn_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:button="@color/transparent"
+                    android:drawableBottom="@drawable/selector_btns_login_background"
+                    android:onClick="@{() -> presenter.onLoginClicked(user)}"
+                    android:text="@string/login"
+                    android:checked="true"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/login_btn_checked"
+                    android:textSize="@dimen/btn_text_size" />
+
+                <RadioButton
+                    android:id="@+id/btn_go_to_registration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:button="@color/transparent"
+                    android:drawableBottom="@drawable/selector_btns_login_background"
+                    android:onClick="@{() -> presenter.onRegistrationClicked()}"
+                    android:text="@string/registration"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/btn_text_size" />
+
+            </RadioGroup>
 
         </LinearLayout>
 
