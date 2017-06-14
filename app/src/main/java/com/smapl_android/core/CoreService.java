@@ -60,7 +60,7 @@ public class CoreService {
                         });
 
                     } else {
-                        sessionStorage.saveAuthKey(result.getAuthKey());
+                        sessionStorage.saveAuthKey(result.getResult().getId());
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -73,7 +73,7 @@ public class CoreService {
         });
     }
 
-    public void registration(User user, final CoreRequest<Boolean> successOutput) {
+    public void registration(final User user, final CoreRequest<Boolean> successOutput) {
         try {
             Validators.getPhoneValidator(rootContext)
                     .validate(user.getPhoneNumber());
@@ -99,11 +99,26 @@ public class CoreService {
                             }
                         });
                     } else {
-                        sessionStorage.saveAuthKey(result.getToken());
-                        uiHandler.post(new Runnable() {
+                        networkServiceImpl.login(user.getPhoneNumber(), user.getPassword(), new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
                             @Override
-                            public void run() {
-                                successOutput.processResult(true);
+                            public void onResult(LoginResponse result, final Throwable error) {
+                                if (error != null) {
+                                    uiHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            successOutput.processError(error.getMessage());
+                                        }
+                                    });
+                                } else {
+
+                                    sessionStorage.saveAuthKey(result.getResult().getId());
+                                    uiHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            successOutput.processResult(true);
+                                        }
+                                    });
+                                }
                             }
                         });
                     }

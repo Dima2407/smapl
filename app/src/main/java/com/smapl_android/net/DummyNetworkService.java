@@ -47,18 +47,34 @@ class DummyNetworkService implements NetworkService{
     }
 
     @Override
-    public void login(final String login, String password, final OnResultCallback<LoginResponse, Throwable> callback) {
+    public void login(final String mobileNumber, final String password,
+                      final OnResultCallback<LoginResponse, Throwable> callback) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     Thread.sleep(500);
-                    if("1111111111".equals(login)){
+
+                    if ("1111111111".equals(mobileNumber) && "qwerty".equals(password)) {
+
                         LoginResponse result = new LoginResponse();
-                        result.setAuthKey(UUID.randomUUID().toString());
+                        LoginResponse.Result innerResult = new LoginResponse.Result();
+                        String string = Utils.generateString("test strign", 10);
+                        Random random = new Random();
+
+                        innerResult.setCreated(string);
+                        innerResult.setId(string);
+                        innerResult.setTtl(random.nextInt());
+                        innerResult.setUserId(string);
+
+                        result.setResult(innerResult);
                         callback.onResult(result, null);
-                    }else {
-                        callback.onResult(null, new Exception("hoho"));
+                    } else if (mobileNumber != null && mobileNumber.isEmpty()) {
+                        callback.onResult(null, new Exception("Please provide username."));
+                    } else if (password != null && password.isEmpty()) {
+                        callback.onResult(null, new Exception("Please provide password."));
+                    } else {
+                        callback.onResult(null, new Exception("Incorrect username or password."));
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -71,15 +87,25 @@ class DummyNetworkService implements NetworkService{
     public void registration(User user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
         final String phoneNumber = user.getPhoneNumber();
         final String password = user.getPassword();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     Thread.sleep(2000);
-                    if ("1111111111".equals(phoneNumber)){
+                    if (phoneNumber != null && "1111111111".equals(phoneNumber)) {
                         RegistrationResponse result = new RegistrationResponse();
-                        result.setToken(UUID.randomUUID().toString());
-                        result.setUserId(UUID.randomUUID().toString());
+                        String string = Utils.generateString("testString", 10);
+                        Random random = new Random();
+                        result.setCarColor(string);
+                        result.setCarMark(string);
+                        result.setCarModel(string);
+                        result.setCarYear(random.nextInt());
+                        result.setFirstName(string);
+                        result.setLastName(string);
+                        result.setMobileNumber(string);
+                        result.setCreatedAt(string);
+                        result.setUpdatedAt(string);
                         callback.onResult(result, null);
                     } else {
                         callback.onResult(null, new Exception("phoneNumber isn't equals 1111111111"));
