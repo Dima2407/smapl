@@ -3,6 +3,8 @@ package com.smapl_android.core;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
+
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.model.User;
@@ -15,6 +17,7 @@ import com.smapl_android.ui.base.CoreActivity;
 
 public class CoreService {
 
+    private static final String TAG = CoreService.class.getSimpleName();
     private final Context rootContext;
 
     private final SessionStorage sessionStorage;
@@ -25,7 +28,7 @@ public class CoreService {
 
     public CoreService(Context rootContext) {
         this.rootContext = rootContext;
-        this.networkServiceImpl = NetworkServiceFactory.create(true);
+        this.networkServiceImpl = NetworkServiceFactory.create(false);
         this.uiHandler = new Handler(Looper.getMainLooper());
         this.sessionStorage = new SessionStorage(rootContext);
     }
@@ -101,7 +104,7 @@ public class CoreService {
                     } else {
                         networkServiceImpl.login(user.getPhoneNumber(), user.getPassword(), new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
                             @Override
-                            public void onResult(LoginResponse result, final Throwable error) {
+                            public void onResult(final LoginResponse result, final Throwable error) {
                                 if (error != null) {
                                     uiHandler.post(new Runnable() {
                                         @Override
@@ -110,7 +113,6 @@ public class CoreService {
                                         }
                                     });
                                 } else {
-
                                     sessionStorage.saveAuthKey(result.getResult().getId());
                                     uiHandler.post(new Runnable() {
                                         @Override

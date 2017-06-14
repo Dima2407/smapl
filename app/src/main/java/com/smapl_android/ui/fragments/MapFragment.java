@@ -31,16 +31,16 @@ public class MapFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        user = getArguments().getParcelable("user");
+        /*user = getArguments().getParcelable("user");
 
         textUserName = (TextView) view.findViewById(R.id.text_map_user_name);
         textCar = (TextView) view.findViewById(R.id.text_map_car_brand_model);
         imageCarPhoto = (ImageView) view.findViewById(R.id.img_map_car_photo);
 
-        textUserName.setText(user.getName());
+        textUserName.setText(user.getFirstName() + " " + user.getLastName());
         Log.i("model", " name = " + textUserName.getText().toString());
         textCar.setText(user.getCarBrand() + " " + user.getCarModel());
         Log.i("model", " car model = " + textCar.getText().toString());
-        imageCarPhoto.setImageBitmap(user.getCarPhoto());
+        imageCarPhoto.setImageBitmap(user.getCarPhoto());*/
     }
 }

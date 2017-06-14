@@ -2,6 +2,7 @@ package com.smapl_android.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +25,14 @@ public class AboutYourselfFragment extends BaseFragment {
     private static final String TAG = AboutYourselfFragment.class.getSimpleName();
 
     private EditText name;
+    private EditText lastName;
     private RadioGroup gender;
     private Spinner age;
     private Spinner carBrand;
     private EditText carModel;
     private EditText carYearOfIssue;
     private Spinner carColor;
-    private ListView interests;
+    private EditText interests;
 
     @Nullable
     @Override
@@ -42,14 +44,15 @@ public class AboutYourselfFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        name = (EditText) view.findViewById(R.id.edit_about_yourself_name);
+        name = (EditText) view.findViewById(R.id.edit_about_yourself_first_name);
+        lastName = (EditText) view.findViewById(R.id.edit_about_yourself_last_name);
         gender = (RadioGroup) view.findViewById(R.id.radio_group_about_yourself_gender);
         age = (Spinner) view.findViewById(R.id.spinner_about_yourself_age);
         carBrand = (Spinner) view.findViewById(R.id.spinner_about_yourself_car_brand);
         carModel = (EditText) view.findViewById(R.id.edit_about_yourself_car_model);
         carYearOfIssue = (EditText) view.findViewById(R.id.edit_about_yourself_car_yaer_of_issue);
         carColor = (Spinner) view.findViewById(R.id.spinner_about_yourself_car_color);
-        interests = (ListView) view.findViewById(R.id.list_about_yourself_interests);
+        interests = (EditText) view.findViewById(R.id.edit_about_yourself_interests);
 
         view.findViewById(R.id.btn_about_yourself_forward).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,21 +70,22 @@ public class AboutYourselfFragment extends BaseFragment {
         User user = new User();
         user.setPhoneNumber(phoneNumber);
         user.setPassword(password);
-        user.setName(name.getText().toString());
+        user.setFirstName(name.getText().toString());
+        user.setLastName(lastName.getText().toString());
         user.setGender(gender.getCheckedRadioButtonId() == R.id.radio_about_yourself_man);
-        String strAge = age.getSelectedItem().toString();
+    /*    String strAge = age.getSelectedItem().toString();
         User.Age ageEnum = null;
         for (int i = 0; i < getResources().getStringArray(R.array.age).length; i++){
             if (strAge.equals(getResources().getStringArray(R.array.age)[i])){
                 ageEnum = User.Age.values()[i];
             }
-        }
-        user.setAge(ageEnum);
+        }*/
+        user.setAge(Integer.parseInt(age.getSelectedItem().toString()));
         user.setCarBrand(carBrand.getSelectedItem().toString());
-        user.setCarModel(carModel.toString());
+        user.setCarModel(carModel.getText().toString());
         user.setCarYearOfIssue(Integer.parseInt(carYearOfIssue.getText().toString()));
         user.setColor(carColor.getSelectedItem().toString());
-        List<String> interests = new ArrayList<>();
+    /*    List<String> interests = new ArrayList<>();
         SparseBooleanArray interestsArray = this.interests.getCheckedItemPositions();
         for (int i = 0; i < interestsArray.size(); i++){
             int key = interestsArray.keyAt(i);
@@ -92,8 +96,8 @@ public class AboutYourselfFragment extends BaseFragment {
         String[] stringInterests = new String[interests.size()];
         for (int i = 0; i < interests.size(); i++){
             stringInterests[i] = interests.get(i);
-        }
-        user.setInterests(stringInterests);
+        }*/
+        user.setInterests(interests.getText().toString());
 
         LoadCarPhotoFragment loadCarPhotoFragment = new LoadCarPhotoFragment();
 

@@ -136,7 +136,6 @@ public class LoadCarPhotoFragment extends BaseFragment {
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, mainScreenFragment)
-                .addToBackStack(null)
                 .commit();
     }
 
