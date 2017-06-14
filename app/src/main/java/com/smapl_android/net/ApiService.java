@@ -1,5 +1,7 @@
 package com.smapl_android.net;
 
+import com.smapl_android.net.requests.LoginRequest;
+import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.responses.AdvCompaniesResponse;
 import com.smapl_android.net.responses.EditCarResponse;
 import com.smapl_android.net.responses.EditPasswordResponse;
@@ -14,6 +16,7 @@ import com.smapl_android.net.responses.RestorePasswordResponse;
 import com.smapl_android.net.responses.SendMessageResponse;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -26,25 +29,13 @@ public interface ApiService {
 
     String API_KEY = "keykey";
 
-    @POST("api/login")
-    @FormUrlEncoded
+    @POST("api/user/login")
     @Headers("api_key: " + API_KEY)
-    Call<LoginResponse> login(@Query("phone") String login,
-                              @Query("password") String password);
+    Call<LoginResponse> login(@Body LoginRequest loginRequest);
 
-    @POST("api/registration")
-    @FormUrlEncoded
+    @POST("api/user")
     @Headers("api_key: " + API_KEY)
-    Call<RegistrationResponse> registration(@Query("phone") String phoneNumber,
-                                            @Query("password") String password,
-                                            @Query("name") String name,
-                                            @Query("gender") String gender,
-                                            @Query("age") int age,
-                                            @Query("car/mark") String carBrand,
-                                            @Query("car/model") String carModel,
-                                            @Query("car/year") int carYearOfIssue,
-                                            @Query("car/color") String color,
-                                            @Query("hobby") String interests);
+    Call<RegistrationResponse> registration(@Body RegistrationRequest registrationRequest);
 
     @POST("api/restore")
     @FormUrlEncoded

@@ -1,5 +1,6 @@
 package com.smapl_android.ui.fragments;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.databinding.FragmentMiniLoginBinding;
 import com.smapl_android.model.LoginInfo;
+import com.smapl_android.ui.activities.MainActivity;
 import com.smapl_android.ui.base.BaseFragment;
 
 public class LoginMiniFragment extends BaseFragment {
@@ -36,7 +38,9 @@ public class LoginMiniFragment extends BaseFragment {
                     .handleSuccess(new SuccessOutput<Boolean>() {
                         @Override
                         public void onSuccess(Boolean result) {
-
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
                         }
                     });
             getCoreService()

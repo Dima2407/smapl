@@ -2,7 +2,11 @@ package com.smapl_android.net;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.smapl_android.model.User;
+import com.smapl_android.net.requests.LoginRequest;
+import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.responses.AdvCompaniesResponse;
 import com.smapl_android.net.responses.EditCarResponse;
 import com.smapl_android.net.responses.EditPasswordResponse;
@@ -33,9 +37,8 @@ class NetworkServiceImpl implements NetworkService {
     private final ApiService apiService;
 
     public NetworkServiceImpl() {
-        //TODO: wait fro real API
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.github.com")
+                .baseUrl("http://adrider.pg-dev.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -44,7 +47,7 @@ class NetworkServiceImpl implements NetworkService {
 
     @Override
     public void login(String login, String password, final OnResultCallback<LoginResponse, Throwable> callback) {
-        final Call<LoginResponse> responseCall = apiService.login(login, password);
+        final Call<LoginResponse> responseCall = apiService.login(new LoginRequest(login, password));
         responseCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -78,13 +81,9 @@ class NetworkServiceImpl implements NetworkService {
     @Override
     public void registration(User user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
 
-        int age = 18; //dummy
-
-        String interests = user.getInterests().toString(); // dummy
-
-        final Call<RegistrationResponse> responseCall = apiService.registration(user.getPhoneNumber(), user.getPassword(),
-                user.getName(), user.isGender() ? GENDER_MAN : GENDER_WOMAN, age, user.getCarBrand(), user.getCarModel(),
-                user.getCarYearOfIssue(), user.getColor(), interests);
+        RegistrationRequest registrationRequest = new RegistrationRequest(user.getEmail(), user.getPassword(), user.getFirstName(),
+                user.getLastName(), user.getPhoneNumber(), user.getCarYearOfIssue(), user.getCarBrand(), user.getCarModel(), user.getColor());
+        final Call<RegistrationResponse> responseCall = apiService.registration(registrationRequest);
         responseCall.enqueue(new Callback<RegistrationResponse>() {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
