@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.smapl_android.R;
@@ -18,6 +20,8 @@ public class LoginFragment extends BaseFragment {
     private RelativeLayout layoutContent;
     private LoginMiniFragment loginMiniFragment;
     private RegistrationFragment registrationFragment;
+    private RadioButton btnLogin;
+    private RadioButton btnRegistration;
 
     @Nullable
     @Override
@@ -37,6 +41,9 @@ public class LoginFragment extends BaseFragment {
         loginMiniFragment = new LoginMiniFragment();
         registrationFragment = new RegistrationFragment();
 
+        btnLogin = (RadioButton) view.findViewById(R.id.btn_login);
+        btnRegistration = (RadioButton) view.findViewById(R.id.btn_go_to_registration);
+
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(layoutContent.getId(), loginMiniFragment)
                 .commit();
@@ -46,13 +53,16 @@ public class LoginFragment extends BaseFragment {
 
     public class Presenter {
         public void onLoginClicked(LoginInfo loginInfo) {
-
+            btnLogin.setTextColor(getResources().getColor(R.color.login_btn_checked));
+            btnRegistration.setTextColor(getResources().getColor(R.color.white));
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(layoutContent.getId(), loginMiniFragment)
                     .commit();
         }
 
         public void onRegistrationClicked() {
+            btnRegistration.setTextColor(getResources().getColor(R.color.login_btn_checked));
+            btnLogin.setTextColor(getResources().getColor(R.color.white));
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(layoutContent.getId(), registrationFragment)
                     .addToBackStack(null)
