@@ -16,12 +16,19 @@ repositories {
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def file = output.outputFile
+            def fileName = "smapl-android-${variant.versionName}.apk"
+            output.outputFile = new File(file.parentFile, fileName)
+        }
+    }
 
     Properties props = new Properties()
-    props.load(new FileInputStream(file("../local.properties")))
+    props.load(new FileInputStream(file("../dummy-sign.properties")))
     signingConfigs {
         release {
-            storeFile file(props['store.file'])
+            storeFile file('../' + props['store.file'])
             storePassword props['store.password']
             keyAlias props['key.alias']
             keyPassword props['key.password']
@@ -82,13 +89,7 @@ dependencies {
 }
 
 def buildVersion() {
-    if (hasProperty('buildVersion')) {
-        println "build version = ${buildVersion}"
-        println ""
-        return buildVersion
-    } else {
-        return 'dev_version'
-    }
+    "0." + buildNumber()
 }
 
 def buildNumber() {
@@ -96,6 +97,6 @@ def buildNumber() {
         println "build number = ${buildNumber}"
         return buildNumber as int
     } else {
-        return 0
+        return 1
     }
 }
