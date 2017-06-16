@@ -1,46 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_smapl_background">
+
+    <LinearLayout
+        android:id="@+id/linear_load_photo_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_load_car_photo_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_menu_bottom_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@android:color/transparent"
+            android:paddingTop="14dp"
+            android:text="@string/load_photo"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_menu_bottom_size" />
+
+        <Button
+            android:id="@+id/btn_load_car_photo_forward"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/forward_rus_2"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_menu_bottom_size" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/text_load_car_photo"
-        android:text="@string/load_car_photo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:textSize="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <ImageView
-        android:id="@+id/img_car_photo"
-        android:layout_below="@id/text_load_car_photo"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_load_photo_menu"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorAccent"
-        android:layout_width="90dp"
-        android:layout_height="90dp" />
+        android:layout_marginTop="100dp"
+        android:text="@string/load_car_photo"
+        android:textColor="@android:color/white"
+        android:textSize="18dp" />
+
+    <RelativeLayout
+        android:id="@+id/relative_img_load_photo"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_below="@id/text_load_car_photo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:id="@+id/img_car_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/img_load_photo_circle" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="50dp"
+            android:background="@drawable/img_load_photo_horizontal_line" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="50dp"
+            android:rotation="90"
+            android:background="@drawable/img_load_photo_horizontal_line" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_circle_load_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_load_car_photo_skip"
-        android:text="@string/skip"
-        android:layout_below="@id/img_car_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/relative_img_load_photo"
+        android:background="@android:color/transparent"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="@string/skip" />
 
-    <Button
-        android:id="@+id/btn_load_car_photo_back"
-        android:text="@string/back"
-        android:layout_alignParentBottom="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btn_load_car_photo_forward"
-        android:text="@string/forward_rus"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </RelativeLayout>

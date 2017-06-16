@@ -8,4 +8,7 @@
     <dimen name="edit_login_height">34dp</dimen>
     <dimen name="img_btn_login_forward_size">50dp</dimen>
     <dimen name="image_car_circle_size">90dp</dimen>
+    <dimen name="text_menu_bottom_size">20dp</dimen>
+    <dimen name="name_profile_size">30dp</dimen>
+    <dimen name="car_brand_model_profile_size">20dp</dimen>
 </resources>
