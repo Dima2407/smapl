@@ -31,7 +31,7 @@
     <string name="hint_interests">Интересы</string>
     <string name="last_name">Фамилия</string>
     <string name="email">e-mail</string>
-    <string name="load_photo">Загрузка фото</string>
+    <string name="load_photo">Загрузить фото</string>
     <string name="set_car">Машина</string>
     <string name="to_set_car">Изменить описание машины</string>
     <string name="change_password">Изменить пароль</string>
@@ -43,6 +43,7 @@
     <string name="hint_old_password">Старый пароль</string>
     <string name="hint_new_password">Новый пароль</string>
     <string name="save">Сохранить</string>
+    <string name="forward_rus_2">Далее</string>
 
     <string-array name="age">
         <item>18</item>

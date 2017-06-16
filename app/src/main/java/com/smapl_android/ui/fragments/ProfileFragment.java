@@ -24,21 +24,15 @@ public class ProfileFragment extends BaseFragment {
         view.findViewById(R.id.btn_to_set_car_fragment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToFragment(new SetCarFragment());
+                getCoreActivity().replaceContent(new SetCarFragment());
             }
         });
 
         view.findViewById(R.id.btn_edit_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToFragment(new ChangePasswordFragment());
+                getCoreActivity().replaceContent(new ChangePasswordFragment());
             }
         });
-    }
-
-    private void goToFragment(BaseFragment fragment) {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, fragment)
-                .commit();
     }
 }
