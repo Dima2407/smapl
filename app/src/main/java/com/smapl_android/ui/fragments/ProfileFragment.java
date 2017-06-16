@@ -16,4 +16,29 @@ public class ProfileFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        view.findViewById(R.id.btn_to_set_car_fragment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToFragment(new SetCarFragment());
+            }
+        });
+
+        view.findViewById(R.id.btn_edit_password).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToFragment(new ChangePasswordFragment());
+            }
+        });
+    }
+
+    private void goToFragment(BaseFragment fragment) {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(android.R.id.content, fragment)
+                .commit();
+    }
 }

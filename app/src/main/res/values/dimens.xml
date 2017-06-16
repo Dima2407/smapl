@@ -7,4 +7,5 @@
     <dimen name="margin_fragment_mini_login">20dp</dimen>
     <dimen name="edit_login_height">34dp</dimen>
     <dimen name="img_btn_login_forward_size">50dp</dimen>
+    <dimen name="image_car_circle_size">90dp</dimen>
 </resources>
