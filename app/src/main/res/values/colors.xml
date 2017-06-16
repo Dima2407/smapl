@@ -11,4 +11,5 @@
     <color name="transparent">#00000000</color>
     <color name="grey">#f9f9f9</color>
     <color name="edit_frame">#f0f0f0</color>
+    <color name="color_edit_set_car">#f0f0f0</color>
 </resources>

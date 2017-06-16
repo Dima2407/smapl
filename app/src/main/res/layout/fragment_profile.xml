@@ -2,11 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/img_smapl_background"
     >
 
     <TextView
         android:text="ProfileFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_to_set_car_fragment"
+        android:text="@string/to_set_car"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_edit_password"
+        android:layout_marginTop="10dp"
+        android:text="@string/change_password"
+        android:textAllCaps="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
