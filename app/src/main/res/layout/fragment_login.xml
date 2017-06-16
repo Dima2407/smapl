@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@android:color/white">
 
         <ImageView
             android:id="@+id/img_login_logotip"
@@ -40,8 +40,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/transparent"
-                    android:button="@color/transparent"
+                    android:background="@android:color/transparent"
+                    android:button="@android:color/transparent"
                     android:drawableBottom="@drawable/btn_auth_indicator"
                     android:onClick="@{() -> presenter.onLoginClicked()}"
                     android:text="@string/login"
@@ -49,22 +49,22 @@
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/btn_auth_text"
-                    android:textSize="@dimen/btn_text_size" />
+                    android:textSize="@dimen/core_text_size" />
 
                 <RadioButton
                     android:id="@+id/btn_go_to_registration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/transparent"
-                    android:button="@color/transparent"
+                    android:background="@android:color/transparent"
+                    android:button="@android:color/transparent"
                     android:drawableBottom="@drawable/btn_auth_indicator"
                     android:onClick="@{() -> presenter.onRegistrationClicked()}"
                     android:text="@string/registration"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/btn_auth_text"
-                    android:textSize="@dimen/btn_text_size" />
+                    android:textSize="@dimen/core_text_size" />
 
             </RadioGroup>
 
@@ -76,7 +76,9 @@
             android:layout_height="match_parent"
             android:layout_below="@id/linear_buttons"
             android:background="@color/grey"
-            android:padding="@dimen/padding_frame">
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="33dp">
 
         </RelativeLayout>
     </RelativeLayout>

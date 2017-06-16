@@ -22,7 +22,7 @@
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/img_map_car_photo"
             android:text="Петя"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             android:textSize="45dp" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:layout_alignLeft="@id/text_map_user_name"
             android:layout_below="@id/text_map_user_name"
             android:text="Audi A6"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             android:textSize="25dp" />
 
         <Button
@@ -40,7 +40,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="@string/start"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             android:background="@color/colorPrimaryDark"
             android:layout_width="280dp"
             android:layout_height="wrap_content" />

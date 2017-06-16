@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="btn_text_size">17sp</dimen>
-    <dimen name="edit_text_size">18sp</dimen>
+    <dimen name="core_text_size">13sp</dimen>
     <dimen name="btn_forgot_padding">25dp</dimen>
     <dimen name="padding_frame">20dp</dimen>
     <dimen name="white_rectangle_height">205dp</dimen>
     <dimen name="margin_fragment_mini_login">20dp</dimen>
-    <dimen name="edit_login_height">40dp</dimen>
-    <dimen name="edit_login_text_size">18sp</dimen>
+    <dimen name="edit_login_height">34dp</dimen>
     <dimen name="img_btn_login_forward_size">50dp</dimen>
 </resources>

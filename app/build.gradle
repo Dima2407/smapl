@@ -98,6 +98,6 @@ def buildNumber() {
         println "build number = ${buildNumber}"
         return buildNumber as int
     } else {
-        return 1
+        return 2
     }
 }
