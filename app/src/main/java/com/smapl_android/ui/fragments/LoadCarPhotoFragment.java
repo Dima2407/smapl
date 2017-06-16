@@ -1,12 +1,19 @@
 package com.smapl_android.ui.fragments;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +44,10 @@ public class LoadCarPhotoFragment extends BaseFragment {
     RelativeLayout imgLayout;
     private User user;
     private CircleImageView circleImageView;
+
+    private static final String [] IMAGE_PERMISSIONS=  {Manifest.permission.CAMERA};
+
+    private static final int REQUEST_IMAGE_PERMISSIONS = 10;
 
     @Nullable
     @Override
@@ -81,6 +92,24 @@ public class LoadCarPhotoFragment extends BaseFragment {
                 getActivity().onBackPressed();
             }
         });
+        requestImagePermissions();
+    }
+
+    private void requestImagePermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(IMAGE_PERMISSIONS, REQUEST_IMAGE_PERMISSIONS);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        Log.d(TAG, "onRequestPermissionsResult");
+        if (isGrantedPermission(getActivity(), Manifest.permission.CAMERA)) {
+            //TODO:
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
     }
 
     private void showDialog() {
@@ -190,5 +219,9 @@ public class LoadCarPhotoFragment extends BaseFragment {
                 }
                 break;
         }
+    }
+
+    public static boolean isGrantedPermission(Context context, String permission) {
+        return ActivityCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
     }
 }

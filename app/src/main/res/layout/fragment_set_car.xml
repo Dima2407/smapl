@@ -16,19 +16,19 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textSize="@dimen/text_menu_bottom_size"
-            android:background="@color/transparent"
+            android:background="@android:color/transparent"
             android:text="@string/back"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             android:textAllCaps="false" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:background="@color/transparent"
+            android:background="@android:color/transparent"
             android:paddingTop="14dp"
             android:text="@string/set_car"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             android:textAlignment="center"
             android:textSize="@dimen/text_menu_bottom_size" />
 
@@ -38,8 +38,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textSize="@dimen/text_menu_bottom_size"
-            android:background="@color/transparent"
-            android:textColor="@color/white"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
             android:text="@string/save"
             android:textAllCaps="false" />
 
@@ -61,7 +61,7 @@
             android:id="@+id/text_set_car_name"
             android:text="Дмитрий"
             android:textSize="@dimen/name_profile_size"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             android:layout_toRightOf="@id/img_circle_set_car_photo"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
@@ -71,7 +71,7 @@
         <TextView
             android:id="@+id/text_set_car_car_brand_model"
             android:text="Audi A6"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             android:layout_below="@id/text_set_car_name"
             android:layout_alignLeft="@id/text_set_car_name"
             android:textSize="@dimen/car_brand_model_profile_size"
@@ -84,7 +84,7 @@
             android:layout_marginTop="30dp"
             android:hint="@string/hint_car_brand"
             android:background="@drawable/edit_text_line_background"
-            android:textColorHint="@color/white"
+            android:textColorHint="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -93,7 +93,7 @@
             android:layout_below="@id/edit_set_car_brand"
             android:hint="@string/hint_car_model"
             android:background="@drawable/edit_text_line_background"
-            android:textColorHint="@color/white"
+            android:textColorHint="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -102,7 +102,7 @@
             android:layout_below="@id/edit_set_car_model"
             android:hint="@string/hint_car_year_issue"
             android:background="@drawable/edit_text_line_background"
-            android:textColorHint="@color/white"
+            android:textColorHint="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -111,7 +111,7 @@
             android:layout_below="@id/edit_set_car_year_issue"
             android:hint="@string/hint_car_color"
             android:background="@drawable/edit_text_line_background"
-            android:textColorHint="@color/white"
+            android:textColorHint="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
