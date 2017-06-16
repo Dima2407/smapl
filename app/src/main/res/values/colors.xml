@@ -3,13 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="white">#FFFFFF</color>
     <color name="background_blue">#0F99FF</color>
     <color name="login_btn_checked">#0FBBFF</color>
     <color name="color_login_hint">#a0a0a0</color>
     <color name="blue_dark">#2F66CC</color>
-    <color name="transparent">#00000000</color>
     <color name="grey">#f9f9f9</color>
-    <color name="edit_frame">#f0f0f0</color>
-    <color name="color_edit_set_car">#f0f0f0</color>
+    <color name="edit_frame">#E9E7E7</color>
+    <color name="color_edit_set_car">#E9E7E7</color>
 </resources>

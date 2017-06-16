@@ -29,17 +29,17 @@
                 android:layout_marginLeft="1dp"
                 android:layout_weight="1"
                 android:padding="7dp"
-                android:src="@drawable/image_login_teleaphone" />
+                android:src="@drawable/vector_smart_object_6" />
 
             <EditText
                 android:id="@+id/edit_registration_phone_number"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/edit_login_height"
-                android:background="@color/transparent"
+                android:background="@android:color/transparent"
                 android:hint="@string/input_phone"
                 android:inputType="phone"
                 android:layout_weight="8"
-                android:textSize="@dimen/edit_login_text_size" />
+                android:textSize="@dimen/core_text_size" />
 
             <ImageView
                 android:id="@+id/img_login_chek_mark"
@@ -67,18 +67,18 @@
                 android:layout_marginLeft="3dp"
                 android:layout_weight="1"
                 android:padding="3dp"
-                android:src="@drawable/image_login_lock" />
+                android:src="@drawable/vector_smart_object_7" />
 
             <EditText
                 android:id="@+id/edit_registration_password"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/edit_login_height"
-                android:background="@color/transparent"
+                android:background="@android:color/transparent"
                 android:hint="@string/input_password"
                 android:inputType="textPassword"
                 android:textColorHint="@color/color_login_hint"
                 android:layout_weight="8"
-                android:textSize="@dimen/edit_text_size" />
+                android:textSize="@dimen/core_text_size" />
 
             <ImageView
                 android:id="@+id/img_password_check_mark"
@@ -100,8 +100,8 @@
             android:background="@drawable/btn_login_background"
             android:text="@string/registration_registration"
             android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/btn_text_size" />
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/core_text_size" />
 
     </RelativeLayout>
 
