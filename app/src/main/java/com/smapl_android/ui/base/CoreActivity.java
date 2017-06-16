@@ -1,8 +1,11 @@
 package com.smapl_android.ui.base;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import com.smapl_android.R;
@@ -11,6 +14,9 @@ import com.smapl_android.core.CoreService;
 
 public abstract class CoreActivity extends AppCompatActivity {
 
+    private final PermissionsManager permissionsManager = new PermissionsManager();
+    private final ImageManager imageManager = new ImageManager();
+    //region progress
     private ProgressDialog progressDialog;
 
     public CoreService getCoreService() {
@@ -36,7 +42,9 @@ public abstract class CoreActivity extends AppCompatActivity {
         }
         progressDialog = null;
     }
+    //endregion
 
+    //region dialog
     public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
@@ -49,17 +57,63 @@ public abstract class CoreActivity extends AppCompatActivity {
         });
         builder.show();
     }
+    //endregion
 
-    public void replaceContent(Fragment fragment){
+    //region navigation
+    public void replaceContent(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
-                .add(android.R.id.content, fragment)
+                .replace(android.R.id.content, fragment)
                 .commit();
     }
 
-    public void replaceContentWithHistory(Fragment fragment){
+    public void replaceContentWithHistory(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
-                .add(android.R.id.content, fragment)
+                .replace(android.R.id.content, fragment)
                 .commit();
     }
+    //endregion
+
+    //region permissions
+
+    public void runWithPermissions(OnPermissionsRequestListener listener, String... permissions) {
+        permissionsManager.runWithPermissions(this, listener, permissions, null);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    //endregion
+
+    //region system
+    public void takePhoto(final OnImageRequestListener listener) {
+        runWithPermissions(new OnPermissionsRequestListener() {
+            @Override
+            public void onSuccess() {
+                imageManager.takePhoto(CoreActivity.this, listener);
+            }
+
+            @Override
+            public void onFail() {
+                if (listener != null) {
+                    listener.onResult(null);
+                }
+            }
+        }, new String[]{Manifest.permission.CAMERA});
+    }
+
+    public void selectPhoto(final OnImageRequestListener listener) {
+        imageManager.selectImage(this, listener);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        imageManager.onActivityResult(this, requestCode, resultCode, data);
+    }
+
+    //endregion
 }

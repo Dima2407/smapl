@@ -16,8 +16,7 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
-        <activity android:name=".ui.activities.AuthActivity"
-            android:noHistory="true">
+        <activity android:name=".ui.activities.AuthActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN"/>
 
@@ -27,6 +26,12 @@
 
         <activity android:name=".ui.activities.MainActivity">
         </activity>
+        <provider android:name="android.support.v4.content.FileProvider"
+                  android:authorities="com.smapl_android.fileprovider"
+                  android:exported="false"
+                  android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/camera_path"/>
+        </provider>
 
         <meta-data
             android:name="io.fabric.ApiKey"

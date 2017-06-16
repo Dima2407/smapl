@@ -2,6 +2,7 @@ package com.smapl_android.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -83,7 +84,9 @@ public class AboutYourselfFragment extends BaseFragment {
         user.setAge(Integer.parseInt(age.getSelectedItem().toString()));
         user.setCarBrand(carBrand.getSelectedItem().toString());
         user.setCarModel(carModel.getText().toString());
-        user.setCarYearOfIssue(Integer.parseInt(carYearOfIssue.getText().toString()));
+        final String yearStr = carYearOfIssue.getText().toString();
+        if(!TextUtils.isEmpty(yearStr))
+        user.setCarYearOfIssue(Integer.parseInt(yearStr));
         user.setColor(carColor.getSelectedItem().toString());
     /*    List<String> interests = new ArrayList<>();
         SparseBooleanArray interestsArray = this.interests.getCheckedItemPositions();
@@ -106,10 +109,7 @@ public class AboutYourselfFragment extends BaseFragment {
 
         loadCarPhotoFragment.setArguments(bundle);
 
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, loadCarPhotoFragment)
-                .addToBackStack(null)
-                .commit();
+        getCoreActivity().replaceContentWithHistory(loadCarPhotoFragment);
 
     }
 }

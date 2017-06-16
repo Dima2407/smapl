@@ -46,8 +46,7 @@ public class RegistrationFragment extends BaseFragment {
         bundle.putString("password", password);
         aboutYourselfFragment.setArguments(bundle);
 
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, aboutYourselfFragment)
-                .commit();
+        getCoreActivity().replaceContentWithHistory(aboutYourselfFragment);
+
     }
 }

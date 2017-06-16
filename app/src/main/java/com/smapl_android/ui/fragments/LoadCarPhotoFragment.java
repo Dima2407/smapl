@@ -30,6 +30,7 @@ import com.smapl_android.ui.base.BaseFragment;
 
 import java.io.IOException;
 
+import com.smapl_android.ui.base.OnImageRequestListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
@@ -92,24 +93,6 @@ public class LoadCarPhotoFragment extends BaseFragment {
                 getActivity().onBackPressed();
             }
         });
-        requestImagePermissions();
-    }
-
-    private void requestImagePermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(IMAGE_PERMISSIONS, REQUEST_IMAGE_PERMISSIONS);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        Log.d(TAG, "onRequestPermissionsResult");
-        if (isGrantedPermission(getActivity(), Manifest.permission.CAMERA)) {
-            //TODO:
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
     }
 
     private void showDialog() {
@@ -134,19 +117,22 @@ public class LoadCarPhotoFragment extends BaseFragment {
 
 
     private void makePhoto() {
-        Log.i("crazj", "makeFoto()");
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            Log.i("crazj", "makeFoto().takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null");
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
+        getCoreActivity().takePhoto(new OnImageRequestListener() {
+            @Override
+            public void onResult(Uri data) {
+                Log.d(TAG, "onResult: " + data);
+            }
+        });
     }
 
     private void loadPhotoFromGallery() {
-        Log.i("crazj", "loadPhotoFromGallery()");
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        photoPickerIntent.setType("image/*");
-        startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
+        getCoreActivity().selectPhoto(new OnImageRequestListener() {
+            @Override
+            public void onResult(Uri data) {
+                Log.d(TAG, "onResult: " + data);
+
+            }
+        });
     }
 
     private void registration(){
@@ -185,43 +171,4 @@ public class LoadCarPhotoFragment extends BaseFragment {
                 .commit();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-
-        Log.i("crazj", "onActivityResult()");
-        Log.i("crazj", "requestCode = " + requestCode);
-
-        Bitmap bitmap = null;
-        switch (requestCode) {
-            case GALLERY_REQUEST:
-                if (resultCode == RESULT_OK) {
-                    Uri selectedImage = intent.getData();
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Log.i("crazj", "onActivityResult().preSetImage");
-                    circleImageView.setImageBitmap(bitmap);
-                    Log.i("crazj", "onActivityResult().postSetImage");
-                    user.setCarPhoto(bitmap);
-                }
-                break;
-            case REQUEST_IMAGE_CAPTURE:
-                if (resultCode == RESULT_OK) {
-                    Bundle extras = intent.getExtras();
-                    Bitmap imageBitmap = (Bitmap) extras.get("data");
-                    Log.i("crazj", "onActivityResult().preSetImage");
-                    circleImageView.setImageBitmap(bitmap);
-                    Log.i("crazj", "onActivityResult().postSetImage");
-                    user.setCarPhoto(imageBitmap);
-                }
-                break;
-        }
-    }
-
-    public static boolean isGrantedPermission(Context context, String permission) {
-        return ActivityCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
-    }
 }
