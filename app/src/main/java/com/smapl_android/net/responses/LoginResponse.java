@@ -20,7 +20,7 @@ public class LoginResponse {
         private String created;
 
         @SerializedName("userId")
-        private String userId;
+        private int userId;
 
         public String getId() {
             return id;
@@ -46,11 +46,11 @@ public class LoginResponse {
             this.created = created;
         }
 
-        public String getUserId() {
+        public int getUserId() {
             return userId;
         }
 
-        public void setUserId(String userId) {
+        public void setUserId(int userId) {
             this.userId = userId;
         }
     }

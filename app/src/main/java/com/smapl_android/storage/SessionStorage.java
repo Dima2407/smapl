@@ -10,6 +10,7 @@ public class SessionStorage {
     private static final String FILE_NAME = "_session_storage";
 
     private static final String AUTH_KEY = "_auth_key";
+    private static final String USER_ID = "_user_id";
 
     private SharedPreferences preferences;
 
@@ -29,7 +30,15 @@ public class SessionStorage {
         preferences.edit().putString(AUTH_KEY, authKey).apply();
     }
 
+    public void saveUserId(int userId){
+        preferences.edit().putInt(USER_ID, userId).apply();
+    }
+
     public String getAuthKey() {
         return preferences.getString(AUTH_KEY, null);
+    }
+
+    public int getUserId() {
+        return preferences.getInt(USER_ID, -1);
     }
 }

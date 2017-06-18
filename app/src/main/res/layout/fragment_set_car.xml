@@ -1,121 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/img_smapl_background">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
 
+        <variable
+                name="user"
+                type="com.smapl_android.model.UserInfo"/>
+
+        <variable
+                name="presenter"
+                type="com.smapl_android.ui.fragments.SetCarFragment.Presenter"/>
+    </data>
     <LinearLayout
-        android:id="@+id/linear_set_car_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_set_car_back"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="@dimen/text_menu_bottom_size"
-            android:background="@android:color/transparent"
-            android:text="@string/back"
-            android:textColor="@android:color/white"
-            android:textAllCaps="false" />
+            android:orientation="vertical"
+            android:background="@drawable/img_smapl_background">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:background="@android:color/transparent"
-            android:paddingTop="14dp"
-            android:text="@string/set_car"
-            android:textColor="@android:color/white"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_menu_bottom_size" />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_set_car_forward"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="@dimen/text_menu_bottom_size"
-            android:background="@android:color/transparent"
-            android:textColor="@android:color/white"
-            android:text="@string/save"
-            android:textAllCaps="false" />
+            <Button
+                    android:id="@+id/btn_set_car_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/core_text_size"
+                    android:background="@android:color/transparent"
+                    android:text="@string/back"
+                    android:textColor="@android:color/white"
+                    android:textAllCaps="false"
+                    android:onClick="@{() -> presenter.onBackClicked()}"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:background="@android:color/transparent"
+                    android:paddingTop="14dp"
+                    android:text="@string/set_car"
+                    android:textColor="@android:color/white"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/core_text_size"/>
+
+            <Button
+                    android:id="@+id/btn_set_car_forward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/core_text_size"
+                    android:background="@android:color/transparent"
+                    android:textColor="@android:color/white"
+                    android:text="@string/save"
+                    android:textAllCaps="false"
+                    android:onClick="@{() -> presenter.onSaveClicked()}"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_circle_set_car_photo"
+                    android:src="@drawable/audi"
+                    android:layout_width="@dimen/image_car_circle_size"
+                    android:layout_height="@dimen/image_car_circle_size"/>
+
+            <TextView
+                    android:id="@+id/text_set_car_name"
+                    android:text="@{user.name}"
+                    android:textSize="@dimen/name_profile_size"
+                    android:textColor="@android:color/white"
+                    android:layout_toRightOf="@id/img_circle_set_car_photo"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/text_set_car_car_brand_model"
+                    android:text="@{user.carBrandModel}"
+                    android:textColor="@android:color/white"
+                    android:layout_below="@id/text_set_car_name"
+                    android:layout_alignLeft="@id/text_set_car_name"
+                    android:textSize="@dimen/car_brand_model_profile_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <EditText
+                    android:id="@+id/edit_set_car_brand"
+                    android:layout_below="@id/img_circle_set_car_photo"
+                    android:layout_marginTop="30dp"
+                    android:hint="@string/hint_car_brand"
+                    android:background="@drawable/edit_text_line_background"
+                    android:textColorHint="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{user.carBrand}"
+                    android:addTextChangedListener="@{user.carBrandTextWatcher}"/>
+
+            <EditText
+                    android:id="@+id/edit_set_car_model"
+                    android:layout_below="@id/edit_set_car_brand"
+                    android:hint="@string/hint_car_model"
+                    android:background="@drawable/edit_text_line_background"
+                    android:textColorHint="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{user.carModel}"
+                    android:addTextChangedListener="@{user.carModelTextWatcher}"/>
+
+            <EditText
+                    android:id="@+id/edit_set_car_year_issue"
+                    android:layout_below="@id/edit_set_car_model"
+                    android:hint="@string/hint_car_year_issue"
+                    android:background="@drawable/edit_text_line_background"
+                    android:textColorHint="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{user.carYear}"
+                    android:addTextChangedListener="@{user.carYearTextWatcher}"/>
+
+            <EditText
+                    android:id="@+id/edit_set_car_color"
+                    android:layout_below="@id/edit_set_car_year_issue"
+                    android:hint="@string/hint_car_color"
+                    android:background="@drawable/edit_text_line_background"
+                    android:textColorHint="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{user.carColor}"
+                    android:addTextChangedListener="@{user.carColorTextWatcher}"/>
+
+
+        </RelativeLayout>
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
-        android:layout_below="@id/linear_set_car_menu" >
-
-       <de.hdodenhof.circleimageview.CircleImageView
-           android:id="@+id/img_circle_set_car_photo"
-           android:src="@drawable/audi"
-           android:layout_width="@dimen/image_car_circle_size"
-           android:layout_height="@dimen/image_car_circle_size" />
-
-        <TextView
-            android:id="@+id/text_set_car_name"
-            android:text="Дмитрий"
-            android:textSize="@dimen/name_profile_size"
-            android:textColor="@android:color/white"
-            android:layout_toRightOf="@id/img_circle_set_car_photo"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/text_set_car_car_brand_model"
-            android:text="Audi A6"
-            android:textColor="@android:color/white"
-            android:layout_below="@id/text_set_car_name"
-            android:layout_alignLeft="@id/text_set_car_name"
-            android:textSize="@dimen/car_brand_model_profile_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/edit_set_car_brand"
-            android:layout_below="@id/img_circle_set_car_photo"
-            android:layout_marginTop="30dp"
-            android:hint="@string/hint_car_brand"
-            android:background="@drawable/edit_text_line_background"
-            android:textColorHint="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/edit_set_car_model"
-            android:layout_below="@id/edit_set_car_brand"
-            android:hint="@string/hint_car_model"
-            android:background="@drawable/edit_text_line_background"
-            android:textColorHint="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/edit_set_car_year_issue"
-            android:layout_below="@id/edit_set_car_model"
-            android:hint="@string/hint_car_year_issue"
-            android:background="@drawable/edit_text_line_background"
-            android:textColorHint="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/edit_set_car_color"
-            android:layout_below="@id/edit_set_car_year_issue"
-            android:hint="@string/hint_car_color"
-            android:background="@drawable/edit_text_line_background"
-            android:textColorHint="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</layout>

@@ -1,24 +1,16 @@
 package com.smapl_android.net;
 
 import com.smapl_android.model.User;
-import com.smapl_android.net.responses.AdvCompaniesResponse;
-import com.smapl_android.net.responses.EditCarResponse;
-import com.smapl_android.net.responses.EditPasswordResponse;
-import com.smapl_android.net.responses.EditProfileResponse;
-import com.smapl_android.net.responses.GetBeforeMessagesResponse;
-import com.smapl_android.net.responses.GetCompanyHistoryResponse;
-import com.smapl_android.net.responses.GetLastMessagesResponse;
-import com.smapl_android.net.responses.GetNewsResponse;
-import com.smapl_android.net.responses.LoginResponse;
-import com.smapl_android.net.responses.RegistrationResponse;
-import com.smapl_android.net.responses.RestorePasswordResponse;
-import com.smapl_android.net.responses.SendMessageResponse;
+import com.smapl_android.net.requests.UpdateCarRequest;
+import com.smapl_android.net.responses.*;
 
 public interface NetworkService {
 
     void login(String login, String password, final NetworkServiceImpl.OnResultCallback<LoginResponse, Throwable> callback);
 
     void registration(User user, final NetworkService.OnResultCallback<RegistrationResponse, Throwable> callback);
+
+    void getUserById(int id, String token, NetworkService.OnResultCallback<UserResponse, Throwable> callback);
 
     void restorePassword(String login, final NetworkService.OnResultCallback<RestorePasswordResponse, Throwable> callback);
 
@@ -43,6 +35,8 @@ public interface NetworkService {
 
     void sendMessage(String message, String senderId, String receiverId, String date,
                      NetworkService.OnResultCallback<SendMessageResponse, Throwable> callback);
+
+    void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<UpdateCarResponse, Throwable> callback);
 
     interface OnResultCallback<T, E> {
         void onResult(T result, E error);
