@@ -1,21 +1,10 @@
 package com.smapl_android.net;
 
 import com.smapl_android.model.User;
-import com.smapl_android.net.responses.AdvCompaniesResponse;
-import com.smapl_android.net.responses.EditCarResponse;
-import com.smapl_android.net.responses.EditPasswordResponse;
-import com.smapl_android.net.responses.EditProfileResponse;
-import com.smapl_android.net.responses.GetBeforeMessagesResponse;
-import com.smapl_android.net.responses.GetCompanyHistoryResponse;
-import com.smapl_android.net.responses.GetLastMessagesResponse;
-import com.smapl_android.net.responses.GetNewsResponse;
-import com.smapl_android.net.responses.LoginResponse;
-import com.smapl_android.net.responses.RegistrationResponse;
-import com.smapl_android.net.responses.RestorePasswordResponse;
-import com.smapl_android.net.responses.SendMessageResponse;
+import com.smapl_android.net.requests.UpdateCarRequest;
+import com.smapl_android.net.responses.*;
 
 import java.util.Random;
-import java.util.UUID;
 
 @Deprecated
 class DummyNetworkService implements NetworkService{
@@ -65,7 +54,7 @@ class DummyNetworkService implements NetworkService{
                         innerResult.setCreated(string);
                         innerResult.setId(string);
                         innerResult.setTtl(random.nextInt());
-                        innerResult.setUserId(string);
+                        innerResult.setUserId(0);
 
                         result.setResult(innerResult);
                         callback.onResult(result, null);
@@ -366,6 +355,16 @@ class DummyNetworkService implements NetworkService{
                 }
             }
         }).start();
+
+    }
+
+    @Override
+    public void getUserById(int id, String token, OnResultCallback<UserResponse, Throwable> callback) {
+
+    }
+
+    @Override
+    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<UpdateCarResponse, Throwable> callback) {
 
     }
 }

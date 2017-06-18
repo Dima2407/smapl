@@ -13,7 +13,7 @@ public class MainActivity extends CoreActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fragment fragment = new MainScreenFragment();
-        replaceContent(fragment);
+        replaceContentWithHistory(fragment);
     }
 
 

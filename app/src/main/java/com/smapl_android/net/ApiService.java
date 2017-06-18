@@ -2,40 +2,27 @@ package com.smapl_android.net;
 
 import com.smapl_android.net.requests.LoginRequest;
 import com.smapl_android.net.requests.RegistrationRequest;
-import com.smapl_android.net.responses.AdvCompaniesResponse;
-import com.smapl_android.net.responses.EditCarResponse;
-import com.smapl_android.net.responses.EditPasswordResponse;
-import com.smapl_android.net.responses.EditProfileResponse;
-import com.smapl_android.net.responses.GetBeforeMessagesResponse;
-import com.smapl_android.net.responses.GetCompanyHistoryResponse;
-import com.smapl_android.net.responses.GetLastMessagesResponse;
-import com.smapl_android.net.responses.GetNewsResponse;
-import com.smapl_android.net.responses.LoginResponse;
-import com.smapl_android.net.responses.RegistrationResponse;
-import com.smapl_android.net.responses.RestorePasswordResponse;
-import com.smapl_android.net.responses.SendMessageResponse;
+import com.smapl_android.net.requests.UpdateCarRequest;
+import com.smapl_android.net.responses.*;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
-
-import static com.smapl_android.net.ApiService.API_KEY;
+import retrofit2.http.*;
 
 public interface ApiService {
 
     String API_KEY = "keykey";
 
     @POST("api/user/login")
-    @Headers("api_key: " + API_KEY)
     Call<LoginResponse> login(@Body LoginRequest loginRequest);
 
     @POST("api/user")
-    @Headers("api_key: " + API_KEY)
     Call<RegistrationResponse> registration(@Body RegistrationRequest registrationRequest);
+
+    @GET("api/user/{id}")
+    Call<UserResponse> getUserById(@Path("id") int id, @Query("access_token") String token);
+
+    @PATCH("api/user/edit/car/{id}")
+    Call<UpdateCarResponse> updateCar(@Path("id") int userId, @Query("access_token") String token, @Body UpdateCarRequest updateUserRequest);
 
     @POST("api/restore")
     @FormUrlEncoded
@@ -93,4 +80,6 @@ public interface ApiService {
                                           @Query("sender_id") String sender_id,
                                           @Query("receiver_id") String receiver_id,
                                           @Query("date") String date);
+
+
 }

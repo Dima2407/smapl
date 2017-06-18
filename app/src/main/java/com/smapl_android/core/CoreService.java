@@ -3,15 +3,17 @@ package com.smapl_android.core;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.model.User;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
+import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.LoginResponse;
 import com.smapl_android.net.responses.RegistrationResponse;
+import com.smapl_android.net.responses.UpdateCarResponse;
+import com.smapl_android.net.responses.UserResponse;
 import com.smapl_android.storage.SessionStorage;
 import com.smapl_android.ui.base.CoreActivity;
 
@@ -64,6 +66,7 @@ public class CoreService {
 
                     } else {
                         sessionStorage.saveAuthKey(result.getResult().getId());
+                        sessionStorage.saveUserId(result.getResult().getUserId());
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -114,6 +117,7 @@ public class CoreService {
                                     });
                                 } else {
                                     sessionStorage.saveAuthKey(result.getResult().getId());
+                                    sessionStorage.saveUserId(result.getResult().getUserId());
                                     uiHandler.post(new Runnable() {
                                         @Override
                                         public void run() {
@@ -133,8 +137,63 @@ public class CoreService {
         sessionStorage.logout();
     }
 
+    public void getUser(final CoreRequest<UserResponse> coreRequest){
+        int userId =  sessionStorage.getUserId();
+        String token = sessionStorage.getAuthKey();
+        networkServiceImpl.getUserById(userId, token, new NetworkService.OnResultCallback<UserResponse, Throwable>() {
+            @Override
+            public void onResult(final UserResponse result, final Throwable error) {
+                if (coreRequest != null) {
+                    if (error != null) {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processError(error.getMessage());
+                            }
+                        });
+
+                    } else {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processResult(result);
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
     public <T> CoreRequest<T> newRequest(CoreActivity activity){
         return new CoreRequest<T>(activity, this);
     }
 
+    public void updateCar(UpdateCarRequest updateUserRequest, final CoreRequest<Boolean> coreRequest) {
+        int userId =  sessionStorage.getUserId();
+        String token = sessionStorage.getAuthKey();
+        networkServiceImpl.updateCar(userId, token, updateUserRequest,new NetworkService.OnResultCallback<UpdateCarResponse, Throwable>() {
+            @Override
+            public void onResult(final UpdateCarResponse result, final Throwable error) {
+                if (coreRequest != null) {
+                    if (error != null) {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processError(error.getMessage());
+                            }
+                        });
+
+                    } else {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processResult(result.isResult());
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
 }

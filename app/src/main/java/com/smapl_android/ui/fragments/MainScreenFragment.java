@@ -67,8 +67,8 @@ public class MainScreenFragment extends BaseFragment {
     }
 
     private void setFragment(int position) {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(linearContent.getId(), fragmentsTabItems.get(position))
-                .commit();
+        getCoreActivity().replaceContentWithHistory(
+                fragmentsTabItems.get(position)
+        );
     }
 }

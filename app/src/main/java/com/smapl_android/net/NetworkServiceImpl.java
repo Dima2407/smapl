@@ -2,23 +2,11 @@ package com.smapl_android.net;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.smapl_android.model.User;
 import com.smapl_android.net.requests.LoginRequest;
 import com.smapl_android.net.requests.RegistrationRequest;
-import com.smapl_android.net.responses.AdvCompaniesResponse;
-import com.smapl_android.net.responses.EditCarResponse;
-import com.smapl_android.net.responses.EditPasswordResponse;
-import com.smapl_android.net.responses.EditProfileResponse;
-import com.smapl_android.net.responses.GetBeforeMessagesResponse;
-import com.smapl_android.net.responses.GetCompanyHistoryResponse;
-import com.smapl_android.net.responses.GetLastMessagesResponse;
-import com.smapl_android.net.responses.GetNewsResponse;
-import com.smapl_android.net.responses.LoginResponse;
-import com.smapl_android.net.responses.RegistrationResponse;
-import com.smapl_android.net.responses.RestorePasswordResponse;
-import com.smapl_android.net.responses.SendMessageResponse;
+import com.smapl_android.net.requests.UpdateCarRequest;
+import com.smapl_android.net.responses.*;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -404,6 +392,71 @@ class NetworkServiceImpl implements NetworkService {
 
             @Override
             public void onFailure(Call<SendMessageResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getUserById(int id, String token, final OnResultCallback<UserResponse, Throwable> callback) {
+        final Call<UserResponse> userByIdCall = apiService.getUserById(id, token);
+        userByIdCall.enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                if (response.isSuccessful()) {
+                    if (callback != null) {
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+                        }
+                        callback.onResult(null, new Exception(errorMessage));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, final OnResultCallback<UpdateCarResponse, Throwable> callback) {
+        final Call<UpdateCarResponse> userByIdCall = apiService.updateCar(userId, token, updateUserRequest);
+        userByIdCall.enqueue(new Callback<UpdateCarResponse>() {
+            @Override
+            public void onResponse(Call<UpdateCarResponse> call, Response<UpdateCarResponse> response) {
+                if (response.isSuccessful()) {
+                    if (callback != null) {
+                        callback.onResult(response.body(), null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+
+                        }
+                        callback.onResult(null, new Exception(errorMessage));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpdateCarResponse> call, Throwable t) {
                 if (callback != null) {
                     callback.onResult(null, t);
                 }

@@ -24,14 +24,14 @@ public class ProfileFragment extends BaseFragment {
         view.findViewById(R.id.btn_to_set_car_fragment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getCoreActivity().replaceContent(new SetCarFragment());
+                getCoreActivity().replaceContentWithHistory(new SetCarFragment());
             }
         });
 
         view.findViewById(R.id.btn_edit_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getCoreActivity().replaceContent(new ChangePasswordFragment());
+                getCoreActivity().replaceContentWithHistory(new ChangePasswordFragment());
             }
         });
     }
