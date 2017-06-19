@@ -143,6 +143,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
                 bitmap = decodeBitmapFromUri(data, circleImageView.getWidth(),
                         circleImageView.getHeight(), false);
                 circleImageView.setImageBitmap(bitmap);
+               // Log.i("Photo", "bitmap size = " + bitmap.getHeight() + " " + bitmap.getWidth());
             }
         });
     }
@@ -186,6 +187,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
     private Bitmap decodeBitmapFromUri(Uri uri, int reqWidth, int reqHeight, boolean isTakenPhoto) {
 
         String filePath = isTakenPhoto ? createFileFromUri(uri).getAbsolutePath() : getRealPathFromURI(getContext(), uri);
+        Log.i("Photo", "photo path = " + filePath);
 
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -194,6 +196,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
 
         options.inJustDecodeBounds = false;
+        Log.i("Photo", "photo path = " + options.inSampleSize);
         return BitmapFactory.decodeFile(filePath, options);
     }
 
