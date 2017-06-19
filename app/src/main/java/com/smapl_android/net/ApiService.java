@@ -5,6 +5,7 @@ import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -24,6 +25,13 @@ public interface ApiService {
     @PATCH("api/user/edit/car/{id}")
     Call<UpdateCarResponse> updateCar(@Path("id") int userId, @Query("access_token") String token, @Body UpdateCarRequest updateUserRequest);
 
+    @POST("api/user/change-password")
+    @FormUrlEncoded
+    Call<ResponseBody> editPassword(@Query("access_token") String token,
+                                    @Field("oldPassword") String oldPassword,
+                                    @Field("newPassword") String newPassword);
+
+
     @POST("api/restore")
     @FormUrlEncoded
     @Headers("api_key: " + API_KEY)
@@ -41,12 +49,6 @@ public interface ApiService {
     @Headers("api_key: " + API_KEY)
     Call<GetCompanyHistoryResponse> getCompanyHistory();
 
-    @POST("api/edit/password/userId")
-    @FormUrlEncoded
-    @Headers("api_key: " + API_KEY)
-    Call<EditPasswordResponse> editPassword(@Query("oldPassword") String oldPassword,
-                                            @Query("newPassword") String newPassword);
-
     @POST("api/edit/profile/userId")
     @FormUrlEncoded
     @Headers("api_key: " + API_KEY)
@@ -56,14 +58,6 @@ public interface ApiService {
                                           @Query("age") Integer age,
                                           @Query("hobby") String hobby);
 
-    @POST("api/edit/car/userId")
-    @FormUrlEncoded
-    @Headers("api_key: " + API_KEY)
-    Call<EditCarResponse> editCar(@Query("car/year") Integer carYear,
-                                  @Query("car/mark") String carMark,
-                                  @Query("car/model") String carModel,
-                                  @Query("car/color") String carColor,
-                                  @Query("car/photo") String carPhoto);
 
     @GET("api/messages/last/user_id")
     @Headers("api_key: " + API_KEY)

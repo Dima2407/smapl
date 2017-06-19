@@ -13,8 +13,7 @@ public class User implements Parcelable {
     private Long id;
     private String phoneNumber;
     private String password;
-    private String firstName;
-    private String lastName;
+    private String name;
     private String email;
     private boolean gender;
     private int age;
@@ -28,11 +27,26 @@ public class User implements Parcelable {
     public User() {
     }
 
+    public User(Long id, String phoneNumber, String password, String name, String email, boolean gender, int age, String carBrand, String carModel, int carYearOfIssue, String color, String interests, Bitmap carPhoto) {
+        this.id = id;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
+        this.age = age;
+        this.carBrand = carBrand;
+        this.carModel = carModel;
+        this.carYearOfIssue = carYearOfIssue;
+        this.color = color;
+        this.interests = interests;
+        this.carPhoto = carPhoto;
+    }
+
     protected User(Parcel in) {
         phoneNumber = in.readString();
         password = in.readString();
-        firstName = in.readString();
-        lastName = in.readString();
+        name = in.readString();
         email = in.readString();
         gender = in.readByte() != 0;
         age = in.readInt();
@@ -61,6 +75,22 @@ public class User implements Parcelable {
         return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(phoneNumber);
+        dest.writeString(password);
+        dest.writeString(name);
+        dest.writeString(email);
+        dest.writeByte((byte) (gender ? 1 : 0));
+        dest.writeInt(age);
+        dest.writeString(carBrand);
+        dest.writeString(carModel);
+        dest.writeInt(carYearOfIssue);
+        dest.writeString(color);
+        dest.writeString(interests);
+        dest.writeParcelable(carPhoto, flags);
+    }
+
     public Long getId() {
         return id;
     }
@@ -85,20 +115,12 @@ public class User implements Parcelable {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -173,23 +195,9 @@ public class User implements Parcelable {
         this.carPhoto = carPhoto;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(phoneNumber);
-        dest.writeString(password);
-        dest.writeString(firstName);
-        dest.writeString(lastName);
-        dest.writeString(email);
-        dest.writeByte((byte) (gender ? 1 : 0));
-        dest.writeInt(age);
-        dest.writeString(carBrand);
-        dest.writeString(carModel);
-        dest.writeInt(carYearOfIssue);
-        dest.writeString(color);
-        dest.writeString(interests);
-        dest.writeParcelable(carPhoto, flags);
+    public static Creator<User> getCREATOR() {
+        return CREATOR;
     }
-
 
     public enum Age{
 

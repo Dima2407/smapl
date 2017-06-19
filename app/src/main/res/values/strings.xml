@@ -4,7 +4,7 @@
     <string name="error_empty_password">Password can\'t be empty</string>
     <string name="login">Войти</string>
     <string name="wait_login">Waiting!</string>
-    <string name="error_empty_phone_number">Phone number con\'t be empty</string>
+    <string name="error_empty_phone_number">Phone number can\'t be empty</string>
     <string name="error_wrong_phone_number">Wrong phone number</string>
     <string name="error_phone_number_short">The phone number is too short</string>
     <string name="error_password_short">The password is too short</string>

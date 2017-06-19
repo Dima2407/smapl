@@ -227,22 +227,8 @@ class DummyNetworkService implements NetworkService{
     }
 
     @Override
-    public void editPassword(final String oldPassword, String newPassword, final OnResultCallback<EditPasswordResponse, Throwable> callback) {
-        final EditPasswordResponse response = new EditPasswordResponse();
-        response.setMessage("Everything is OK");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                    if ("1111".equals(oldPassword)) {
-                        callback.onResult(response, null);
-                    } else callback.onResult(null, new Exception("Something went wrong"));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+    public void editPassword(String token, String oldPassword, String newPassword, OnResultCallback<Boolean, Throwable> callback) {
+
     }
 
     @Override
@@ -265,24 +251,6 @@ class DummyNetworkService implements NetworkService{
             }
         }).start();
 
-    }
-
-    @Override
-    public void editCar(Integer carYear, String carMark, String carModel, String carColor, String carPhoto,
-                        final OnResultCallback<EditCarResponse, Throwable> callback) {
-        final EditCarResponse responce = new EditCarResponse();
-        responce.setMessage("Everything is OK");
-        final boolean check = (carYear != null && carColor.length() != 0 && carMark.length() != 0 &&
-                carModel.length() != 0 && carPhoto.length() != 0);
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (check) {
-                    callback.onResult(responce, null);
-                } else callback.onResult(null, new Exception("Something went wrong"));
-            }
-        }).start();
     }
 
     @Override

@@ -20,14 +20,11 @@ public interface NetworkService {
 
     void getCompanyHistory(final NetworkService.OnResultCallback<GetCompanyHistoryResponse, Throwable> callback);
 
-    void editPassword(String oldPassword, String newPassword,
-                      final NetworkService.OnResultCallback<EditPasswordResponse, Throwable> callback);
+    void editPassword(String token, String oldPassword, String newPassword,
+                      final NetworkService.OnResultCallback<Boolean, Throwable> callback);
 
     void editProfile(String phone, String name, String gender, Integer age, String hobby,
                      final NetworkService.OnResultCallback<EditProfileResponse, Throwable> callback);
-
-    void editCar(Integer carYear, String carMark, String carModel, String carColor, String carPhoto,
-                 OnResultCallback<EditCarResponse, Throwable> callback);
 
     void getLastMessages(final NetworkService.OnResultCallback<GetLastMessagesResponse, Throwable> callback);
 
