@@ -44,6 +44,8 @@
     <string name="hint_new_password">Новый пароль</string>
     <string name="save">Сохранить</string>
     <string name="forward_rus_2">Далее</string>
+    <string name="or">или</string>
+    <string name="btn_login_facebook">Войти через Facebook</string>
 
     <string-array name="age">
         <item>18</item>
