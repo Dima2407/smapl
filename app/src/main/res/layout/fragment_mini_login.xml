@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/login_background_white_shape"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
             android:paddingTop="20dp">
 
 
@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_login_height"
                 android:layout_below="@id/edit_login"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableLeft="@drawable/vector_smart_object_7"
                 android:drawablePadding="10dp"
@@ -81,12 +81,13 @@
 
         <ImageButton
             android:id="@+id/btn_login_forward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/btn_login_forward_size"
+            android:layout_height="@dimen/btn_login_forward_size"
             android:layout_below="@id/login_body"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="-31dp"
+            android:layout_marginTop="-47dp"
             android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
             android:onClick="@{() -> presenter.onLoginClicked(user)}"
             android:src="@drawable/button_send" />
 
@@ -95,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_below="@id/btn_login_forward"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
 
             <TextView
@@ -128,7 +129,7 @@
             android:text="@string/btn_login_facebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:textAllCaps="false"
