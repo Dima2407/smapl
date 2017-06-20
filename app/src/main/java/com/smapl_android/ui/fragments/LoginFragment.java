@@ -6,12 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.smapl_android.R;
 import com.smapl_android.databinding.FragmentLoginBinding;
-import com.smapl_android.model.LoginInfo;
 import com.smapl_android.ui.base.BaseFragment;
 
 
