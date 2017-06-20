@@ -19,7 +19,8 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
-        <activity android:name=".ui.activities.AuthActivity">
+        <activity android:name=".ui.activities.AuthActivity"
+            android:windowSoftInputMode="adjustPan">
         <intent-filter>
             <action android:name="android.intent.action.MAIN"/>
 
