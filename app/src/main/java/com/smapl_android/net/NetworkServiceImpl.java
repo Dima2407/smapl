@@ -8,6 +8,7 @@ import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,6 +16,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 class NetworkServiceImpl implements NetworkService {
 
@@ -69,8 +71,8 @@ class NetworkServiceImpl implements NetworkService {
     @Override
     public void registration(User user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
 
-        RegistrationRequest registrationRequest = new RegistrationRequest(user.getEmail(), user.getPassword(), user.getFirstName(),
-                user.getLastName(), user.getPhoneNumber(), user.getCarYearOfIssue(), user.getCarBrand(), user.getCarModel(), user.getColor());
+        RegistrationRequest registrationRequest = new RegistrationRequest(user.getEmail(), user.getPassword(), user.getName(),
+               user.getPhoneNumber(), user.getCarYearOfIssue(), user.getCarBrand(), user.getCarModel(), user.getColor());
         final Call<RegistrationResponse> responseCall = apiService.registration(registrationRequest);
         responseCall.enqueue(new Callback<RegistrationResponse>() {
             @Override
@@ -235,72 +237,8 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void editPassword(String oldPassword, String newPassword, final OnResultCallback<EditPasswordResponse, Throwable> callback) {
-        final Call<EditPasswordResponse> responseCall = apiService.editPassword(oldPassword, newPassword);
-        responseCall.enqueue(new Callback<EditPasswordResponse>() {
-            @Override
-            public void onResponse(Call<EditPasswordResponse> call, Response<EditPasswordResponse> response) {
-                if (response.isSuccessful()) {
-                    if (callback != null) {
-                        callback.onResult(response.body(), null);
-                    }
-                } else {
-                    if (callback != null) {
-                        String errorMessage = "error";
-                        try {
-                            errorMessage = response.errorBody().string();
-                        } catch (IOException e) {
-                            errorMessage = e.getMessage();
-                            Log.e(TAG, "onResponse: ", e);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<EditPasswordResponse> call, Throwable t) {
-                if (callback != null) {
-                    callback.onResult(null, t);
-                }
-            }
-        });
-    }
-
-    @Override
     public void editProfile(String phone, String name, String gender, Integer age, String hobby, OnResultCallback<EditProfileResponse, Throwable> callback) {
         throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void editCar(Integer carYear, String carMark, String carModel, String carColor, String carPhoto, final OnResultCallback<EditCarResponse, Throwable> callback) {
-        Call<EditCarResponse> responseCall = apiService.editCar(carYear, carMark, carModel, carColor, carPhoto);
-        responseCall.enqueue(new Callback<EditCarResponse>() {
-            @Override
-            public void onResponse(Call<EditCarResponse> call, Response<EditCarResponse> response) {
-                if (response.isSuccessful()) {
-                    if (callback != null) {
-                        callback.onResult(response.body(), null);
-                    }
-                } else {
-                    if (callback != null) {
-                        String errorMessage = "error";
-                        try {
-                            errorMessage = response.errorBody().string();
-                        } catch (IOException e) {
-                            errorMessage = e.getMessage();
-                            Log.e(TAG, "onResponse: ", e);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<EditCarResponse> call, Throwable t) {
-                if (callback != null) {
-                    callback.onResult(null, t);
-                }
-            }
-        });
     }
 
     @Override
@@ -459,6 +397,39 @@ class NetworkServiceImpl implements NetworkService {
             public void onFailure(Call<UpdateCarResponse> call, Throwable t) {
                 if (callback != null) {
                     callback.onResult(null, t);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void editPassword(String token, String oldPassword, String newPassword, final OnResultCallback<Boolean, Throwable> callback) {
+        final Call<ResponseBody> responseCall = apiService.editPassword(token, oldPassword, newPassword);
+        responseCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful() && response.code() == HttpURLConnection.HTTP_NO_CONTENT) {
+                    if (callback != null) {
+                        callback.onResult(true, null);
+                    }
+                } else {
+                    if (callback != null) {
+                        String errorMessage = "error";
+                        try {
+                            errorMessage = response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage = e.getMessage();
+                            Log.e(TAG, "onResponse: ", e);
+                        }
+                        callback.onResult(false, new Exception(errorMessage));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(false, t);
                 }
             }
         });

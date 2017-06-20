@@ -3,6 +3,7 @@ package com.smapl_android.core;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validators;
@@ -10,6 +11,7 @@ import com.smapl_android.model.User;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.requests.UpdateCarRequest;
+import com.smapl_android.net.responses.EditPasswordResponse;
 import com.smapl_android.net.responses.LoginResponse;
 import com.smapl_android.net.responses.RegistrationResponse;
 import com.smapl_android.net.responses.UpdateCarResponse;
@@ -189,6 +191,32 @@ public class CoreService {
                             @Override
                             public void run() {
                                 coreRequest.processResult(result.isResult());
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    public void changePassword(String oldPassword, String newPassword, final CoreRequest<Boolean> coreRequest){
+        String token = sessionStorage.getAuthKey();
+        networkServiceImpl.editPassword(token, oldPassword, newPassword, new NetworkService.OnResultCallback<Boolean, Throwable>() {
+            @Override
+            public void onResult(final Boolean result, final Throwable error) {
+                if (coreRequest != null){
+                    if (error != null){
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processError(error.getMessage());
+                            }
+                        });
+                    } else {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processResult(result);
                             }
                         });
                     }

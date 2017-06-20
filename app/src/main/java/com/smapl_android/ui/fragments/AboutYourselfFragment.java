@@ -71,8 +71,7 @@ public class AboutYourselfFragment extends BaseFragment {
         User user = new User();
         user.setPhoneNumber(phoneNumber);
         user.setPassword(password);
-        user.setFirstName(name.getText().toString());
-        user.setLastName(lastName.getText().toString());
+        user.setName(name.getText().toString());
         user.setGender(gender.getCheckedRadioButtonId() == R.id.radio_about_yourself_man);
     /*    String strAge = age.getSelectedItem().toString();
         User.Age ageEnum = null;

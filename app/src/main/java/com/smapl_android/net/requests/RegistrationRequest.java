@@ -12,11 +12,8 @@ public class RegistrationRequest {
     @SerializedName("password")
     private String password;
 
-    @SerializedName("first_name")
-    private String firstName;
-
-    @SerializedName("last_name")
-    private String lastName;
+    @SerializedName("name")
+    private String name;
 
     @SerializedName("mobile_number")
     private String phoneNumber;
@@ -36,11 +33,11 @@ public class RegistrationRequest {
     @SerializedName("car_photo")
     private Bitmap carPhoto;
 
-    public RegistrationRequest(String email, String password, String firstName, String lastName, String phoneNumber, int carYear, String carMark, String carModel, String carColor, Bitmap carPhoto) {
+
+    public RegistrationRequest(String email, String password, String name, String phoneNumber, int carYear, String carMark, String carModel, String carColor, Bitmap carPhoto) {
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.phoneNumber = phoneNumber;
         this.carYear = carYear;
         this.carMark = carMark;
@@ -49,11 +46,10 @@ public class RegistrationRequest {
         this.carPhoto = carPhoto;
     }
 
-    public RegistrationRequest(String email, String password, String firstName, String lastName, String phoneNumber, int carYear, String carMark, String carModel, String carColor) {
+    public RegistrationRequest(String email, String password, String name, String phoneNumber, int carYear, String carMark, String carModel, String carColor) {
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.phoneNumber = phoneNumber;
         this.carYear = carYear;
         this.carMark = carMark;
@@ -77,20 +73,12 @@ public class RegistrationRequest {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhoneNumber() {

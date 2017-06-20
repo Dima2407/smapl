@@ -106,7 +106,20 @@ public abstract class CoreActivity extends AppCompatActivity {
     }
 
     public void selectPhoto(final OnImageRequestListener listener) {
-        imageManager.selectImage(this, listener);
+        runWithPermissions(new OnPermissionsRequestListener() {
+            @Override
+            public void onSuccess() {
+                imageManager.selectImage(CoreActivity.this, listener);
+            }
+
+            @Override
+            public void onFail() {
+                if (listener != null) {
+                    listener.onResult(null);
+                }
+            }
+        }, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
+
 
     }
 
