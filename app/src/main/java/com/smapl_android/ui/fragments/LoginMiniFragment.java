@@ -16,12 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookActivity;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
+import com.facebook.LoginStatusCallback;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -42,6 +44,7 @@ public class LoginMiniFragment extends BaseFragment {
     private static final String TAG = LoginMiniFragment.class.getSimpleName();
     private Presenter presenter = new Presenter();
     private LoginInfoViewModel viewModel;
+
     private Button btnLogin;
     CallbackManager callbackManager;
 
@@ -86,12 +89,34 @@ public class LoginMiniFragment extends BaseFragment {
 
     }
 
+    private boolean isAuthorized(){
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        if (accessToken == null){
+            Log.i(TAG, "accessToken == null");
+            return false;
+        } else {
+            Log.i(TAG, "access token : " + accessToken);
+            return true;
+        }
+    }
+
     private void facebookLogin() {
+        if (isAuthorized()){
+            getCoreActivity().replaceContent(new MainScreenFragment());
+        } else {
+            login();
+        }
+
+    }
+
+    private void login(){
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email","user_photos","public_profile"));
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.i(TAG, "registerCallBack onSuccess");
+                Log.i(TAG, "access token : " + loginResult.getAccessToken());
+                getCoreActivity().replaceContentWithHistory(new MainScreenFragment());
             }
 
             @Override

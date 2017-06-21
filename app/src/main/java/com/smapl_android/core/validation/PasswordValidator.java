@@ -3,7 +3,7 @@ package com.smapl_android.core.validation;
 import android.text.TextUtils;
 
 public class PasswordValidator extends BaseValidator<String> {
-    private static final int MIN_PASSWORD_LENGTH = 4;
+    private static final int MIN_PASSWORD_LENGTH = 6;
     private final String errorMessageEmpty;
     private final String errorMessageLength;
 

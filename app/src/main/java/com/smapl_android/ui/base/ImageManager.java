@@ -67,7 +67,7 @@ class ImageManager {
         activity.startActivityForResult(photoPickerIntent, requestId);
     }
 
-    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+    public boolean onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         try {
             SimpleOnImageRequestListener runnable = requestsRunners.get(requestCode);
             if (runnable != null) {
@@ -83,6 +83,7 @@ class ImageManager {
                         }
 
                     }
+                    return true;
                 } else {
                     final OnImageRequestListener listener = runnable.listener;
                     if (listener != null) {
@@ -93,6 +94,7 @@ class ImageManager {
         } finally {
             requestsRunners.remove(requestCode);
         }
+        return false;
     }
 
 

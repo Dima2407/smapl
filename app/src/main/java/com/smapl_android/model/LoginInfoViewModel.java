@@ -31,15 +31,15 @@ public class LoginInfoViewModel extends BaseObservable {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
             updatePasswordValidationMark();
             if (!Objects.equals(password.get(), s.toString())) {
                 password.set(s.toString());
             }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
         }
     };
 
@@ -51,15 +51,15 @@ public class LoginInfoViewModel extends BaseObservable {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
             updatePhoneValidationMark();
             if (!Objects.equals(phone.get(), s.toString())) {
                 phone.set(s.toString());
             }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
         }
     };
 
