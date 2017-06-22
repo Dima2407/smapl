@@ -6,6 +6,7 @@ import android.databinding.ObservableField;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -31,7 +32,7 @@ public class LoginInfoViewModel extends BaseObservable {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            updatePasswordValidationMark();
+            updatePasswordValidationMark(s);
             if (!Objects.equals(password.get(), s.toString())) {
                 password.set(s.toString());
             }
@@ -51,7 +52,7 @@ public class LoginInfoViewModel extends BaseObservable {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            updatePhoneValidationMark();
+            updatePhoneValidationMark(s);
             if (!Objects.equals(phone.get(), s.toString())) {
                 phone.set(s.toString());
             }
@@ -74,17 +75,17 @@ public class LoginInfoViewModel extends BaseObservable {
         return markDrawable;
     }
 
-    private void updatePasswordValidationMark(){
-        updateValidationMark(password, Validators.getPasswordValidator(context), passwordValid);
+    private void updatePasswordValidationMark(CharSequence s){
+        updateValidationMark(s, Validators.getPasswordValidator(context), passwordValid);
     }
 
-    private void updatePhoneValidationMark(){
-        updateValidationMark(phone, Validators.getPhoneValidator(context), phoneValid);
+    private void updatePhoneValidationMark(CharSequence s){
+        updateValidationMark(s, Validators.getPhoneValidator(context), phoneValid);
     }
 
-    private void updateValidationMark(ObservableField<String> field, Validator<String> validator, ObservableField<Drawable> mark){
+    private void updateValidationMark(CharSequence field, Validator<String> validator, ObservableField<Drawable> mark){
         try {
-            boolean correct = validator.validate(field.get());
+            boolean correct = validator.validate(field.toString());
             if(correct){
                 mark.set(getMarkDrawable());
             }else {
