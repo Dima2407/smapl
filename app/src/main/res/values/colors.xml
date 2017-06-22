@@ -5,9 +5,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="background_blue">#0F99FF</color>
     <color name="login_btn_checked">#7dcceb</color>
+    <color name="color_btn_facebook">#7dcceb</color>
     <color name="color_login_hint">#a0a0a0</color>
     <color name="blue_dark">#2F66CC</color>
     <color name="grey">#f9f9f9</color>
     <color name="edit_frame">#E9E7E7</color>
     <color name="color_edit_set_car">#E9E7E7</color>
+    <color name="text_color_or">#b4b4bd</color>
 </resources>

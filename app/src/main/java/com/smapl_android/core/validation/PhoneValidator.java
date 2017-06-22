@@ -4,7 +4,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 public class PhoneValidator extends BaseValidator<String> {
-    private static final int MIN_PHONE_NUMBER_LENGTH = 4;
+    private static final int MIN_PHONE_NUMBER_LENGTH = 10;
     private final String errorMessageEmpty;
     private final String errorMessageLength;
     private final String errorMessageContent;

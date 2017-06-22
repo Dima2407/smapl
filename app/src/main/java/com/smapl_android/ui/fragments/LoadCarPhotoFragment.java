@@ -1,28 +1,19 @@
 package com.smapl_android.ui.fragments;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.smapl_android.R;
@@ -31,21 +22,16 @@ import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.model.User;
 import com.smapl_android.ui.base.BaseFragment;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import com.smapl_android.ui.base.OnImageRequestListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static android.app.Activity.RESULT_OK;
 
 
 public class LoadCarPhotoFragment extends BaseFragment {
@@ -128,9 +114,11 @@ public class LoadCarPhotoFragment extends BaseFragment {
             @Override
             public void onResult(Uri data) {
                 Log.d(TAG, "onResult: " + data);
-                bitmap = decodeBitmapFromUri(data, circleImageView.getWidth(),
-                        circleImageView.getHeight(), true);
-                circleImageView.setImageBitmap(bitmap);
+                if (data != null) {
+                    bitmap = decodeBitmapFromUri(data, circleImageView.getWidth(),
+                            circleImageView.getHeight(), true);
+                    circleImageView.setImageBitmap(bitmap);
+                }
             }
         });
     }
@@ -140,10 +128,11 @@ public class LoadCarPhotoFragment extends BaseFragment {
             @Override
             public void onResult(Uri data) {
                 Log.d(TAG, "onResult: " + data);
-                bitmap = decodeBitmapFromUri(data, circleImageView.getWidth(),
-                        circleImageView.getHeight(), false);
-                circleImageView.setImageBitmap(bitmap);
-               // Log.i("Photo", "bitmap size = " + bitmap.getHeight() + " " + bitmap.getWidth());
+                if (data != null) {
+                    bitmap = decodeBitmapFromUri(data, circleImageView.getWidth(),
+                            circleImageView.getHeight(), false);
+                    circleImageView.setImageBitmap(bitmap);
+                }
             }
         });
     }
@@ -187,7 +176,6 @@ public class LoadCarPhotoFragment extends BaseFragment {
     private Bitmap decodeBitmapFromUri(Uri uri, int reqWidth, int reqHeight, boolean isTakenPhoto) {
 
         String filePath = isTakenPhoto ? createFileFromUri(uri).getAbsolutePath() : getRealPathFromURI(getContext(), uri);
-        Log.i("Photo", "photo path = " + filePath);
 
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -196,7 +184,6 @@ public class LoadCarPhotoFragment extends BaseFragment {
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
 
         options.inJustDecodeBounds = false;
-        Log.i("Photo", "photo path = " + options.inSampleSize);
         return BitmapFactory.decodeFile(filePath, options);
     }
 
