@@ -13,4 +13,8 @@
     <dimen name="car_brand_model_profile_size">20dp</dimen>
     <dimen name="btn_login_forward_size">51dp</dimen>
     <dimen name="btn_facebook_hight">34dp</dimen>
+    <dimen name="login_logotip_hight">313dp</dimen>
+    <dimen name="login_white_shape_hight">216dp</dimen>
+    <dimen name="btn_facebook_margin_top">25dp</dimen>
+    <dimen name="btn_facebook_margin_bottom">29dp</dimen>
 </resources>
