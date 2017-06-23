@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_smapl_background">
+    android:background="@drawable/bg">
 
     <LinearLayout
         android:id="@+id/linear_load_photo_menu"
@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:background="@android:color/transparent"
-            android:paddingTop="14dp"
+            android:paddingTop="16dp"
             android:text="@string/load_photo"
             android:textAlignment="center"
             android:textColor="@android:color/white"
@@ -54,7 +54,7 @@
         android:layout_marginTop="100dp"
         android:text="@string/load_car_photo"
         android:textColor="@android:color/white"
-        android:textSize="18dp" />
+        android:textSize="@dimen/core_text_size" />
 
     <RelativeLayout
         android:id="@+id/relative_img_load_photo"
@@ -62,7 +62,7 @@
         android:layout_height="140dp"
         android:layout_below="@id/text_load_car_photo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="41dp">
 
         <ImageView
             android:id="@+id/img_car_photo"
@@ -94,13 +94,13 @@
         android:id="@+id/btn_load_car_photo_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="39dp"
         android:layout_below="@id/relative_img_load_photo"
         android:background="@android:color/transparent"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:layout_centerHorizontal="true"
+        android:textSize="@dimen/core_text_size"
         android:text="@string/skip" />
-
 
 </RelativeLayout>

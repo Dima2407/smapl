@@ -13,8 +13,8 @@
     <string name="forward">forward</string>
     <string name="name">Имя</string>
     <string name="gender">Пол</string>
-    <string name="car_model">Модель машины</string>
-    <string name="car_year_of_issue">Год выпуска</string>
+    <string name="car_model">Модель авто</string>
+    <string name="car_year_of_issue">Год выпуска авто</string>
     <string name="load_car_photo">Загрузите фото вашего автомобиля</string>
     <string name="skip">Пропустить</string>
     <string name="back">Назад</string>
@@ -48,6 +48,11 @@
     <string name="btn_login_facebook">Войти через Facebook</string>
     <string name="facebook_app_id">137649426800650</string>
     <string name="fb_login_protocol_scheme">fb1690647591244835</string>
+    <string name="text_about_yourself">Заполните информацию о себе</string>
+    <string name="text_about_yourself_age">Возраст(выбор из диапазона)</string>
+    <string name="text_about_yourself_car_brand">Марка авто</string>
+    <string name="text_about_yourself_car_color">Цвет авто</string>
+    <string name="text_about_yourself_menu">Обо мне</string>
 
     <string-array name="age">
         <item>18</item>
