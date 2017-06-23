@@ -8,6 +8,7 @@ import android.util.Log;
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.model.User;
+import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.requests.UpdateCarRequest;
@@ -81,13 +82,13 @@ public class CoreService {
         });
     }
 
-    public void registration(final User user, final CoreRequest<Boolean> successOutput) {
+    public void registration(final UserInfoViewModel user, final CoreRequest<Boolean> successOutput) {
         try {
             Validators.getPhoneValidator(rootContext)
-                    .validate(user.getPhoneNumber());
+                    .validate(user.phone.get());
 
             Validators.getPasswordValidator(rootContext)
-                    .validate(user.getPassword());
+                    .validate(user.password.get());
         } catch (ValidationException e) {
             if (successOutput != null) {
                 successOutput.processError(e.getMessage());
@@ -107,7 +108,7 @@ public class CoreService {
                             }
                         });
                     } else {
-                        networkServiceImpl.login(user.getPhoneNumber(), user.getPassword(), new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
+                        networkServiceImpl.login(user.phone.get(), user.password.get(), new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
                             @Override
                             public void onResult(final LoginResponse result, final Throwable error) {
                                 if (error != null) {

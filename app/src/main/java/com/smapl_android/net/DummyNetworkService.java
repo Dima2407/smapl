@@ -1,6 +1,7 @@
 package com.smapl_android.net;
 
 import com.smapl_android.model.User;
+import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
 
@@ -73,8 +74,8 @@ class DummyNetworkService implements NetworkService{
     }
 
     @Override
-    public void registration(User user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
-        final String phoneNumber = user.getPhoneNumber();
+    public void registration(UserInfoViewModel user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
+        /*final String phoneNumber = user.getPhoneNumber();
         final String password = user.getPassword();
 
         new Thread(new Runnable() {
@@ -103,7 +104,7 @@ class DummyNetworkService implements NetworkService{
                     e.printStackTrace();
                 }
             }
-        }).start();
+        }).start();*/
     }
 
     @Override

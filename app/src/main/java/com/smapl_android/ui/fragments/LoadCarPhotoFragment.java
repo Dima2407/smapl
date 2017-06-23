@@ -20,6 +20,7 @@ import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.model.User;
+import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.ui.base.BaseFragment;
 
 import java.io.ByteArrayOutputStream;
@@ -38,7 +39,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
 
     private static final String TAG = LoadCarPhotoFragment.class.getSimpleName();
     private RelativeLayout imgLayout;
-    private User user;
+    private UserInfoViewModel user;
     private CircleImageView circleImageView;
     private Bitmap bitmap;
 
@@ -140,7 +141,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
     private void registration() {
 
         if (bitmap != null)
-            user.setCarPhoto(bitmap);
+            user.carPhoto.set(bitmap);
 
         final CoreRequest<Boolean> request = getCoreService()
                 .newRequest(getCoreActivity());
@@ -161,11 +162,6 @@ public class LoadCarPhotoFragment extends BaseFragment {
         registration();
 
         MainScreenFragment mainScreenFragment = new MainScreenFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("user", user);
-
-        mainScreenFragment.setArguments(bundle);
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, mainScreenFragment)

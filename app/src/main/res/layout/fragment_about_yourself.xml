@@ -1,108 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
-        android:id="@+id/edit_about_yourself_first_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/name"
-        android:imeOptions="actionDone" />
+    <data>
 
-    <EditText
-        android:id="@+id/edit_about_yourself_last_name"
-        android:hint="@string/last_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <variable
+            name="user"
+            type="com.smapl_android.model.UserInfoViewModel" />
 
-    <EditText
-        android:id="@+id/edit_about_yourself_email"
-        android:hint="@string/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <variable
+            name="presenter"
+            type="com.smapl_android.ui.fragments.AboutYourselfFragment.Presenter" />
 
-    <RadioGroup
-        android:id="@+id/radio_group_about_yourself_gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gender" />
-
-        <RadioButton
-            android:id="@+id/radio_about_yourself_man"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RadioButton
-            android:id="@+id/radio_about_yourself_woman"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </RadioGroup>
-
-    <Spinner
-        android:id="@+id/spinner_about_yourself_age"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/age"></Spinner>
-
-    <Spinner
-        android:id="@+id/spinner_about_yourself_car_brand"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/car_brand"></Spinner>
-
-    <EditText
-        android:id="@+id/edit_about_yourself_car_model"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/car_model"
-        android:imeOptions="actionDone" />
-
-    <EditText
-        android:id="@+id/edit_about_yourself_car_yaer_of_issue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/car_year_of_issue"
-        android:imeOptions="actionDone"
-        android:inputType="number"
-        android:maxLength="4" />
-
-    <Spinner
-        android:id="@+id/spinner_about_yourself_car_color"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/car_color"></Spinner>
-
-    <EditText
-        android:id="@+id/edit_about_yourself_interests"
-        android:hint="@string/hint_interests"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_about_yourself_cancel"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/edit_about_yourself_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cancel" />
+            android:hint="@string/name"
+            android:text="@{user.name}"
+            app:addTextChangedListener="@{user.nameTextWatcher}"
+            android:imeOptions="actionDone" />
 
-        <Button
-            android:id="@+id/btn_about_yourself_forward"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/edit_about_yourself_email"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/forward" />
+            android:hint="@string/email"
+            android:text="@{user.email}"
+            app:addTextChangedListener="@{user.emailTextWatcher}"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_about_yourself_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender" />
+
+            <RadioButton
+                android:id="@+id/radio_about_yourself_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/radio_about_yourself_woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+        <Spinner
+            android:id="@+id/spinner_about_yourself_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/age"></Spinner>
+
+        <Spinner
+            android:id="@+id/spinner_about_yourself_car_brand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/car_brand"></Spinner>
+
+        <EditText
+            android:id="@+id/edit_about_yourself_car_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/car_model"
+            android:text="@{user.carModel}"
+            app:addTextChangedListener="@{user.carModelTextWatcher}"
+            android:imeOptions="actionDone" />
+
+        <EditText
+            android:id="@+id/edit_about_yourself_car_yaer_of_issue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/car_year_of_issue"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:text="@{user.carYearOfIssue}"
+            app:addTextChangedListener="@{user.carYearTextWatcher}"
+            android:maxLength="4" />
+
+        <Spinner
+            android:id="@+id/spinner_about_yourself_car_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/car_color"></Spinner>
+
+        <EditText
+            android:id="@+id/edit_about_yourself_interests"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_interests"
+            android:text="@{user.interests}"
+            app:addTextChangedListener="@{user.interestsTextWatcher}"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_about_yourself_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:onClick="@{() -> presenter.onClickBack()}"/>
+
+            <Button
+                android:id="@+id/btn_about_yourself_forward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forward"
+                android:onClick="@{() -> presenter.onClickForward()}"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</layout>

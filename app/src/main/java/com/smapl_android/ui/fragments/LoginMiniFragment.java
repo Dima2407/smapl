@@ -46,7 +46,7 @@ public class LoginMiniFragment extends BaseFragment {
     private LoginInfoViewModel viewModel;
 
     private Button btnLogin;
-    CallbackManager callbackManager;
+    private CallbackManager callbackManager;
 
     @Nullable
     @Override

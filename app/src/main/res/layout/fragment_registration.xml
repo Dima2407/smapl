@@ -1,108 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/grey">
+    <data>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/white_rectangle_height"
-        android:src="@drawable/login_background_white_shape" />
+        <variable
+            name="user"
+            type="com.smapl_android.model.UserInfoViewModel" />
+
+        <variable
+            name="presenter"
+            type="com.smapl_android.ui.fragments.RegistrationFragment.Presenter" />
+
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin_fragment_mini_login">
+        android:background="@color/grey">
 
-        <LinearLayout
-            android:id="@+id/linear_edit_registration_login"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_background"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_height="@dimen/white_rectangle_height"
+            android:src="@drawable/login_background_white_shape" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
-                android:layout_weight="1"
-                android:padding="7dp"
-                android:src="@drawable/vector_smart_object_6" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_fragment_mini_login">
 
-            <EditText
-                android:id="@+id/edit_registration_phone_number"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/edit_login_height"
-                android:background="@android:color/transparent"
-                android:hint="@string/input_phone"
-                android:inputType="phone"
-                android:layout_weight="8"
+            <LinearLayout
+                android:id="@+id/linear_edit_registration_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="1"
+                    android:padding="7dp"
+                    android:src="@drawable/vector_smart_object_6" />
+
+                <EditText
+                    android:id="@+id/edit_registration_phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/edit_login_height"
+                    android:layout_weight="8"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/input_phone"
+                    android:inputType="phone"
+                    android:text="@{user.phone}"
+                    app:addTextChangedListener="@{user.phoneTextWatcher}"
+                    android:textSize="@dimen/core_text_size" />
+
+                <ImageView
+                    android:id="@+id/img_login_chek_mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_edit_registration_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linear_edit_registration_login"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_background"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:src="@drawable/vector_smart_object_7" />
+
+                <EditText
+                    android:id="@+id/edit_registration_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/edit_login_height"
+                    android:layout_weight="8"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/input_password"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/color_login_hint"
+                    android:text="@{user.password}"
+                    app:addTextChangedListener="@{user.passwordTextWatcher}"
+                    android:textSize="@dimen/core_text_size" />
+
+                <ImageView
+                    android:id="@+id/img_password_check_mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_registration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linear_edit_registration_password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_login_background"
+                android:text="@string/registration_registration"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:onClick="@{() -> presenter.onRegistrationClicked(user)}"
                 android:textSize="@dimen/core_text_size" />
 
-            <ImageView
-                android:id="@+id/img_login_chek_mark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_edit_registration_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/linear_edit_registration_login"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_text_background"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="3dp"
-                android:layout_weight="1"
-                android:padding="3dp"
-                android:src="@drawable/vector_smart_object_7" />
-
-            <EditText
-                android:id="@+id/edit_registration_password"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/edit_login_height"
-                android:background="@android:color/transparent"
-                android:hint="@string/input_password"
-                android:inputType="textPassword"
-                android:textColorHint="@color/color_login_hint"
-                android:layout_weight="8"
-                android:textSize="@dimen/core_text_size" />
-
-            <ImageView
-                android:id="@+id/img_password_check_mark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_registration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/linear_edit_registration_password"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/btn_login_background"
-            android:text="@string/registration_registration"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/core_text_size" />
+        </RelativeLayout>
 
     </RelativeLayout>
-
-</RelativeLayout>
+</layout>

@@ -3,6 +3,7 @@ package com.smapl_android.net;
 import android.util.Log;
 
 import com.smapl_android.model.User;
+import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.requests.LoginRequest;
 import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
@@ -69,10 +70,10 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void registration(User user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
+    public void registration(UserInfoViewModel user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
 
-        RegistrationRequest registrationRequest = new RegistrationRequest(user.getEmail(), user.getPassword(), user.getName(),
-               user.getPhoneNumber(), user.getCarYearOfIssue(), user.getCarBrand(), user.getCarModel(), user.getColor());
+        RegistrationRequest registrationRequest = new RegistrationRequest(user.email.get(), user.password.get(), user.name.get(),
+               user.phone.get(), Integer.parseInt(user.carYearOfIssue.get()), user.carBrand.get(), user.carModel.get(), user.color.get());
         final Call<RegistrationResponse> responseCall = apiService.registration(registrationRequest);
         responseCall.enqueue(new Callback<RegistrationResponse>() {
             @Override

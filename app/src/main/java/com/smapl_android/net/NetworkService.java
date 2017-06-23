@@ -1,6 +1,7 @@
 package com.smapl_android.net;
 
 import com.smapl_android.model.User;
+import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
 
@@ -8,7 +9,7 @@ public interface NetworkService {
 
     void login(String login, String password, final NetworkServiceImpl.OnResultCallback<LoginResponse, Throwable> callback);
 
-    void registration(User user, final NetworkService.OnResultCallback<RegistrationResponse, Throwable> callback);
+    void registration(UserInfoViewModel user, final NetworkService.OnResultCallback<RegistrationResponse, Throwable> callback);
 
     void getUserById(int id, String token, NetworkService.OnResultCallback<UserResponse, Throwable> callback);
 
