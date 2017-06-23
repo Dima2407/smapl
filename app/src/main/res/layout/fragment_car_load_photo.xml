@@ -58,8 +58,8 @@
 
     <RelativeLayout
         android:id="@+id/relative_img_load_photo"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="@dimen/load_car_photo_size"
+        android:layout_height="@dimen/load_car_photo_size"
         android:layout_below="@id/text_load_car_photo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="41dp">
@@ -68,20 +68,7 @@
             android:id="@+id/img_car_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/img_load_photo_circle" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="50dp"
-            android:background="@drawable/img_load_photo_horizontal_line" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="50dp"
-            android:rotation="90"
-            android:background="@drawable/img_load_photo_horizontal_line" />
+            android:src="@drawable/vector_smart_object_11"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_circle_load_photo"

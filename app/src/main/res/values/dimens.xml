@@ -18,4 +18,5 @@
     <dimen name="btn_facebook_margin_top">25dp</dimen>
     <dimen name="btn_facebook_margin_bottom">29dp</dimen>
     <dimen name="about_yourself_indent">39dp</dimen>
+    <dimen name="load_car_photo_size">134dp</dimen>
 </resources>
