@@ -68,10 +68,23 @@ public abstract class CoreActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public void replaceContent(int containerId, Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(containerId, fragment)
+                .commit();
+    }
+
     public void replaceContentWithHistory(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(android.R.id.content, fragment)
+                .commit();
+    }
+
+    public void replaceContentWithHistory(int containerId, Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(containerId, fragment)
                 .commit();
     }
     //endregion
