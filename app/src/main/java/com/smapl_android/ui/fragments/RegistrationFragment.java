@@ -29,38 +29,6 @@ public class RegistrationFragment extends BaseFragment {
         return binding.getRoot();
     }
 
-   /* private EditText phoneNumberEditText;
-    private EditText passwordEditText;
-
-
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        phoneNumberEditText = (EditText) view.findViewById(R.id.edit_registration_phone_number);
-        passwordEditText = (EditText) view.findViewById(R.id.edit_registration_password);
-        view.findViewById(R.id.btn_registration).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleRegistration();
-            }
-        });
-    }
-
-    private void handleRegistration() {
-        String phoneNamber = phoneNumberEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-
-        AboutYourselfFragment aboutYourselfFragment = new AboutYourselfFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putString("phoneNumber", phoneNamber);
-        bundle.putString("password", password);
-        aboutYourselfFragment.setArguments(bundle);
-
-        getCoreActivity().replaceContentWithHistory(aboutYourselfFragment);
-
-    }*/
 
     public class Presenter {
 
