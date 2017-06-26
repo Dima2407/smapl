@@ -3,25 +3,24 @@ package com.smapl_android.ui.fragments;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 
 import com.smapl_android.R;
 import com.smapl_android.databinding.FragmentMainScreenBinding;
 import com.smapl_android.model.User;
 import com.smapl_android.ui.base.BaseFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainScreenFragment extends BaseFragment {
 
     private static final String TAG = MainScreenFragment.class.getSimpleName();
     private LinearLayout linearContent;
+    private ImageView imageItem1;
+    private ImageView imageItem2;
+    private ImageView imageItem3;
     private User user;
 
     @Nullable
@@ -37,21 +36,35 @@ public class MainScreenFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         linearContent = (LinearLayout) view.findViewById(R.id.linear_main_screen);
+
+        imageItem1 = (ImageView) view.findViewById(R.id.img_main_screen_triangle_1);
+        imageItem2 = (ImageView) view.findViewById(R.id.img_main_screen_triangle_2);
+        imageItem3 = (ImageView) view.findViewById(R.id.img_main_screen_triangle_3);
     }
 
 
 
     public class Presenter{
 
+
         public void onNewsClicked(){
+            imageItem1.setVisibility(View.VISIBLE);
+            imageItem2.setVisibility(View.GONE);
+            imageItem3.setVisibility(View.GONE);
             getCoreActivity().replaceContent(linearContent.getId(), new NewsFragment());
         }
 
         public void onMapClicked(){
+            imageItem1.setVisibility(View.GONE);
+            imageItem2.setVisibility(View.VISIBLE);
+            imageItem3.setVisibility(View.GONE);
             getCoreActivity().replaceContent(linearContent.getId(), new MapFragment());
         }
 
         public void onProfileClicked(){
+            imageItem1.setVisibility(View.GONE);
+            imageItem2.setVisibility(View.GONE);
+            imageItem3.setVisibility(View.VISIBLE);
             getCoreActivity().replaceContent(linearContent.getId(), new ProfileFragment());
         }
 

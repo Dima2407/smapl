@@ -7,10 +7,10 @@
     <dimen name="margin_fragment_mini_login">20dp</dimen>
     <dimen name="edit_login_height">34dp</dimen>
     <dimen name="img_btn_login_forward_size">50dp</dimen>
-    <dimen name="image_car_circle_size">90dp</dimen>
+    <dimen name="image_car_circle_size">60dp</dimen>
     <dimen name="text_menu_bottom_size">17sp</dimen>
-    <dimen name="name_profile_size">30dp</dimen>
-    <dimen name="car_brand_model_profile_size">20dp</dimen>
+    <dimen name="name_profile_size">22dp</dimen>
+    <dimen name="car_brand_model_profile_size">13dp</dimen>
     <dimen name="btn_login_forward_size">51dp</dimen>
     <dimen name="btn_facebook_hight">34dp</dimen>
     <dimen name="login_logotip_hight">313dp</dimen>
@@ -20,6 +20,7 @@
     <dimen name="about_yourself_indent">39dp</dimen>
     <dimen name="load_car_photo_size">134dp</dimen>
     <dimen name="text_menu_below_size">10sp</dimen>
-    <dimen name="menu_below_item_padding_top">7dp</dimen>
+    <dimen name="menu_below_item_padding_top">0dp</dimen>
     <dimen name="menu_below_item_drawable_padding">3dp</dimen>
+    <dimen name="menu_below_item_margin_bottom">5dp</dimen>
 </resources>
