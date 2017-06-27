@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.smapl_android.R;
+import com.smapl_android.core.validation.ValidationException;
+import com.smapl_android.core.validation.Validator;
+import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentRegistrationBinding;
 import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.ui.base.BaseFragment;
@@ -34,11 +37,21 @@ public class RegistrationFragment extends BaseFragment {
 
         public void onRegistrationClicked(UserInfoViewModel userInfoViewModel) {
 
+            final String phoneNumber = userInfoViewModel.phone.get();
+            final String password = userInfoViewModel.password.get();
+
+            try {
+                Validators.getPhoneValidator(getContext()).validate(phoneNumber);
+                Validators.getPasswordValidator(getContext()).validate(password);
+            } catch (ValidationException e) {
+                showMessage(getString(R.string.app_name), e.getMessage());
+                return;
+            }
+
             AboutYourselfFragment aboutYourselfFragment = new AboutYourselfFragment();
             Bundle bundle = new Bundle();
-
-            bundle.putString("phoneNumber", userInfoViewModel.phone.get());
-            bundle.putString("password", userInfoViewModel.password.get());
+            bundle.putString("phoneNumber", phoneNumber);
+            bundle.putString("password", password);
             aboutYourselfFragment.setArguments(bundle);
 
             getCoreActivity().replaceContentWithHistory(aboutYourselfFragment);

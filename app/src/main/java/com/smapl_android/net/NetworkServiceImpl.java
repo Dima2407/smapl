@@ -72,7 +72,7 @@ class NetworkServiceImpl implements NetworkService {
     @Override
     public void registration(UserInfoViewModel user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
 
-        RegistrationRequest registrationRequest = new RegistrationRequest(user.email.get(), user.password.get(), user.name.get(),
+        RegistrationRequest registrationRequest = new RegistrationRequest(user.email.get() , user.password.get(), user.name.get(),
                user.phone.get(), Integer.parseInt(user.carYearOfIssue.get()), user.carBrand.get(), user.carModel.get(), user.color.get());
         final Call<RegistrationResponse> responseCall = apiService.registration(registrationRequest);
         responseCall.enqueue(new Callback<RegistrationResponse>() {

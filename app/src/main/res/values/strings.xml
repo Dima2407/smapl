@@ -53,6 +53,12 @@
     <string name="text_about_yourself_car_brand">Марка авто</string>
     <string name="text_about_yourself_car_color">Цвет авто</string>
     <string name="text_about_yourself_menu">Обо мне</string>
+    <string name="error_empty_name">Введите имя</string>
+    <string name="error_empty_email">Введите e-mail</string>
+    <string name="error_incorrect_email">Вы ввели некорректный e-mail</string>
+    <string name="error_empty_car_model">Введите модель автомобиля</string>
+    <string name="error_empty_car_year">Введите год выпуска автомобиля</string>
+    <string name="error_incorrect_car_year">Вы ввели некорректный год выпуска автомобиля</string>
 
     <string-array name="age">
         <item>18</item>

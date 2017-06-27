@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validators;
-import com.smapl_android.model.User;
 import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
@@ -43,18 +42,7 @@ public class CoreService {
     }
 
     public void login(String login, String password, final CoreRequest<Boolean> coreRequest) {
-        try {
-            Validators.getPhoneValidator(rootContext)
-                    .validate(login);
 
-            Validators.getPasswordValidator(rootContext)
-                    .validate(password);
-        } catch (ValidationException e) {
-            if (coreRequest != null) {
-                coreRequest.processError(e.getMessage());
-            }
-            return;
-        }
         networkServiceImpl.login(login, password, new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
             @Override
             public void onResult(LoginResponse result, final Throwable error) {
@@ -68,8 +56,8 @@ public class CoreService {
                         });
 
                     } else {
-                        sessionStorage.saveAuthKey(result.getResult().getId());
-                        sessionStorage.saveUserId(result.getResult().getUserId());
+                        sessionStorage.saveAuthKey(result.getId());
+                        sessionStorage.saveUserId(result.getUserId());
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -83,18 +71,6 @@ public class CoreService {
     }
 
     public void registration(final UserInfoViewModel user, final CoreRequest<Boolean> successOutput) {
-        try {
-            Validators.getPhoneValidator(rootContext)
-                    .validate(user.phone.get());
-
-            Validators.getPasswordValidator(rootContext)
-                    .validate(user.password.get());
-        } catch (ValidationException e) {
-            if (successOutput != null) {
-                successOutput.processError(e.getMessage());
-            }
-            return;
-        }
 
         networkServiceImpl.registration(user, new NetworkService.OnResultCallback<RegistrationResponse, Throwable>() {
             @Override
@@ -119,8 +95,8 @@ public class CoreService {
                                         }
                                     });
                                 } else {
-                                    sessionStorage.saveAuthKey(result.getResult().getId());
-                                    sessionStorage.saveUserId(result.getResult().getUserId());
+                                    sessionStorage.saveAuthKey(result.getId());
+                                    sessionStorage.saveUserId(result.getUserId());
                                     uiHandler.post(new Runnable() {
                                         @Override
                                         public void run() {

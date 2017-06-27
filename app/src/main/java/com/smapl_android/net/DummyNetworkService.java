@@ -39,7 +39,7 @@ class DummyNetworkService implements NetworkService{
     @Override
     public void login(final String mobileNumber, final String password,
                       final OnResultCallback<LoginResponse, Throwable> callback) {
-        new Thread(new Runnable() {
+       /* new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -70,7 +70,7 @@ class DummyNetworkService implements NetworkService{
                     e.printStackTrace();
                 }
             }
-        }).start();
+        }).start();*/
     }
 
     @Override
