@@ -20,7 +20,8 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
         <activity android:name=".ui.activities.AuthActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:noHistory="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN"/>
 
