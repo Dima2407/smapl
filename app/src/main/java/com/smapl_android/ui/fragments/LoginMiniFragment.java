@@ -41,7 +41,7 @@ import java.util.Arrays;
 public class LoginMiniFragment extends BaseFragment {
 
 
-    private static final String TAG = LoginMiniFragment.class.getSimpleName();
+    public static final String TAG = LoginMiniFragment.class.getSimpleName();
     private Presenter presenter = new Presenter();
     private LoginInfoViewModel viewModel;
 
@@ -92,10 +92,8 @@ public class LoginMiniFragment extends BaseFragment {
     private boolean isAuthorized(){
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken == null){
-            Log.i(TAG, "accessToken == null");
             return false;
         } else {
-            Log.i(TAG, "access token : " + accessToken);
             return true;
         }
     }
@@ -114,9 +112,7 @@ public class LoginMiniFragment extends BaseFragment {
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.i(TAG, "registerCallBack onSuccess");
-                Log.i(TAG, "access token : " + loginResult.getAccessToken());
-                getCoreActivity().replaceContentWithHistory(new MainScreenFragment());
+                getCoreActivity().replaceContent(new MainScreenFragment());
             }
 
             @Override

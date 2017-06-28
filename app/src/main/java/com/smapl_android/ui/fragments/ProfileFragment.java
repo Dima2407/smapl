@@ -34,5 +34,13 @@ public class ProfileFragment extends BaseFragment {
                 getCoreActivity().replaceContentWithHistory(new ChangePasswordFragment());
             }
         });
+
+        view.findViewById(R.id.btn_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCoreService().logout();
+                getCoreActivity().replaceContent(new LoginFragment());
+            }
+        });
     }
 }

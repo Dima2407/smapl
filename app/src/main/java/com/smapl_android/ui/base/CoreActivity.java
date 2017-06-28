@@ -87,6 +87,32 @@ public abstract class CoreActivity extends AppCompatActivity {
                 .replace(containerId, fragment)
                 .commit();
     }
+
+    public void replaceContentWithTag(int containerId, Fragment fragment, String tag) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(containerId, fragment, tag)
+                .commit();
+    }
+
+    public void replaceContentWithTag(Fragment fragment, String tag) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(android.R.id.content, fragment, tag)
+                .commit();
+    }
+
+    public void replaceContentWithHistoryWithTag(int containerId, Fragment fragment, String tag) {
+        getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(containerId, fragment, tag)
+                .commit();
+    }
+
+    public void replaceContentWithHistoryWithTag(Fragment fragment, String tag) {
+        getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(android.R.id.content, fragment, tag)
+                .commit();
+    }
     //endregion
 
     //region permissions

@@ -37,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LoadCarPhotoFragment extends BaseFragment {
 
-    private static final String TAG = LoadCarPhotoFragment.class.getSimpleName();
+    public static final String TAG = LoadCarPhotoFragment.class.getSimpleName();
     private RelativeLayout imgLayout;
     private UserInfoViewModel user;
     private CircleImageView circleImageView;
@@ -163,9 +163,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
 
         MainScreenFragment mainScreenFragment = new MainScreenFragment();
 
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, mainScreenFragment)
-                .commit();
+        getCoreActivity().replaceContent(mainScreenFragment);
     }
 
 

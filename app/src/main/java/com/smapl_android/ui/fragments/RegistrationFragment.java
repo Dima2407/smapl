@@ -19,6 +19,7 @@ import com.smapl_android.ui.base.BaseFragment;
 
 public class RegistrationFragment extends BaseFragment {
 
+    public static final String TAG = RegistrationFragment.class.getSimpleName();
     private Presenter presenter = new Presenter();
     private UserInfoViewModel userInfoViewModel;
 
@@ -54,7 +55,10 @@ public class RegistrationFragment extends BaseFragment {
             bundle.putString("password", password);
             aboutYourselfFragment.setArguments(bundle);
 
-            getCoreActivity().replaceContentWithHistory(aboutYourselfFragment);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .addToBackStack(null)
+                    .add(android.R.id.content, aboutYourselfFragment, AboutYourselfFragment.TAG)
+                    .commit();
         }
     }
 }

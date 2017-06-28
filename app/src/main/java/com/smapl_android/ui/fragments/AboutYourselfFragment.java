@@ -3,6 +3,7 @@ package com.smapl_android.ui.fragments;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,12 +19,13 @@ import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentAboutYourselfBinding;
 import com.smapl_android.model.UserInfoViewModel;
+import com.smapl_android.ui.activities.AuthActivity;
 import com.smapl_android.ui.base.BaseFragment;
 
 
 public class AboutYourselfFragment extends BaseFragment {
 
-    private static final String TAG = AboutYourselfFragment.class.getSimpleName();
+    public static final String TAG = AboutYourselfFragment.class.getSimpleName();
 
     private UserInfoViewModel user;
     private Presenter presenter = new Presenter();
@@ -40,7 +42,7 @@ public class AboutYourselfFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentAboutYourselfBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about_yourself,container,false);
+        FragmentAboutYourselfBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about_yourself, container, false);
         user = new UserInfoViewModel(getContext());
         binding.setUser(user);
         binding.setPresenter(presenter);
@@ -79,7 +81,7 @@ public class AboutYourselfFragment extends BaseFragment {
         user.age.set(age.getSelectedItem().toString());
         user.carBrand.set(carBrand.getSelectedItem().toString());
         final String yearStr = carYearOfIssue.getText().toString();
-     //   if(!TextUtils.isEmpty(yearStr))
+        //   if(!TextUtils.isEmpty(yearStr))
         user.carYearOfIssue.set(yearStr);
         user.color.set(carColor.getSelectedItem().toString());
 
@@ -89,36 +91,39 @@ public class AboutYourselfFragment extends BaseFragment {
         bundle.putParcelable("user", user);
 
         loadCarPhotoFragment.setArguments(bundle);
-        getCoreActivity().replaceContentWithHistory(loadCarPhotoFragment);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .add(android.R.id.content, loadCarPhotoFragment, LoadCarPhotoFragment.TAG)
+                .commit();
 
     }
 
     private void validation() throws ValidationException {
 
-        if (!Validators.getNameValidator(getContext()).validate(name.getText().toString())){
+        if (!Validators.getNameValidator(getContext()).validate(name.getText().toString())) {
             name.setError(getString(R.string.error_empty_name));
         }
 
-        if (!Validators.getEmailValidator(getContext()).validate(email.getText().toString())){
+        if (!Validators.getEmailValidator(getContext()).validate(email.getText().toString())) {
             email.setError(getString(R.string.error_incorrect_email));
         }
 
-        if (!Validators.getCarModelValidator(getContext()).validate(carModel.getText().toString())){
+        if (!Validators.getCarModelValidator(getContext()).validate(carModel.getText().toString())) {
             carModel.setError(getString(R.string.error_empty_car_model));
         }
 
-        if (!Validators.getCarYearValidator(getContext()).validate(carYearOfIssue.getText().toString())){
+        if (!Validators.getCarYearValidator(getContext()).validate(carYearOfIssue.getText().toString())) {
             carYearOfIssue.setError(getString(R.string.error_incorrect_car_year));
         }
     }
 
     public class Presenter {
 
-        public void onClickBack(){
+        public void onClickBack() {
             getActivity().onBackPressed();
         }
 
-        public void onClickForward(){
+        public void onClickForward() {
             registration();
         }
 
