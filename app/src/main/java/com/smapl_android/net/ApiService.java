@@ -23,7 +23,7 @@ public interface ApiService {
     Call<UserResponse> getUserById(@Path("id") int id, @Query("access_token") String token);
 
     @PATCH("api/user/edit/car/{id}")
-    Call<UpdateCarResponse> updateCar(@Path("id") int userId, @Query("access_token") String token, @Body UpdateCarRequest updateUserRequest);
+    Call<ResponseBody> updateCar(@Path("id") int userId, @Query("access_token") String token, @Body UpdateCarRequest updateUserRequest);
 
     @POST("api/user/change-password")
     @FormUrlEncoded

@@ -371,14 +371,14 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, final OnResultCallback<UpdateCarResponse, Throwable> callback) {
-        final Call<UpdateCarResponse> userByIdCall = apiService.updateCar(userId, token, updateUserRequest);
-        userByIdCall.enqueue(new Callback<UpdateCarResponse>() {
+    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, final OnResultCallback<Boolean, Throwable> callback) {
+        final Call<ResponseBody> userByIdCall = apiService.updateCar(userId, token, updateUserRequest);
+        userByIdCall.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<UpdateCarResponse> call, Response<UpdateCarResponse> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     if (callback != null) {
-                        callback.onResult(response.body(), null);
+                        callback.onResult(true, null);
                     }
                 } else {
                     if (callback != null) {
@@ -389,15 +389,15 @@ class NetworkServiceImpl implements NetworkService {
                             errorMessage = e.getMessage();
 
                         }
-                        callback.onResult(null, new Exception(errorMessage));
+                        callback.onResult(false, new Exception(errorMessage));
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<UpdateCarResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 if (callback != null) {
-                    callback.onResult(null, t);
+                    callback.onResult(false, t);
                 }
             }
         });

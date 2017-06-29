@@ -38,7 +38,7 @@ public class ApiUnitTest {
             public void onResult(LoginResponse result, Throwable error) {
                 assertThat(error, CoreMatchers.nullValue());
                 assertThat(result, CoreMatchers.notNullValue());
-                assertThat(result.getResult(), CoreMatchers.allOf(CoreMatchers.notNullValue()));
+                assertThat(result, CoreMatchers.allOf(CoreMatchers.notNullValue()));
             }
         });
         latch.await(WAIT_TIMEOUT, TimeUnit.SECONDS);
@@ -53,7 +53,7 @@ public class ApiUnitTest {
             public void onResult(LoginResponse result, Throwable error) {
                 assertThat(error, CoreMatchers.nullValue());
                 assertThat(result, CoreMatchers.notNullValue());
-                assertThat(result.getResult(), CoreMatchers.allOf(CoreMatchers.notNullValue()));
+                assertThat(result, CoreMatchers.allOf(CoreMatchers.notNullValue()));
             }
         });
         latch.await(WAIT_TIMEOUT, TimeUnit.SECONDS);

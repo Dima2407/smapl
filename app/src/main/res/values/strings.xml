@@ -39,7 +39,7 @@
     <string name="hint_car_model">Модель авто</string>
     <string name="hint_car_year_issue">Год выпуска</string>
     <string name="hint_car_color">Цвет машины</string>
-    <string name="change_password_password">Пароль</string>
+    <string name="change_password_password">Обо мне</string>
     <string name="hint_old_password">Старый пароль</string>
     <string name="hint_new_password">Новый пароль</string>
     <string name="save">Сохранить</string>
@@ -60,6 +60,10 @@
     <string name="error_empty_car_year">Введите год выпуска автомобиля</string>
     <string name="error_incorrect_car_year">Вы ввели некорректный год выпуска автомобиля</string>
     <string name="logout">Выйти из аккаунта</string>
+    <string name="hint_phone">Телефон</string>
+    <string name="hint_name">Имя</string>
+    <string name="age">Возраст</string>
+    <string name="about_me">Обо мне</string>
 
     <string-array name="age">
         <item>18</item>

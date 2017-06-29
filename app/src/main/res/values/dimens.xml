@@ -23,4 +23,5 @@
     <dimen name="menu_below_item_padding_top">0dp</dimen>
     <dimen name="menu_below_item_drawable_padding">3dp</dimen>
     <dimen name="menu_below_item_margin_bottom">5dp</dimen>
+    <dimen name="edit_password_edit_padding_top">10dp</dimen>
 </resources>

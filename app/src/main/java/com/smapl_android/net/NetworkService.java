@@ -34,7 +34,7 @@ public interface NetworkService {
     void sendMessage(String message, String senderId, String receiverId, String date,
                      NetworkService.OnResultCallback<SendMessageResponse, Throwable> callback);
 
-    void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<UpdateCarResponse, Throwable> callback);
+    void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<Boolean, Throwable> callback);
 
     interface OnResultCallback<T, E> {
         void onResult(T result, E error);

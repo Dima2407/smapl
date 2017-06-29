@@ -37,7 +37,7 @@ public class CoreService {
         this.sessionStorage = new SessionStorage(rootContext);
     }
 
-    public boolean isLoggedIn(){
+    public boolean isLoggedIn() {
         return sessionStorage.isLoggedIn();
     }
 
@@ -112,12 +112,12 @@ public class CoreService {
         });
     }
 
-    public void logout(){
+    public void logout() {
         sessionStorage.logout();
     }
 
-    public void getUser(final CoreRequest<UserResponse> coreRequest){
-        int userId =  sessionStorage.getUserId();
+    public void getUser(final CoreRequest<UserResponse> coreRequest) {
+        int userId = sessionStorage.getUserId();
         String token = sessionStorage.getAuthKey();
         networkServiceImpl.getUserById(userId, token, new NetworkService.OnResultCallback<UserResponse, Throwable>() {
             @Override
@@ -144,16 +144,16 @@ public class CoreService {
         });
     }
 
-    public <T> CoreRequest<T> newRequest(CoreActivity activity){
+    public <T> CoreRequest<T> newRequest(CoreActivity activity) {
         return new CoreRequest<T>(activity, this);
     }
 
     public void updateCar(UpdateCarRequest updateUserRequest, final CoreRequest<Boolean> coreRequest) {
-        int userId =  sessionStorage.getUserId();
+        int userId = sessionStorage.getUserId();
         String token = sessionStorage.getAuthKey();
-        networkServiceImpl.updateCar(userId, token, updateUserRequest,new NetworkService.OnResultCallback<UpdateCarResponse, Throwable>() {
+        networkServiceImpl.updateCar(userId, token, updateUserRequest, new NetworkService.OnResultCallback<Boolean, Throwable>() {
             @Override
-            public void onResult(final UpdateCarResponse result, final Throwable error) {
+            public void onResult(final Boolean result, final Throwable error) {
                 if (coreRequest != null) {
                     if (error != null) {
                         uiHandler.post(new Runnable() {
@@ -167,7 +167,7 @@ public class CoreService {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                coreRequest.processResult(result.isResult());
+                                coreRequest.processResult(result);
                             }
                         });
                     }
@@ -176,13 +176,13 @@ public class CoreService {
         });
     }
 
-    public void changePassword(String oldPassword, String newPassword, final CoreRequest<Boolean> coreRequest){
+    public void changePassword(String oldPassword, String newPassword, final CoreRequest<Boolean> coreRequest) {
         String token = sessionStorage.getAuthKey();
         networkServiceImpl.editPassword(token, oldPassword, newPassword, new NetworkService.OnResultCallback<Boolean, Throwable>() {
             @Override
             public void onResult(final Boolean result, final Throwable error) {
-                if (coreRequest != null){
-                    if (error != null){
+                if (coreRequest != null) {
+                    if (error != null) {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {

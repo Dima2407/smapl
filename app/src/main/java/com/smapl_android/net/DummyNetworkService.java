@@ -328,12 +328,17 @@ class DummyNetworkService implements NetworkService{
     }
 
     @Override
-    public void getUserById(int id, String token, OnResultCallback<UserResponse, Throwable> callback) {
+    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<Boolean, Throwable> callback) {
 
     }
 
     @Override
-    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<UpdateCarResponse, Throwable> callback) {
+    public void getUserById(int id, String token, OnResultCallback<UserResponse, Throwable> callback) {
 
     }
+
+  /*  @Override
+    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<UpdateCarResponse, Throwable> callback) {
+
+    }*/
 }
