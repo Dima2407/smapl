@@ -14,11 +14,17 @@ import com.smapl_android.R;
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
+import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.responses.UserResponse;
 
 import java.util.Objects;
 
 public class UserInfoViewModel extends BaseObservable implements Parcelable {
+
+
+    private static final String GENDER_MAN = "man";
+    private static final String GENDER_WOMAN = "woman";
+
     public final ObservableField<String> phone = new ObservableField<>();
     public final ObservableField<String> password = new ObservableField<>();
     public final ObservableField<String> name = new ObservableField<>();
@@ -39,11 +45,9 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
     public final ObservableField<String> oldAge = new ObservableField<>();
     public final ObservableField<String> oldInterests = new ObservableField<>();
 
-    //public final TextWatcher phoneTextWatcher = new TextWatcherAdapter(phone);
-    //public final TextWatcher passwordTextWatcher = new TextWatcherAdapter(password);
     public final TextWatcher nameTextWatcher = new TextWatcherAdapter(name);
     public final TextWatcher emailTextWatcher = new TextWatcherAdapter(email);
-   // public final TextWatcher genderTextWatcher = new TextWatcherAdapter(gender);
+    // public final TextWatcher genderTextWatcher = new TextWatcherAdapter(gender);
     public final TextWatcher ageTextWatcher = new TextWatcherAdapter(age);
     public final TextWatcher carBrandTextWatcher = new TextWatcherAdapter(carBrand);
     public final TextWatcher carModelTextWatcher = new TextWatcherAdapter(carModel);
@@ -110,20 +114,20 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         return markDrawable;
     }
 
-    private void updatePasswordValidationMark(CharSequence s){
+    private void updatePasswordValidationMark(CharSequence s) {
         updateValidationMark(s, Validators.getPasswordValidator(context), passwordValid);
     }
 
-    private void updatePhoneValidationMark(CharSequence s){
+    private void updatePhoneValidationMark(CharSequence s) {
         updateValidationMark(s, Validators.getPhoneValidator(context), phoneValid);
     }
 
-    private void updateValidationMark(CharSequence field, Validator<String> validator, ObservableField<Drawable> mark){
+    private void updateValidationMark(CharSequence field, Validator<String> validator, ObservableField<Drawable> mark) {
         try {
             boolean correct = validator.validate(field.toString());
-            if(correct){
+            if (correct) {
                 mark.set(getMarkDrawable());
-            }else {
+            } else {
                 mark.set(null);
             }
         } catch (ValidationException e) {
@@ -131,7 +135,7 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         }
     }
 
-    public void apply(UserResponse response){
+    public void apply(UserResponse response) {
         oldName.set(response.getName());
         carBrand.set(response.getCarMark());
         carModel.set(response.getCarModel());
@@ -139,6 +143,18 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         carYearOfIssue.set(String.valueOf(response.getCarYear()));
         oldPhone.set(response.getMobileNumber());
         oldInterests.set(response.getInterests());
+    }
+
+    public EditProfileRequest toEditProfileRequest() {
+        EditProfileRequest request = new EditProfileRequest();
+        request.setName(name.get());
+        request.setPhone(phone.get());
+        request.setAge(age.get());
+        if (gender.get() != null)
+            request.setGender(gender.get() == true ? GENDER_MAN : GENDER_WOMAN);
+        request.setInterests(interests.get());
+
+        return request;
     }
 
 

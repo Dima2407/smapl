@@ -2,6 +2,7 @@ package com.smapl_android.net;
 
 import com.smapl_android.model.User;
 import com.smapl_android.model.UserInfoViewModel;
+import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
 
@@ -233,26 +234,10 @@ class DummyNetworkService implements NetworkService{
     }
 
     @Override
-    public void editProfile(final String phone, String name, String gender, final Integer age, String hobby,
-                            final OnResultCallback<EditProfileResponse, Throwable> callback) {
-        final EditProfileResponse response = new EditProfileResponse();
-        response.setMessage("Everything is OK");
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                    if (phone.length() != 0 && age != null) {
-                        callback.onResult(response, null);
-                    } else callback.onResult(null, new Exception("Something went wrong"));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+    public void editProfile(int userId, String token, EditProfileRequest request, OnResultCallback<EditProfileResponse, Throwable> callback) {
 
     }
+
 
     @Override
     public void getLastMessages(final OnResultCallback<GetLastMessagesResponse, Throwable> callback) {

@@ -5,14 +5,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class EditProfileResponse {
 
-    @SerializedName("message")
-    private String message;
+    @SerializedName("count")
+    private int count;
 
-    public String getMessage() {
-        return message;
+    public int getCount() {
+        return count;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setCount(int count) {
+        this.count = count;
     }
 }

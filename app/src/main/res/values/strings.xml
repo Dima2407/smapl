@@ -65,6 +65,7 @@
     <string name="hint_about_me_interests">Интересы:</string>
     <string name="age">Возраст</string>
     <string name="about_me">Обо мне</string>
+    <string name="about_me_no_changes">Вы не внесли никаких изменений</string>
 
     <string-array name="age">
         <item>18</item>

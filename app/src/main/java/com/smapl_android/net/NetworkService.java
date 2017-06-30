@@ -2,6 +2,7 @@ package com.smapl_android.net;
 
 import com.smapl_android.model.User;
 import com.smapl_android.model.UserInfoViewModel;
+import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
 
@@ -24,8 +25,7 @@ public interface NetworkService {
     void editPassword(String token, String oldPassword, String newPassword,
                       final NetworkService.OnResultCallback<Boolean, Throwable> callback);
 
-    void editProfile(String phone, String name, String gender, Integer age, String hobby,
-                     final NetworkService.OnResultCallback<EditProfileResponse, Throwable> callback);
+    void editProfile(int userId, String token, EditProfileRequest request, final NetworkService.OnResultCallback<EditProfileResponse, Throwable> callback);
 
     void getLastMessages(final NetworkService.OnResultCallback<GetLastMessagesResponse, Throwable> callback);
 
