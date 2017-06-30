@@ -14,6 +14,7 @@ import com.smapl_android.R;
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
+import com.smapl_android.net.responses.UserResponse;
 
 import java.util.Objects;
 
@@ -33,6 +34,11 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
     public final ObservableField<Drawable> phoneValid = new ObservableField<>();
     public final ObservableField<Drawable> passwordValid = new ObservableField<>();
 
+    public final ObservableField<String> oldPhone = new ObservableField<>();
+    public final ObservableField<String> oldName = new ObservableField<>();
+    public final ObservableField<String> oldAge = new ObservableField<>();
+    public final ObservableField<String> oldInterests = new ObservableField<>();
+
     //public final TextWatcher phoneTextWatcher = new TextWatcherAdapter(phone);
     //public final TextWatcher passwordTextWatcher = new TextWatcherAdapter(password);
     public final TextWatcher nameTextWatcher = new TextWatcherAdapter(name);
@@ -48,6 +54,7 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
     private Context context;
 
     private Drawable markDrawable;
+
     public final TextWatcher passwordTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -122,6 +129,16 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         } catch (ValidationException e) {
             mark.set(null);
         }
+    }
+
+    public void apply(UserResponse response){
+        oldName.set(response.getName());
+        carBrand.set(response.getCarMark());
+        carModel.set(response.getCarModel());
+        color.set(response.getCarColor());
+        carYearOfIssue.set(String.valueOf(response.getCarYear()));
+        oldPhone.set(response.getMobileNumber());
+        oldInterests.set(response.getInterests());
     }
 
 

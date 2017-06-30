@@ -42,5 +42,12 @@ public class ProfileFragment extends BaseFragment {
                 getCoreActivity().replaceContent(new LoginFragment());
             }
         });
+
+        view.findViewById(R.id.btn_about_me).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCoreActivity().replaceContentWithHistory(new AboutMeFragment());
+            }
+        });
     }
 }

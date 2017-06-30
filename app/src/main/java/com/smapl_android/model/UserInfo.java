@@ -29,6 +29,7 @@ public class UserInfo extends BaseObservable {
     public final TextWatcher carYearTextWatcher = new TextWatcherAdapter(carYear);
 
     public void apply(UserResponse response){
+        name.set(response.getName());
         carBrandModel.set(String.format("%s %s", response.getCarMark(), response.getCarModel()));
         carBrand.set(response.getCarMark());
         carModel.set(response.getCarModel());

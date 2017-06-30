@@ -71,6 +71,8 @@ public class ChangePasswordFragment extends BaseFragment {
                         }
                     });
             getCoreService().changePassword(oldPasswordStr, newPasswordStr, request);
+        } else {
+            showMessage(getString(R.string.app_name), getString(R.string.error_empty_password));
         }
 
     }

@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">smapl-android</string>
-    <string name="error_empty_login">Login can\'t be empty</string>
-    <string name="error_empty_password">Password can\'t be empty</string>
+    <string name="error_empty_login">Вы не ввели логин</string>
+    <string name="error_empty_password">Вы не ввели пароль</string>
     <string name="login">Войти</string>
     <string name="wait_login">Waiting!</string>
-    <string name="error_empty_phone_number">Phone number can\'t be empty</string>
-    <string name="error_wrong_phone_number">Wrong phone number</string>
-    <string name="error_phone_number_short">The phone number is too short</string>
-    <string name="error_password_short">The password is too short</string>
+    <string name="error_empty_phone_number">Вы не ввели номер телефона</string>
+    <string name="error_wrong_phone_number">Вы ввели некорректный номер телефона</string>
+    <string name="error_phone_number_short">Вы ввели короткий номер</string>
+    <string name="error_password_short">Вы ввели слишком короткий пароль</string>
     <string name="registration">Зарегистрироваться</string>
     <string name="cancel">cancel</string>
     <string name="forward">forward</string>
@@ -38,7 +38,7 @@
     <string name="hint_car_brand">Марка авто</string>
     <string name="hint_car_model">Модель авто</string>
     <string name="hint_car_year_issue">Год выпуска</string>
-    <string name="hint_car_color">Цвет машины</string>
+    <string name="hint_car_color">Цвет</string>
     <string name="change_password_password">Обо мне</string>
     <string name="hint_old_password">Старый пароль</string>
     <string name="hint_new_password">Новый пароль</string>
@@ -60,8 +60,9 @@
     <string name="error_empty_car_year">Введите год выпуска автомобиля</string>
     <string name="error_incorrect_car_year">Вы ввели некорректный год выпуска автомобиля</string>
     <string name="logout">Выйти из аккаунта</string>
-    <string name="hint_phone">Телефон</string>
-    <string name="hint_name">Имя</string>
+    <string name="hint_phone">Телефон:</string>
+    <string name="hint_name">Имя:</string>
+    <string name="hint_about_me_interests">Интересы:</string>
     <string name="age">Возраст</string>
     <string name="about_me">Обо мне</string>
 

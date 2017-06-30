@@ -25,6 +25,9 @@ public class UserResponse {
     @SerializedName("car_color")
     private String carColor;
 
+    @SerializedName("interest")
+    private String interests;
+
     @SerializedName("created_at")
     private String createdAt;
 
@@ -85,6 +88,14 @@ public class UserResponse {
 
     public void setCarColor(String carColor) {
         this.carColor = carColor;
+    }
+
+    public String getInterests() {
+        return interests;
+    }
+
+    public void setInterests(String interests) {
+        this.interests = interests;
     }
 
     public String getCreatedAt() {
