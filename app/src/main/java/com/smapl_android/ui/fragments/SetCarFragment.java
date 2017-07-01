@@ -4,17 +4,23 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
+import com.smapl_android.core.validation.ValidationException;
+import com.smapl_android.core.validation.Validator;
+import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentSetCarBinding;
 import com.smapl_android.model.UserInfo;
 import com.smapl_android.model.UserInfoViewModel;
@@ -25,8 +31,11 @@ import com.smapl_android.ui.base.BaseFragment;
 
 public class SetCarFragment extends BaseFragment {
 
+    private static final String TAG = SetCarFragment.class.getSimpleName();
     private UserInfoViewModel user;
     private Spinner carBrandSpinner;
+    private EditText carYear;
+    String carBrandStr;
 
     @Nullable
     @Override
@@ -39,35 +48,17 @@ public class SetCarFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        final CoreRequest<UserResponse> request = getCoreService()
-                .newRequest(getCoreActivity());
-        request
-                .withLoading(R.string.wait_login)
-                .handleErrorAsDialog()
-                .handleSuccess(new SuccessOutput<UserResponse>() {
-                    @Override
-                    public void onSuccess(UserResponse result) {
-                        user.apply(result);
-                    }
-                });
-        getCoreService()
-                .getUser(request);
-    }
-
-    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        carYear = (EditText) view.findViewById(R.id.edit_set_car_year_issue);
         carBrandSpinner = (Spinner) view.findViewById(R.id.spinner_set_car_brand);
+        setUserFromRequest();
 
         carBrandSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
-
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -77,14 +68,50 @@ public class SetCarFragment extends BaseFragment {
         });
     }
 
+    private void setUserFromRequest() {
+        final CoreRequest<UserResponse> request = getCoreService()
+                .newRequest(getCoreActivity());
+        request
+                .withLoading(R.string.wait_login)
+                .handleErrorAsDialog()
+                .handleSuccess(new SuccessOutput<UserResponse>() {
+                    @Override
+                    public void onSuccess(UserResponse result) {
+                        user.apply(result);
+                        carBrandStr = user.carBrand.get();
+                        setSpinnerPosition();
+                    }
+                });
+        getCoreService()
+                .getUser(request);
+    }
+
+    private void setSpinnerPosition() {
+        if (carBrandStr != null) {
+            String[] strCarYearArray = getResources().getStringArray(R.array.car_brand);
+            for (int i = 0; i < strCarYearArray.length; i++) {
+                if (strCarYearArray[i].equals(carBrandStr))
+                    carBrandSpinner.setSelection(i);
+            }
+        }
+    }
+
+
     public class Presenter {
 
-        public void onBackClicked(){
+        public void onBackClicked() {
             getActivity().onBackPressed();
 
         }
 
-        public void onSaveClicked(){
+        public void onSaveClicked() {
+
+            try {
+                Validators.getCarYearValidator(getContext()).validate(carYear.getText().toString());
+            } catch (ValidationException e) {
+                showMessage(getString(R.string.app_name), getString(R.string.error_incorrect_car_year));
+                return;
+            }
 
             user.carBrand.set(carBrandSpinner.getSelectedItem().toString());
 
@@ -98,7 +125,7 @@ public class SetCarFragment extends BaseFragment {
                     .handleSuccess(new SuccessOutput<Boolean>() {
                         @Override
                         public void onSuccess(Boolean result) {
-                            if(result){
+                            if (result) {
                                 getActivity().onBackPressed();
                             }
                         }

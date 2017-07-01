@@ -81,7 +81,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="40dp"
                 android:layout_toRightOf="@id/img_circle_set_car_photo"
-                android:text="@{user.name}"
+                android:text="@{user.oldName}"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/name_profile_size" />
 
@@ -94,20 +94,6 @@
                 android:text="@{user.carBrand + ' ' + user.carModel}"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/car_brand_model_profile_size" />
-
-           <!-- <EditText
-                android:id="@+id/edit_set_car_brand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/img_circle_set_car_photo"
-                android:layout_marginTop="50dp"
-                android:addTextChangedListener="@{user.carBrandTextWatcher}"
-                android:background="@drawable/edit_text_line_background"
-                android:hint="@string/hint_car_brand"
-                android:text="@{user.carBrand}"
-                android:paddingTop="@dimen/edit_password_edit_padding_top"
-                android:textSize="@dimen/core_text_size"
-                android:textColorHint="@android:color/white" />-->
 
             <LinearLayout
                 android:id="@+id/linear_set_car_brand"
