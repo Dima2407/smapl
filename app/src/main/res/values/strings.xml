@@ -66,6 +66,7 @@
     <string name="age">Возраст</string>
     <string name="about_me">Обо мне</string>
     <string name="about_me_no_changes">Вы не внесли никаких изменений</string>
+    <string name="fill_all_fields">Вы заполнили не все поля</string>
 
     <string-array name="age">
         <item>18</item>

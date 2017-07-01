@@ -15,6 +15,7 @@ import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.net.requests.EditProfileRequest;
+import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.UserResponse;
 
 import java.util.Objects;
@@ -143,6 +144,15 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         carYearOfIssue.set(String.valueOf(response.getCarYear()));
         oldPhone.set(response.getMobileNumber());
         oldInterests.set(response.getInterests());
+    }
+
+    public UpdateCarRequest toUpdateCar(){
+        UpdateCarRequest request = new UpdateCarRequest();
+        request.setCarMark(carBrand.get());
+        request.setCarColor(color.get());
+        request.setCarYear(Integer.parseInt(carYearOfIssue.get()));
+        request.setCarModel(carModel.get());
+        return request;
     }
 
     public EditProfileRequest toEditProfileRequest() {

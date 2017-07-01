@@ -1,5 +1,6 @@
 package com.smapl_android.ui.fragments;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.smapl_android.R;
@@ -80,6 +82,7 @@ public class ChangePasswordFragment extends BaseFragment {
     public class Presenter {
 
         public void onClickForward() {
+            hideKeyboard();
             changePassword();
         }
 

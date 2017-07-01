@@ -5,7 +5,7 @@
 
         <variable
             name="user"
-            type="com.smapl_android.model.UserInfo" />
+            type="com.smapl_android.model.UserInfoViewModel" />
 
         <variable
             name="presenter"
@@ -91,11 +91,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/text_set_car_name"
                 android:layout_below="@id/text_set_car_name"
-                android:text="@{user.carBrandModel}"
+                android:text="@{user.carBrand + ' ' + user.carModel}"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/car_brand_model_profile_size" />
 
-            <EditText
+           <!-- <EditText
                 android:id="@+id/edit_set_car_brand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,13 +107,39 @@
                 android:text="@{user.carBrand}"
                 android:paddingTop="@dimen/edit_password_edit_padding_top"
                 android:textSize="@dimen/core_text_size"
-                android:textColorHint="@android:color/white" />
+                android:textColorHint="@android:color/white" />-->
+
+            <LinearLayout
+                android:id="@+id/linear_set_car_brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_line_background"
+                android:paddingTop="@dimen/edit_password_edit_padding_top"
+                android:layout_below="@id/img_circle_set_car_photo"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hint_car_brand"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/core_text_size" />
+
+                <Spinner
+                    android:id="@+id/spinner_set_car_brand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:entries="@array/car_brand"></Spinner>
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/edit_set_car_model"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edit_set_car_brand"
+                android:layout_below="@id/linear_set_car_brand"
                 android:addTextChangedListener="@{user.carModelTextWatcher}"
                 android:background="@drawable/edit_text_line_background"
                 android:hint="@string/hint_car_model"
@@ -132,7 +158,7 @@
                 android:hint="@string/hint_car_year_issue"
                 android:inputType="number"
                 android:maxLength="4"
-                android:text="@{user.carYear}"
+                android:text="@{user.carYearOfIssue}"
                 android:paddingTop="@dimen/edit_password_edit_padding_top"
                 android:textSize="@dimen/core_text_size"
                 android:textColorHint="@android:color/white" />
@@ -146,7 +172,7 @@
                 android:addTextChangedListener="@{user.carColorTextWatcher}"
                 android:background="@drawable/edit_text_line_background"
                 android:hint="@string/hint_car_color"
-                android:text="@{user.carColor}"
+                android:text="@{user.color}"
                 android:textSize="@dimen/core_text_size"
                 android:textColorHint="@android:color/white" />
 

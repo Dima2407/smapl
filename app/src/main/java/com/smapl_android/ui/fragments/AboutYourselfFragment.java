@@ -1,5 +1,6 @@
 package com.smapl_android.ui.fragments;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -65,24 +67,23 @@ public class AboutYourselfFragment extends BaseFragment {
     }
 
     private void registration() {
-        String phoneNumber = getArguments().getString("phoneNumber");
-        String password = getArguments().getString("password");
 
-        try {
-            validation();
-        } catch (ValidationException e) {
-            showMessage(getString(R.string.app_name), e.getMessage());
+        hideKeyboard();
+
+        if (!validation()) {
+            showMessage(getString(R.string.app_name), getString(R.string.fill_all_fields));
             return;
         }
+
+        String phoneNumber = getArguments().getString("phoneNumber");
+        String password = getArguments().getString("password");
 
         user.phone.set(phoneNumber);
         user.password.set(password);
         user.gender.set(gender.getCheckedRadioButtonId() == R.id.radio_about_yourself_man);
         user.age.set(age.getSelectedItem().toString());
         user.carBrand.set(carBrand.getSelectedItem().toString());
-        final String yearStr = carYearOfIssue.getText().toString();
-        //   if(!TextUtils.isEmpty(yearStr))
-        user.carYearOfIssue.set(yearStr);
+        user.carYearOfIssue.set(carYearOfIssue.getText().toString());
         user.color.set(carColor.getSelectedItem().toString());
 
         LoadCarPhotoFragment loadCarPhotoFragment = new LoadCarPhotoFragment();
@@ -98,23 +99,39 @@ public class AboutYourselfFragment extends BaseFragment {
 
     }
 
-    private void validation() throws ValidationException {
+    private boolean validation() {
 
-        if (!Validators.getNameValidator(getContext()).validate(name.getText().toString())) {
-            name.setError(getString(R.string.error_empty_name));
+        boolean isValidate = true;
+
+        try {
+            Validators.getNameValidator(getContext()).validate(name.getText().toString());
+        } catch (ValidationException e) {
+            name.setError(e.getMessage());
+            isValidate = false;
         }
 
-        if (!Validators.getEmailValidator(getContext()).validate(email.getText().toString())) {
-            email.setError(getString(R.string.error_incorrect_email));
+        try {
+            Validators.getEmailValidator(getContext()).validate(email.getText().toString());
+        } catch (ValidationException e) {
+            email.setError(e.getMessage());
+            isValidate = false;
         }
 
-        if (!Validators.getCarModelValidator(getContext()).validate(carModel.getText().toString())) {
-            carModel.setError(getString(R.string.error_empty_car_model));
+        try {
+            Validators.getCarModelValidator(getContext()).validate(carModel.getText().toString());
+        } catch (ValidationException e) {
+            carModel.setError(e.getMessage());
+            isValidate = false;
         }
 
-        if (!Validators.getCarYearValidator(getContext()).validate(carYearOfIssue.getText().toString())) {
-            carYearOfIssue.setError(getString(R.string.error_incorrect_car_year));
+        try {
+           Validators.getCarYearValidator(getContext()).validate(carYearOfIssue.getText().toString());
+        } catch (ValidationException e) {
+            carYearOfIssue.setError(e.getMessage());
+            isValidate = false;
         }
+
+        return isValidate;
     }
 
     public class Presenter {
