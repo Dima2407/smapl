@@ -109,7 +109,14 @@ public class SetCarFragment extends BaseFragment {
             try {
                 Validators.getCarYearValidator(getContext()).validate(carYear.getText().toString());
             } catch (ValidationException e) {
-                showMessage(getString(R.string.app_name), getString(R.string.error_incorrect_car_year));
+                showMessage(getString(R.string.app_name), e.getMessage());
+                return;
+            }
+
+            try {
+                Validators.getCarModelValidator(getContext()).validate(user.carModel.get());
+            } catch (ValidationException e) {
+                showMessage(getString(R.string.app_name), e.getMessage());
                 return;
             }
 
