@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.smapl_android.model.UserInfoViewModel" />
+
+        <variable
+            name="presenter"
+            type="com.smapl_android.ui.fragments.AboutMeFragment.Presenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_about_me_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="@{() -> presenter.onClickBack()}"
+                android:text="@string/back"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_menu_bottom_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@android:color/transparent"
+                android:paddingTop="14dp"
+                android:text="@string/change_password_password"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_menu_bottom_size" />
+
+            <Button
+                android:id="@+id/btn_about_me_forward"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="@{() -> presenter.onClickForward()}"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_menu_bottom_size" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_circle_about_me_photo"
+                android:layout_width="@dimen/image_car_circle_size"
+                android:layout_height="@dimen/image_car_circle_size"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/audi" />
+
+            <TextView
+                android:id="@+id/text_about_me_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_toRightOf="@id/img_circle_about_me_photo"
+                android:text="@{user.oldName}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/name_profile_size" />
+
+            <TextView
+                android:id="@+id/text_about_me_car_brand_model"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/text_about_me_name"
+                android:layout_below="@id/text_about_me_name"
+                android:text="@{user.carBrand + ' ' + user.carModel}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/car_brand_model_profile_size" />
+
+            <EditText
+                android:id="@+id/edit_about_me_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img_circle_about_me_photo"
+                android:layout_marginTop="50dp"
+                android:drawableRight="@{user.phoneValid}"
+                android:addTextChangedListener="@{user.phoneTextWatcher}"
+                android:background="@drawable/edit_text_line_background"
+                android:hint="@{@string/hint_phone + ' ' + user.oldPhone}"
+                android:paddingTop="@dimen/edit_password_edit_padding_top"
+                android:text="@{user.phone}"
+                android:textColorHint="@android:color/white"
+                android:textSize="@dimen/core_text_size" />
+
+            <EditText
+                android:id="@+id/edit_about_me_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_about_me_phone"
+                android:addTextChangedListener="@{user.nameTextWatcher}"
+                android:background="@drawable/edit_text_line_background"
+                android:hint="@{@string/hint_name + ' ' + user.oldName}"
+                android:paddingTop="@dimen/edit_password_edit_padding_top"
+                android:text="@{user.name}"
+                android:textColorHint="@android:color/white"
+                android:textSize="@dimen/core_text_size" />
+
+            <EditText
+                android:id="@+id/edit_about_me_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_about_me_name"
+                android:background="@drawable/edit_text_line_background"
+                android:hint="@string/gender"
+                android:paddingTop="@dimen/edit_password_edit_padding_top"
+                android:textColorHint="@android:color/white"
+                android:textSize="@dimen/core_text_size" />
+
+            <EditText
+                android:id="@+id/edit_about_me_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_about_me_gender"
+                android:background="@drawable/edit_text_line_background"
+                android:hint="@string/age"
+                android:paddingTop="@dimen/edit_password_edit_padding_top"
+                android:textColorHint="@android:color/white"
+                android:textSize="@dimen/core_text_size" />
+
+            <EditText
+                android:id="@+id/edit_about_me_interests"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edit_about_me_age"
+                android:addTextChangedListener="@{user.interestsTextWatcher}"
+                android:background="@drawable/edit_text_line_background"
+                android:hint="@{user.oldInterests != null ? @string/hint_about_me_interests + ' ' + user.oldInterests : @string/hint_interests}"
+                android:paddingTop="@dimen/edit_password_edit_padding_top"
+                android:text="@{user.interests}"
+                android:textColorHint="@android:color/white"
+                android:textSize="@dimen/core_text_size" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</layout>

@@ -3,18 +3,22 @@ package com.smapl_android.ui.fragments;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import com.smapl_android.R;
 import com.smapl_android.databinding.FragmentLoginBinding;
+import com.smapl_android.ui.activities.AuthActivity;
 import com.smapl_android.ui.base.BaseFragment;
 
 
 public class LoginFragment extends BaseFragment {
 
+    public static final String TAG = LoginFragment.class.getSimpleName();
     private RelativeLayout layoutContent;
     private LoginMiniFragment loginMiniFragment;
     private RegistrationFragment registrationFragment;
@@ -37,24 +41,17 @@ public class LoginFragment extends BaseFragment {
         registrationFragment = new RegistrationFragment();
 
         getActivity().getSupportFragmentManager().beginTransaction()
-                .add(layoutContent.getId(), loginMiniFragment)
+                .add(layoutContent.getId(), loginMiniFragment, LoginMiniFragment.TAG)
                 .commit();
-
     }
-
 
     public class Presenter {
         public void onLoginClicked() {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(layoutContent.getId(), loginMiniFragment)
-                    .commit();
+            getCoreActivity().replaceContentWithHistoryWithTag(layoutContent.getId(), loginMiniFragment, LoginMiniFragment.TAG);
         }
 
         public void onRegistrationClicked() {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(layoutContent.getId(), registrationFragment)
-                    .addToBackStack(null)
-                    .commit();
+            getCoreActivity().replaceContentWithHistoryWithTag(layoutContent.getId(), registrationFragment, RegistrationFragment.TAG);
         }
     }
 }

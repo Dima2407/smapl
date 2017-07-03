@@ -1,20 +1,20 @@
 <resources>
     <string name="app_name">smapl-android</string>
-    <string name="error_empty_login">Login can\'t be empty</string>
-    <string name="error_empty_password">Password can\'t be empty</string>
+    <string name="error_empty_login">Вы не ввели логин</string>
+    <string name="error_empty_password">Вы не ввели пароль</string>
     <string name="login">Войти</string>
     <string name="wait_login">Waiting!</string>
-    <string name="error_empty_phone_number">Phone number can\'t be empty</string>
-    <string name="error_wrong_phone_number">Wrong phone number</string>
-    <string name="error_phone_number_short">The phone number is too short</string>
-    <string name="error_password_short">The password is too short</string>
+    <string name="error_empty_phone_number">Вы не ввели номер телефона</string>
+    <string name="error_wrong_phone_number">Вы ввели некорректный номер телефона</string>
+    <string name="error_phone_number_short">Вы ввели короткий номер</string>
+    <string name="error_password_short">Вы ввели слишком короткий пароль</string>
     <string name="registration">Зарегистрироваться</string>
     <string name="cancel">cancel</string>
     <string name="forward">forward</string>
     <string name="name">Имя</string>
     <string name="gender">Пол</string>
-    <string name="car_model">Модель машины</string>
-    <string name="car_year_of_issue">Год выпуска</string>
+    <string name="car_model">Модель авто</string>
+    <string name="car_year_of_issue">Год выпуска авто</string>
     <string name="load_car_photo">Загрузите фото вашего автомобиля</string>
     <string name="skip">Пропустить</string>
     <string name="back">Назад</string>
@@ -38,8 +38,8 @@
     <string name="hint_car_brand">Марка авто</string>
     <string name="hint_car_model">Модель авто</string>
     <string name="hint_car_year_issue">Год выпуска</string>
-    <string name="hint_car_color">Цвет машины</string>
-    <string name="change_password_password">Пароль</string>
+    <string name="hint_car_color">Цвет</string>
+    <string name="change_password_password">Обо мне</string>
     <string name="hint_old_password">Старый пароль</string>
     <string name="hint_new_password">Новый пароль</string>
     <string name="save">Сохранить</string>
@@ -48,6 +48,25 @@
     <string name="btn_login_facebook">Войти через Facebook</string>
     <string name="facebook_app_id">137649426800650</string>
     <string name="fb_login_protocol_scheme">fb1690647591244835</string>
+    <string name="text_about_yourself">Заполните информацию о себе</string>
+    <string name="text_about_yourself_age">Возраст(выбор из диапазона)</string>
+    <string name="text_about_yourself_car_brand">Марка авто</string>
+    <string name="text_about_yourself_car_color">Цвет авто</string>
+    <string name="text_about_yourself_menu">Обо мне</string>
+    <string name="error_empty_name">Введите имя</string>
+    <string name="error_empty_email">Введите e-mail</string>
+    <string name="error_incorrect_email">Вы ввели некорректный e-mail</string>
+    <string name="error_empty_car_model">Введите модель автомобиля</string>
+    <string name="error_empty_car_year">Введите год выпуска автомобиля</string>
+    <string name="error_incorrect_car_year">Вы ввели некорректный год выпуска автомобиля</string>
+    <string name="logout">Выйти из аккаунта</string>
+    <string name="hint_phone">Телефон:</string>
+    <string name="hint_name">Имя:</string>
+    <string name="hint_about_me_interests">Интересы:</string>
+    <string name="age">Возраст</string>
+    <string name="about_me">Обо мне</string>
+    <string name="about_me_no_changes">Вы не внесли никаких изменений</string>
+    <string name="fill_all_fields">Вы заполнили не все поля</string>
 
     <string-array name="age">
         <item>18</item>

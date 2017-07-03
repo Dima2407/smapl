@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import com.smapl_android.R;
 import com.smapl_android.ui.base.CoreActivity;
+import com.smapl_android.ui.fragments.AboutYourselfFragment;
+import com.smapl_android.ui.fragments.LoadCarPhotoFragment;
 import com.smapl_android.ui.fragments.LoginFragment;
 
 public class AuthActivity extends CoreActivity {
@@ -37,6 +39,21 @@ public class AuthActivity extends CoreActivity {
 
     private void showLogin() {
         Fragment fragment = new LoginFragment();
-        replaceContent(fragment);
+        replaceContentWithTag(fragment, LoginFragment.TAG);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        final AboutYourselfFragment aboutFragment = (AboutYourselfFragment) getSupportFragmentManager().findFragmentByTag(AboutYourselfFragment.TAG);
+        final LoadCarPhotoFragment loadCarPhotoFragment = (LoadCarPhotoFragment) getSupportFragmentManager().findFragmentByTag(LoadCarPhotoFragment.TAG);
+
+        if ((aboutFragment == null || (aboutFragment != null && !aboutFragment.isVisible()))
+                && (loadCarPhotoFragment == null || (loadCarPhotoFragment != null && !loadCarPhotoFragment.isVisible()))) {
+
+            finish();
+
+        } else
+            super.onBackPressed();
     }
 }

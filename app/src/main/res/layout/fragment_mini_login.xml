@@ -22,39 +22,65 @@
         <RelativeLayout
             android:id="@+id/login_body"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/login_white_shape_hight"
+            android:layout_marginTop="33dp"
             android:background="@drawable/login_background_white_shape"
-            android:paddingLeft="13dp"
-            android:paddingRight="13dp"
-            android:paddingTop="20dp">
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
-
-            <EditText
-                android:id="@+id/edit_login"
+            <RelativeLayout
+                android:id="@+id/layout_login_login"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_login_height"
-                android:background="@drawable/edit_text_background"
-                android:drawableLeft="@drawable/vector_smart_object_6"
-                android:drawablePadding="10dp"
-                android:drawableRight="@{user.phoneValid}"
-                android:hint="@string/input_phone"
-                android:inputType="phone"
-                android:paddingLeft="6dp"
-                android:text="@{user.phone}"
-                android:textSize="@dimen/core_text_size"
-                app:addTextChangedListener="@{user.phoneTextWatcher}" />
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/img_edit_login_login_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/edit_text_blue_rectan_bg" />
+
+                <EditText
+                    android:id="@+id/edit_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_login_height"
+                    android:layout_marginLeft="@dimen/edit_login_registr_margin_left"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableLeft="@drawable/vector_smart_object_6"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@{user.phoneValid}"
+                    android:hint="@string/input_phone"
+                    android:inputType="phone"
+                    android:paddingLeft="6dp"
+                    android:text="@{user.phone}"
+                    android:textSize="@dimen/core_text_size"
+                    app:addTextChangedListener="@{user.phoneTextWatcher}" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_login_height"
+                android:layout_marginTop="42dp"
+                android:layout_below="@id/layout_login_login">
+
+                <ImageView
+                    android:id="@+id/img_edit_login_password_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/edit_text_blue_rectan_bg" />
 
             <EditText
                 android:id="@+id/edit_password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_login_height"
-                android:layout_below="@id/edit_login"
-                android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableLeft="@drawable/vector_smart_object_7"
                 android:drawablePadding="10dp"
                 android:drawableRight="@{user.passwordValid}"
                 android:hint="@string/input_password"
+                android:layout_marginLeft="@dimen/edit_login_registr_margin_left"
                 android:imeOptions="actionSend"
                 android:inputType="textPassword"
                 android:paddingLeft="6dp"
@@ -63,15 +89,17 @@
                 android:textSize="@dimen/core_text_size"
                 app:addTextChangedListener="@{user.passwordTextWatcher}" />
 
+                </RelativeLayout>
+
 
             <Button
                 android:id="@+id/btn_login_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/edit_password"
+                android:layout_below="@id/layout_login_password"
                 android:layout_marginBottom="2dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="19dp"
                 android:background="@android:color/transparent"
                 android:text="@string/forgot_password"
                 android:textAllCaps="false"
@@ -88,8 +116,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-30dp"
             android:background="@android:color/transparent"
-            android:scaleType="centerCrop"
             android:onClick="@{() -> presenter.onLoginClicked(user)}"
+            android:scaleType="centerCrop"
             android:src="@drawable/button_send" />
 
         <RelativeLayout
@@ -97,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_below="@id/btn_login_forward"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="58dp">
 
 
             <TextView
@@ -107,19 +135,21 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/or"
                 android:textColor="@color/text_color_or"
-                android:textSize="20dp" />
+                android:textSize="@dimen/core_text_size" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="11dp"
                 android:layout_toLeftOf="@id/text_login_or"
                 android:src="@drawable/edit_text_line_background" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="11dp"
                 android:layout_toRightOf="@id/text_login_or"
                 android:src="@drawable/edit_text_line_background" />
 
@@ -127,18 +157,18 @@
 
         <Button
             android:id="@+id/btn_login_facebook"
-            android:layout_below="@id/layaut_login_container"
-            android:text="@string/btn_login_facebook"
-            android:textSize="@dimen/core_text_size"
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_facebook_hight"
-            android:layout_marginTop="15dp"
+            android:layout_below="@id/layaut_login_container"
+            android:layout_marginBottom="@dimen/btn_facebook_margin_bottom"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="@dimen/btn_facebook_margin_top"
+            android:background="@drawable/btn_facebook_shape"
+            android:text="@string/btn_login_facebook"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:background="@drawable/btn_facebook_shape"
-            />
+            android:textSize="@dimen/core_text_size" />
 
     </RelativeLayout>
 

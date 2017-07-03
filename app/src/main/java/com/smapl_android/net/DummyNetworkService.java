@@ -1,6 +1,8 @@
 package com.smapl_android.net;
 
 import com.smapl_android.model.User;
+import com.smapl_android.model.UserInfoViewModel;
+import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
 
@@ -38,7 +40,7 @@ class DummyNetworkService implements NetworkService{
     @Override
     public void login(final String mobileNumber, final String password,
                       final OnResultCallback<LoginResponse, Throwable> callback) {
-        new Thread(new Runnable() {
+       /* new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -69,12 +71,12 @@ class DummyNetworkService implements NetworkService{
                     e.printStackTrace();
                 }
             }
-        }).start();
+        }).start();*/
     }
 
     @Override
-    public void registration(User user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
-        final String phoneNumber = user.getPhoneNumber();
+    public void registration(UserInfoViewModel user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
+        /*final String phoneNumber = user.getPhoneNumber();
         final String password = user.getPassword();
 
         new Thread(new Runnable() {
@@ -103,7 +105,7 @@ class DummyNetworkService implements NetworkService{
                     e.printStackTrace();
                 }
             }
-        }).start();
+        }).start();*/
     }
 
     @Override
@@ -232,26 +234,10 @@ class DummyNetworkService implements NetworkService{
     }
 
     @Override
-    public void editProfile(final String phone, String name, String gender, final Integer age, String hobby,
-                            final OnResultCallback<EditProfileResponse, Throwable> callback) {
-        final EditProfileResponse response = new EditProfileResponse();
-        response.setMessage("Everything is OK");
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                    if (phone.length() != 0 && age != null) {
-                        callback.onResult(response, null);
-                    } else callback.onResult(null, new Exception("Something went wrong"));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+    public void editProfile(int userId, String token, EditProfileRequest request, OnResultCallback<EditProfileResponse, Throwable> callback) {
 
     }
+
 
     @Override
     public void getLastMessages(final OnResultCallback<GetLastMessagesResponse, Throwable> callback) {
@@ -327,12 +313,17 @@ class DummyNetworkService implements NetworkService{
     }
 
     @Override
-    public void getUserById(int id, String token, OnResultCallback<UserResponse, Throwable> callback) {
+    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<Boolean, Throwable> callback) {
 
     }
 
     @Override
-    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<UpdateCarResponse, Throwable> callback) {
+    public void getUserById(int id, String token, OnResultCallback<UserResponse, Throwable> callback) {
 
     }
+
+  /*  @Override
+    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<UpdateCarResponse, Throwable> callback) {
+
+    }*/
 }

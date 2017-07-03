@@ -9,77 +9,82 @@
             type="com.smapl_android.ui.fragments.LoginFragment.Presenter" />
     </data>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white">
-
-        <ImageView
-            android:id="@+id/img_login_logotip"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/logotip" />
-
-        <LinearLayout
-            android:id="@+id/linear_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/img_login_logotip"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <RadioButton
-                    android:id="@+id/btn_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:button="@android:color/transparent"
-                    android:drawableBottom="@drawable/btn_auth_indicator"
-                    android:onClick="@{() -> presenter.onLoginClicked()}"
-                    android:text="@string/login"
-                    android:checked="true"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/btn_auth_text"
-                    android:textSize="@dimen/core_text_size" />
-
-                <RadioButton
-                    android:id="@+id/btn_go_to_registration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:button="@android:color/transparent"
-                    android:drawableBottom="@drawable/btn_auth_indicator"
-                    android:onClick="@{() -> presenter.onRegistrationClicked()}"
-                    android:text="@string/registration"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/btn_auth_text"
-                    android:textSize="@dimen/core_text_size" />
-
-            </RadioGroup>
-
-        </LinearLayout>
+        android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:id="@+id/relative_login_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/linear_buttons"
-            android:background="@color/grey"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="33dp">
+            android:background="@android:color/white">
 
+            <ImageView
+                android:id="@+id/img_login_logotip"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/login_logotip_hight"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/logotip" />
+
+            <LinearLayout
+                android:id="@+id/linear_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/img_login_logotip"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioButton
+                        android:id="@+id/btn_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:button="@android:color/transparent"
+                        android:checked="true"
+                        android:drawableBottom="@drawable/btn_auth_indicator"
+                        android:onClick="@{() -> presenter.onLoginClicked()}"
+                        android:text="@string/login"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/btn_auth_text"
+                        android:textSize="@dimen/core_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/btn_go_to_registration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:button="@android:color/transparent"
+                        android:drawableBottom="@drawable/btn_auth_indicator"
+                        android:onClick="@{() -> presenter.onRegistrationClicked()}"
+                        android:text="@string/registration"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/btn_auth_text"
+                        android:textSize="@dimen/core_text_size" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_login_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/linear_buttons"
+                android:background="@color/grey"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="33dp">
+
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
+    </ScrollView>
 </layout>

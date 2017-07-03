@@ -1,9 +1,13 @@
 package com.smapl_android.net;
 
+import com.smapl_android.model.UserRequestBody;
+import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.requests.LoginRequest;
 import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
+
+import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -23,13 +27,17 @@ public interface ApiService {
     Call<UserResponse> getUserById(@Path("id") int id, @Query("access_token") String token);
 
     @PATCH("api/user/edit/car/{id}")
-    Call<UpdateCarResponse> updateCar(@Path("id") int userId, @Query("access_token") String token, @Body UpdateCarRequest updateUserRequest);
+    Call<ResponseBody> updateCar(@Path("id") int userId, @Query("access_token") String token, @Body UpdateCarRequest updateUserRequest);
 
     @POST("api/user/change-password")
     @FormUrlEncoded
     Call<ResponseBody> editPassword(@Query("access_token") String token,
                                     @Field("oldPassword") String oldPassword,
                                     @Field("newPassword") String newPassword);
+
+    @POST("api/user/update")
+    Call<EditProfileResponse> editProfile(@Query("where") String where, @Query("access_token") String token, @Body EditProfileRequest editProfileRequest);
+
 
 
     @POST("api/restore")
@@ -48,16 +56,6 @@ public interface ApiService {
     @GET("api/history/company_id")
     @Headers("api_key: " + API_KEY)
     Call<GetCompanyHistoryResponse> getCompanyHistory();
-
-    @POST("api/edit/profile/userId")
-    @FormUrlEncoded
-    @Headers("api_key: " + API_KEY)
-    Call<EditProfileResponse> editProfile(@Query("phone") String phone,
-                                          @Query("name") String name,
-                                          @Query("gender") String gender,
-                                          @Query("age") Integer age,
-                                          @Query("hobby") String hobby);
-
 
     @GET("api/messages/last/user_id")
     @Headers("api_key: " + API_KEY)

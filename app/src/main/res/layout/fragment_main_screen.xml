@@ -1,45 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/img_smapl_background">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="presenter"
+            type="com.smapl_android.ui.fragments.MainScreenFragment.Presenter" />
+    </data>
 
     <LinearLayout
-        android:id="@+id/linear_main_screen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="6">
+        android:layout_height="match_parent"
+        android:background="@drawable/img_smapl_background"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linear_main_screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="@drawable/vector_smart_object_61"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+
+                <ImageView
+                    android:id="@+id/img_main_screen_triangle_1"
+                    android:layout_width="110dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/indicator_triangle_blue"
+                    android:visibility="gone"
+                    android:rotation="180"/>
+
+                <ImageView
+                    android:id="@+id/img_main_screen_triangle_2"
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/indicator_triangle_blue"
+                    android:visibility="gone"
+                    android:rotation="180"/>
+
+                <ImageView
+                    android:id="@+id/img_main_screen_triangle_3"
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:layout_marginRight="5dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/indicator_triangle_blue"
+                    android:rotation="180"/>
+
+
+            </RelativeLayout>
+
+            <RadioGroup
+                android:id="@+id/tab_layout_main_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/tab_item_main_screen_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/menu_below_item_margin_bottom"
+                    android:layout_marginLeft="40dp"
+                    android:button="@android:color/transparent"
+                    android:drawablePadding="@dimen/menu_below_item_drawable_padding"
+                    android:drawableTop="@drawable/vector_smart_object_12"
+                    android:onClick="@{() -> presenter.onNewsClicked()}"
+                    android:paddingTop="@dimen/menu_below_item_padding_top"
+                    android:text="Новости"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_menu_below_size" />
+
+                <RadioButton
+                    android:id="@+id/tab_item_main_screen_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/menu_below_item_margin_bottom"
+                    android:layout_marginLeft="87dp"
+                    android:button="@android:color/transparent"
+                    android:drawablePadding="@dimen/menu_below_item_drawable_padding"
+                    android:drawableTop="@drawable/icon_map"
+                    android:onClick="@{() -> presenter.onMapClicked()}"
+                    android:paddingTop="@dimen/menu_below_item_padding_top"
+                    android:text="Карта"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_menu_below_size" />
+
+                <RadioButton
+                    android:id="@+id/tab_item_main_screen_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/menu_below_item_margin_bottom"
+                    android:layout_marginLeft="87dp"
+                    android:button="@android:color/transparent"
+                    android:drawablePadding="@dimen/menu_below_item_drawable_padding"
+                    android:drawableTop="@drawable/vector_smart_object"
+                    android:onClick="@{() -> presenter.onProfileClicked()}"
+                    android:paddingTop="@dimen/menu_below_item_padding_top"
+                    android:text="Профиль"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_menu_below_size" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
     </LinearLayout>
-
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout_main_screen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@color/colorPrimaryDark"
-        >
-
-        <android.support.design.widget.TabItem
-            android:id="@+id/tab_item_main_screen_news"
-            android:text="Новости"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <android.support.design.widget.TabItem
-            android:id="@+id/tab_item_main_screen_map"
-            android:text="Карта"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <android.support.design.widget.TabItem
-            android:id="@+id/tab_item_main_screen_profile"
-            android:text="Профиль"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </android.support.design.widget.TabLayout>
-
-
-</LinearLayout>
+</layout>

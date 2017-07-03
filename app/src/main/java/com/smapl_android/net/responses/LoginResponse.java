@@ -5,63 +5,50 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
 
-    @SerializedName("result")
-    private Result result;
+    @SerializedName("id")
+    private String id;
 
-    public static class Result {
+    @SerializedName("ttl")
+    private Integer ttl;
 
-        @SerializedName("id")
-        private String id;
+    @SerializedName("created")
+    private String created;
 
-        @SerializedName("ttl")
-        private Integer ttl;
+    @SerializedName("userId")
+    private int userId;
 
-        @SerializedName("created")
-        private String created;
-
-        @SerializedName("userId")
-        private int userId;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public Integer getTtl() {
-            return ttl;
-        }
-
-        public void setTtl(Integer ttl) {
-            this.ttl = ttl;
-        }
-
-        public String getCreated() {
-            return created;
-        }
-
-        public void setCreated(String created) {
-            this.created = created;
-        }
-
-        public int getUserId() {
-            return userId;
-        }
-
-        public void setUserId(int userId) {
-            this.userId = userId;
-        }
+    public String getId() {
+        return id;
     }
 
-    public Result getResult() {
-        return result;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setResult(Result result) {
-        this.result = result;
+    public Integer getTtl() {
+        return ttl;
     }
+
+    public void setTtl(Integer ttl) {
+        this.ttl = ttl;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
 }
 
 

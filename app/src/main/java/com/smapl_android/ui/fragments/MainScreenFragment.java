@@ -1,32 +1,34 @@
 package com.smapl_android.ui.fragments;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.smapl_android.R;
+import com.smapl_android.databinding.FragmentMainScreenBinding;
 import com.smapl_android.model.User;
 import com.smapl_android.ui.base.BaseFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainScreenFragment extends BaseFragment {
 
     private static final String TAG = MainScreenFragment.class.getSimpleName();
     private LinearLayout linearContent;
-    private List<BaseFragment> fragmentsTabItems;
-    private TabLayout tabLayout;
+    private ImageView imageItem1;
+    private ImageView imageItem2;
+    private ImageView imageItem3;
     private User user;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main_screen, container, false);
+        FragmentMainScreenBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_screen, container, false);
+        binding.setPresenter(new Presenter());
+        return binding.getRoot();
     }
 
     @Override
@@ -35,40 +37,36 @@ public class MainScreenFragment extends BaseFragment {
 
         linearContent = (LinearLayout) view.findViewById(R.id.linear_main_screen);
 
-        fragmentsTabItems = new ArrayList<>();
-
-        fragmentsTabItems.add(new NewsFragment());
-        fragmentsTabItems.add(new MapFragment());
-        fragmentsTabItems.add(new ProfileFragment());
-
-        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_main_screen);      
-
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .add(linearContent.getId(), fragmentsTabItems.get(0))
-                .commit();        
-        
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                setFragment(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-        
+        imageItem1 = (ImageView) view.findViewById(R.id.img_main_screen_triangle_1);
+        imageItem2 = (ImageView) view.findViewById(R.id.img_main_screen_triangle_2);
+        imageItem3 = (ImageView) view.findViewById(R.id.img_main_screen_triangle_3);
     }
 
-    private void setFragment(int position) {
-        getCoreActivity().replaceContentWithHistory(
-                fragmentsTabItems.get(position)
-        );
+
+
+    public class Presenter{
+
+
+        public void onNewsClicked(){
+            imageItem1.setVisibility(View.VISIBLE);
+            imageItem2.setVisibility(View.GONE);
+            imageItem3.setVisibility(View.GONE);
+            getCoreActivity().replaceContent(linearContent.getId(), new NewsFragment());
+        }
+
+        public void onMapClicked(){
+            imageItem1.setVisibility(View.GONE);
+            imageItem2.setVisibility(View.VISIBLE);
+            imageItem3.setVisibility(View.GONE);
+            getCoreActivity().replaceContent(linearContent.getId(), new MapFragment());
+        }
+
+        public void onProfileClicked(){
+            imageItem1.setVisibility(View.GONE);
+            imageItem2.setVisibility(View.GONE);
+            imageItem3.setVisibility(View.VISIBLE);
+            getCoreActivity().replaceContent(linearContent.getId(), new ProfileFragment());
+        }
+
     }
 }
