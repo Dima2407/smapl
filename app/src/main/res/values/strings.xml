@@ -66,7 +66,12 @@
     <string name="age">Возраст</string>
     <string name="about_me">Обо мне</string>
     <string name="about_me_no_changes">Вы не внесли никаких изменений</string>
-    <string name="fill_all_fields">Вы заполнили не все поля</string>
+    <string name="fill_all_fields">Вы заполнили не все обязательные поля</string>
+    <string name="changes_saved">Изменения сохранены</string>
+    <string name="password_changed">Новый пароль сохранен</string>
+    <string name="man">мужчина</string>
+    <string name="woman">женщина</string>
+    <string name="wrong_age">Некорректный возраст</string>
 
     <string-array name="age">
         <item>18</item>

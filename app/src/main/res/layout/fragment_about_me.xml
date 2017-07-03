@@ -100,10 +100,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/img_circle_about_me_photo"
                 android:layout_marginTop="50dp"
-                android:drawableRight="@{user.phoneValid}"
                 android:addTextChangedListener="@{user.phoneTextWatcher}"
                 android:background="@drawable/edit_text_line_background"
+                android:drawableRight="@{user.phoneValid}"
                 android:hint="@{@string/hint_phone + ' ' + user.oldPhone}"
+                android:inputType="phone"
                 android:paddingTop="@dimen/edit_password_edit_padding_top"
                 android:text="@{user.phone}"
                 android:textColorHint="@android:color/white"
@@ -122,25 +123,62 @@
                 android:textColorHint="@android:color/white"
                 android:textSize="@dimen/core_text_size" />
 
-            <EditText
-                android:id="@+id/edit_about_me_gender"
+            <RadioGroup
+                android:id="@+id/radio_group_about_me_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/edit_about_me_name"
                 android:background="@drawable/edit_text_line_background"
-                android:hint="@string/gender"
-                android:paddingTop="@dimen/edit_password_edit_padding_top"
-                android:textColorHint="@android:color/white"
-                android:textSize="@dimen/core_text_size" />
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/edit_password_edit_padding_top">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/core_text_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/man"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/core_text_size" />
+
+                <RadioButton
+                    android:id="@+id/radio_about_me_man"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/woman"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/core_text_size" />
+
+                <RadioButton
+                    android:id="@+id/radio_about_me_woman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RadioGroup>
 
             <EditText
                 android:id="@+id/edit_about_me_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edit_about_me_gender"
+                android:layout_below="@id/radio_group_about_me_gender"
+                android:addTextChangedListener="@{user.ageTextWatcher}"
                 android:background="@drawable/edit_text_line_background"
-                android:hint="@string/age"
+                android:hint="@{user.oldAge != null ? @string/age + ' ' + user.oldAge : @string/age}"
+                android:inputType="number"
+                android:maxLength="3"
                 android:paddingTop="@dimen/edit_password_edit_padding_top"
+                android:text="@{user.age}"
                 android:textColorHint="@android:color/white"
                 android:textSize="@dimen/core_text_size" />
 

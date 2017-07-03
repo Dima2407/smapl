@@ -8,10 +8,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
+import com.smapl_android.core.validation.ValidationException;
+import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentAboutMeBinding;
 import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.requests.EditProfileRequest;
@@ -19,10 +23,17 @@ import com.smapl_android.net.responses.EditProfileResponse;
 import com.smapl_android.net.responses.UserResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
+import static com.smapl_android.R.string.email;
+
 public class AboutMeFragment extends BaseFragment {
 
     private static final String TAG = AboutMeFragment.class.getSimpleName();
+    private static final String GENDER_MAN = "man";
+    private static final String GENDER_WOMAN = "woman";
+
     private UserInfoViewModel user;
+    private RadioGroup gender;
+
 
     @Nullable
     @Override
@@ -53,13 +64,39 @@ public class AboutMeFragment extends BaseFragment {
                 .getUser(request);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        gender = (RadioGroup) view.findViewById(R.id.radio_group_about_me_gender);
+    }
+
     private void save() {
 
         if (TextUtils.isEmpty(user.name.get()) && TextUtils.isEmpty(user.phone.get()) && TextUtils.isEmpty(user.interests.get())
-                && TextUtils.isEmpty(user.age.get())/* && TextUtils.isEmpty(user.gender.get())*/) {
+                /*&& TextUtils.isEmpty(user.age.get())*/ /*&& gender.getCheckedRadioButtonId() < 0*/) {
             showMessage(getString(R.string.app_name), getString(R.string.about_me_no_changes));
             return;
         }
+
+        if (!TextUtils.isEmpty(user.phone.get())) {
+            try {
+                Validators.getPhoneValidator(getContext()).validate(user.phone.get());
+            } catch (ValidationException e) {
+                showMessage(getString(R.string.app_name), e.getMessage());
+                return;
+            }
+        }
+
+        if (!TextUtils.isEmpty(user.age.get())){
+            if (Integer.valueOf(user.age.get()) < 18 || Integer.valueOf(user.age.get()) > 110) {
+                showMessage(getString(R.string.app_name), getString(R.string.wrong_age));
+                return;
+            }
+        }
+
+        if (gender.getCheckedRadioButtonId() >= 0)
+            user.gender.set(gender.getCheckedRadioButtonId() == R.id.radio_about_me_man ? GENDER_MAN : GENDER_WOMAN);
 
         final EditProfileRequest editProfileRequest = user.toEditProfileRequest();
 
@@ -72,8 +109,8 @@ public class AboutMeFragment extends BaseFragment {
                     @Override
                     public void onSuccess(EditProfileResponse result) {
                         if (result.getCount() > 0) {
+                            showMessage(getString(R.string.app_name), getString(R.string.changes_saved));
                             getActivity().onBackPressed();
-                            Log.i(TAG, "onSucces, result = " + result.getCount());
                         }
                     }
                 });
@@ -84,10 +121,12 @@ public class AboutMeFragment extends BaseFragment {
     public class Presenter {
 
         public void onClickForward() {
+            hideKeyboard();
             save();
         }
 
         public void onClickBack() {
+            hideKeyboard();
             getActivity().onBackPressed();
         }
 

@@ -28,6 +28,8 @@ import com.smapl_android.ui.base.BaseFragment;
 public class AboutYourselfFragment extends BaseFragment {
 
     public static final String TAG = AboutYourselfFragment.class.getSimpleName();
+    private static final String GENDER_MAN = "man";
+    private static final String GENDER_WOMAN = "woman";
 
     private UserInfoViewModel user;
     private Presenter presenter = new Presenter();
@@ -80,7 +82,8 @@ public class AboutYourselfFragment extends BaseFragment {
 
         user.phone.set(phoneNumber);
         user.password.set(password);
-        user.gender.set(gender.getCheckedRadioButtonId() == R.id.radio_about_yourself_man);
+        if (gender.getCheckedRadioButtonId() >= 0)
+            user.gender.set(gender.getCheckedRadioButtonId() == R.id.radio_about_yourself_man ? GENDER_MAN : GENDER_WOMAN);
         user.age.set(age.getSelectedItem().toString());
         user.carBrand.set(carBrand.getSelectedItem().toString());
         user.carYearOfIssue.set(carYearOfIssue.getText().toString());
@@ -125,7 +128,7 @@ public class AboutYourselfFragment extends BaseFragment {
         }
 
         try {
-           Validators.getCarYearValidator(getContext()).validate(carYearOfIssue.getText().toString());
+            Validators.getCarYearValidator(getContext()).validate(carYearOfIssue.getText().toString());
         } catch (ValidationException e) {
             carYearOfIssue.setError(e.getMessage());
             isValidate = false;

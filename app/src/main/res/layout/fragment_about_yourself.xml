@@ -116,11 +116,26 @@
                     android:textColorHint="@color/about_yourself_hint"
                     android:textSize="@dimen/core_text_size" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/man"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/about_yourself_hint"
+                    android:textSize="@dimen/core_text_size" />
+
                 <RadioButton
                     android:id="@+id/radio_about_yourself_man"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp" />
+                    android:text="@string/woman"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/about_yourself_hint"
+                    android:textSize="@dimen/core_text_size" />
 
                 <RadioButton
                     android:id="@+id/radio_about_yourself_woman"

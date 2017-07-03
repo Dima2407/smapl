@@ -13,6 +13,9 @@ public class UserResponse {
     @SerializedName("mobile_number")
     private String mobileNumber;
 
+    @SerializedName("age")
+    private Integer age;
+
     @SerializedName("car_year")
     private Integer carYear;
 
@@ -112,5 +115,13 @@ public class UserResponse {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
