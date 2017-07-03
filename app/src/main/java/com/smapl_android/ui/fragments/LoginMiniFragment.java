@@ -3,6 +3,7 @@ package com.smapl_android.ui.fragments;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -14,6 +15,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -47,6 +50,10 @@ public class LoginMiniFragment extends BaseFragment {
 
     private Button btnLogin;
     private CallbackManager callbackManager;
+    private EditText editLogin;
+    private ImageView imgLoginBg;
+    private EditText editPassword;
+    private ImageView imgPasswordBg;
 
     @Nullable
     @Override
@@ -61,6 +68,14 @@ public class LoginMiniFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        editLogin = (EditText) view.findViewById(R.id.edit_login);
+        imgLoginBg = (ImageView) view.findViewById(R.id.img_edit_login_login_bg);
+        imgLoginBg.setVisibility(View.INVISIBLE);
+
+        editPassword = (EditText) view.findViewById(R.id.edit_password);
+        imgPasswordBg = (ImageView) view.findViewById(R.id.img_edit_login_password_bg);
+        imgPasswordBg.setVisibility(View.INVISIBLE);
 
         FacebookSdk.sdkInitialize(getCoreActivity().getApplicationContext());
 
@@ -87,6 +102,27 @@ public class LoginMiniFragment extends BaseFragment {
             }
         });
 
+        editLogin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    imgLoginBg.setVisibility(View.INVISIBLE);
+                } else {
+                    imgLoginBg.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        editPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    imgPasswordBg.setVisibility(View.INVISIBLE);
+                } else {
+                    imgPasswordBg.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private boolean isAuthorized(){
@@ -142,6 +178,7 @@ public class LoginMiniFragment extends BaseFragment {
     }
 
     public class Presenter {
+
         public void onLoginClicked(LoginInfoViewModel loginInfoViewModel) {
             final CoreRequest<Boolean> request = getCoreService()
                     .newRequest(getCoreActivity());

@@ -29,48 +29,76 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
 
-
-            <EditText
-                android:id="@+id/edit_registration_phone_number"
+            <RelativeLayout
+                android:id="@+id/layout_redistration_login"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_login_height"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/edit_text_background"
-                android:drawableLeft="@drawable/vector_smart_object_6"
-                android:drawablePadding="10dp"
-                android:drawableRight="@{user.phoneValid}"
-                android:hint="@string/input_phone"
-                android:inputType="phone"
-                android:paddingLeft="6dp"
-                android:text="@{user.phone}"
-                android:textSize="@dimen/core_text_size"
-                app:addTextChangedListener="@{user.phoneTextWatcher}" />
+                android:layout_marginTop="20dp">
 
-            <EditText
-                android:id="@+id/edit_registration_password"
+                <ImageView
+                    android:id="@+id/img_edit_redistration_login_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/edit_text_blue_rectan_bg" />
+
+
+                <EditText
+                    android:id="@+id/edit_registration_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_login_height"
+                    android:layout_marginLeft="@dimen/edit_login_registr_margin_left"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableLeft="@drawable/vector_smart_object_6"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@{user.phoneValid}"
+                    android:hint="@string/input_phone"
+                    android:inputType="phone"
+                    android:paddingLeft="6dp"
+                    android:text="@{user.phone}"
+                    android:textSize="@dimen/core_text_size"
+                    app:addTextChangedListener="@{user.phoneTextWatcher}" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_registration_password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/edit_login_height"
-                android:layout_below="@id/edit_registration_phone_number"
-                android:layout_marginTop="42dp"
-                android:background="@drawable/edit_text_background"
-                android:drawableLeft="@drawable/vector_smart_object_7"
-                android:drawablePadding="10dp"
-                android:drawableRight="@{user.passwordValid}"
-                android:hint="@string/input_password"
-                android:imeOptions="actionSend"
-                android:inputType="textPassword"
-                android:paddingLeft="6dp"
-                android:text="@{user.password}"
-                android:textColorHint="@color/color_login_hint"
-                android:textSize="@dimen/core_text_size"
-                app:addTextChangedListener="@{user.passwordTextWatcher}" />
+                android:layout_below="@id/layout_redistration_login"
+                android:layout_marginTop="42dp">
+
+                <ImageView
+                    android:id="@+id/img_edit_redistration_password_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/edit_text_blue_rectan_bg" />
+
+                <EditText
+                    android:id="@+id/edit_registration_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edit_login_height"
+                    android:layout_marginLeft="@dimen/edit_login_registr_margin_left"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableLeft="@drawable/vector_smart_object_7"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@{user.passwordValid}"
+                    android:hint="@string/input_password"
+                    android:imeOptions="actionSend"
+                    android:inputType="textPassword"
+                    android:paddingLeft="6dp"
+                    android:text="@{user.password}"
+                    android:textColorHint="@color/color_login_hint"
+                    android:textSize="@dimen/core_text_size"
+                    app:addTextChangedListener="@{user.passwordTextWatcher}" />
+
+            </RelativeLayout>
 
             <Button
                 android:id="@+id/btn_registration_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/edit_registration_password"
+                android:layout_below="@id/layout_registration_password"
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="19dp"
                 android:background="@android:color/transparent"
@@ -90,8 +118,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-30dp"
             android:background="@android:color/transparent"
-            android:scaleType="centerCrop"
             android:onClick="@{() -> presenter.onRegistrationClicked(user)}"
+            android:scaleType="centerCrop"
             android:src="@drawable/button_send" />
 
     </RelativeLayout>
