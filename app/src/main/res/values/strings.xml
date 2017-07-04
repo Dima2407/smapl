@@ -6,7 +6,7 @@
     <string name="wait_login">Waiting!</string>
     <string name="error_empty_phone_number">Вы не ввели номер телефона</string>
     <string name="error_wrong_phone_number">Вы ввели некорректный номер телефона</string>
-    <string name="error_phone_number_short">Вы ввели короткий номер</string>
+    <string name="error_phone_number_lenght">Длина номера должна быть 10 цифр</string>
     <string name="error_password_short">Вы ввели слишком короткий пароль</string>
     <string name="registration">Зарегистрироваться</string>
     <string name="cancel">cancel</string>

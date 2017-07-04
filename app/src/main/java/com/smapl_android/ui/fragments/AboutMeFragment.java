@@ -30,6 +30,8 @@ public class AboutMeFragment extends BaseFragment {
     private static final String TAG = AboutMeFragment.class.getSimpleName();
     private static final String GENDER_MAN = "man";
     private static final String GENDER_WOMAN = "woman";
+    private static final int MIN_AGE = 18;
+    private static final int MAX_AGE = 110;
 
     private UserInfoViewModel user;
     private RadioGroup gender;
@@ -89,7 +91,7 @@ public class AboutMeFragment extends BaseFragment {
         }
 
         if (!TextUtils.isEmpty(user.age.get())){
-            if (Integer.valueOf(user.age.get()) < 18 || Integer.valueOf(user.age.get()) > 110) {
+            if (Integer.valueOf(user.age.get()) < MIN_AGE || Integer.valueOf(user.age.get()) > MAX_AGE) {
                 showMessage(getString(R.string.app_name), getString(R.string.wrong_age));
                 return;
             }
