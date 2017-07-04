@@ -138,7 +138,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
         });
     }
 
-    private void registration() {
+    private boolean registration() {
 
         if (bitmap != null)
             user.carPhoto.set(bitmap);
@@ -155,11 +155,15 @@ public class LoadCarPhotoFragment extends BaseFragment {
                     }
                 });
         getCoreService().registration(user, request);
+
+        return request.isError();
     }
 
     private void toMainScreen() {
 
-        registration();
+        if (!registration()) {
+            return;
+        }
 
         MainScreenFragment mainScreenFragment = new MainScreenFragment();
 
