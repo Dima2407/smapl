@@ -1,8 +1,11 @@
 package com.smapl_android.ui.fragments;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +20,11 @@ import com.smapl_android.databinding.FragmentMapBinding;
 import com.smapl_android.model.User;
 import com.smapl_android.model.UserInfo;
 import com.smapl_android.net.responses.UserResponse;
+import com.smapl_android.services.GeolocationService;
+import com.smapl_android.ui.activities.AuthActivity;
+import com.smapl_android.ui.activities.MainActivity;
 import com.smapl_android.ui.base.BaseFragment;
+import com.smapl_android.ui.base.CoreActivity;
 
 public class MapFragment extends BaseFragment {
 
@@ -61,6 +68,20 @@ public class MapFragment extends BaseFragment {
     }
 
     public class Presenter{
+        public void startGeolocationService() {
+            if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
+                return;
+            }
+            ((AuthActivity) getActivity()).startService(new Intent(getActivity(), GeolocationService.class));
+        }
 
+
+        public void stopGeolocationService() {
+
+            ((AuthActivity) getActivity()).stopService(new Intent(getActivity(), GeolocationService.class));
+        }
     }
 }
