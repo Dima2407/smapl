@@ -1,50 +1,28 @@
 package com.smapl_android.net.requests;
 
-import android.graphics.Bitmap;
-
 import com.google.gson.annotations.SerializedName;
+import com.smapl_android.model.UserInfoViewModel;
 
 public class RegistrationRequest {
 
+    @SerializedName("type")
+    private String type;
     @SerializedName("email")
     private String email;
-
     @SerializedName("password")
     private String password;
-
     @SerializedName("name")
     private String name;
-
     @SerializedName("mobile_number")
     private String phoneNumber;
-
     @SerializedName("car_year")
     private int carYear;
-
     @SerializedName("car_mark")
     private String carMark;
-
     @SerializedName("car_model")
     private String carModel;
-
     @SerializedName("car_color")
     private String carColor;
-
-    @SerializedName("car_photo")
-    private Bitmap carPhoto;
-
-
-    public RegistrationRequest(String email, String password, String name, String phoneNumber, int carYear, String carMark, String carModel, String carColor, Bitmap carPhoto) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.carYear = carYear;
-        this.carMark = carMark;
-        this.carModel = carModel;
-        this.carColor = carColor;
-        this.carPhoto = carPhoto;
-    }
 
     public RegistrationRequest(String email, String password, String name, String phoneNumber, int carYear, String carMark, String carModel, String carColor) {
         this.email = email;
@@ -55,6 +33,18 @@ public class RegistrationRequest {
         this.carMark = carMark;
         this.carModel = carModel;
         this.carColor = carColor;
+        this.type = "driver";
+    }
+
+    public RegistrationRequest(UserInfoViewModel user) {
+        this(user.email.get(),
+                user.password.get(),
+                user.name.get(),
+                user.phone.get(),
+                Integer.parseInt(user.carYearOfIssue.get()),
+                user.carBrand.get(),
+                user.carModel.get(),
+                user.color.get());
     }
 
     public String getEmail() {
@@ -119,13 +109,5 @@ public class RegistrationRequest {
 
     public void setCarColor(String carColor) {
         this.carColor = carColor;
-    }
-
-    public Bitmap getCarPhoto() {
-        return carPhoto;
-    }
-
-    public void setCarPhoto(Bitmap carPhoto) {
-        this.carPhoto = carPhoto;
     }
 }

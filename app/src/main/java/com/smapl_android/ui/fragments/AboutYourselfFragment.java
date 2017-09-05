@@ -89,12 +89,7 @@ public class AboutYourselfFragment extends BaseFragment {
         user.carYearOfIssue.set(carYearOfIssue.getText().toString());
         user.color.set(carColor.getSelectedItem().toString());
 
-        LoadCarPhotoFragment loadCarPhotoFragment = new LoadCarPhotoFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("user", user);
-
-        loadCarPhotoFragment.setArguments(bundle);
+        Fragment loadCarPhotoFragment = LoadCarPhotoFragment.create(user);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .add(android.R.id.content, loadCarPhotoFragment, LoadCarPhotoFragment.TAG)

@@ -15,6 +15,8 @@ import retrofit2.http.*;
 
 public interface ApiService {
 
+    String DEV_URL = "http://adrider.pg-dev.com/";
+
     String API_KEY = "keykey";
 
     @POST("api/user/login")

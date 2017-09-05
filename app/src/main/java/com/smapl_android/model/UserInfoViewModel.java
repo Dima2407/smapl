@@ -33,7 +33,6 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
     public final ObservableField<String> carYearOfIssue = new ObservableField<>();
     public final ObservableField<String> color = new ObservableField<>();
     public final ObservableField<String> interests = new ObservableField<>();
-    public final ObservableField<Bitmap> carPhoto = new ObservableField<>();
     public final ObservableField<Drawable> phoneValid = new ObservableField<>();
     public final ObservableField<Drawable> passwordValid = new ObservableField<>();
 

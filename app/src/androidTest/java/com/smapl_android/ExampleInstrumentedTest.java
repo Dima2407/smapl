@@ -1,4 +1,4 @@
-package com.example.dima.smapl_android;
+package com.smapl_android;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
