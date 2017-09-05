@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.smapl_android.R;
@@ -29,6 +31,9 @@ import com.smapl_android.ui.base.CoreActivity;
 public class MapFragment extends BaseFragment {
 
     private static final String TAG = MapFragment.class.getSimpleName();
+
+    private Button startButton, stopButton;
+    private RelativeLayout relativeLayout1,relativeLayout2;
     //private UserInfo user;
 
     @Nullable
@@ -37,6 +42,12 @@ public class MapFragment extends BaseFragment {
         FragmentMapBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false);
         binding.setUser(getUser());
         binding.setPresenter(new Presenter());
+
+        View inflatedView =  inflater.inflate(R.layout.fragment_map, container, false);
+
+
+
+
         return binding.getRoot();
     }
 
@@ -65,6 +76,15 @@ public class MapFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        startButton = (Button) getView().findViewById(R.id.btn_map_start);
+        stopButton = (Button) getView().findViewById(R.id.btn_map_stop);
+        relativeLayout1 = (RelativeLayout)getView().findViewById(R.id.relativeLayout);
+        relativeLayout2 = (RelativeLayout)getView().findViewById(R.id.relativeLayout2);
+
+        relativeLayout1.setVisibility(View.GONE);
+        relativeLayout2.setVisibility(View.GONE);
+        startButton.setVisibility(View.VISIBLE);
+        stopButton.setVisibility(View.GONE);
     }
 
     public class Presenter{
@@ -75,13 +95,22 @@ public class MapFragment extends BaseFragment {
                         1);
                 return;
             }
-            ((AuthActivity) getActivity()).startService(new Intent(getActivity(), GeolocationService.class));
+            (getActivity()).startService(new Intent(getActivity(), GeolocationService.class));
+
+            startButton.setVisibility(View.GONE);
+            stopButton.setVisibility(View.VISIBLE);
+            relativeLayout1.setVisibility(View.VISIBLE);
+            relativeLayout2.setVisibility(View.VISIBLE);
         }
 
 
         public void stopGeolocationService() {
 
-            ((AuthActivity) getActivity()).stopService(new Intent(getActivity(), GeolocationService.class));
+            (getActivity()).stopService(new Intent(getActivity(), GeolocationService.class));
+            stopButton.setVisibility(View.GONE);
+            relativeLayout1.setVisibility(View.GONE);
+            relativeLayout2.setVisibility(View.GONE);
+            startButton.setVisibility(View.VISIBLE);
         }
     }
 }

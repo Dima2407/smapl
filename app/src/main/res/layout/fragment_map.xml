@@ -54,10 +54,150 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="@drawable/img_circle_btn_start"
+            android:onClick="@{() -> presenter.startGeolocationService()}"
             android:text="@string/start"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:textSize="27sp" />
+            android:textSize="27sp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="168dp"
+                android:src="@drawable/main_speed" />
+
+            <TextView
+                android:id="@+id/you_earned_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="56dp"
+                android:text="Вы заработали"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/total_points_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/you_earned_TextView"
+                android:layout_centerHorizontal="true"
+                android:text="500"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/points_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_below="@+id/total_points_TextView"
+                android:layout_centerHorizontal="true"
+                android:text="баллов"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relativeLayout"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="32dp"
+            android:paddingTop="16dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/income_points_TextView"
+                    android:layout_width="106dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="10 баллов"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="22.2sp" />
+
+                <TextView
+                    android:id="@+id/distance_TextView"
+                    android:layout_width="106dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_toRightOf="@+id/income_points_TextView"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="10 км"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/name_profile_size" />
+
+                <TextView
+                    android:id="@+id/income_points_name_TextView"
+                    android:layout_width="106dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/income_points_TextView"
+                    android:layout_below="@id/income_points_TextView"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Стоимость"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:id="@+id/distance_name_TextView"
+                    android:layout_width="106dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/distance_TextView"
+                    android:layout_below="@id/distance_TextView"
+                    android:layout_gravity="fill"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Расстояние"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relativeLayout2"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp">
+
+            <Button
+                android:id="@+id/btn_map_stop"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:background="#7dcceb"
+                android:onClick="@{() -> presenter.stopGeolocationService()}"
+                android:text="Стоп"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:visibility="visible" />
+        </RelativeLayout>
 
     </RelativeLayout>
+
 </layout>

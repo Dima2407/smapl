@@ -9,7 +9,7 @@
     <dimen name="img_btn_login_forward_size">50dp</dimen>
     <dimen name="image_car_circle_size">60dp</dimen>
     <dimen name="text_menu_bottom_size">17sp</dimen>
-    <dimen name="name_profile_size">22dp</dimen>
+    <dimen name="name_profile_size">22sp</dimen>
     <dimen name="car_brand_model_profile_size">13dp</dimen>
     <dimen name="btn_login_forward_size">51dp</dimen>
     <dimen name="btn_facebook_hight">34dp</dimen>

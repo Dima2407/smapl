@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.smapl_android.R;
 import com.smapl_android.SmaplApplication;
 import com.smapl_android.core.CoreService;
+import com.smapl_android.services.GeolocationService;
 
 public abstract class CoreActivity extends AppCompatActivity {
 
@@ -28,6 +29,11 @@ public abstract class CoreActivity extends AppCompatActivity {
         final SmaplApplication application = (SmaplApplication) getApplication();
         return application.getCoreService();
     }
+    public GeolocationService getGeolocationService() {
+        final SmaplApplication application = (SmaplApplication) getApplication();
+        return application.getGeolocationService();
+    }
+
 
     public void showProgress(String message) {
         showProgress(getString(R.string.app_name), message);
