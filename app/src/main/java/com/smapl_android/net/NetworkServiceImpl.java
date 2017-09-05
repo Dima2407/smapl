@@ -212,4 +212,9 @@ class NetworkServiceImpl implements NetworkService {
         responseCall.enqueue(createCallback(callback));
     }
 
+    @Override
+    public void getCampaigns(String token, OnResultCallback<GetCampaignListResponse, Throwable> callback) {
+        final Call<GetCampaignListResponse> campaigns = apiService.getCampaigns(token);
+        campaigns.enqueue(createCallback(callback));
+    }
 }

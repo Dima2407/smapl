@@ -36,6 +36,8 @@ public interface NetworkService {
 
     void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<Boolean, Throwable> callback);
 
+    void getCampaigns(String token, OnResultCallback<GetCampaignListResponse, Throwable> callback);
+
     interface OnResultCallback<T, E> {
         void onResult(T result, E error);
     }

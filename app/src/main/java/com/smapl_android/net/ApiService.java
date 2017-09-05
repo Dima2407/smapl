@@ -76,4 +76,6 @@ public interface ApiService {
                                           @Query("date") String date);
 
 
+    @GET("api/campaign/list")
+    Call<GetCampaignListResponse> getCampaigns(@Query("access_token") String token);
 }
