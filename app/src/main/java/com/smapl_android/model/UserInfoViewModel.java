@@ -22,22 +22,17 @@ import java.util.Objects;
 
 public class UserInfoViewModel extends BaseObservable implements Parcelable {
 
-
-    private static final String GENDER_MAN = "man";
-    private static final String GENDER_WOMAN = "woman";
-
     public final ObservableField<String> phone = new ObservableField<>();
     public final ObservableField<String> password = new ObservableField<>();
     public final ObservableField<String> name = new ObservableField<>();
     public final ObservableField<String> email = new ObservableField<>();
-    public final ObservableField<Boolean> gender = new ObservableField<>();
+    public final ObservableField<String> gender = new ObservableField<>();
     public final ObservableField<String> age = new ObservableField<>();
     public final ObservableField<String> carBrand = new ObservableField<>();
     public final ObservableField<String> carModel = new ObservableField<>();
     public final ObservableField<String> carYearOfIssue = new ObservableField<>();
     public final ObservableField<String> color = new ObservableField<>();
     public final ObservableField<String> interests = new ObservableField<>();
-    public final ObservableField<Bitmap> carPhoto = new ObservableField<>();
     public final ObservableField<Drawable> phoneValid = new ObservableField<>();
     public final ObservableField<Drawable> passwordValid = new ObservableField<>();
 
@@ -141,12 +136,13 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         carBrand.set(response.getCarMark());
         carModel.set(response.getCarModel());
         color.set(response.getCarColor());
-        carYearOfIssue.set(String.valueOf(response.getCarYear()));
+        carYearOfIssue.set(response.getCarYear().toString());
+        oldAge.set(response.getAge() != null ? response.getAge().toString() : null);
         oldPhone.set(response.getMobileNumber());
         oldInterests.set(response.getInterests());
     }
 
-    public UpdateCarRequest toUpdateCar(){
+    public UpdateCarRequest toUpdateCar() {
         UpdateCarRequest request = new UpdateCarRequest();
         request.setCarMark(carBrand.get());
         request.setCarColor(color.get());
@@ -159,9 +155,10 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         EditProfileRequest request = new EditProfileRequest();
         request.setName(name.get());
         request.setPhone(phone.get());
-        request.setAge(age.get());
+        if (age.get() != null)
+            request.setAge(Integer.parseInt(age.get()));
         if (gender.get() != null)
-            request.setGender(gender.get() == true ? GENDER_MAN : GENDER_WOMAN);
+            request.setGender(gender.get());
         request.setInterests(interests.get());
 
         return request;

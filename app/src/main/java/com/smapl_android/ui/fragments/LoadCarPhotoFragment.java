@@ -9,30 +9,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
-import com.smapl_android.model.User;
+import com.smapl_android.core.UploadService;
 import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.ui.base.BaseFragment;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.smapl_android.ui.base.OnImageRequestListener;
-
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import java.io.*;
 
 
 public class LoadCarPhotoFragment extends BaseFragment {
@@ -41,7 +34,17 @@ public class LoadCarPhotoFragment extends BaseFragment {
     private RelativeLayout imgLayout;
     private UserInfoViewModel user;
     private CircleImageView circleImageView;
-    private Bitmap bitmap;
+    private String filePath;
+
+
+    public static Fragment create(UserInfoViewModel user) {
+        final LoadCarPhotoFragment fragment = new LoadCarPhotoFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("user", user);
+
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
 
     @Nullable
@@ -69,15 +72,15 @@ public class LoadCarPhotoFragment extends BaseFragment {
         view.findViewById(R.id.btn_load_car_photo_forward).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toMainScreen();
+                registration();
             }
         });
 
         view.findViewById(R.id.btn_load_car_photo_skip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bitmap = null;
-                toMainScreen();
+                filePath = null;
+                registration();
             }
         });
 
@@ -116,8 +119,9 @@ public class LoadCarPhotoFragment extends BaseFragment {
             public void onResult(Uri data) {
                 Log.d(TAG, "onResult: " + data);
                 if (data != null) {
-                    bitmap = decodeBitmapFromUri(data, circleImageView.getWidth(),
-                            circleImageView.getHeight(), true);
+                    filePath = createFileFromUri(data).getAbsolutePath();
+                    Bitmap bitmap = decodeBitmapFromUri(filePath, circleImageView.getWidth(),
+                            circleImageView.getHeight());
                     circleImageView.setImageBitmap(bitmap);
                 }
             }
@@ -130,18 +134,16 @@ public class LoadCarPhotoFragment extends BaseFragment {
             public void onResult(Uri data) {
                 Log.d(TAG, "onResult: " + data);
                 if (data != null) {
-                    bitmap = decodeBitmapFromUri(data, circleImageView.getWidth(),
-                            circleImageView.getHeight(), false);
+                    filePath = getRealPathFromURI(getContext(), data);
+                    Bitmap bitmap = decodeBitmapFromUri(filePath, circleImageView.getWidth(),
+                            circleImageView.getHeight());
                     circleImageView.setImageBitmap(bitmap);
                 }
             }
         });
     }
 
-    private void registration() {
-
-        if (bitmap != null)
-            user.carPhoto.set(bitmap);
+    private boolean registration() {
 
         final CoreRequest<Boolean> request = getCoreService()
                 .newRequest(getCoreActivity());
@@ -151,25 +153,27 @@ public class LoadCarPhotoFragment extends BaseFragment {
                 .handleSuccess(new SuccessOutput<Boolean>() {
                     @Override
                     public void onSuccess(Boolean result) {
-                        Log.d(TAG, "registration " + result);
+
+                        if (result) {
+
+                            if (filePath != null) {
+                                UploadService.uploadCarPhoto(getActivity(), filePath);
+                            }
+
+                            MainScreenFragment mainScreenFragment = new MainScreenFragment();
+
+                            getCoreActivity().replaceContent(mainScreenFragment);
+                        }
                     }
                 });
         getCoreService().registration(user, request);
-    }
 
-    private void toMainScreen() {
-
-        registration();
-
-        MainScreenFragment mainScreenFragment = new MainScreenFragment();
-
-        getCoreActivity().replaceContent(mainScreenFragment);
+        return request.isError();
     }
 
 
-    private Bitmap decodeBitmapFromUri(Uri uri, int reqWidth, int reqHeight, boolean isTakenPhoto) {
+    private Bitmap decodeBitmapFromUri(String filePath, int reqWidth, int reqHeight) {
 
-        String filePath = isTakenPhoto ? createFileFromUri(uri).getAbsolutePath() : getRealPathFromURI(getContext(), uri);
 
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;

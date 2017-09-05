@@ -17,7 +17,7 @@ public final class Validators {
     public static Validator<String> getPhoneValidator(Context context) {
         if (phoneValidator == null) {
             phoneValidator = new PhoneValidator(context.getString(R.string.error_empty_phone_number),
-                    context.getString(R.string.error_phone_number_short),
+                    context.getString(R.string.error_phone_number_lenght),
                     context.getString(R.string.error_wrong_phone_number));
         }
         return phoneValidator;

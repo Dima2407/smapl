@@ -86,28 +86,7 @@ public class CoreService {
                             }
                         });
                     } else {
-                        networkServiceImpl.login(user.phone.get(), user.password.get(), new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
-                            @Override
-                            public void onResult(final LoginResponse result, final Throwable error) {
-                                if (error != null) {
-                                    uiHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            successOutput.processError(error.getMessage());
-                                        }
-                                    });
-                                } else {
-                                    sessionStorage.saveAuthKey(result.getId());
-                                    sessionStorage.saveUserId(result.getUserId());
-                                    uiHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            successOutput.processResult(true);
-                                        }
-                                    });
-                                }
-                            }
-                        });
+                        login(user.phone.get(), user.password.get(), successOutput);
                     }
                 }
             }
