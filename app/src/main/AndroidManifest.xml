@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature android:name="android.hardware.camera" android:required="true"/>
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -62,9 +65,11 @@
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/camera_path"/>
         </provider>
 
-        <service android:name=".core.UploadService">
+        <service android:name=".core.UploadService"/>
+        <service android:name=".services.GeolocationService"
+                 android:enabled="true"
+                 android:exported="true" />
 
-        </service>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="188c458887d8193e9c2712f1f3683c14fe315215" />
