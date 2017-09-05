@@ -72,6 +72,9 @@
     <string name="man">мужчина</string>
     <string name="woman">женщина</string>
     <string name="wrong_age">Некорректный возраст</string>
+    <string name="balance_format">Баланс: %d грн</string>
+    <string name="total_earn_format">Всего заработали: %d грн</string>
+    <string name="drive_format">Проехали: %d км</string>
 
     <string-array name="age">
         <item>18</item>
