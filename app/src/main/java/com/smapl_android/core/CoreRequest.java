@@ -1,5 +1,7 @@
 package com.smapl_android.core;
 
+import android.util.Log;
+
 import com.smapl_android.R;
 import com.smapl_android.ui.base.CoreActivity;
 
@@ -76,5 +78,9 @@ public class CoreRequest<T> {
 
     void processError(String error) {
         errorOutput.onError(error);
+    }
+
+    public boolean isError() {
+        return !displayError;
     }
 }
