@@ -22,7 +22,8 @@ public class AuthActivity extends CoreActivity {
         splashHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                boolean loggedIn = getCoreService().isLoggedIn();
+               // boolean loggedIn = getCoreService().isLoggedIn();
+                boolean loggedIn = true;
                 if (loggedIn) {
                     openMainActivity();
                 } else {
