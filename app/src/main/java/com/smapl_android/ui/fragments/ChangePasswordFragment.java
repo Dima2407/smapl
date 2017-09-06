@@ -13,11 +13,11 @@ import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentChangePasswordBinding;
-import com.smapl_android.model.UserViewPassword;
+import com.smapl_android.model.PasswordEditVM;
 import com.smapl_android.ui.base.BaseFragment;
 
 public class ChangePasswordFragment extends BaseFragment {
-    private UserViewPassword viewPassword = new UserViewPassword();
+    private PasswordEditVM viewPassword = new PasswordEditVM();
 
     @Nullable
     @Override

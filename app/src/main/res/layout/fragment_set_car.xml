@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:custom="http://schemas.android.com/apk/res-auto">
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="user"
-            type="com.smapl_android.model.UserInfoViewModel" />
+                name="user"
+                type="com.smapl_android.model.UserInfo" />
+
+        <variable
+            name="car"
+            type="com.smapl_android.model.CarInfoEditVM" />
 
         <variable
             name="presenter"
@@ -34,34 +39,16 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img_circle_set_car_photo"
-                android:layout_width="@dimen/image_car_circle_size"
-                android:layout_height="@dimen/image_car_circle_size"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="35dp"
-                android:src="@drawable/audi" />
-
-            <TextView
-                android:id="@+id/text_set_car_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="40dp"
-                android:layout_toRightOf="@id/img_circle_set_car_photo"
-                android:text="@{user.oldName}"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/name_profile_size" />
-
-            <TextView
-                android:id="@+id/text_set_car_car_brand_model"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/text_set_car_name"
-                android:layout_below="@id/text_set_car_name"
-                android:text="@{user.carBrand + ' ' + user.carModel}"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/car_brand_model_profile_size" />
+            <com.smapl_android.ui.widgets.UserInfoBar
+                    android:id="@+id/img_circle_set_car_photo"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    custom:leftSpace="6dp"
+                    custom:userName="@{user.name}"
+                    custom:carInfo="@{user.carBrandModel}"
+                    custom:carPhoto="@{user.carPhoto}"/>
 
             <LinearLayout
                 android:id="@+id/linear_set_car_brand"
@@ -80,12 +67,13 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/core_text_size" />
 
-                <Spinner
+                <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/spinner_set_car_brand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:entries="@array/car_brand"></Spinner>
+                    android:entries="@array/car_brand"
+                    bind:selectedValue="@={car.carBrand}"/>
 
             </LinearLayout>
 
@@ -94,10 +82,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/linear_set_car_brand"
-                android:addTextChangedListener="@{user.carModelTextWatcher}"
                 android:background="@drawable/edit_text_line_background"
                 android:hint="@string/hint_car_model"
-                android:text="@{user.carModel}"
+                android:text="@={car.carModel}"
                 android:paddingTop="@dimen/edit_password_edit_padding_top"
                 android:textSize="@dimen/core_text_size"
                 android:textColorHint="@android:color/white" />
@@ -107,12 +94,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/edit_set_car_model"
-                android:addTextChangedListener="@{user.carYearTextWatcher}"
                 android:background="@drawable/edit_text_line_background"
                 android:hint="@string/hint_car_year_issue"
                 android:inputType="number"
                 android:maxLength="4"
-                android:text="@{user.carYearOfIssue}"
+                android:text="@={car.carYear}"
                 android:paddingTop="@dimen/edit_password_edit_padding_top"
                 android:textSize="@dimen/core_text_size"
                 android:textColorHint="@android:color/white" />
@@ -123,10 +109,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/edit_set_car_year_issue"
                 android:paddingTop="@dimen/edit_password_edit_padding_top"
-                android:addTextChangedListener="@{user.carColorTextWatcher}"
                 android:background="@drawable/edit_text_line_background"
                 android:hint="@string/hint_car_color"
-                android:text="@{user.color}"
+                android:text="@={car.carColor}"
                 android:textSize="@dimen/core_text_size"
                 android:textColorHint="@android:color/white" />
 
