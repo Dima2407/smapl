@@ -47,11 +47,11 @@ public class MainScreenFragment extends BaseFragment {
     public class Presenter{
 
 
-        public void onNewsClicked(){
+        public void onHistoryClicked(){
             imageItem1.setVisibility(View.VISIBLE);
             imageItem2.setVisibility(View.GONE);
             imageItem3.setVisibility(View.GONE);
-            getCoreActivity().replaceContent(linearContent.getId(), new NewsFragment());
+            getCoreActivity().replaceContent(linearContent.getId(), new HistoryFragment());
         }
 
         public void onMapClicked(){
