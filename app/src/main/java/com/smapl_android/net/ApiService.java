@@ -15,6 +15,8 @@ import retrofit2.http.*;
 
 public interface ApiService {
 
+    String DEV_URL = "http://adrider.pg-dev.com/";
+
     String API_KEY = "keykey";
 
     @POST("api/user/login")
@@ -74,4 +76,6 @@ public interface ApiService {
                                           @Query("date") String date);
 
 
+    @GET("api/campaign/list")
+    Call<GetCampaignListResponse> getCampaigns(@Query("access_token") String token);
 }

@@ -133,6 +133,7 @@ public class SetCarFragment extends BaseFragment {
                         @Override
                         public void onSuccess(Boolean result) {
                             if (result) {
+                                showMessage(getString(R.string.app_name), getString(R.string.changes_saved));
                                 getActivity().onBackPressed();
                             }
                         }

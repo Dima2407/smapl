@@ -12,14 +12,12 @@ import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
-import com.smapl_android.net.responses.EditPasswordResponse;
-import com.smapl_android.net.responses.EditProfileResponse;
-import com.smapl_android.net.responses.LoginResponse;
-import com.smapl_android.net.responses.RegistrationResponse;
-import com.smapl_android.net.responses.UpdateCarResponse;
-import com.smapl_android.net.responses.UserResponse;
+import com.smapl_android.net.responses.*;
 import com.smapl_android.storage.SessionStorage;
 import com.smapl_android.ui.base.CoreActivity;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class CoreService {
 
@@ -86,28 +84,7 @@ public class CoreService {
                             }
                         });
                     } else {
-                        networkServiceImpl.login(user.phone.get(), user.password.get(), new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
-                            @Override
-                            public void onResult(final LoginResponse result, final Throwable error) {
-                                if (error != null) {
-                                    uiHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            successOutput.processError(error.getMessage());
-                                        }
-                                    });
-                                } else {
-                                    sessionStorage.saveAuthKey(result.getId());
-                                    sessionStorage.saveUserId(result.getUserId());
-                                    uiHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            successOutput.processResult(true);
-                                        }
-                                    });
-                                }
-                            }
-                        });
+                        login(user.phone.get(), user.password.get(), successOutput);
                     }
                 }
             }
@@ -223,6 +200,33 @@ public class CoreService {
                             @Override
                             public void run() {
                                 coreRequest.processResult(result);
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+
+    public void getCampaigns(final CoreRequest<List<GetCampaignListResponse.Campaign>> coreRequest){
+        String token = sessionStorage.getAuthKey();
+        networkServiceImpl.getCampaigns(token,  new NetworkService.OnResultCallback<GetCampaignListResponse, Throwable>() {
+            @Override
+            public void onResult(final GetCampaignListResponse result, final Throwable error) {
+                if (coreRequest != null) {
+                    if (error != null) {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processError(error.getMessage());
+                            }
+                        });
+                    } else {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processResult(Arrays.asList(result.getCampaigns()));
                             }
                         });
                     }

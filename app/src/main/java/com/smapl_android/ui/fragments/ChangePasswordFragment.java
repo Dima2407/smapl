@@ -68,6 +68,7 @@ public class ChangePasswordFragment extends BaseFragment {
                         @Override
                         public void onSuccess(Boolean result) {
                             if (result) {
+                                showMessage(getString(R.string.app_name), getString(R.string.password_changed));
                                 getActivity().onBackPressed();
                             }
                         }

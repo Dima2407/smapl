@@ -1,44 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/img_smapl_background"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:text="ProfileFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <data>
 
-    <Button
-        android:id="@+id/btn_to_set_car_fragment"
-        android:text="@string/to_set_car"
-        android:textAllCaps="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <variable
+                name="user"
+                type="com.smapl_android.model.UserInfo"/>
 
-    <Button
-        android:id="@+id/btn_edit_password"
-        android:layout_marginTop="10dp"
-        android:text="@string/change_password"
-        android:textAllCaps="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    </data>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/img_smapl_background">
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_map_car_photo"
+                    android:layout_width="@dimen/image_car_circle_size"
+                    android:layout_height="@dimen/image_car_circle_size"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="40dp"
+                    android:src="@drawable/audi"/>
 
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_marginTop="10dp"
-        android:text="@string/logout"
-        android:textAllCaps="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <TextView
+                    android:id="@+id/text_map_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="45dp"
+                    android:layout_toRightOf="@id/img_map_car_photo"
+                    android:text="@{user.name}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/name_profile_size"/>
 
-    <Button
-        android:id="@+id/btn_about_me"
-        android:layout_marginTop="10dp"
-        android:text="@string/about_me"
-        android:textAllCaps="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <TextView
+                    android:id="@+id/text_map_car_brand_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/text_map_user_name"
+                    android:layout_below="@id/text_map_user_name"
+                    android:text="@{user.carBrandModel}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/car_brand_model_profile_size"/>
 
-</LinearLayout>
+
+            <TextView
+                    android:id="@+id/text_map_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_map_car_photo"
+                    android:text="@{user.balance}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/car_brand_model_profile_size"/>
+
+            <TextView
+                    android:id="@+id/text_map_earn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_map_balance"
+                    android:text="@{user.earn}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/car_brand_model_profile_size"/>
+
+            <TextView
+                    android:id="@+id/text_map_drive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_map_earn"
+                    android:text="@{user.drive}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/car_brand_model_profile_size"/>
+        </RelativeLayout>
+
+        <Button
+                android:id="@+id/btn_to_set_car_fragment"
+                android:text="@string/to_set_car"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <Button
+                android:id="@+id/btn_edit_password"
+                android:layout_marginTop="10dp"
+                android:text="@string/change_password"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <Button
+                android:id="@+id/btn_logout"
+                android:layout_marginTop="10dp"
+                android:text="@string/logout"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <Button
+                android:id="@+id/btn_about_me"
+                android:layout_marginTop="10dp"
+                android:text="@string/about_me"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</layout>

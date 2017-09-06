@@ -19,7 +19,6 @@ import com.smapl_android.ui.base.BaseFragment;
 public class LoginFragment extends BaseFragment {
 
     public static final String TAG = LoginFragment.class.getSimpleName();
-    private RelativeLayout layoutContent;
     private LoginMiniFragment loginMiniFragment;
     private RegistrationFragment registrationFragment;
 
@@ -35,23 +34,21 @@ public class LoginFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        layoutContent = (RelativeLayout) view.findViewById(R.id.relative_login_content);
-
         loginMiniFragment = new LoginMiniFragment();
         registrationFragment = new RegistrationFragment();
 
         getActivity().getSupportFragmentManager().beginTransaction()
-                .add(layoutContent.getId(), loginMiniFragment, LoginMiniFragment.TAG)
+                .add(R.id.relative_login_content, loginMiniFragment, LoginMiniFragment.TAG)
                 .commit();
     }
 
     public class Presenter {
         public void onLoginClicked() {
-            getCoreActivity().replaceContentWithHistoryWithTag(layoutContent.getId(), loginMiniFragment, LoginMiniFragment.TAG);
+            getCoreActivity().replaceContentWithHistoryWithTag(R.id.relative_login_content, loginMiniFragment, LoginMiniFragment.TAG);
         }
 
         public void onRegistrationClicked() {
-            getCoreActivity().replaceContentWithHistoryWithTag(layoutContent.getId(), registrationFragment, RegistrationFragment.TAG);
+            getCoreActivity().replaceContentWithHistoryWithTag(R.id.relative_login_content, registrationFragment, RegistrationFragment.TAG);
         }
     }
 }

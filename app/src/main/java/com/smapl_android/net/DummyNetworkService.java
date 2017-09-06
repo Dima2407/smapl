@@ -326,4 +326,9 @@ class DummyNetworkService implements NetworkService{
     public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<UpdateCarResponse, Throwable> callback) {
 
     }*/
+
+    @Override
+    public void getCampaigns(String token, OnResultCallback<GetCampaignListResponse, Throwable> callback) {
+
+    }
 }
