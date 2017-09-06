@@ -83,4 +83,8 @@ public class CoreRequest<T> {
     public boolean isError() {
         return !displayError;
     }
+
+    public WeakReference<CoreActivity> getActivity() {
+        return activity;
+    }
 }

@@ -3,9 +3,11 @@ package com.smapl_android.core;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.smapl_android.core.validation.ValidationException;
+import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.NetworkService;

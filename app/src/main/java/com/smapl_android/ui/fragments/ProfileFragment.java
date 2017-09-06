@@ -2,21 +2,16 @@ package com.smapl_android.ui.fragments;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.databinding.FragmentProfileBinding;
-import com.smapl_android.model.UserInfo;
-import com.smapl_android.net.responses.UserResponse;
 import com.smapl_android.ui.activities.AuthActivity;
-import com.smapl_android.ui.activities.MainActivity;
 import com.smapl_android.ui.base.BaseFragment;
 
 public class ProfileFragment extends BaseFragment {
@@ -34,42 +29,36 @@ public class ProfileFragment extends BaseFragment {
     public class Presenter {
 
 
-
-        public void goToCampaigns(){
+        public void goToCampaigns() {
             getCoreActivity().replaceContentWithHistory(new CampaignListFragment());
         }
 
-        public void goToObtainMoney(){
+        public void goToObtainMoney() {
 
         }
 
-        public void goToEditPersonalInfo(){
+        public void goToEditPersonalInfo() {
 
             getCoreActivity().replaceContentWithHistory(new AboutMeFragment());
         }
 
-        public void goToEditCar(){
+        public void goToEditCar() {
             getCoreActivity().replaceContentWithHistory(new SetCarFragment());
         }
 
-        public void goToEditPassword(){
+        public void goToEditPassword() {
             getCoreActivity().replaceContentWithHistory(new ChangePasswordFragment());
         }
 
-        public void logout(){
-            final CoreRequest<Boolean> request = getCoreService()
-                    .newRequest(getCoreActivity());
-            request
-                    .withLoading(R.string.wait_login)
-                    .handleErrorAsDialog()
-                    .handleSuccess(new SuccessOutput<Boolean>() {
-                        @Override
-                        public void onSuccess(Boolean result) {
-                            Intent intent = new Intent(getContext(), AuthActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                        }
-                    });
+        public void logout() {
+            final CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
+                @Override
+                public void onSuccess(Boolean result) {
+                    Intent intent = new Intent(getContext(), AuthActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            });
             getCoreService().logout(request);
         }
     }

@@ -15,7 +15,9 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.smapl_android.R;
 import com.smapl_android.SmaplApplication;
+import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.CoreService;
+import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.model.UserInfo;
 import com.smapl_android.services.GeolocationService;
 
@@ -97,7 +99,7 @@ public abstract class CoreActivity extends AppCompatActivity {
     public void replaceContentWithHistory(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
-                .replace(android.R.id.content, fragment)
+                .replace(android.R.id.content, fragment, fragment.getClass().getSimpleName())
                 .commit();
     }
 
@@ -194,6 +196,16 @@ public abstract class CoreActivity extends AppCompatActivity {
 
     public UserInfo getUserInfo() {
         return userInfo;
+    }
+
+    public <T> CoreRequest<T> newWaitingRequest(SuccessOutput<T> successOutput){
+        final CoreRequest<T> request = getCoreService().newRequest(this);
+
+        request
+                .withLoading(R.string.wait_login)
+                .handleErrorAsDialog()
+                .handleSuccess(successOutput);
+        return request;
     }
 
     //endregion

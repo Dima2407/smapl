@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.smapl_android.R;
 import com.smapl_android.core.CoreService;
 import com.smapl_android.ui.base.CoreActivity;
 
@@ -48,6 +49,16 @@ public abstract class BaseFragment extends Fragment {
         if (activity instanceof CoreActivity) {
             CoreActivity coreActivity = (CoreActivity) activity;
             coreActivity.showMessage(title, message);
+        }else {
+            throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
+        }
+    }
+
+    protected void showMessage(String message) {
+        final FragmentActivity activity = getActivity();
+        if (activity instanceof CoreActivity) {
+            CoreActivity coreActivity = (CoreActivity) activity;
+            coreActivity.showMessage(getString(R.string.app_name), message);
         }else {
             throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
         }
