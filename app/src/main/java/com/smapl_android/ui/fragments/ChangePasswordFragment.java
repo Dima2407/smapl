@@ -46,7 +46,12 @@ public class ChangePasswordFragment extends BaseFragment {
             @Override
             public void onSuccess(Boolean result) {
                 if (result) {
-                    showMessage(getString(R.string.password_changed));
+                    showMessage(getString(R.string.password_changed), new Runnable() {
+                        @Override
+                        public void run() {
+                            getCoreActivity().onBackPressed();
+                        }
+                    });
                 }
             }
         });

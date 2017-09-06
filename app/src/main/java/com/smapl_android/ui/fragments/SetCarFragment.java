@@ -67,8 +67,13 @@ public class SetCarFragment extends BaseFragment {
                         @Override
                         public void onSuccess(Boolean result) {
                             if (result) {
-                                showMessage(getString(R.string.changes_saved));
-                                getActivity().onBackPressed();
+                                showMessage(getString(R.string.changes_saved), new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        getActivity().onBackPressed();
+                                    }
+                                });
                             }
                         }
                     });
