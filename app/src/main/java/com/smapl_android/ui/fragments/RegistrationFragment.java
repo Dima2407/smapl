@@ -85,7 +85,7 @@ public class RegistrationFragment extends BaseFragment {
                 Validators.getPhoneValidator(getContext()).validate(phoneNumber);
                 Validators.getPasswordValidator(getContext()).validate(password);
             } catch (ValidationException e) {
-                showMessage(getString(R.string.app_name), e.getMessage());
+                showMessage(e.getMessage());
                 return;
             }
 

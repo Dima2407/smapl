@@ -151,20 +151,6 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         return request;
     }
 
-    public EditProfileRequest toEditProfileRequest() {
-        EditProfileRequest request = new EditProfileRequest();
-        request.setName(name.get());
-        request.setPhone(phone.get());
-        if (age.get() != null)
-            request.setAge(Integer.parseInt(age.get()));
-        if (gender.get() != null)
-            request.setGender(gender.get());
-        request.setInterests(interests.get());
-
-        return request;
-    }
-
-
     public static final Creator<UserInfoViewModel> CREATOR = new Creator<UserInfoViewModel>() {
         @Override
         public UserInfoViewModel createFromParcel(Parcel in) {

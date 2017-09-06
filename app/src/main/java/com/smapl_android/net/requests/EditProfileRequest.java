@@ -11,7 +11,7 @@ public class EditProfileRequest {
     private String phone;
 
     @SerializedName("age")
-    private int age;
+    private String age;
 
     @SerializedName("gender")
     private String gender;
@@ -35,11 +35,11 @@ public class EditProfileRequest {
         this.phone = phone;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 

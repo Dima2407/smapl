@@ -14,7 +14,7 @@ public class UserResponse {
     private String mobileNumber;
 
     @SerializedName("age")
-    private Integer age;
+    private String age;
 
     @SerializedName("car_year")
     private Integer carYear;
@@ -39,6 +39,9 @@ public class UserResponse {
 
     @SerializedName("updated_at")
     private String updatedAt;
+
+    @SerializedName("gender")
+    private String gender;
 
     public String getName() {
         return name;
@@ -120,11 +123,11 @@ public class UserResponse {
         this.updatedAt = updatedAt;
     }
 
-    public Integer getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -134,5 +137,13 @@ public class UserResponse {
 
     public void setCarPhoto(String carPhoto) {
         this.carPhoto = carPhoto;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

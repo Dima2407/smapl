@@ -36,15 +36,10 @@ public class UserInfo extends BaseObservable {
 
     public final ObservableField<String> driveAmount = new ObservableField<>();
 
-    public final TextWatcher carBrandTextWatcher = new TextWatcherAdapter(carBrand);
-
-    public final TextWatcher carModelTextWatcher = new TextWatcherAdapter(carModel);
-
-    public final TextWatcher carColorTextWatcher = new TextWatcherAdapter(carColor);
-
-    public final TextWatcher carYearTextWatcher = new TextWatcherAdapter(carYear);
+    private UserResponse response;
 
     public void apply(Resources resources, UserResponse response){
+        this.response = response;
         name.set(response.getName());
         carBrandModel.set(String.format("%s %s", response.getCarMark(), response.getCarModel()));
         carBrand.set(response.getCarMark());
@@ -52,6 +47,7 @@ public class UserInfo extends BaseObservable {
         carColor.set(response.getCarColor());
         carYear.set(String.valueOf(response.getCarYear()));
         balance.set(resources.getString(R.string.balance_format, 1000));
+        balanceAmount.set("1000");
         final int money = 10000;
         earn.set(resources.getString(R.string.total_earn_format, money));
         final int distance = 5000;
@@ -61,13 +57,8 @@ public class UserInfo extends BaseObservable {
         carPhoto.set(String.format("http://adrider.pg-dev.com/api/containers/car_photo/download/%s",response.getCarPhoto()));
     }
 
-    public UpdateCarRequest toUpdateCar(){
-        UpdateCarRequest request = new UpdateCarRequest();
-        request.setCarMark(carBrand.get());
-        request.setCarColor(carColor.get());
-        request.setCarYear(Integer.parseInt(carYear.get()));
-        request.setCarModel(carModel.get());
-        return request;
-    }
 
+    public UserResponse getResponse() {
+        return response;
+    }
 }

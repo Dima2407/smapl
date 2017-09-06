@@ -62,6 +62,9 @@ public abstract class CoreActivity extends AppCompatActivity {
 
     //region dialog
     public void showMessage(String title, String message) {
+        showMessage(title, message, null);
+    }
+    public void showMessage(String title, String message, final Runnable completed) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
         builder.setMessage(message);
@@ -69,6 +72,9 @@ public abstract class CoreActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                if(completed!= null){
+                    completed.run();
+                }
             }
         });
         builder.show();

@@ -44,21 +44,16 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected void showMessage(String title, String message) {
-        final FragmentActivity activity = getActivity();
-        if (activity instanceof CoreActivity) {
-            CoreActivity coreActivity = (CoreActivity) activity;
-            coreActivity.showMessage(title, message);
-        }else {
-            throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
-        }
-    }
 
     protected void showMessage(String message) {
+        showMessage(message, null);
+    }
+
+    protected void showMessage(String message, Runnable completed) {
         final FragmentActivity activity = getActivity();
         if (activity instanceof CoreActivity) {
             CoreActivity coreActivity = (CoreActivity) activity;
-            coreActivity.showMessage(getString(R.string.app_name), message);
+            coreActivity.showMessage(getString(R.string.app_name), message, completed);
         }else {
             throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
         }

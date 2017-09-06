@@ -51,21 +51,21 @@ public class MainScreenFragment extends BaseFragment {
             imageItem1.setVisibility(View.VISIBLE);
             imageItem2.setVisibility(View.GONE);
             imageItem3.setVisibility(View.GONE);
-            getCoreActivity().replaceContent(linearContent.getId(), new HistoryFragment());
+            getCoreActivity().replaceContentWithHistory(linearContent.getId(), new HistoryFragment());
         }
 
         public void onMapClicked(){
             imageItem1.setVisibility(View.GONE);
             imageItem2.setVisibility(View.VISIBLE);
             imageItem3.setVisibility(View.GONE);
-            getCoreActivity().replaceContent(linearContent.getId(), new MapFragment());
+            getCoreActivity().replaceContentWithHistory(linearContent.getId(), new MapFragment());
         }
 
         public void onProfileClicked(){
             imageItem1.setVisibility(View.GONE);
             imageItem2.setVisibility(View.GONE);
             imageItem3.setVisibility(View.VISIBLE);
-            getCoreActivity().replaceContent(linearContent.getId(), new ProfileFragment());
+            getCoreActivity().replaceContentWithHistory(linearContent.getId(), new ProfileFragment());
         }
 
     }

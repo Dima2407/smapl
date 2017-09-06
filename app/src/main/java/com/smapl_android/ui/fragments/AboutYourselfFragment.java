@@ -1,27 +1,20 @@
 package com.smapl_android.ui.fragments;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-
 import com.smapl_android.R;
 import com.smapl_android.core.validation.ValidationException;
-import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentAboutYourselfBinding;
 import com.smapl_android.model.UserInfoViewModel;
-import com.smapl_android.ui.activities.AuthActivity;
 import com.smapl_android.ui.base.BaseFragment;
 
 
@@ -73,7 +66,7 @@ public class AboutYourselfFragment extends BaseFragment {
         hideKeyboard();
 
         if (!validation()) {
-            showMessage(getString(R.string.app_name), getString(R.string.fill_all_fields));
+            showMessage(getString(R.string.fill_all_fields));
             return;
         }
 
