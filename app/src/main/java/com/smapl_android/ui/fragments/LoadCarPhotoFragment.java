@@ -144,6 +144,10 @@ public class LoadCarPhotoFragment extends BaseFragment {
     }
 
     private boolean registration() {
+        if (filePath != null) {
+            UploadService.uploadCarPhoto(getActivity(), filePath);
+            return true;
+        }
 
         final CoreRequest<Boolean> request = getCoreService()
                 .newRequest(getCoreActivity());

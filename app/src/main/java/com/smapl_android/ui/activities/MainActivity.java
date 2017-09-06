@@ -28,7 +28,6 @@ public class MainActivity extends CoreActivity {
                     @Override
                     public void onSuccess(UserResponse result) {
                         userInfo.apply(getResources(), result);
-                        userInfo.carPhoto.set("https://assets.gcs.ehi.com/content/enterprise_cros/data/vehicle/bookingCountries/GB/CARS/MBMR.doi.352.high.imageSmallThreeQuarterNodePath.png/1444354922894.png");
                     }
                 });
 

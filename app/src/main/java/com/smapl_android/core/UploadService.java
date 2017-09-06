@@ -48,21 +48,17 @@ public class UploadService extends IntentService {
                 .setType(MultipartBody.FORM);
 
 
-        String filePartHeader = String.format("form-data; name=\"%s\"; filename=\"%s\"", file.getName(), file.getName());
+        String filePartHeader = String.format("form-data; name=\"image\"; filename=\"%s\"", file.getName(), file.getName());
 
         requestBody.addPart(
                 Headers.of(HEADER_CONTENT_DISPOSITION, filePartHeader),
                 RequestBody.create(okhttp3.MediaType.parse("image/" + extension), file));
 
-        requestBody.addPart(
-                Headers.of(HEADER_CONTENT_DISPOSITION, "form-data; name=\"file\""),
-                RequestBody.create(null, file.getName()));
-
 
         final Request request = new Request.Builder()
                 .url(ApiService.DEV_URL + "api/user/upload_image/" + sessionStorage.getUserId())
                 .addHeader("Authorization", sessionStorage.getAuthKey())
-                .patch(requestBody.build())
+                .post(requestBody.build())
                 .build();
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

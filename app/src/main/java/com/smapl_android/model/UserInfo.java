@@ -58,6 +58,7 @@ public class UserInfo extends BaseObservable {
         drive.set(resources.getString(R.string.drive_format, distance));
         driveAmount.set(String.format("%d км", distance));
         earnAmount.set(String.format("%d грн", money));
+        carPhoto.set(String.format("http://adrider.pg-dev.com/api/containers/car_photo/download/%s",response.getCarPhoto()));
     }
 
     public UpdateCarRequest toUpdateCar(){

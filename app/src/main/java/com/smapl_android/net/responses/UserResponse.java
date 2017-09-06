@@ -28,6 +28,9 @@ public class UserResponse {
     @SerializedName("car_color")
     private String carColor;
 
+    @SerializedName("car_photo")
+    private String carPhoto;
+
     @SerializedName("interest")
     private String interests;
 
@@ -123,5 +126,13 @@ public class UserResponse {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getCarPhoto() {
+        return carPhoto;
+    }
+
+    public void setCarPhoto(String carPhoto) {
+        this.carPhoto = carPhoto;
     }
 }
