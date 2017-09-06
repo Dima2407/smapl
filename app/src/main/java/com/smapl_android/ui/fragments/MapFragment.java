@@ -42,12 +42,6 @@ public class MapFragment extends BaseFragment {
         FragmentMapBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false);
         binding.setUser(getUser());
         binding.setPresenter(new Presenter());
-
-        View inflatedView =  inflater.inflate(R.layout.fragment_map, container, false);
-
-
-
-
         return binding.getRoot();
     }
 

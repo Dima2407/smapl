@@ -81,9 +81,9 @@
                     android:button="@android:color/transparent"
                     android:drawablePadding="@dimen/menu_below_item_drawable_padding"
                     android:drawableTop="@drawable/vector_smart_object_12"
-                    android:onClick="@{() -> presenter.onNewsClicked()}"
+                    android:onClick="@{() -> presenter.onHistoryClicked()}"
                     android:paddingTop="@dimen/menu_below_item_padding_top"
-                    android:text="Новости"
+                    android:text="История"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_menu_below_size" />
 

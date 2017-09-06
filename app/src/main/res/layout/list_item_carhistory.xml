@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/text_about_me_car_brand_model"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="Дата:"
+                android:textColor="#89ffffff"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/car_history_date_TextView"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="1 december 2017"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="3dp"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#54ffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="Компания:"
+                android:textColor="#89ffffff"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/car_history_company_name_TextView"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="Adidas"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="3dp"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#54ffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="Проехали: "
+                android:textColor="#89ffffff"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/car_history_passed_distance_TextView"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text=" 283 km"
+                android:textColor="#ffffffff"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="3dp"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#54ffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="Заработали:"
+                android:textColor="#89ffffff"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/car_history_earned_points_TextView"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="800$"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
