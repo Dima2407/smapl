@@ -6,7 +6,7 @@ public final class NetworkServiceFactory {
 
     public static NetworkService create(boolean stub){
         if(stub){
-            return new DummyNetworkService();
+            return null;//new DummyNetworkService();
         }else {
             return new NetworkServiceImpl();
         }

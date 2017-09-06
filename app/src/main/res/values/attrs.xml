@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProfileButton">
+        <attr name="content" format="string"/>
+        <attr name="line_height" format="dimension"/>
+        <attr name="line_color" format="color"/>
+        <attr name="line_space" format="dimension"/>
+        <attr name="icon" format="reference"/>
+        <attr name="lines">
+            <flag name="top" value="1"/>
+            <flag name="bottom" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SimpleTopBar">
+        <attr name="leftText" format="string"/>
+        <attr name="rightText" format="string"/>
+        <attr name="centerText" format="string"/>
+        <attr name="leftClick" format="reference"/>
+        <attr name="rightClick" format="reference"/>
+    </declare-styleable>
+</resources>

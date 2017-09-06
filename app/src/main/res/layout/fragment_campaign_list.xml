@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:custom="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.RecyclerView
-            android:id="@+id/campaign_recycle_view"
+    <data>
+
+        <variable
+                name="presenter"
+                type="com.smapl_android.ui.fragments.CampaignListFragment.Presenter"/>
+    </data>
+
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@drawable/bg">
 
-</LinearLayout>
+        <com.smapl_android.ui.widgets.SimpleTopBar
+                android:id="@+id/linear_edit_car_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:leftText="@string/back"
+                custom:centerText="@string/campaign_list"
+                custom:leftClick="@{() -> presenter.onClickBack()}"/>
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/campaign_recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </LinearLayout>
+</layout>

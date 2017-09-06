@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:custom="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -18,48 +19,15 @@
         android:background="@drawable/bg"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/linear_edit_car_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_set_car_back"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="@{() -> presenter.onBackClicked()}"
-                android:text="@string/back"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_menu_bottom_size" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:background="@android:color/transparent"
-                android:paddingTop="14dp"
-                android:text="@string/set_car"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_menu_bottom_size" />
-
-            <Button
-                android:id="@+id/btn_set_car_forward"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="@{() -> presenter.onSaveClicked()}"
-                android:text="@string/save"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_menu_bottom_size" />
-
-        </LinearLayout>
+        <com.smapl_android.ui.widgets.SimpleTopBar
+                android:id="@+id/linear_edit_car_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:leftText="@string/back"
+                custom:centerText="@string/set_car"
+                custom:rightText="@string/save"
+                custom:leftClick="@{() -> presenter.onBackClicked()}"
+                custom:rightClick="@{() -> presenter.onSaveClicked()}"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

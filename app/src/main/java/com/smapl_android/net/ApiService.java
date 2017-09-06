@@ -78,4 +78,7 @@ public interface ApiService {
 
     @GET("api/campaign/list")
     Call<GetCampaignListResponse> getCampaigns(@Query("access_token") String token);
+
+    @POST("api/user/logout")
+    Call<ResponseBody> logout(String token);
 }

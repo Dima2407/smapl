@@ -217,4 +217,10 @@ class NetworkServiceImpl implements NetworkService {
         final Call<GetCampaignListResponse> campaigns = apiService.getCampaigns(token);
         campaigns.enqueue(createCallback(callback));
     }
+
+    @Override
+    public void logout(String token, OnResultCallback<Boolean, Throwable> callback) {
+        final Call<ResponseBody> logout = apiService.logout(token);
+        logout.enqueue(createBooleanEmptyBody(callback));
+    }
 }

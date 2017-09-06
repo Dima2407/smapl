@@ -1,109 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:custom="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-                name="user"
-                type="com.smapl_android.model.UserInfo"/>
+                name="user" type="com.smapl_android.model.UserInfo"/>
+        <variable name="presenter"
+                  type="com.smapl_android.ui.fragments.ProfileFragment.Presenter"/>
 
     </data>
-    <LinearLayout
-            android:orientation="vertical"
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/img_smapl_background">
-        <RelativeLayout
+            android:fillViewport="true">
+
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/img_map_car_photo"
-                    android:layout_width="@dimen/image_car_circle_size"
-                    android:layout_height="@dimen/image_car_circle_size"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="40dp"
-                    android:src="@drawable/audi"/>
+                android:layout_height="match_parent"
+                android:background="@drawable/img_smapl_background"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="36dp"
+                android:paddingBottom="36dp">
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img_map_car_photo"
+                        android:layout_width="@dimen/image_car_circle_size"
+                        android:layout_height="@dimen/image_car_circle_size"
+                        android:src="@drawable/audi"/>
 
-            <TextView
-                    android:id="@+id/text_map_user_name"
+                <TextView
+                        android:id="@+id/text_map_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_alignTop="@+id/img_map_car_photo"
+                        android:layout_toRightOf="@id/img_map_car_photo"
+                        android:text="@{user.name}"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/name_profile_size"/>
+
+                <TextView
+                        android:id="@+id/text_map_car_brand_model"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/text_map_user_name"
+                        android:layout_below="@id/text_map_user_name"
+                        android:text="@{user.carBrandModel}"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/car_brand_model_profile_size"/>
+
+
+                <TextView
+                        android:id="@+id/text_map_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@id/img_map_car_photo"
+                        android:text="@{user.balance}"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/car_brand_model_profile_size"/>
+
+                <TextView
+                        android:id="@+id/text_map_earn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_map_balance"
+                        android:text="@{user.earn}"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/car_brand_model_profile_size"/>
+
+                <TextView
+                        android:id="@+id/text_map_drive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_map_earn"
+                        android:text="@{user.drive}"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/car_brand_model_profile_size"/>
+            </RelativeLayout>
+
+            <com.smapl_android.ui.widgets.ProfileButton
+                    android:id="@+id/btn_to_campaign_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    custom:content="@string/campaign_list"
+                    custom:line_height="1dp"
+                    custom:line_color="@android:color/darker_gray"
+                    custom:line_space="10dp"
+                    android:onClick="@{() -> presenter.goToCampaigns()}"/>
+
+            <com.smapl_android.ui.widgets.ProfileButton
+                    android:id="@+id/btn_obtain_money"
+                    custom:content="@string/obtain_money"
+                    custom:line_height="1dp"
+                    custom:line_color="@android:color/darker_gray"
+                    custom:line_space="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="45dp"
-                    android:layout_toRightOf="@id/img_map_car_photo"
-                    android:text="@{user.name}"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/name_profile_size"/>
+                    android:layout_marginTop="36dp"
+                    android:onClick="@{() -> presenter.goToObtainMoney()}"/>
 
-            <TextView
-                    android:id="@+id/text_map_car_brand_model"
-                    android:layout_width="wrap_content"
+            <com.smapl_android.ui.widgets.ProfileButton
+                    android:id="@+id/btn_about_me"
+                    custom:content="@string/edit_about_me"
+                    custom:line_height="1dp"
+                    custom:line_color="@android:color/darker_gray"
+                    custom:line_space="10dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/text_map_user_name"
-                    android:layout_below="@id/text_map_user_name"
-                    android:text="@{user.carBrandModel}"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/car_brand_model_profile_size"/>
+                    android:layout_marginTop="36dp"
+                    android:onClick="@{() -> presenter.goToEditPersonalInfo()}"/>
 
-
-            <TextView
-                    android:id="@+id/text_map_balance"
-                    android:layout_width="wrap_content"
+            <com.smapl_android.ui.widgets.ProfileButton
+                    android:id="@+id/btn_to_set_car_fragment"
+                    custom:content="@string/to_set_car"
+                    custom:line_height="1dp"
+                    custom:line_color="@android:color/darker_gray"
+                    custom:line_space="10dp"
+                    custom:lines="bottom"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/img_map_car_photo"
-                    android:text="@{user.balance}"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/car_brand_model_profile_size"/>
+                    android:onClick="@{() -> presenter.goToEditCar()}"/>
 
-            <TextView
-                    android:id="@+id/text_map_earn"
-                    android:layout_width="wrap_content"
+            <com.smapl_android.ui.widgets.ProfileButton
+                    android:id="@+id/btn_edit_password"
+                    custom:content="@string/change_password"
+                    custom:line_height="1dp"
+                    custom:line_color="@android:color/darker_gray"
+                    custom:line_space="10dp"
+                    custom:lines="bottom"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/text_map_balance"
-                    android:text="@{user.earn}"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/car_brand_model_profile_size"/>
+                    android:onClick="@{() -> presenter.goToEditPassword()}"/>
 
-            <TextView
-                    android:id="@+id/text_map_drive"
-                    android:layout_width="wrap_content"
+            <com.smapl_android.ui.widgets.ProfileButton
+                    android:id="@+id/btn_logout"
+                    android:layout_marginTop="36dp"
+                    custom:content="@string/logout"
+                    custom:line_height="1dp"
+                    custom:line_color="@android:color/darker_gray"
+                    custom:line_space="10dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/text_map_earn"
-                    android:text="@{user.drive}"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/car_brand_model_profile_size"/>
-        </RelativeLayout>
+                    android:onClick="@{() -> presenter.logout()}"/>
 
-        <Button
-                android:id="@+id/btn_to_set_car_fragment"
-                android:text="@string/to_set_car"
-                android:textAllCaps="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <Button
-                android:id="@+id/btn_edit_password"
-                android:layout_marginTop="10dp"
-                android:text="@string/change_password"
-                android:textAllCaps="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <Button
-                android:id="@+id/btn_logout"
-                android:layout_marginTop="10dp"
-                android:text="@string/logout"
-                android:textAllCaps="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <Button
-                android:id="@+id/btn_about_me"
-                android:layout_marginTop="10dp"
-                android:text="@string/about_me"
-                android:textAllCaps="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </layout>

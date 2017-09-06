@@ -8,9 +8,18 @@ import com.smapl_android.net.responses.*;
 
 public interface NetworkService {
 
+    //region auth
+
     void login(String login, String password, final NetworkServiceImpl.OnResultCallback<LoginResponse, Throwable> callback);
 
     void registration(UserInfoViewModel user, final NetworkService.OnResultCallback<RegistrationResponse, Throwable> callback);
+
+    void logout(String token, OnResultCallback<Boolean, Throwable> callback);
+
+    void editPassword(String token, String oldPassword, String newPassword,
+                      final NetworkService.OnResultCallback<Boolean, Throwable> callback);
+
+    //endregion
 
     void getUserById(int id, String token, NetworkService.OnResultCallback<UserResponse, Throwable> callback);
 
@@ -22,8 +31,7 @@ public interface NetworkService {
 
     void getCompanyHistory(final NetworkService.OnResultCallback<GetCompanyHistoryResponse, Throwable> callback);
 
-    void editPassword(String token, String oldPassword, String newPassword,
-                      final NetworkService.OnResultCallback<Boolean, Throwable> callback);
+
 
     void editProfile(int userId, String token, EditProfileRequest request, final NetworkService.OnResultCallback<EditProfileResponse, Throwable> callback);
 

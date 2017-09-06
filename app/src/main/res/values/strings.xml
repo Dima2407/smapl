@@ -33,7 +33,7 @@
     <string name="email">e-mail</string>
     <string name="load_photo">Загрузить фото</string>
     <string name="set_car">Машина</string>
-    <string name="to_set_car">Изменить описание машины</string>
+    <string name="to_set_car">Редактировать информацию о машине</string>
     <string name="change_password">Изменить пароль</string>
     <string name="hint_car_brand">Марка авто</string>
     <string name="hint_car_model">Модель авто</string>
@@ -59,7 +59,7 @@
     <string name="error_empty_car_model">Введите модель автомобиля</string>
     <string name="error_empty_car_year">Введите год выпуска автомобиля</string>
     <string name="error_incorrect_car_year">Вы ввели некорректный год выпуска автомобиля</string>
-    <string name="logout">Выйти из аккаунта</string>
+    <string name="logout">Выйти</string>
     <string name="hint_phone">Телефон:</string>
     <string name="hint_name">Имя:</string>
     <string name="hint_about_me_interests">Интересы:</string>
@@ -75,6 +75,9 @@
     <string name="balance_format">Баланс: %d грн</string>
     <string name="total_earn_format">Всего заработали: %d грн</string>
     <string name="drive_format">Проехали: %d км</string>
+    <string name="campaign_list">Рекламные компании</string>
+    <string name="obtain_money">Вывод денег</string>
+    <string name="edit_about_me">Редактировать личную информацию</string>
 
     <string-array name="age">
         <item>18</item>

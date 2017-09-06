@@ -1,199 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:custom="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-            name="user"
-            type="com.smapl_android.model.UserInfoViewModel" />
+                name="user"
+                type="com.smapl_android.model.UserInfoViewModel"/>
 
         <variable
-            name="presenter"
-            type="com.smapl_android.ui.fragments.AboutMeFragment.Presenter" />
+                name="presenter"
+                type="com.smapl_android.ui.fragments.AboutMeFragment.Presenter"/>
     </data>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_about_me_back"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="@{() -> presenter.onClickBack()}"
-                android:text="@string/back"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_menu_bottom_size" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:background="@android:color/transparent"
-                android:paddingTop="14dp"
-                android:text="@string/change_password_password"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_menu_bottom_size" />
-
-            <Button
-                android:id="@+id/btn_about_me_forward"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:onClick="@{() -> presenter.onClickForward()}"
-                android:text="@string/save"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_menu_bottom_size" />
-
-        </LinearLayout>
-
-        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp">
+            android:background="@drawable/bg"
+            android:orientation="vertical">
+
+        <com.smapl_android.ui.widgets.SimpleTopBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:leftText="@string/back"
+                custom:centerText="@string/change_password_password"
+                custom:rightText="@string/save"
+                custom:leftClick="@{() -> presenter.onClickBack()}"
+                custom:rightClick="@{() -> presenter.onClickForward()}"/>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img_circle_about_me_photo"
-                android:layout_width="@dimen/image_car_circle_size"
-                android:layout_height="@dimen/image_car_circle_size"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="35dp"
-                android:src="@drawable/audi" />
+                    android:id="@+id/img_circle_about_me_photo"
+                    android:layout_width="@dimen/image_car_circle_size"
+                    android:layout_height="@dimen/image_car_circle_size"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="35dp"
+                    android:src="@drawable/audi"/>
 
             <TextView
-                android:id="@+id/text_about_me_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="40dp"
-                android:layout_toRightOf="@id/img_circle_about_me_photo"
-                android:text="@{user.oldName}"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/name_profile_size" />
+                    android:id="@+id/text_about_me_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_toRightOf="@id/img_circle_about_me_photo"
+                    android:text="@{user.oldName}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/name_profile_size"/>
 
             <TextView
-                android:id="@+id/text_about_me_car_brand_model"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/text_about_me_name"
-                android:layout_below="@id/text_about_me_name"
-                android:text="@{user.carBrand + ' ' + user.carModel}"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/car_brand_model_profile_size" />
+                    android:id="@+id/text_about_me_car_brand_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/text_about_me_name"
+                    android:layout_below="@id/text_about_me_name"
+                    android:text="@{user.carBrand + ' ' + user.carModel}"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/car_brand_model_profile_size"/>
 
             <EditText
-                android:id="@+id/edit_about_me_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/img_circle_about_me_photo"
-                android:layout_marginTop="50dp"
-                android:addTextChangedListener="@{user.phoneTextWatcher}"
-                android:background="@drawable/edit_text_line_background"
-                android:drawableRight="@{user.phoneValid}"
-                android:hint="@{@string/hint_phone + ' ' + user.oldPhone}"
-                android:inputType="phone"
-                android:paddingTop="@dimen/edit_password_edit_padding_top"
-                android:text="@{user.phone}"
-                android:textColorHint="@android:color/white"
-                android:textSize="@dimen/core_text_size" />
+                    android:id="@+id/edit_about_me_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_circle_about_me_photo"
+                    android:layout_marginTop="50dp"
+                    android:addTextChangedListener="@{user.phoneTextWatcher}"
+                    android:background="@drawable/edit_text_line_background"
+                    android:drawableRight="@{user.phoneValid}"
+                    android:hint="@{@string/hint_phone + ' ' + user.oldPhone}"
+                    android:inputType="phone"
+                    android:paddingTop="@dimen/edit_password_edit_padding_top"
+                    android:text="@{user.phone}"
+                    android:textColorHint="@android:color/white"
+                    android:textSize="@dimen/core_text_size"/>
 
             <EditText
-                android:id="@+id/edit_about_me_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/edit_about_me_phone"
-                android:addTextChangedListener="@{user.nameTextWatcher}"
-                android:background="@drawable/edit_text_line_background"
-                android:hint="@{@string/hint_name + ' ' + user.oldName}"
-                android:paddingTop="@dimen/edit_password_edit_padding_top"
-                android:text="@{user.name}"
-                android:textColorHint="@android:color/white"
-                android:textSize="@dimen/core_text_size" />
+                    android:id="@+id/edit_about_me_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edit_about_me_phone"
+                    android:addTextChangedListener="@{user.nameTextWatcher}"
+                    android:background="@drawable/edit_text_line_background"
+                    android:hint="@{@string/hint_name + ' ' + user.oldName}"
+                    android:paddingTop="@dimen/edit_password_edit_padding_top"
+                    android:text="@{user.name}"
+                    android:textColorHint="@android:color/white"
+                    android:textSize="@dimen/core_text_size"/>
 
             <RadioGroup
-                android:id="@+id/radio_group_about_me_gender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/edit_about_me_name"
-                android:background="@drawable/edit_text_line_background"
-                android:orientation="horizontal"
-                android:paddingTop="@dimen/edit_password_edit_padding_top">
+                    android:id="@+id/radio_group_about_me_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edit_about_me_name"
+                    android:background="@drawable/edit_text_line_background"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/edit_password_edit_padding_top">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/gender"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/core_text_size" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gender"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/core_text_size"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/man"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/core_text_size" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/man"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/core_text_size"/>
 
                 <RadioButton
-                    android:id="@+id/radio_about_me_man"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                        android:id="@+id/radio_about_me_man"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/woman"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/core_text_size" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/woman"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/core_text_size"/>
 
                 <RadioButton
-                    android:id="@+id/radio_about_me_woman"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                        android:id="@+id/radio_about_me_woman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
             </RadioGroup>
 
             <EditText
-                android:id="@+id/edit_about_me_age"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/radio_group_about_me_gender"
-                android:addTextChangedListener="@{user.ageTextWatcher}"
-                android:background="@drawable/edit_text_line_background"
-                android:hint="@{user.oldAge != null ? @string/age + ' ' + user.oldAge : @string/age}"
-                android:inputType="number"
-                android:maxLength="3"
-                android:paddingTop="@dimen/edit_password_edit_padding_top"
-                android:text="@{user.age}"
-                android:textColorHint="@android:color/white"
-                android:textSize="@dimen/core_text_size" />
+                    android:id="@+id/edit_about_me_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/radio_group_about_me_gender"
+                    android:addTextChangedListener="@{user.ageTextWatcher}"
+                    android:background="@drawable/edit_text_line_background"
+                    android:hint="@{user.oldAge != null ? @string/age + ' ' + user.oldAge : @string/age}"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingTop="@dimen/edit_password_edit_padding_top"
+                    android:text="@{user.age}"
+                    android:textColorHint="@android:color/white"
+                    android:textSize="@dimen/core_text_size"/>
 
             <EditText
-                android:id="@+id/edit_about_me_interests"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/edit_about_me_age"
-                android:addTextChangedListener="@{user.interestsTextWatcher}"
-                android:background="@drawable/edit_text_line_background"
-                android:hint="@{user.oldInterests != null ? @string/hint_about_me_interests + ' ' + user.oldInterests : @string/hint_interests}"
-                android:paddingTop="@dimen/edit_password_edit_padding_top"
-                android:text="@{user.interests}"
-                android:textColorHint="@android:color/white"
-                android:textSize="@dimen/core_text_size" />
+                    android:id="@+id/edit_about_me_interests"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edit_about_me_age"
+                    android:addTextChangedListener="@{user.interestsTextWatcher}"
+                    android:background="@drawable/edit_text_line_background"
+                    android:hint="@{user.oldInterests != null ? @string/hint_about_me_interests + ' ' + user.oldInterests : @string/hint_interests}"
+                    android:paddingTop="@dimen/edit_password_edit_padding_top"
+                    android:text="@{user.interests}"
+                    android:textColorHint="@android:color/white"
+                    android:textSize="@dimen/core_text_size"/>
 
         </RelativeLayout>
 

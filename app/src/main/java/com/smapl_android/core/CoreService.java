@@ -91,8 +91,31 @@ public class CoreService {
         });
     }
 
-    public void logout() {
+    public void logout(final CoreRequest<Boolean> request) {
         sessionStorage.logout();
+        String token = sessionStorage.getAuthKey();
+        networkServiceImpl.logout(token, new NetworkService.OnResultCallback<Boolean, Throwable>() {
+            @Override
+            public void onResult(final Boolean result, final Throwable error) {
+                if (request != null) {
+                    if (error != null) {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                request.processError(error.getMessage());
+                            }
+                        });
+                    } else {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                request.processResult(result);
+                            }
+                        });
+                    }
+                }
+            }
+        });
     }
 
     public void getUser(final CoreRequest<UserResponse> coreRequest) {

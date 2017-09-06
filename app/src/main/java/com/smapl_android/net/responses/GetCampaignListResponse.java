@@ -30,7 +30,7 @@ public class GetCampaignListResponse {
         @SerializedName("age")
         private String age;
         @SerializedName("sticker")
-        private String sticker;
+        private String[] stickers;
         @SerializedName("description")
         private String description;
         @SerializedName("created_at")
@@ -72,8 +72,8 @@ public class GetCampaignListResponse {
             return age;
         }
 
-        public String getSticker() {
-            return sticker;
+        public String[] getStickers() {
+            return stickers;
         }
 
         public String getDescription() {

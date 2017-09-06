@@ -9,7 +9,7 @@ import com.smapl_android.net.responses.*;
 import java.util.Random;
 
 @Deprecated
-class DummyNetworkService implements NetworkService{
+abstract class DummyNetworkService implements NetworkService{
 
     public static class Utils {
         public static <T> T[] arrayGenerate(int capacity) {
@@ -329,6 +329,11 @@ class DummyNetworkService implements NetworkService{
 
     @Override
     public void getCampaigns(String token, OnResultCallback<GetCampaignListResponse, Throwable> callback) {
+
+    }
+
+    @Override
+    public void logout(String token, OnResultCallback<Boolean, Throwable> callback) {
 
     }
 }

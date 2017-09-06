@@ -2,6 +2,7 @@ package com.smapl_android.ui.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
+import com.smapl_android.databinding.FragmentCampaignListBinding;
 import com.smapl_android.net.responses.GetCampaignListResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
@@ -28,7 +30,9 @@ public class CampaignListFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_campaign_list, container, false);
+        final FragmentCampaignListBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_campaign_list, container, false);
+        binding.setPresenter(new Presenter());
+        return binding.getRoot();
     }
 
     @Override
@@ -98,6 +102,12 @@ public class CampaignListFragment extends BaseFragment {
             image = (ImageView) itemView.findViewById(android.R.id.icon);
             title = (TextView) itemView.findViewById(android.R.id.text1);
             description = (TextView) itemView.findViewById(android.R.id.text2);
+        }
+    }
+
+    public class Presenter {
+        public void onClickBack(){
+
         }
     }
 }
