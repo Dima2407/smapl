@@ -39,31 +39,10 @@ public class MapFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentMapBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false);
-        binding.setUser(getUser());
+        binding.setUser(getCoreActivity().getUserInfo());
         binding.setPresenter(new Presenter());
 
         return binding.getRoot();
-    }
-
-    private UserInfo getUser(){
-        final UserInfo userInfo = new UserInfo();
-        final CoreRequest<UserResponse> request = getCoreService().newRequest(getCoreActivity());
-        request.withLoading(R.string.wait_login)
-                .handleErrorAsDialog()
-                .handleSuccess(new SuccessOutput<UserResponse>() {
-                    @Override
-                    public void onSuccess(UserResponse result) {
-                        userInfo.name.set(result.getName());
-                        userInfo.carBrand.set(result.getCarMark());
-                        userInfo.carModel.set(result.getCarModel());
-                        userInfo.carColor.set(result.getCarColor());
-                        userInfo.carYear.set(result.getCarYear() != null ? result.getCarYear().toString() : null);
-                    }
-                });
-
-        getCoreService().getUser(request);
-
-        return userInfo;
     }
 
     @Override

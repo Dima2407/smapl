@@ -1,64 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="user" type="com.smapl_android.model.UserInfo"/>
+    </data>
     <LinearLayout
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/car_history_footer_LinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="visible">
+                  android:paddingTop="12dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <TextView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:textAlignment="textStart"
-                android:text="Всего проехали:"
-                android:textColor="#FFFFFFFF" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/total_drive"
+                    android:textColor="@android:color/white"/>
 
             <TextView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:text="409 км"
-                android:textStyle="bold"
-                android:textColor="#FFFFFFFF" />
+                    android:id="@+id/total_drive"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="@{user.driveAmount}"
+                    android:textColor="@android:color/white"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1"
-            >
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+        >
 
             <TextView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:textAlignment="textStart"
-                android:text="Всего заработали:"
-                android:textColor="#FFFFFFFF" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Всего заработали:"
+                    android:textColor="@android:color/white"/>
 
             <TextView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:text="2009 баллов"
-                android:textStyle="bold"
-                android:textAlignment="textStart"
-                android:textColor="#FFFFFFFF" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{user.earnAmount}"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"/>
         </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+</layout>

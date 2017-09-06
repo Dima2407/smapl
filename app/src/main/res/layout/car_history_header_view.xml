@@ -1,56 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="user" type="com.smapl_android.model.UserInfo"/>
+    </data>
     <LinearLayout
-        android:id="@+id/car_history_header_LinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img_map_car_photo"
-                android:layout_width="@dimen/image_car_circle_size"
-                android:layout_height="@dimen/image_car_circle_size"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="40dp"
-                android:src="@drawable/audi" />
-
-            <TextView
-                android:id="@+id/text_map_user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="45dp"
-                android:layout_toRightOf="@id/img_map_car_photo"
-                android:text="USERNAME"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/name_profile_size" />
-
-            <TextView
-                android:id="@+id/text_map_car_brand_model"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/text_map_user_name"
-                android:layout_below="@id/text_map_user_name"
-                android:text="LEXUS"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/car_brand_model_profile_size" />
-
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/current_balance_TextView"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Текущий баланс: 3500 баллов"
-            android:textAlignment="center"
-            android:textColor="#FFFFFFFF"
-            android:textSize="18sp" />
+            android:layout_height="match_parent">
+
+        <com.smapl_android.ui.widgets.UserInfoBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:leftSpace="6dp"
+                custom:userName="@{user.name}"
+                custom:carInfo="@{user.carBrandModel}"
+                custom:carPhoto="@{user.carPhoto}"/>
+        <TextView
+                android:id="@+id/current_balance_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{user.balance}"
+                android:textAlignment="center"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18sp"/>
     </LinearLayout>
-</LinearLayout>
+</layout>

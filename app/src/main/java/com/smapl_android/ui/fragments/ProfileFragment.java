@@ -26,25 +26,8 @@ public class ProfileFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final FragmentProfileBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
         binding.setPresenter(new Presenter());
-        binding.setUser(getUser());
+        binding.setUser(getCoreActivity().getUserInfo());
         return binding.getRoot();
-    }
-
-    private UserInfo getUser(){
-        final UserInfo userInfo = new UserInfo();
-        final CoreRequest<UserResponse> request = getCoreService().newRequest(getCoreActivity());
-        request.withLoading(R.string.wait_login)
-                .handleErrorAsDialog()
-                .handleSuccess(new SuccessOutput<UserResponse>() {
-                    @Override
-                    public void onSuccess(UserResponse result) {
-                        userInfo.apply(getResources(), result);
-                    }
-                });
-
-        getCoreService().getUser(request);
-
-        return userInfo;
     }
 
 

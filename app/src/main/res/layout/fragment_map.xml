@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:custom="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -17,35 +18,16 @@
         android:layout_height="match_parent"
         android:background="@drawable/img_smapl_background">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_map_car_photo"
-            android:layout_width="@dimen/image_car_circle_size"
-            android:layout_height="@dimen/image_car_circle_size"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/audi" />
 
-        <TextView
-            android:id="@+id/text_map_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="45dp"
-            android:layout_toRightOf="@id/img_map_car_photo"
-            android:text="@{user.name}"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/name_profile_size" />
-
-        <TextView
-            android:id="@+id/text_map_car_brand_model"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/text_map_user_name"
-            android:layout_below="@id/text_map_user_name"
-            android:text="@{user.carBrand + ' ' + user.carModel}"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/car_brand_model_profile_size" />
-
+        <com.smapl_android.ui.widgets.UserInfoBar
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:leftSpace="6dp"
+                custom:userName="@{user.name}"
+                custom:carInfo="@{user.carBrandModel}"
+                custom:carPhoto="@{user.carPhoto}"/>
 
         <Button
             android:id="@+id/btn_map_start"

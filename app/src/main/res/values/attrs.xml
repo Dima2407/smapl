@@ -19,4 +19,11 @@
         <attr name="leftClick" format="reference"/>
         <attr name="rightClick" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="UserInfoBar">
+        <attr name="userName" format="string"/>
+        <attr name="carInfo" format="string"/>
+        <attr name="carPhoto" format="string"/>
+        <attr name="leftSpace" format="dimension"/>
+    </declare-styleable>
 </resources>

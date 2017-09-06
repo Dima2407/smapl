@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable name="item" type="com.smapl_android.ui.fragments.HistoryFragment.CarHistory"/>
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:paddingTop="12dp"
+                  android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_background"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:weightSum="1">
+
+                <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Дата:"
+                        android:textColor="#89ffffff"
+                        android:textSize="13sp"/>
+
+                <TextView
+                        android:id="@+id/car_history_date_TextView"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:text="@{item.date}"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"/>
+
+            </LinearLayout>
+
+            <View
+                    android:layout_marginTop="3dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#54ffffff"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="1">
+
+                <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Компания:"
+                        android:textColor="#89ffffff"
+                        android:textSize="13sp"/>
+
+                <TextView
+                        android:id="@+id/car_history_company_name_TextView"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:text="@{item.companyName}"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"/>
+
+            </LinearLayout>
+
+            <View
+                    android:layout_marginTop="3dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#54ffffff"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="1">
+
+                <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Проехали: "
+                        android:textColor="#89ffffff"
+                        android:textSize="13sp"/>
+
+                <TextView
+                        android:id="@+id/car_history_passed_distance_TextView"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:text="@{item.distancePassed}"
+                        android:textColor="#ffffffff"
+                        android:textSize="13sp"/>
+
+            </LinearLayout>
+
+            <View
+                    android:layout_marginTop="3dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#54ffffff"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="1">
+
+                <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Заработали:"
+                        android:textColor="#89ffffff"
+                        android:textSize="13sp"/>
+
+                <TextView
+                        android:id="@+id/car_history_earned_points_TextView"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:text="@{item.earnedPoints}"
+                        android:textColor="@android:color/white"
+                        android:textSize="13sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

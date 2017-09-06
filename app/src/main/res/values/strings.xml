@@ -74,10 +74,11 @@
     <string name="wrong_age">Некорректный возраст</string>
     <string name="balance_format">Баланс: %d грн</string>
     <string name="total_earn_format">Всего заработали: %d грн</string>
-    <string name="drive_format">Проехали: %d км</string>
+    <string name="drive_format">Всего проехали: %d км</string>
     <string name="campaign_list">Рекламные компании</string>
     <string name="obtain_money">Вывод денег</string>
     <string name="edit_about_me">Редактировать личную информацию</string>
+    <string name="total_drive">Всего проехали:</string>
 
     <string-array name="age">
         <item>18</item>

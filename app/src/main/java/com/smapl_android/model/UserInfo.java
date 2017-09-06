@@ -22,11 +22,19 @@ public class UserInfo extends BaseObservable {
 
     public final ObservableField<String> carYear = new ObservableField<>();
 
+    public final ObservableField<String> carPhoto = new ObservableField<>();
+
     public final ObservableField<String> balance = new ObservableField<>();
+
+    public final ObservableField<String> balanceAmount = new ObservableField<>();
 
     public final ObservableField<String> earn = new ObservableField<>();
 
+    public final ObservableField<String> earnAmount = new ObservableField<>();
+
     public final ObservableField<String> drive = new ObservableField<>();
+
+    public final ObservableField<String> driveAmount = new ObservableField<>();
 
     public final TextWatcher carBrandTextWatcher = new TextWatcherAdapter(carBrand);
 
@@ -44,8 +52,12 @@ public class UserInfo extends BaseObservable {
         carColor.set(response.getCarColor());
         carYear.set(String.valueOf(response.getCarYear()));
         balance.set(resources.getString(R.string.balance_format, 1000));
-        earn.set(resources.getString(R.string.total_earn_format,10000));
-        drive.set(resources.getString(R.string.drive_format, 5000));
+        final int money = 10000;
+        earn.set(resources.getString(R.string.total_earn_format, money));
+        final int distance = 5000;
+        drive.set(resources.getString(R.string.drive_format, distance));
+        driveAmount.set(String.format("%d км", distance));
+        earnAmount.set(String.format("%d грн", money));
     }
 
     public UpdateCarRequest toUpdateCar(){

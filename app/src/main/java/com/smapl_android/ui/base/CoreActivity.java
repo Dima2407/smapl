@@ -16,9 +16,12 @@ import android.view.inputmethod.InputMethodManager;
 import com.smapl_android.R;
 import com.smapl_android.SmaplApplication;
 import com.smapl_android.core.CoreService;
+import com.smapl_android.model.UserInfo;
 import com.smapl_android.services.GeolocationService;
 
 public abstract class CoreActivity extends AppCompatActivity {
+
+    protected final UserInfo userInfo = new UserInfo();
 
     private final PermissionsManager permissionsManager = new PermissionsManager();
     private final ImageManager imageManager = new ImageManager();
@@ -187,6 +190,10 @@ public abstract class CoreActivity extends AppCompatActivity {
         if (!handled){
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
     //endregion
