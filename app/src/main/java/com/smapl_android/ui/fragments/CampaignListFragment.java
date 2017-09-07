@@ -1,18 +1,18 @@
 package com.smapl_android.ui.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
@@ -25,7 +25,6 @@ import java.util.List;
 public class CampaignListFragment extends BaseFragment {
 
     private RecyclerView campaignRecycleView;
-
 
     @Nullable
     @Override
@@ -40,58 +39,61 @@ public class CampaignListFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         campaignRecycleView = (RecyclerView) view.findViewById(R.id.campaign_recycle_view);
         campaignRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+        String[] strArray = new String[]{"One", "Two", "Three"};
+        CampaignsListAdapter campaignsListAdapter = new CampaignsListAdapter(strArray);
+        campaignRecycleView.setAdapter(campaignsListAdapter);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final CoreRequest<List<GetCampaignListResponse.Campaign>> request = getCoreService()
-                .newRequest(getCoreActivity());
-        request
-                .withLoading(R.string.wait_login)
-                .handleErrorAsDialog()
-                .handleSuccess(new SuccessOutput<List<GetCampaignListResponse.Campaign>>() {
-                    @Override
-                    public void onSuccess(List<GetCampaignListResponse.Campaign> result) {
-                        final CampaignAdapter adapter = new CampaignAdapter(result);
-                        campaignRecycleView.setAdapter(adapter);
-                    }
-                });
-        getCoreService().getCampaigns(request);
+        //       final CoreRequest<List<GetCampaignListResponse.Campaign>> request = getCoreService()
+//                .newRequest(getCoreActivity());
+//        request
+//                .withLoading(R.string.wait_login)
+//                .handleErrorAsDialog()
+//                .handleSuccess(new SuccessOutput<List<GetCampaignListResponse.Campaign>>() {
+//                    @Override
+//                    public void onSuccess(List<GetCampaignListResponse.Campaign> result) {
+//                        final CampaignAdapter adapter = new CampaignAdapter(result);
+//                        campaignRecycleView.setAdapter(adapter);
+//                    }
+//                });
+        //       getCoreService().getCampaigns(request);
     }
 
 
-    private static final class CampaignAdapter extends RecyclerView.Adapter<CampaignVH>{
+//    private static final class CampaignAdapter extends RecyclerView.Adapter<CampaignVH> {
+//
+//        private final List<GetCampaignListResponse.Campaign> items;
+//
+//        CampaignAdapter(List<GetCampaignListResponse.Campaign> result) {
+//            items = result;
+//        }
+//
+//        @Override
+//        public CampaignVH onCreateViewHolder(ViewGroup parent, int viewType) {
+//            Context context = parent.getContext();
+//
+//            View itemView = View.inflate(context, R.layout.item_compaign, null);
+//
+//            return new CampaignVH(itemView);
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(CampaignVH holder, int position) {
+//            final GetCampaignListResponse.Campaign campaign = items.get(position);
+//            holder.title.setText(campaign.getName());
+//            holder.description.setText(campaign.getDescription());
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return items.size();
+//        }
+//    }
 
-        private final List<GetCampaignListResponse.Campaign> items;
-
-        CampaignAdapter(List<GetCampaignListResponse.Campaign> result) {
-            items = result;
-        }
-
-        @Override
-        public CampaignVH onCreateViewHolder(ViewGroup parent, int viewType) {
-            Context context = parent.getContext();
-
-            View itemView = View.inflate(context, R.layout.item_compaign, null);
-
-            return new CampaignVH(itemView);
-        }
-
-        @Override
-        public void onBindViewHolder(CampaignVH holder, int position) {
-            final GetCampaignListResponse.Campaign campaign = items.get(position);
-            holder.title.setText(campaign.getName());
-            holder.description.setText(campaign.getDescription());
-        }
-
-        @Override
-        public int getItemCount() {
-            return items.size();
-        }
-    }
-
-    private static final class CampaignVH extends RecyclerView.ViewHolder{
+    private static final class CampaignVH extends RecyclerView.ViewHolder {
 
         private final ImageView image;
         private final TextView title;
@@ -106,8 +108,60 @@ public class CampaignListFragment extends BaseFragment {
     }
 
     public class Presenter {
-        public void onClickBack(){
+        public void onClickBack() {
 
         }
+
+
     }
+
+
+    private class CampaignsListAdapter extends RecyclerView.Adapter<CampaignsListAdapter.ViewHolder> {
+        private String[] mDataset;
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public View view;
+
+            public ViewHolder(View v) {
+                super(v);
+                this.view = v;
+            }
+
+        }
+
+        public CampaignsListAdapter(String[] myDataset) {
+            mDataset = myDataset;
+        }
+
+        @Override
+        public CampaignsListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                                  int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.campaign_list_item, parent, false);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getContext(), "Open Activity...", Toast.LENGTH_SHORT).show();
+                    getCoreActivity().replaceContentWithHistory(new CampaignDetailsFragment());
+                }
+            });
+
+            ViewHolder vh = new ViewHolder(view);
+            return vh;
+        }
+
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mDataset.length;
+        }
+    }
+
 }
