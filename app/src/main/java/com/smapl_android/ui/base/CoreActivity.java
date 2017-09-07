@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -130,9 +132,33 @@ public abstract class CoreActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public void replaceContentWithHistoryWithTag(int containerId, Fragment fragment, String tag) {
+    public void replaceContentWithHistory(int containerId, Class<? extends Fragment> fr) {
+        final String tag = fr.getSimpleName();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
+        if(fragment == null){
+            try {
+                fragment = fr.newInstance();
+            } catch (Exception e){
+                Log.e(TAG, "replaceContentWithHistory: ", e);
+            }
+        }
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
+                .replace(containerId, fragment, tag)
+                .commit();
+    }
+
+    public void replaceContentNoHistory(int containerId, FragmentManager fragmentManager, Class<? extends Fragment> fr) {
+        final String tag = fr.getSimpleName();
+        Fragment fragment = fragmentManager.findFragmentByTag(tag);
+        if(fragment == null){
+            try {
+                fragment = fr.newInstance();
+            } catch (Exception e){
+                Log.e(TAG, "replaceContentNoHistory: ", e);
+            }
+        }
+        fragmentManager.beginTransaction()
                 .replace(containerId, fragment, tag)
                 .commit();
     }

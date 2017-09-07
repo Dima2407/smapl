@@ -1,125 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:custom="http://schemas.android.com/apk/res-auto" xmlns:bind="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View"/>
-
-        <variable
-            name="presenter"
-            type="com.smapl_android.ui.fragments.MainScreenFragment.Presenter" />
+        <variable name="vm" type="com.smapl_android.model.MainScreenVM"/>
     </data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/img_smapl_background"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/linear_main_screen"
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"></LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:background="@drawable/vector_smart_object_61"
+            android:layout_height="match_parent"
+            android:background="@drawable/img_smapl_background"
             android:orientation="vertical">
 
-            <RelativeLayout
+        <FrameLayout
+                android:id="@+id/linear_main_screen"
                 android:layout_width="match_parent"
-                android:layout_height="10dp">
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottom_bar"
+        />
 
-                <ImageView
-                    android:id="@+id/img_main_screen_triangle_1"
-                    android:layout_width="110dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:src="@drawable/indicator_triangle_blue"
-                    android:visibility="gone"
-                    android:rotation="180"/>
-
-                <ImageView
-                    android:id="@+id/img_main_screen_triangle_2"
-                    android:layout_width="110dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/indicator_triangle_blue"
-                    android:visibility="gone"
-                    android:rotation="180"/>
-
-                <ImageView
-                    android:id="@+id/img_main_screen_triangle_3"
-                    android:layout_width="110dp"
-                    android:layout_height="match_parent"
-                    android:visibility="gone"
-                    android:layout_marginRight="5dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/indicator_triangle_blue"
-                    android:rotation="180"/>
-
-
-            </RelativeLayout>
-
-            <RadioGroup
-                android:id="@+id/tab_layout_main_screen"
+        <LinearLayout
+                android:id="@+id/bottom_bar"
+                android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:paddingBottom="8dp"
+                android:background="@drawable/vector_smart_object_61"
                 android:orientation="horizontal">
 
-                <RadioButton
+            <com.smapl_android.ui.widgets.IndicatorButton
                     android:id="@+id/tab_item_main_screen_news"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/menu_below_item_margin_bottom"
-                    android:layout_marginLeft="40dp"
-                    android:button="@android:color/transparent"
-                    android:drawablePadding="@dimen/menu_below_item_drawable_padding"
-                    android:drawableTop="@drawable/vector_smart_object_12"
-                    android:onClick="@{() -> presenter.onHistoryClicked()}"
-                    android:paddingTop="@dimen/menu_below_item_padding_top"
-                    android:text="История"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_menu_below_size" />
+                    android:layout_width="0.0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    bind:checked="@={vm.historyActive}"
+                    custom:indicator_title="История"
+                    custom:indicator_icon="@drawable/vector_smart_object_12"
+            />
 
-                <RadioButton
+            <com.smapl_android.ui.widgets.IndicatorButton
                     android:id="@+id/tab_item_main_screen_map"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/menu_below_item_margin_bottom"
-                    android:layout_marginLeft="87dp"
-                    android:button="@android:color/transparent"
-                    android:drawablePadding="@dimen/menu_below_item_drawable_padding"
-                    android:drawableTop="@drawable/icon_map"
-                    android:onClick="@{() -> presenter.onMapClicked()}"
-                    android:paddingTop="@dimen/menu_below_item_padding_top"
-                    android:text="Карта"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_menu_below_size" />
+                    android:layout_width="0.0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    custom:indicator_icon="@drawable/icon_map"
+                    bind:checked="@={vm.mapActive}"
+                    custom:indicator_title="Карта"/>
 
-                <RadioButton
+            <com.smapl_android.ui.widgets.IndicatorButton
                     android:id="@+id/tab_item_main_screen_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/menu_below_item_margin_bottom"
-                    android:layout_marginLeft="87dp"
-                    android:button="@android:color/transparent"
-                    android:drawablePadding="@dimen/menu_below_item_drawable_padding"
-                    android:drawableTop="@drawable/vector_smart_object"
-                    android:onClick="@{() -> presenter.onProfileClicked()}"
-                    android:paddingTop="@dimen/menu_below_item_padding_top"
-                    android:text="Профиль"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_menu_below_size" />
-
-            </RadioGroup>
+                    android:layout_width="0.0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    custom:indicator_icon="@drawable/vector_smart_object"
+                    bind:checked="@={vm.profileActive}"
+                    custom:indicator_title="Профиль"/>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

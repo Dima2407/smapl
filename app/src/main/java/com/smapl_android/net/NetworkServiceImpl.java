@@ -3,7 +3,7 @@ package com.smapl_android.net;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.smapl_android.model.UserInfoViewModel;
-import com.smapl_android.model.UserRequestBody;
+import com.smapl_android.net.requests.UserRequestBody;
 import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.requests.LoginRequest;
 import com.smapl_android.net.requests.RegistrationRequest;
@@ -146,16 +146,16 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, final OnResultCallback<Boolean, Throwable> callback) {
-        final Call<ResponseBody> userByIdCall = apiService.updateCar(userId, token, updateUserRequest);
-        userByIdCall.enqueue(createBoolean(callback));
+    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, final OnResultCallback<UserResponse, Throwable> callback) {
+        final Call<UserResponse> userByIdCall = apiService.editProfile(userId, token, updateUserRequest);
+        userByIdCall.enqueue(createCallback(callback));
     }
 
     @Override
-    public void editProfile(int userId, String token, EditProfileRequest request, final OnResultCallback<EditProfileResponse, Throwable> callback) {
+    public void editProfile(int userId, String token, EditProfileRequest request, final OnResultCallback<UserResponse, Throwable> callback) {
         UserRequestBody userRequestBody = new UserRequestBody();
         userRequestBody.setId(userId);
-        final Call<EditProfileResponse> responseCall = apiService.editProfile(new Gson().toJson(userRequestBody), token, request);
+        final Call<UserResponse> responseCall = apiService.editProfile(userId, token, request);
         responseCall.enqueue(createCallback(callback));
 
     }

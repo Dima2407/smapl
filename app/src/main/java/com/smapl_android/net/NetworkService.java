@@ -1,6 +1,5 @@
 package com.smapl_android.net;
 
-import com.smapl_android.model.User;
 import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
@@ -33,7 +32,7 @@ public interface NetworkService {
 
 
 
-    void editProfile(int userId, String token, EditProfileRequest request, final NetworkService.OnResultCallback<EditProfileResponse, Throwable> callback);
+    void editProfile(int userId, String token, EditProfileRequest request, final NetworkService.OnResultCallback<UserResponse, Throwable> callback);
 
     void getLastMessages(final NetworkService.OnResultCallback<GetLastMessagesResponse, Throwable> callback);
 
@@ -42,7 +41,7 @@ public interface NetworkService {
     void sendMessage(String message, String senderId, String receiverId, String date,
                      NetworkService.OnResultCallback<SendMessageResponse, Throwable> callback);
 
-    void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<Boolean, Throwable> callback);
+    void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<UserResponse, Throwable> callback);
 
     void getCampaigns(String token, OnResultCallback<GetCampaignListResponse, Throwable> callback);
 

@@ -1,13 +1,7 @@
 package com.smapl_android.net;
 
-import com.smapl_android.model.UserRequestBody;
-import com.smapl_android.net.requests.EditProfileRequest;
-import com.smapl_android.net.requests.LoginRequest;
-import com.smapl_android.net.requests.RegistrationRequest;
-import com.smapl_android.net.requests.UpdateCarRequest;
+import com.smapl_android.net.requests.*;
 import com.smapl_android.net.responses.*;
-
-import org.json.JSONObject;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -28,17 +22,17 @@ public interface ApiService {
     @GET("api/user/{id}")
     Call<UserResponse> getUserById(@Path("id") int id, @Query("access_token") String token);
 
-    @PATCH("api/user/edit/car/{id}")
-    Call<ResponseBody> updateCar(@Path("id") int userId, @Query("access_token") String token, @Body UpdateCarRequest updateUserRequest);
-
     @POST("api/user/change-password")
     @FormUrlEncoded
     Call<ResponseBody> editPassword(@Query("access_token") String token,
                                     @Field("oldPassword") String oldPassword,
                                     @Field("newPassword") String newPassword);
 
-    @POST("api/user/update")
-    Call<EditProfileResponse> editProfile(@Query("where") String where, @Query("access_token") String token, @Body EditProfileRequest editProfileRequest);
+    @PATCH("api/user/{id}")
+    Call<UserResponse> editProfile(@Path("id") int userId, @Query("access_token") String token, @Body EditProfileRequest editProfileRequest);
+
+    @PATCH("api/user/{id}")
+    Call<UserResponse> editProfile(@Path("id") int userId, @Query("access_token") String token, @Body UpdateCarRequest editProfileRequest);
 
 
 
