@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-
 import com.smapl_android.R;
 import com.smapl_android.SmaplApplication;
 import com.smapl_android.core.CoreRequest;
@@ -23,6 +22,7 @@ import com.smapl_android.services.GeolocationService;
 
 public abstract class CoreActivity extends AppCompatActivity {
 
+    private static final String TAG = CoreActivity.class.getSimpleName();
     protected final UserInfo userInfo = new UserInfo();
 
     private final PermissionsManager permissionsManager = new PermissionsManager();
@@ -34,6 +34,7 @@ public abstract class CoreActivity extends AppCompatActivity {
         final SmaplApplication application = (SmaplApplication) getApplication();
         return application.getCoreService();
     }
+
     public GeolocationService getGeolocationService() {
         final SmaplApplication application = (SmaplApplication) getApplication();
         return application.getGeolocationService();
@@ -64,6 +65,7 @@ public abstract class CoreActivity extends AppCompatActivity {
     public void showMessage(String title, String message) {
         showMessage(title, message, null);
     }
+
     public void showMessage(String title, String message, final Runnable completed) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
@@ -72,7 +74,7 @@ public abstract class CoreActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                if(completed!= null){
+                if (completed != null) {
                     completed.run();
                 }
             }
@@ -194,8 +196,8 @@ public abstract class CoreActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-       boolean handled = imageManager.onActivityResult(this, requestCode, resultCode, data);
-        if (!handled){
+        boolean handled = imageManager.onActivityResult(this, requestCode, resultCode, data);
+        if (!handled) {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -204,7 +206,7 @@ public abstract class CoreActivity extends AppCompatActivity {
         return userInfo;
     }
 
-    public <T> CoreRequest<T> newWaitingRequest(SuccessOutput<T> successOutput){
+    public <T> CoreRequest<T> newWaitingRequest(SuccessOutput<T> successOutput) {
         final CoreRequest<T> request = getCoreService().newRequest(this);
 
         request
@@ -215,4 +217,33 @@ public abstract class CoreActivity extends AppCompatActivity {
     }
 
     //endregion
+
+
+    @Override
+    public void onBackPressed() {
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
+
+    public void replaceContentNoHistory(int contentId, Class<? extends Fragment> frClass) {
+        final String tag = frClass.getSimpleName();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
+        if(fragment == null){
+            try {
+                fragment = frClass.newInstance();
+            } catch (Exception e) {
+                Log.e(TAG, "replaceContentNoHistory: ",e );
+            }
+        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(contentId, fragment, tag)
+                .commit();
+
+    }
 }

@@ -3,10 +3,15 @@ package com.smapl_android.ui.widgets;
 import android.databinding.BindingAdapter;
 import android.databinding.InverseBindingAdapter;
 import android.databinding.InverseBindingListener;
+import android.databinding.ObservableField;
 import android.support.v7.widget.AppCompatSpinner;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class BindingUtils {
 
@@ -31,6 +36,33 @@ public class BindingUtils {
     @InverseBindingAdapter(attribute = "bind:selectedValue", event = "bind:selectedValueAttrChanged")
     public static String captureSelectedValue(AppCompatSpinner pAppCompatSpinner) {
         return (String) pAppCompatSpinner.getSelectedItem();
+    }
+
+    @BindingAdapter("bind:onSendActionListener")
+    public static void bindImeListener(EditText editText, final Runnable listener) {
+        if (listener != null) {
+            editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    boolean handled = false;
+                    if (actionId == EditorInfo.IME_ACTION_SEND) {
+                        listener.run();
+                        handled = true;
+                    }
+                    return handled;
+                }
+            });
+        }
+    }
+
+    @BindingAdapter("bind:focused")
+    public static void bindFocused(EditText editText, final ObservableField<Boolean> value) {
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                value.set(hasFocus);
+            }
+        });
     }
 
 }

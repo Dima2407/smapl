@@ -41,19 +41,4 @@ public class AuthActivity extends CoreActivity {
         Fragment fragment = new LoginFragment();
         replaceContentWithTag(fragment, LoginFragment.TAG);
     }
-
-    @Override
-    public void onBackPressed() {
-
-        final AboutYourselfFragment aboutFragment = (AboutYourselfFragment) getSupportFragmentManager().findFragmentByTag(AboutYourselfFragment.TAG);
-        final LoadCarPhotoFragment loadCarPhotoFragment = (LoadCarPhotoFragment) getSupportFragmentManager().findFragmentByTag(LoadCarPhotoFragment.TAG);
-
-        if ((aboutFragment == null || (aboutFragment != null && !aboutFragment.isVisible()))
-                && (loadCarPhotoFragment == null || (loadCarPhotoFragment != null && !loadCarPhotoFragment.isVisible()))) {
-
-            finish();
-
-        } else
-            super.onBackPressed();
-    }
 }

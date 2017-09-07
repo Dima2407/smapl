@@ -1,11 +1,17 @@
 package com.smapl_android.core;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
@@ -281,6 +287,26 @@ public class CoreService {
                         });
                     }
                 }
+            }
+        });
+    }
+
+    public void loginFacebook(Activity activity, CallbackManager facebookCallbackManager, final CoreRequest<Boolean> request) {
+        LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("email","user_photos","public_profile"));
+        LoginManager.getInstance().registerCallback(facebookCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                request.processResult(true);
+            }
+
+            @Override
+            public void onCancel() {
+                request.processResult(false);
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                request.processError(error.getMessage());
             }
         });
     }
