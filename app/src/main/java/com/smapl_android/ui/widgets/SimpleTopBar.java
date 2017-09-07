@@ -3,6 +3,7 @@ package com.smapl_android.ui.widgets;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.databinding.BindingAdapter;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -38,9 +39,9 @@ public class SimpleTopBar extends LinearLayout {
         buttonRight = (Button)findViewById(R.id.btn_right);
         textTitle = (TextView)findViewById(R.id.title_center);
 
-        buttonLeft.setText(leftText);
-        textTitle.setText(centerText);
-        buttonRight.setText(rightText);
+        setTextForItem(buttonLeft, leftText);
+        setTextForItem(textTitle, centerText);
+        setTextForItem(buttonRight, rightText);
     }
 
     @BindingAdapter("leftClick")
@@ -54,6 +55,14 @@ public class SimpleTopBar extends LinearLayout {
     public static void setRightClick(SimpleTopBar container, OnClickListener listener) {
         if (listener != null) {
             container.buttonRight.setOnClickListener(listener);
+        }
+    }
+
+    public void setTextForItem(TextView itemView, String itemText){
+        if(TextUtils.isEmpty(itemText)){
+            itemView.setVisibility(GONE);
+        }else {
+            itemView.setText(itemText);
         }
     }
 }

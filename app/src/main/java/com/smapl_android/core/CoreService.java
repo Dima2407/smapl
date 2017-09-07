@@ -259,4 +259,29 @@ public class CoreService {
             }
         });
     }
+
+    public void restorePassword(String email, final CoreRequest<Boolean> request) {
+        networkServiceImpl.restorePassword(email,  new NetworkService.OnResultCallback<Boolean, Throwable>() {
+            @Override
+            public void onResult(final Boolean result, final Throwable error) {
+                if (request != null) {
+                    if (error != null) {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                request.processError(error.getMessage());
+                            }
+                        });
+                    } else {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                request.processResult(result);
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
 }

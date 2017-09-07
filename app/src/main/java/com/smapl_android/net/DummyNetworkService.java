@@ -109,25 +109,6 @@ abstract class DummyNetworkService implements NetworkService{
     }
 
     @Override
-    public void restorePassword(final String login, final OnResultCallback<RestorePasswordResponse, Throwable> callback) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                    if ("1111".equals(login)) {
-                        callback.onResult(new RestorePasswordResponse(), null);
-                    } else {
-                        callback.onResult(null, new Exception("Something went wrong"));
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    @Override
     public void getAdvCompanies(final OnResultCallback<AdvCompaniesResponse, Throwable> callback) {
         final AdvCompaniesResponse response = new AdvCompaniesResponse();
         AdvCompaniesResponse.Company[] companies = new AdvCompaniesResponse.Company[10];

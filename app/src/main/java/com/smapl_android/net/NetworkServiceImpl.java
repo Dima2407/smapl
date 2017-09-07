@@ -167,10 +167,10 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void restorePassword(String login, final OnResultCallback<RestorePasswordResponse, Throwable> callback) {
+    public void restorePassword(String login, final OnResultCallback<Boolean, Throwable> callback) {
 
-        final Call<RestorePasswordResponse> responseCall = apiService.restorePassword(login);
-        responseCall.enqueue(createCallback(callback));
+        final Call<ResponseBody> responseCall = apiService.restorePassword(login);
+        responseCall.enqueue(createBooleanEmptyBody(callback));
     }
 
     @Override

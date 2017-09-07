@@ -21,7 +21,6 @@ public class MainScreenFragment extends BaseFragment {
     private ImageView imageItem1;
     private ImageView imageItem2;
     private ImageView imageItem3;
-    private User user;
 
     @Nullable
     @Override

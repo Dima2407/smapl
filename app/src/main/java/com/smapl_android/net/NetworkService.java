@@ -23,7 +23,7 @@ public interface NetworkService {
 
     void getUserById(int id, String token, NetworkService.OnResultCallback<UserResponse, Throwable> callback);
 
-    void restorePassword(String login, final NetworkService.OnResultCallback<RestorePasswordResponse, Throwable> callback);
+    void restorePassword(String login, final NetworkService.OnResultCallback<Boolean, Throwable> callback);
 
     void getAdvCompanies(final NetworkService.OnResultCallback<AdvCompaniesResponse, Throwable> callback);
 

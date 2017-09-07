@@ -196,6 +196,10 @@ public class LoginMiniFragment extends BaseFragment {
             getCoreService()
                     .login(loginInfoViewModel.phone.get(), loginInfoViewModel.password.get(), request);
         }
+
+        public void forgetPassword(){
+            getCoreActivity().replaceContentWithHistory(new ForgetPasswordFragment());
+        }
     }
 
 

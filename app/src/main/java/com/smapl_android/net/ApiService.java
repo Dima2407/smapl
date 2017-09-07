@@ -42,10 +42,10 @@ public interface ApiService {
 
 
 
-    @POST("api/restore")
+    @POST("api/user/forgot_password")
     @FormUrlEncoded
     @Headers("api_key: " + API_KEY)
-    Call<RestorePasswordResponse> restorePassword(@Query("login") String login);
+    Call<ResponseBody> restorePassword(@Query("login") String email);
 
     @GET("api/advCompanies/userId")
     @Headers("api_key: " + API_KEY)

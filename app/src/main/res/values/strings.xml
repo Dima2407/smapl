@@ -79,6 +79,9 @@
     <string name="obtain_money">Вывод денег</string>
     <string name="edit_about_me">Редактировать личную информацию</string>
     <string name="total_drive">Всего проехали:</string>
+    <string name="restore_password">Восстановление пароля</string>
+    <string name="mail_address">Введите почтовый адресс</string>
+    <string name="send_request">Отправить запрос</string>
 
     <string-array name="age">
         <item>18</item>
