@@ -1,0 +1,61 @@
+<layout>
+
+    <data>
+
+
+        <variable
+            name="presenter"
+            type="com.smapl_android.ui.fragments.StickerFragment.Presenter" />
+
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.smapl_android.ui.fragments.StickerFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/sticker_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/sticker"
+           />
+
+        <ImageView
+            android:clickable="true"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/button_close"
+            android:onClick="@{() -> presenter.onClickCloseButton()}"/>
+
+
+        <ImageView
+
+            android:clickable="true"
+            android:id="@+id/right_button_image_view"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_button"
+            android:onClick="@{() -> presenter.onClickRightButton()}"/>
+
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/left_button_image_view"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/left_button"
+            android:onClick="@{() -> presenter.onClickLeftButton()}"/>
+
+    </RelativeLayout>
+</layout>
