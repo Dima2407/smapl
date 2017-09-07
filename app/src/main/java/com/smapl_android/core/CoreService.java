@@ -242,6 +242,7 @@ public class CoreService {
 
     public void getCampaigns(final CoreRequest<List<GetCampaignListResponse.Campaign>> coreRequest){
         String token = sessionStorage.getAuthKey();
+        Log.d(TAG, "getCampaigns: " + token);
         networkServiceImpl.getCampaigns(token,  new NetworkService.OnResultCallback<GetCampaignListResponse, Throwable>() {
             @Override
             public void onResult(final GetCampaignListResponse result, final Throwable error) {

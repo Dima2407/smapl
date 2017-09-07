@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="item" type="com.smapl_android.model.CampaignVM"/>
+        <variable name="presenter" type="com.smapl_android.ui.fragments.CampaignListFragment.Presenter"/>
+    </data>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:orientation="vertical"
+            android:onClick="@{()-> presenter.onCampaignClicked(item)}">
+
+        <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                bind:photo="@{item.photo}"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{item.name}"
+                android:textColor="#FFFFFFFF"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{item.description}"
+                android:textColor="#FFFFFFFF"/>
+
+        <View
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bbb"/>
+
+    </LinearLayout>
+
+</layout>

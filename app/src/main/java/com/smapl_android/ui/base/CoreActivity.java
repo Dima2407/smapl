@@ -94,7 +94,7 @@ public abstract class CoreActivity extends AppCompatActivity {
     //region navigation
     public void replaceContent(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, fragment)
+                .replace(android.R.id.content, fragment, fragment.getClass().getSimpleName())
                 .commit();
     }
 
@@ -229,21 +229,5 @@ public abstract class CoreActivity extends AppCompatActivity {
         } else {
             getSupportFragmentManager().popBackStack();
         }
-    }
-
-    public void replaceContentNoHistory(int contentId, Class<? extends Fragment> frClass) {
-        final String tag = frClass.getSimpleName();
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
-        if(fragment == null){
-            try {
-                fragment = frClass.newInstance();
-            } catch (Exception e) {
-                Log.e(TAG, "replaceContentNoHistory: ",e );
-            }
-        }
-        getSupportFragmentManager().beginTransaction()
-                .replace(contentId, fragment, tag)
-                .commit();
-
     }
 }

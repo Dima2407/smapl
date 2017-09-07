@@ -3,6 +3,7 @@ package com.smapl_android.ui.fragments;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.databinding.FragmentCampaignDetailsBinding;
+import com.smapl_android.model.CampaignVM;
 import com.smapl_android.net.responses.GetCampaignListResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
@@ -54,6 +56,18 @@ public class CampaignDetailsFragment extends BaseFragment {
 
 
         getCoreService().getCampaigns(request);
+    }
+
+    public static Fragment newInstance(GetCampaignListResponse.Campaign campaign) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(campaign.getClass().getName(), campaign);
+        CampaignDetailsFragment fragment = new CampaignDetailsFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    public static Fragment newInstance(CampaignVM campaign) {
+        return newInstance(campaign.getCampaign());
     }
 
 

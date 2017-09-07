@@ -39,6 +39,6 @@ public class AuthActivity extends CoreActivity {
 
     private void showLogin() {
         Fragment fragment = new LoginFragment();
-        replaceContentWithTag(fragment, LoginFragment.TAG);
+        replaceContent(fragment);
     }
 }
