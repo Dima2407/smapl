@@ -34,7 +34,7 @@ public class ProfileFragment extends BaseFragment {
         }
 
         public void goToObtainMoney() {
-
+            getCoreActivity().replaceContentWithHistory(new MoneyWithdrawalFragment());
         }
 
         public void goToEditPersonalInfo() {

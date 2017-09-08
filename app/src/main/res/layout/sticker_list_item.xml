@@ -10,19 +10,21 @@
         android:paddingRight="50dp">
 
         <ImageView
+            android:id="@+id/sticker_first_image"
             android:background="@drawable/round_white_strip"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentLeft="true"
-            android:src="#000" />
+            android:src="@drawable/audi8" />
 
         <ImageView
+            android:id="@+id/sticker_second_image"
             android:background="@drawable/round_white_strip"
 
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentRight="true"
-            android:src="#000" />
+            android:src="@drawable/audi" />
     </RelativeLayout>
 </layout>
 
