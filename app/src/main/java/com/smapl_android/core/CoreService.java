@@ -101,8 +101,8 @@ public class CoreService {
     }
 
     public void logout(final CoreRequest<Boolean> request) {
-        sessionStorage.logout();
         String token = sessionStorage.getAuthKey();
+        sessionStorage.logout();
         networkServiceImpl.logout(token, getCallback(request));
     }
 
