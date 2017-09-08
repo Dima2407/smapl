@@ -21,10 +21,7 @@ public class MainActivity extends CoreActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final CoreRequest<UserResponse> request = getCoreService().newRequest(this);
-        request.withLoading(R.string.wait_login)
-                .handleErrorAsDialog()
-                .handleSuccess(new SuccessOutput<UserResponse>() {
+        final CoreRequest<UserResponse> request = newWaitingRequest(new SuccessOutput<UserResponse>() {
                     @Override
                     public void onSuccess(UserResponse result) {
                         userInfo.apply(getResources(), result);

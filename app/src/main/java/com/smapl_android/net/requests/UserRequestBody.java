@@ -1,4 +1,4 @@
-package com.smapl_android.model;
+package com.smapl_android.net.requests;
 
 import com.google.gson.annotations.SerializedName;
 

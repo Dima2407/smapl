@@ -3,11 +3,9 @@ package com.smapl_android.ui.fragments;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioGroup;
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
@@ -16,7 +14,7 @@ import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentAboutMeBinding;
 import com.smapl_android.model.UserInfoEditVM;
 import com.smapl_android.net.requests.EditProfileRequest;
-import com.smapl_android.net.responses.EditProfileResponse;
+import com.smapl_android.net.responses.UserResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
 public class AboutMeFragment extends BaseFragment {
@@ -52,17 +50,17 @@ public class AboutMeFragment extends BaseFragment {
 
         final EditProfileRequest editProfileRequest = user.toUpdateRequest();
 
-        final CoreRequest<EditProfileResponse> request = getCoreActivity().newWaitingRequest(new SuccessOutput<EditProfileResponse>() {
+        final CoreRequest<UserResponse> request = getCoreActivity().newWaitingRequest(new SuccessOutput<UserResponse>() {
             @Override
-            public void onSuccess(EditProfileResponse result) {
-                if (result.getCount() > 0) {
-                    showMessage(getString(R.string.changes_saved), new Runnable() {
-                        @Override
-                        public void run() {
-                            getActivity().onBackPressed();
-                        }
-                    });
-                }
+            public void onSuccess(UserResponse result) {
+                getCoreActivity().getUserInfo().apply(getResources(), result);
+                showMessage(getString(R.string.changes_saved), new Runnable() {
+                    @Override
+                    public void run() {
+                        getActivity().onBackPressed();
+                    }
+                });
+
             }
         });
 

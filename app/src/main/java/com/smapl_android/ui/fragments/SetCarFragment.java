@@ -1,17 +1,11 @@
 package com.smapl_android.ui.fragments;
 
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
@@ -19,14 +13,13 @@ import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentSetCarBinding;
 import com.smapl_android.model.CarInfoEditVM;
-import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.UserResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
 public class SetCarFragment extends BaseFragment {
 
-    private CarInfoEditVM carInfo= new CarInfoEditVM();
+    private CarInfoEditVM carInfo = new CarInfoEditVM();
 
     @Nullable
     @Override
@@ -63,20 +56,18 @@ public class SetCarFragment extends BaseFragment {
 
             final UpdateCarRequest updateUserRequest = carInfo.toUpdateCar();
 
-            final CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
+            final CoreRequest<UserResponse> request = getCoreActivity().newWaitingRequest(new SuccessOutput<UserResponse>() {
+                @Override
+                public void onSuccess(UserResponse result) {
+                    getCoreActivity().getUserInfo().apply(getResources(), result);
+                    showMessage(getString(R.string.changes_saved), new Runnable() {
                         @Override
-                        public void onSuccess(Boolean result) {
-                            if (result) {
-                                showMessage(getString(R.string.changes_saved), new Runnable() {
-                                    @Override
-                                    public void run() {
-
-                                        getActivity().onBackPressed();
-                                    }
-                                });
-                            }
+                        public void run() {
+                            getActivity().onBackPressed();
                         }
                     });
+                }
+            });
             getCoreService()
                     .updateCar(updateUserRequest, request);
         }

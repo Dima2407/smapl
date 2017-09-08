@@ -36,6 +36,8 @@ public class UserInfo extends BaseObservable {
 
     public final ObservableField<String> driveAmount = new ObservableField<>();
 
+    public final ObservableField<Boolean> inDrive = new ObservableField<>();
+
     private UserResponse response;
 
     public void apply(Resources resources, UserResponse response){

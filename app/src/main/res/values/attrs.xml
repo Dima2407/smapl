@@ -26,4 +26,9 @@
         <attr name="carPhoto" format="string"/>
         <attr name="leftSpace" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="IndicatorButton">
+        <attr name="indicator_title" format="string"/>
+        <attr name="indicator_icon" format="reference"/>
+    </declare-styleable>
 </resources>

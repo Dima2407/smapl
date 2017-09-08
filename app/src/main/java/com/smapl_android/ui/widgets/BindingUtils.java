@@ -8,10 +8,8 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.*;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class BindingUtils {
 
@@ -63,6 +61,11 @@ public class BindingUtils {
                 value.set(hasFocus);
             }
         });
+    }
+
+    @BindingAdapter("bind:photo")
+    public static void setPhoto(ImageView imageView, String url){
+        ImageLoader.getInstance().displayImage(url, imageView);
     }
 
 }

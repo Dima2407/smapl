@@ -50,7 +50,7 @@ public class ForgetPasswordFragment extends BaseFragment {
                         showMessage(getString(R.string.password_changed), new Runnable() {
                             @Override
                             public void run() {
-                                getCoreActivity().onBackPressed();
+                                getActivity().onBackPressed();
                             }
                         });
                     }
@@ -60,7 +60,7 @@ public class ForgetPasswordFragment extends BaseFragment {
         }
 
         public void onClickBack() {
-            getCoreActivity().onBackPressed();
+            getActivity().onBackPressed();
         }
 
     }

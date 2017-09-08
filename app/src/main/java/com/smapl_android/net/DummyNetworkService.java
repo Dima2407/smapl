@@ -1,6 +1,5 @@
 package com.smapl_android.net;
 
-import com.smapl_android.model.User;
 import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
@@ -214,11 +213,6 @@ abstract class DummyNetworkService implements NetworkService{
 
     }
 
-    @Override
-    public void editProfile(int userId, String token, EditProfileRequest request, OnResultCallback<EditProfileResponse, Throwable> callback) {
-
-    }
-
 
     @Override
     public void getLastMessages(final OnResultCallback<GetLastMessagesResponse, Throwable> callback) {
@@ -290,11 +284,6 @@ abstract class DummyNetworkService implements NetworkService{
                 }
             }
         }).start();
-
-    }
-
-    @Override
-    public void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<Boolean, Throwable> callback) {
 
     }
 
