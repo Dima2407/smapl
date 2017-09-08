@@ -2,7 +2,7 @@ package com.smapl_android.net.responses;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UserResponse {
+public class UserResponse extends ServerResponse<UserResponse>{
 
     @SerializedName("name")
     private String name;
@@ -44,106 +44,54 @@ public class UserResponse {
     private String gender;
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return getResult().name;
     }
 
     public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        return getResult().email;
     }
 
     public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+        return getResult().mobileNumber;
     }
 
     public Integer getCarYear() {
-        return carYear;
-    }
-
-    public void setCarYear(Integer carYear) {
-        this.carYear = carYear;
+        return getResult().carYear;
     }
 
     public String getCarMark() {
-        return carMark;
-    }
-
-    public void setCarMark(String carMark) {
-        this.carMark = carMark;
+        return getResult().carMark;
     }
 
     public String getCarModel() {
-        return carModel;
-    }
-
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
+        return getResult().carModel;
     }
 
     public String getCarColor() {
-        return carColor;
-    }
-
-    public void setCarColor(String carColor) {
-        this.carColor = carColor;
+        return getResult().carColor;
     }
 
     public String getInterests() {
-        return interests;
-    }
-
-    public void setInterests(String interests) {
-        this.interests = interests;
+        return getResult().interests;
     }
 
     public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+        return getResult().createdAt;
     }
 
     public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+        return getResult().updatedAt;
     }
 
     public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
+        return getResult().age;
     }
 
     public String getCarPhoto() {
-        return carPhoto;
-    }
-
-    public void setCarPhoto(String carPhoto) {
-        this.carPhoto = carPhoto;
+        return getResult().carPhoto;
     }
 
     public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
+        return getResult().gender;
     }
 }

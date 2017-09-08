@@ -24,22 +24,8 @@ public interface NetworkService {
 
     void restorePassword(String login, final NetworkService.OnResultCallback<Boolean, Throwable> callback);
 
-    void getAdvCompanies(final NetworkService.OnResultCallback<AdvCompaniesResponse, Throwable> callback);
-
-    void getNews(final NetworkService.OnResultCallback<GetNewsResponse, Throwable> callback);
-
-    void getCompanyHistory(final NetworkService.OnResultCallback<GetCompanyHistoryResponse, Throwable> callback);
-
-
 
     void editProfile(int userId, String token, EditProfileRequest request, final NetworkService.OnResultCallback<UserResponse, Throwable> callback);
-
-    void getLastMessages(final NetworkService.OnResultCallback<GetLastMessagesResponse, Throwable> callback);
-
-    void getBeforeMessages(final NetworkService.OnResultCallback<GetBeforeMessagesResponse, Throwable> callback);
-
-    void sendMessage(String message, String senderId, String receiverId, String date,
-                     NetworkService.OnResultCallback<SendMessageResponse, Throwable> callback);
 
     void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<UserResponse, Throwable> callback);
 

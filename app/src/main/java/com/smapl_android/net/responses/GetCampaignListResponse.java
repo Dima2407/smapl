@@ -4,13 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class GetCampaignListResponse {
-
-    @SerializedName("result")
-    private Campaign[] campaigns;
+public class GetCampaignListResponse extends ServerResponse<GetCampaignListResponse.CampaignList> {
 
     public Campaign[] getCampaigns() {
-        return campaigns;
+        return getResult().campaigns;
+    }
+
+
+    public static class CampaignList {
+        @SerializedName("result")
+        private Campaign[] campaigns;
     }
 
     public static class Campaign implements Serializable {

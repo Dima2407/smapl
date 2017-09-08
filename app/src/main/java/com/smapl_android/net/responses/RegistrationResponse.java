@@ -2,7 +2,7 @@ package com.smapl_android.net.responses;
 
 import com.google.gson.annotations.SerializedName;
 
-public class RegistrationResponse {
+public class RegistrationResponse extends ServerResponse<RegistrationResponse> {
 
     @SerializedName("first_name")
     private String firstName;
@@ -32,74 +32,38 @@ public class RegistrationResponse {
     private String updatedAt;
 
     public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        return getResult().firstName;
     }
 
     public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+        return getResult().lastName;
     }
 
     public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+        return getResult().mobileNumber;
     }
 
     public Integer getCarYear() {
-        return carYear;
-    }
-
-    public void setCarYear(Integer carYear) {
-        this.carYear = carYear;
+        return getResult().carYear;
     }
 
     public String getCarMark() {
-        return carMark;
-    }
-
-    public void setCarMark(String carMark) {
-        this.carMark = carMark;
+        return getResult().carMark;
     }
 
     public String getCarModel() {
-        return carModel;
-    }
-
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
+        return getResult().carModel;
     }
 
     public String getCarColor() {
-        return carColor;
-    }
-
-    public void setCarColor(String carColor) {
-        this.carColor = carColor;
+        return getResult().carColor;
     }
 
     public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+        return getResult().createdAt;
     }
 
     public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+        return getResult().updatedAt;
     }
 }
