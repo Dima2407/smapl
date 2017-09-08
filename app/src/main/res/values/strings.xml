@@ -154,4 +154,9 @@
         <item>автомобили</item>
         <item>активный отдых</item>
     </string-array>
+
+    <string-array name="gender">
+        <item>Мужской</item>
+        <item>Женский</item>
+    </string-array>
 </resources>

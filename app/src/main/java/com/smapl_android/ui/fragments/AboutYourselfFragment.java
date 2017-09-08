@@ -1,15 +1,19 @@
 package com.smapl_android.ui.fragments;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.smapl_android.R;
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validators;
@@ -27,14 +31,20 @@ public class AboutYourselfFragment extends BaseFragment {
     private UserInfoViewModel user;
     private Presenter presenter = new Presenter();
 
-    private RadioGroup gender;
+    // private RadioGroup gender;
     private Spinner age;
     private Spinner carBrand;
     private EditText carYearOfIssue;
     private Spinner carColor;
     private EditText name;
-    private EditText email;
+    // private EditText email;
     private EditText carModel;
+    //private EditText editGender;
+    //private RelativeLayout layoutGender;
+    private Spinner spinnerGender;
+    // private View viewGender;
+    private TextView txtTitle;
+    private TextView txtSpinnerGenderDefault;
 
     @Nullable
     @Override
@@ -50,15 +60,34 @@ public class AboutYourselfFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        /*Typeface face;
+        face = Typeface.createFromAsset(getActivity().getAssets(), "font/text_style.otf");*/
+
+        txtTitle = (TextView) view.findViewById(R.id.text_about_yourself);
+        // txtTitle.setTypeface(face);
         name = (EditText) view.findViewById(R.id.edit_about_yourself_name);
-        email = (EditText) view.findViewById(R.id.edit_about_yourself_email);
-        gender = (RadioGroup) view.findViewById(R.id.radio_group_about_yourself_gender);
+        // email = (EditText) view.findViewById(R.id.edit_about_yourself_email);
+        // gender = (RadioGroup) view.findViewById(R.id.radio_group_about_yourself_gender);
         age = (Spinner) view.findViewById(R.id.spinner_about_yourself_age);
         carBrand = (Spinner) view.findViewById(R.id.spinner_about_yourself_car_brand);
         carYearOfIssue = (EditText) view.findViewById(R.id.edit_about_yourself_car_yaer_of_issue);
         carColor = (Spinner) view.findViewById(R.id.spinner_about_yourself_car_color);
         carModel = (EditText) view.findViewById(R.id.edit_about_yourself_car_model);
-
+        txtSpinnerGenderDefault = (TextView) view.findViewById(R.id.txt_spinner_gender_default);
+        //layoutGender = (RelativeLayout) view.findViewById(R.id.layout_gender_registration);
+        //  editGender = (EditText) view.findViewById(R.id.edit_gender_registration);
+        spinnerGender = (Spinner) view.findViewById(R.id.spinner_gender_registration);
+        //ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getContext(), R.layout.row_text_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.gender, R.layout.row_text_spinner);
+        adapter.setDropDownViewResource(R.layout.row_text_spinner_down);
+        spinnerGender.setAdapter(adapter);
+        txtSpinnerGenderDefault.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtSpinnerGenderDefault.setVisibility(View.GONE);
+                spinnerGender.performClick();
+            }
+        });
     }
 
     private void registration() {
@@ -75,8 +104,8 @@ public class AboutYourselfFragment extends BaseFragment {
 
         user.phone.set(phoneNumber);
         user.password.set(password);
-        if (gender.getCheckedRadioButtonId() >= 0)
-            user.gender.set(gender.getCheckedRadioButtonId() == R.id.radio_about_yourself_man ? GENDER_MAN : GENDER_WOMAN);
+        //if (gender.getCheckedRadioButtonId() >= 0)
+        //    user.gender.set(gender.getCheckedRadioButtonId() == R.id.radio_about_yourself_man ? GENDER_MAN : GENDER_WOMAN);
         user.age.set(age.getSelectedItem().toString());
         user.carBrand.set(carBrand.getSelectedItem().toString());
         user.carYearOfIssue.set(carYearOfIssue.getText().toString());
@@ -101,12 +130,12 @@ public class AboutYourselfFragment extends BaseFragment {
             isValidate = false;
         }
 
-        try {
+      /*  try {
             Validators.getEmailValidator(getContext()).validate(email.getText().toString());
         } catch (ValidationException e) {
             email.setError(e.getMessage());
             isValidate = false;
-        }
+        }*/
 
         try {
             Validators.getCarModelValidator(getContext()).validate(carModel.getText().toString());
