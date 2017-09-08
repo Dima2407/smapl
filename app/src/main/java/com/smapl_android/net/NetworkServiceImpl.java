@@ -135,6 +135,7 @@ class NetworkServiceImpl implements NetworkService {
     @Override
     public void getUserById(int id, String token, final OnResultCallback<UserResponse, Throwable> callback) {
         final Call<UserResponse> userByIdCall = apiService.getUserById(id, token);
+        Log.d(TAG, token);
         userByIdCall.enqueue(createCallback(callback));
     }
 

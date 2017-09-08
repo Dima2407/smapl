@@ -20,7 +20,6 @@
         android:orientation="vertical"
         android:paddingLeft="6dp"
         android:paddingRight="6dp"
-        android:paddingTop="36dp"
         android:paddingBottom="36dp">
 
         <com.smapl_android.ui.widgets.SimpleTopBar
@@ -34,6 +33,7 @@
         <com.smapl_android.ui.widgets.UserInfoBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
             custom:carInfo="@{user.carBrandModel}"
             custom:carPhoto="@{user.carPhoto}"
             custom:leftSpace="6dp"

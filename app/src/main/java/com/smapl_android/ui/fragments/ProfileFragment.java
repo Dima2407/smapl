@@ -55,6 +55,7 @@ public class ProfileFragment extends BaseFragment {
                 @Override
                 public void onSuccess(Boolean result) {
                     Intent intent = new Intent(getContext(), AuthActivity.class);
+                    intent.setAction(AuthActivity.LOGOUT_ACTION);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
