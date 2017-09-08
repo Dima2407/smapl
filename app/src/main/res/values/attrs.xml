@@ -31,4 +31,8 @@
         <attr name="indicator_title" format="string"/>
         <attr name="indicator_icon" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="OverlayImageButton">
+        <attr name="overlay_at" format="reference"/>
+    </declare-styleable>
 </resources>
