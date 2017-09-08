@@ -22,8 +22,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/linear_about_yourself_menu"
@@ -73,76 +73,57 @@
                 android:id="@+id/text_about_yourself"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="26dp"
                 android:text="@string/text_about_yourself"
-                android:textAlignment="center"
-                android:textColor="@color/about_yourself_hint"
-                android:textSize="@dimen/core_text_size" />
+                android:textAlignment="center" />
 
             <EditText
                 android:id="@+id/edit_about_yourself_name"
+                style="@style/TextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:textSize="@dimen/core_text_size"
                 android:hint="@string/name"
                 android:imeOptions="actionDone"
                 android:text="@{user.name}"
                 android:textColorHint="@color/about_yourself_hint"
                 app:addTextChangedListener="@{user.nameTextWatcher}" />
 
-            <EditText
+            <!--<EditText
                 android:id="@+id/edit_about_yourself_email"
+                style="@style/TextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/core_text_size"
                 android:layout_marginTop="@dimen/about_yourself_indent"
                 android:hint="@string/email"
                 android:text="@{user.email}"
                 android:textColorHint="@color/about_yourself_hint"
-                app:addTextChangedListener="@{user.emailTextWatcher}" />
+                app:addTextChangedListener="@{user.emailTextWatcher}" />-->
 
-            <RadioGroup
-                android:id="@+id/radio_group_about_yourself_gender"
+
+            <!-- <EditText
+                 android:id="@+id/edit_gender_registration"
+                 style="@style/TextStyle"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+
+                 android:textColorHint="@color/about_yourself_hint" />
+
+             <View
+                 android:id="@+id/view_gender_registration"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_alignBottom="@id/edit_gender_registration"
+                 android:layout_alignTop="@id/edit_gender_registration"/>-->
+
+            <Spinner
+                android:id="@+id/spinner_gender_registration"
+                style="@style/spinner_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/about_yourself_indent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/gender"
-                    android:textColorHint="@color/about_yourself_hint"
-                    android:textSize="@dimen/core_text_size" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/man"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@color/about_yourself_hint"
-                    android:textSize="@dimen/core_text_size" />
-
-                <RadioButton
-                    android:id="@+id/radio_about_yourself_man"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/woman"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@color/about_yourself_hint"
-                    android:textSize="@dimen/core_text_size" />
-
-                <RadioButton
-                    android:id="@+id/radio_about_yourself_woman"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </RadioGroup>
+                android:entries="@array/gender"
+                android:text="@string/gender"></Spinner>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -151,11 +132,11 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_about_yourself_age"
-                    android:textColor="@color/about_yourself_hint"
-                    android:textSize="@dimen/core_text_size" />
+                    android:textColor="@color/about_yourself_hint" />
 
                 <Spinner
                     android:id="@+id/spinner_about_yourself_age"
@@ -173,11 +154,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_about_yourself_car_brand"
-                    android:textColor="@color/about_yourself_hint"
-                    android:textSize="@dimen/core_text_size" />
+                    android:text="@string/text_about_yourself_car_brand" />
 
                 <Spinner
                     android:id="@+id/spinner_about_yourself_car_brand"
@@ -190,18 +170,18 @@
 
             <EditText
                 android:id="@+id/edit_about_yourself_car_model"
+                style="@style/TextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/about_yourself_indent"
                 android:hint="@string/car_model"
                 android:imeOptions="actionDone"
                 android:text="@{user.carModel}"
-                android:textColor="@color/about_yourself_hint"
-                android:textSize="@dimen/core_text_size"
                 app:addTextChangedListener="@{user.carModelTextWatcher}" />
 
             <EditText
                 android:id="@+id/edit_about_yourself_car_yaer_of_issue"
+                style="@style/TextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/about_yourself_indent"
@@ -210,8 +190,6 @@
                 android:inputType="number"
                 android:maxLength="4"
                 android:text="@{user.carYearOfIssue}"
-                android:textColor="@color/about_yourself_hint"
-                android:textSize="@dimen/core_text_size"
                 app:addTextChangedListener="@{user.carYearTextWatcher}" />
 
             <LinearLayout
@@ -221,11 +199,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/TextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_about_yourself_car_color"
-                    android:textColor="@color/about_yourself_hint"
-                    android:textSize="@dimen/core_text_size" />
+                    android:text="@string/text_about_yourself_car_color" />
 
                 <Spinner
                     android:id="@+id/spinner_about_yourself_car_color"
@@ -238,14 +215,13 @@
 
             <EditText
                 android:id="@+id/edit_about_yourself_interests"
+                style="@style/TextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="182dp"
                 android:layout_marginTop="@dimen/about_yourself_indent"
                 android:hint="@string/hint_interests"
                 android:text="@{user.interests}"
-                android:textColor="@color/about_yourself_hint"
-                android:textSize="@dimen/core_text_size"
-                android:layout_marginBottom="182dp"
                 app:addTextChangedListener="@{user.interestsTextWatcher}" />
 
         </LinearLayout>
