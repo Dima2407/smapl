@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.smapl_android.model.UserInfo" />
+
+        <variable
+            name="presenter"
+            type="com.smapl_android.ui.fragments.MoneyWithdrawalFragment.Presenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:orientation="vertical"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:paddingTop="36dp"
+        android:paddingBottom="36dp">
+
+        <com.smapl_android.ui.widgets.SimpleTopBar
+            android:id="@+id/linear_edit_car_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:leftText="@string/back"
+            custom:centerText="@string/obtain_money"
+            custom:leftClick="@{() -> presenter.onClickBack()}"/>
+
+        <com.smapl_android.ui.widgets.UserInfoBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:carInfo="@{user.carBrandModel}"
+            custom:carPhoto="@{user.carPhoto}"
+            custom:leftSpace="6dp"
+            custom:userName="@{user.name}" />
+
+        <TextView
+            android:id="@+id/current_balance_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="46dp"
+            android:text="@{user.balance}"
+            android:textColor="#FFFFFFFF"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:orientation="vertical"
+            android:paddingBottom="32dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="32dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="Введите данные кредитной карты:"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Имя на карте"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFFFF"
+                android:textSize="12sp"
+                android:backgroundTint="#FFFFFFFF"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Номер карты"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFFFF"
+                android:textSize="12sp"
+                android:backgroundTint="#FFFFFFFF"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Банк"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFFFF"
+                android:textSize="12sp"
+                android:backgroundTint="#FFFFFFFF"/>
+
+        </LinearLayout>
+        <Button
+            android:layout_marginTop="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:text="Задать вопрос"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFFFF"
+            android:background="#7dcceb"
+            />
+
+    </LinearLayout>
+</layout>
