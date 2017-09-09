@@ -1,11 +1,18 @@
 package com.smapl_android.core;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
@@ -24,7 +31,6 @@ import java.util.List;
 public class CoreService {
 
     private static final String TAG = CoreService.class.getSimpleName();
-    private final Context rootContext;
 
     private final SessionStorage sessionStorage;
 
@@ -33,7 +39,6 @@ public class CoreService {
     private Handler uiHandler;
 
     public CoreService(Context rootContext) {
-        this.rootContext = rootContext;
         this.networkServiceImpl = NetworkServiceFactory.create(false);
         this.uiHandler = new Handler(Looper.getMainLooper());
         this.sessionStorage = new SessionStorage(rootContext);
@@ -94,70 +99,32 @@ public class CoreService {
     }
 
     public void logout(final CoreRequest<Boolean> request) {
-        sessionStorage.logout();
         String token = sessionStorage.getAuthKey();
-        networkServiceImpl.logout(token, new NetworkService.OnResultCallback<Boolean, Throwable>() {
-            @Override
-            public void onResult(final Boolean result, final Throwable error) {
-                if (request != null) {
-                    if (error != null) {
-                        uiHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                request.processError(error.getMessage());
-                            }
-                        });
-                    } else {
-                        uiHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                request.processResult(result);
-                            }
-                        });
-                    }
-                }
-            }
-        });
+        sessionStorage.logout();
+        networkServiceImpl.logout(token, getCallback(request));
     }
 
     public void getUser(final CoreRequest<UserResponse> coreRequest) {
         int userId = sessionStorage.getUserId();
         String token = sessionStorage.getAuthKey();
-        networkServiceImpl.getUserById(userId, token, new NetworkService.OnResultCallback<UserResponse, Throwable>() {
-            @Override
-            public void onResult(final UserResponse result, final Throwable error) {
-                if (coreRequest != null) {
-                    if (error != null) {
-                        uiHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                coreRequest.processError(error.getMessage());
-                            }
-                        });
-
-                    } else {
-                        uiHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                coreRequest.processResult(result);
-                            }
-                        });
-                    }
-                }
-            }
-        });
+        networkServiceImpl.getUserById(userId, token, getCallback(coreRequest));
     }
 
     public <T> CoreRequest<T> newRequest(CoreActivity activity) {
         return new CoreRequest<T>(activity, this);
     }
 
-    public void updateCar(UpdateCarRequest updateUserRequest, final CoreRequest<Boolean> coreRequest) {
+    public void updateCar(UpdateCarRequest updateUserRequest, final CoreRequest<UserResponse> coreRequest) {
         int userId = sessionStorage.getUserId();
         String token = sessionStorage.getAuthKey();
-        networkServiceImpl.updateCar(userId, token, updateUserRequest, new NetworkService.OnResultCallback<Boolean, Throwable>() {
+        networkServiceImpl.updateCar(userId, token, updateUserRequest, getCallback(coreRequest));
+    }
+
+    @NonNull
+    private <T> NetworkService.OnResultCallback<T, Throwable> getCallback(final CoreRequest<T> coreRequest) {
+        return new NetworkService.OnResultCallback<T, Throwable>() {
             @Override
-            public void onResult(final Boolean result, final Throwable error) {
+            public void onResult(final T result, final Throwable error) {
                 if (coreRequest != null) {
                     if (error != null) {
                         uiHandler.post(new Runnable() {
@@ -177,65 +144,24 @@ public class CoreService {
                     }
                 }
             }
-        });
+        };
     }
 
     public void changePassword(String oldPassword, String newPassword, final CoreRequest<Boolean> coreRequest) {
         String token = sessionStorage.getAuthKey();
-        networkServiceImpl.editPassword(token, oldPassword, newPassword, new NetworkService.OnResultCallback<Boolean, Throwable>() {
-            @Override
-            public void onResult(final Boolean result, final Throwable error) {
-                if (coreRequest != null) {
-                    if (error != null) {
-                        uiHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                coreRequest.processError(error.getMessage());
-                            }
-                        });
-                    } else {
-                        uiHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                coreRequest.processResult(result);
-                            }
-                        });
-                    }
-                }
-            }
-        });
+        networkServiceImpl.editPassword(token, oldPassword, newPassword, getCallback(coreRequest));
     }
 
-    public void editProfile(EditProfileRequest request, final CoreRequest<EditProfileResponse> coreRequest) {
+    public void editProfile(EditProfileRequest request, final CoreRequest<UserResponse> coreRequest) {
         int userId = sessionStorage.getUserId();
         String token = sessionStorage.getAuthKey();
-        networkServiceImpl.editProfile(userId, token, request, new NetworkService.OnResultCallback<EditProfileResponse, Throwable>() {
-            @Override
-            public void onResult(final EditProfileResponse result, final Throwable error) {
-                if (coreRequest != null) {
-                    if (error != null) {
-                        uiHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                coreRequest.processError(error.getMessage());
-                            }
-                        });
-                    } else {
-                        uiHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                coreRequest.processResult(result);
-                            }
-                        });
-                    }
-                }
-            }
-        });
+        networkServiceImpl.editProfile(userId, token, request, getCallback(coreRequest));
     }
 
 
     public void getCampaigns(final CoreRequest<List<GetCampaignListResponse.Campaign>> coreRequest){
         String token = sessionStorage.getAuthKey();
+        Log.d(TAG, "getCampaigns: " + token);
         networkServiceImpl.getCampaigns(token,  new NetworkService.OnResultCallback<GetCampaignListResponse, Throwable>() {
             @Override
             public void onResult(final GetCampaignListResponse result, final Throwable error) {
@@ -256,6 +182,30 @@ public class CoreService {
                         });
                     }
                 }
+            }
+        });
+    }
+
+    public void restorePassword(String email, final CoreRequest<Boolean> request) {
+        networkServiceImpl.restorePassword(email,  getCallback(request));
+    }
+
+    public void loginFacebook(Activity activity, CallbackManager facebookCallbackManager, final CoreRequest<Boolean> request) {
+        LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("email","user_photos","public_profile"));
+        LoginManager.getInstance().registerCallback(facebookCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                request.processResult(true);
+            }
+
+            @Override
+            public void onCancel() {
+                request.processResult(false);
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                request.processError(error.getMessage());
             }
         });
     }

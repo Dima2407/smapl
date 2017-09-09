@@ -22,8 +22,7 @@ public class AuthActivity extends CoreActivity {
         splashHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-               // boolean loggedIn = getCoreService().isLoggedIn();
-                boolean loggedIn = true;
+                boolean loggedIn = getCoreService().isLoggedIn();
                 if (loggedIn) {
                     openMainActivity();
                 } else {
@@ -40,21 +39,6 @@ public class AuthActivity extends CoreActivity {
 
     private void showLogin() {
         Fragment fragment = new LoginFragment();
-        replaceContentWithTag(fragment, LoginFragment.TAG);
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        final AboutYourselfFragment aboutFragment = (AboutYourselfFragment) getSupportFragmentManager().findFragmentByTag(AboutYourselfFragment.TAG);
-        final LoadCarPhotoFragment loadCarPhotoFragment = (LoadCarPhotoFragment) getSupportFragmentManager().findFragmentByTag(LoadCarPhotoFragment.TAG);
-
-        if ((aboutFragment == null || (aboutFragment != null && !aboutFragment.isVisible()))
-                && (loadCarPhotoFragment == null || (loadCarPhotoFragment != null && !loadCarPhotoFragment.isVisible()))) {
-
-            finish();
-
-        } else
-            super.onBackPressed();
+        replaceContent(fragment);
     }
 }

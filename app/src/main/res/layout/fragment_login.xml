@@ -1,61 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:custom="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
 
         <variable
-            name="presenter"
-            type="com.smapl_android.ui.fragments.LoginFragment.Presenter" />
+                name="presenter"
+                type="com.smapl_android.ui.fragments.LoginFragment.Presenter"/>
+
+        <variable
+                name="vm"
+                type="com.smapl_android.model.AuthVM"/>
     </data>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:background="@android:color/white">
 
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="0.0dp"
+                        android:layout_weight="10"
+                        android:background="@drawable/auth_bg">
+
             <ImageView
-                android:id="@+id/img_login_logotip"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/login_logotip_hight"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/logotip" />
+                    android:id="@+id/img_login_logotip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/big_logo"/>
 
             <LinearLayout
-                android:id="@+id/linear_buttons"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/img_login_logotip"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <RadioGroup
+                    android:id="@+id/linear_buttons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
 
-                    <RadioButton
+                <android.support.v7.widget.AppCompatCheckBox
                         android:id="@+id/btn_login"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:button="@android:color/transparent"
-                        android:checked="true"
+                        android:checked="@={vm.login}"
                         android:drawableBottom="@drawable/btn_auth_indicator"
-                        android:onClick="@{() -> presenter.onLoginClicked()}"
                         android:text="@string/login"
                         android:textAlignment="center"
                         android:textAllCaps="false"
                         android:textColor="@color/btn_auth_text"
-                        android:textSize="@dimen/core_text_size" />
+                        android:textSize="@dimen/core_text_size"/>
 
-                    <RadioButton
+                <android.support.v7.widget.AppCompatCheckBox
                         android:id="@+id/btn_go_to_registration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -63,28 +65,180 @@
                         android:background="@android:color/transparent"
                         android:button="@android:color/transparent"
                         android:drawableBottom="@drawable/btn_auth_indicator"
-                        android:onClick="@{() -> presenter.onRegistrationClicked()}"
+                        android:checked="@={!vm.login}"
                         android:text="@string/registration"
                         android:textAlignment="center"
                         android:textAllCaps="false"
                         android:textColor="@color/btn_auth_text"
-                        android:textSize="@dimen/core_text_size" />
-
-                </RadioGroup>
+                        android:textSize="@dimen/core_text_size"/>
 
             </LinearLayout>
+        </RelativeLayout>
 
-            <RelativeLayout
+        <LinearLayout
                 android:id="@+id/relative_login_content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/linear_buttons"
+                android:layout_height="0.0dp"
+                android:layout_weight="13"
                 android:background="@color/grey"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingTop="33dp">
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/login_container_padding_left"
+                android:paddingRight="@dimen/login_container_padding_right"
+                android:paddingTop="@dimen/login_container_padding_top"
+                android:paddingBottom="@dimen/login_container_padding_bottom">
+
+            <FrameLayout android:layout_width="match_parent"
+                         android:layout_height="0.0dp"
+                         android:layout_weight="1">
+                <RelativeLayout
+                        android:id="@+id/login_body"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/login_background_white_shape"
+                        android:paddingTop="@dimen/login_body_padding_top"
+                        android:paddingBottom="@dimen/login_body_padding_bottom"
+                        android:paddingLeft="@dimen/login_body_padding_left"
+                        android:paddingRight="@dimen/login_body_padding_right">
+
+
+                    <ImageView
+                            android:id="@+id/img_edit_login_login_bg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/edit_login"
+                            android:layout_alignBottom="@+id/edit_login"
+                            android:src="@drawable/edit_text_blue_rectan_bg"
+                            android:visibility="@{vm.phoneFocused ? View.VISIBLE : View.GONE}"/>
+
+                    <EditText
+                            android:id="@+id/edit_login"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edit_login_height"
+                            android:layout_marginLeft="@dimen/edit_login_registr_margin_left"
+                            android:background="@drawable/edit_text_background"
+                            android:drawableLeft="@drawable/vector_smart_object_6"
+                            android:drawablePadding="10dp"
+                            android:drawableRight="@{vm.phoneValid}"
+                            android:hint="@string/input_phone"
+                            android:inputType="phone"
+                            android:paddingLeft="6dp"
+                            android:text="@={vm.phone}"
+                            bind:focused="@{vm.phoneFocused}"
+                            android:textSize="@dimen/core_text_size"/>
+
+
+                    <ImageView
+                            android:id="@+id/img_edit_login_password_bg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/edit_password"
+                            android:layout_alignBottom="@+id/edit_password"
+                            android:src="@drawable/edit_text_blue_rectan_bg"
+                            android:visibility="@{vm.passwordFocused ? View.VISIBLE : View.GONE}"/>
+
+                    <EditText
+                            android:id="@+id/edit_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edit_login_height"
+                            android:background="@drawable/edit_text_background"
+                            android:drawableLeft="@drawable/vector_smart_object_7"
+                            android:drawablePadding="10dp"
+                            android:drawableRight="@{vm.passwordValid}"
+                            android:hint="@string/input_password"
+                            android:layout_marginLeft="@dimen/edit_login_registr_margin_left"
+                            android:imeOptions="actionSend"
+                            android:inputType="textPassword"
+                            android:paddingLeft="6dp"
+                            android:text="@={vm.password}"
+                            android:layout_marginTop="@dimen/login_space_big"
+                            android:layout_marginBottom="@dimen/login_space_medium"
+                            android:textColorHint="@color/color_login_hint"
+                            bind:onSendActionListener="@{() -> presenter.onNextClicked()}"
+                            bind:focused="@{vm.passwordFocused}"
+                            android:layout_below="@+id/edit_login"
+                            android:textSize="@dimen/core_text_size"/>
+
+
+                    <Button
+                            android:id="@+id/btn_login_forgot_password"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/edit_password"
+                            android:background="@android:color/transparent"
+                            android:text="@string/forgot_password"
+                            android:onClick="@{() -> presenter.forgetPassword()}"
+                            android:textAllCaps="false"
+                            android:visibility="@{vm.login ? View.VISIBLE : View.GONE}"
+                            android:textColor="@color/color_login_hint"
+                            android:textSize="@dimen/core_text_size"/>
+
+                </RelativeLayout>
+
+                <com.smapl_android.ui.widgets.OverlayImageButton
+                        android:id="@+id/btn_login_forward"
+                        android:layout_width="@dimen/btn_login_forward_size"
+                        android:layout_height="@dimen/btn_login_forward_size"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{() -> presenter.onNextClicked()}"
+                        android:enabled="@{vm.inputsValid}"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/button_send"
+                        custom:overlay_at="@+id/login_body"/>
+            </FrameLayout>
+
+            <RelativeLayout
+                    android:id="@+id/layaut_login_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/login_space_medium"
+                    android:paddingRight="@dimen/login_space_medium"
+                    android:visibility="@{vm.login ? View.VISIBLE : View.GONE}">
+
+
+                <TextView
+                        android:id="@+id/text_login_or"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/or"
+                        android:layout_marginBottom="@dimen/login_space_medium"
+                        android:textColor="@color/text_color_or"
+                        android:textSize="@dimen/core_text_size"/>
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_toLeftOf="@+id/text_login_or"
+                        android:layout_alignBottom="@+id/text_login_or"
+                        android:layout_marginBottom="6dp"
+                        android:background="@color/color_edit_set_car"/>
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_toRightOf="@+id/text_login_or"
+                        android:layout_alignBottom="@+id/text_login_or"
+                        android:layout_marginBottom="6dp"
+                        android:background="@color/color_edit_set_car"/>
+
+                <Button
+                        android:id="@+id/btn_login_facebook"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/btn_facebook_hight"
+                        android:layout_below="@+id/text_login_or"
+                        android:background="@drawable/btn_facebook_shape"
+                        android:text="@string/btn_login_facebook"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/core_text_size"
+                        android:onClick="@{() -> presenter.facebookLogin()}"/>
 
             </RelativeLayout>
-        </RelativeLayout>
-    </ScrollView>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </layout>

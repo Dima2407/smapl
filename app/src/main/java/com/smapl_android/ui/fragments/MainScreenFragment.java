@@ -1,72 +1,63 @@
 package com.smapl_android.ui.fragments;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.Observable;
+import android.databinding.ObservableField;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.smapl_android.R;
 import com.smapl_android.databinding.FragmentMainScreenBinding;
-import com.smapl_android.model.User;
+import com.smapl_android.model.MainScreenVM;
 import com.smapl_android.ui.base.BaseFragment;
 
 public class MainScreenFragment extends BaseFragment {
 
-    private static final String TAG = MainScreenFragment.class.getSimpleName();
-    private LinearLayout linearContent;
-    private ImageView imageItem1;
-    private ImageView imageItem2;
-    private ImageView imageItem3;
-    private User user;
+    private final MainScreenVM mainScreenVM = new MainScreenVM();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentMainScreenBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_screen, container, false);
-        binding.setPresenter(new Presenter());
+        binding.setVm(mainScreenVM);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        linearContent = (LinearLayout) view.findViewById(R.id.linear_main_screen);
-
-        imageItem1 = (ImageView) view.findViewById(R.id.img_main_screen_triangle_1);
-        imageItem2 = (ImageView) view.findViewById(R.id.img_main_screen_triangle_2);
-        imageItem3 = (ImageView) view.findViewById(R.id.img_main_screen_triangle_3);
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mainScreenVM.mapActive.addOnPropertyChangedCallback(getCallback(R.id.linear_main_screen, MapFragment.class));
 
+        mainScreenVM.historyActive.addOnPropertyChangedCallback(getCallback(R.id.linear_main_screen, HistoryFragment.class));
 
-    public class Presenter{
+        mainScreenVM.profileActive.addOnPropertyChangedCallback(getCallback(R.id.linear_main_screen, ProfileFragment.class));
 
+        mainScreenVM.init();
+    }
 
-        public void onHistoryClicked(){
-            imageItem1.setVisibility(View.VISIBLE);
-            imageItem2.setVisibility(View.GONE);
-            imageItem3.setVisibility(View.GONE);
-            getCoreActivity().replaceContentWithHistory(linearContent.getId(), new HistoryFragment());
-        }
+    @NonNull
+    private Observable.OnPropertyChangedCallback getCallback(final int contentId, final Class<? extends Fragment> fr) {
+        return new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                ObservableField<Boolean> field = (ObservableField<Boolean>) sender;
+                if (field.get()) {
+                    getCoreActivity().replaceContentNoHistory(contentId, getChildFragmentManager(), fr);
+                }
 
-        public void onMapClicked(){
-            imageItem1.setVisibility(View.GONE);
-            imageItem2.setVisibility(View.VISIBLE);
-            imageItem3.setVisibility(View.GONE);
-            getCoreActivity().replaceContentWithHistory(linearContent.getId(), new MapFragment());
-        }
-
-        public void onProfileClicked(){
-            imageItem1.setVisibility(View.GONE);
-            imageItem2.setVisibility(View.GONE);
-            imageItem3.setVisibility(View.VISIBLE);
-            getCoreActivity().replaceContentWithHistory(linearContent.getId(), new ProfileFragment());
-        }
-
+            }
+        };
     }
 }

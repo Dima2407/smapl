@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_container_padding_left">10dp</dimen>
+    <dimen name="login_container_padding_right">10dp</dimen>
+    <dimen name="login_container_padding_top">25dp</dimen>
+    <dimen name="login_container_padding_bottom">25dp</dimen>
+
+    <dimen name="login_body_padding_left">6dp</dimen>
+    <dimen name="login_body_padding_right">6dp</dimen>
+    <dimen name="login_body_padding_top">15dp</dimen>
+    <dimen name="login_body_padding_bottom">15dp</dimen>
+
+    <dimen name="login_space_big">25dp</dimen>
+    <dimen name="login_space_medium">15dp</dimen>
+</resources>

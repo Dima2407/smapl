@@ -3,7 +3,7 @@ package com.smapl_android.net.responses;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
+public class LoginResponse extends ServerResponse<LoginResponse> {
 
     @SerializedName("id")
     private String id;
@@ -18,35 +18,19 @@ public class LoginResponse {
     private int userId;
 
     public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        return getResult().id;
     }
 
     public Integer getTtl() {
-        return ttl;
-    }
-
-    public void setTtl(Integer ttl) {
-        this.ttl = ttl;
+        return getResult().ttl;
     }
 
     public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
+        return getResult().created;
     }
 
     public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+        return getResult().userId;
     }
 
 }

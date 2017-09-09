@@ -7,8 +7,8 @@ import com.smapl_android.net.requests.EditProfileRequest;
 
 public class UserInfoEditVM extends BaseObservable {
 
-    private static final String GENDER_MAN = "man";
-    private static final String GENDER_WOMAN = "woman";
+    private static final String GENDER_MAN = "male";
+    private static final String GENDER_WOMAN = "female";
 
     public final ObservableField<String> name = new ObservableField<>();
     public final ObservableField<String> phone = new ObservableField<>();
