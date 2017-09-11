@@ -17,7 +17,9 @@
     <dimen name="login_white_shape_hight">216dp</dimen>
     <dimen name="btn_facebook_margin_top">25dp</dimen>
     <dimen name="btn_facebook_margin_bottom">29dp</dimen>
-    <dimen name="about_yourself_indent">39dp</dimen>
+    <dimen name="about_yourself_indent">29dp</dimen>
+    <dimen name="about_yourself_indent_edit_text">22dp</dimen>
+    <dimen name="about_yourself_indent_spinner">39dp</dimen>
     <dimen name="load_car_photo_size">134dp</dimen>
     <dimen name="text_menu_below_size">10sp</dimen>
     <dimen name="menu_below_item_padding_top">0dp</dimen>

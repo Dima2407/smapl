@@ -13,4 +13,5 @@
     <color name="color_edit_set_car">#E9E7E7</color>
     <color name="text_color_or">#b4b4bd</color>
     <color name="about_yourself_hint">#a4a4a4</color>
+    <color name="about_yourself_line">#a0a0a0</color>
 </resources>
