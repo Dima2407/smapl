@@ -31,7 +31,6 @@ import java.util.List;
 public class CoreService {
 
     private static final String TAG = CoreService.class.getSimpleName();
-    private final Context rootContext;
 
     private final SessionStorage sessionStorage;
 
@@ -40,7 +39,6 @@ public class CoreService {
     private Handler uiHandler;
 
     public CoreService(Context rootContext) {
-        this.rootContext = rootContext;
         this.networkServiceImpl = NetworkServiceFactory.create(false);
         this.uiHandler = new Handler(Looper.getMainLooper());
         this.sessionStorage = new SessionStorage(rootContext);
@@ -101,8 +99,8 @@ public class CoreService {
     }
 
     public void logout(final CoreRequest<Boolean> request) {
-        sessionStorage.logout();
         String token = sessionStorage.getAuthKey();
+        sessionStorage.logout();
         networkServiceImpl.logout(token, getCallback(request));
     }
 

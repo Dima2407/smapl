@@ -24,7 +24,7 @@ public interface ApiService {
 
     @POST("api/user/change-password")
     @FormUrlEncoded
-    Call<ResponseBody> editPassword(@Query("access_token") String token,
+    Call<EmptyResponse> editPassword(@Query("access_token") String token,
                                     @Field("oldPassword") String oldPassword,
                                     @Field("newPassword") String newPassword);
 
@@ -39,40 +39,12 @@ public interface ApiService {
     @POST("api/user/forgot_password")
     @FormUrlEncoded
     @Headers("api_key: " + API_KEY)
-    Call<ResponseBody> restorePassword(@Query("login") String email);
-
-    @GET("api/advCompanies/userId")
-    @Headers("api_key: " + API_KEY)
-    Call<AdvCompaniesResponse> advCompanies();
-
-    @GET("api/news")
-    @Headers("api_key: " + API_KEY)
-    Call<GetNewsResponse> getNews();
-
-    @GET("api/history/company_id")
-    @Headers("api_key: " + API_KEY)
-    Call<GetCompanyHistoryResponse> getCompanyHistory();
-
-    @GET("api/messages/last/user_id")
-    @Headers("api_key: " + API_KEY)
-    Call<GetLastMessagesResponse> getLastMessages();
-
-    @GET("api/messages/before/date/user_id")
-    @Headers("api_key: " + API_KEY)
-    Call<GetBeforeMessagesResponse> getBeforeMessages();
-
-    @POST("api/messages/send/user_id")
-    @FormUrlEncoded
-    @Headers("api_key: " + API_KEY)
-    Call<SendMessageResponse> sendMessage(@Query("message") String message,
-                                          @Query("sender_id") String sender_id,
-                                          @Query("receiver_id") String receiver_id,
-                                          @Query("date") String date);
+    Call<EmptyResponse> restorePassword(@Query("login") String email);
 
 
     @GET("api/campaign/list")
     Call<GetCampaignListResponse> getCampaigns(@Query("access_token") String token);
 
     @POST("api/user/logout")
-    Call<ResponseBody> logout(String token);
+    Call<EmptyResponse> logout(@Query("access_token") String token);
 }

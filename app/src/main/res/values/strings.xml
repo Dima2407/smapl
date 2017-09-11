@@ -158,6 +158,11 @@
         <item>активный отдых</item>
     </string-array>
 
+    <string-array name="gender">
+        <item>Мужской</item>
+        <item>Женский</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

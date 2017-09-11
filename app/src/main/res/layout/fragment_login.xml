@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:bind="http://schemas.android.com/apk/res-auto"
->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:custom="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="android.view.View"/>
@@ -14,28 +15,29 @@
                 type="com.smapl_android.model.AuthVM"/>
     </data>
 
-    <ScrollView
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:orientation="vertical"
+            android:background="@android:color/white">
 
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white">
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="0.0dp"
+                        android:layout_weight="10"
+                        android:background="@drawable/auth_bg">
 
             <ImageView
                     android:id="@+id/img_login_logotip"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/login_logotip_hight"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/logotip"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/big_logo"/>
 
             <LinearLayout
                     android:id="@+id/linear_buttons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/img_login_logotip"
+                    android:layout_alignParentBottom="true"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
@@ -71,28 +73,32 @@
                         android:textSize="@dimen/core_text_size"/>
 
             </LinearLayout>
+        </RelativeLayout>
 
-            <RelativeLayout
-                    android:id="@+id/relative_login_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/linear_buttons"
-                    android:background="@color/grey"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="30dp"
-                    android:paddingBottom="30dp">
+        <LinearLayout
+                android:id="@+id/relative_login_content"
+                android:layout_width="match_parent"
+                android:layout_height="0.0dp"
+                android:layout_weight="13"
+                android:background="@color/grey"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/login_container_padding_left"
+                android:paddingRight="@dimen/login_container_padding_right"
+                android:paddingTop="@dimen/login_container_padding_top"
+                android:paddingBottom="@dimen/login_container_padding_bottom">
 
+            <FrameLayout android:layout_width="match_parent"
+                         android:layout_height="0.0dp"
+                         android:layout_weight="1">
                 <RelativeLayout
                         android:id="@+id/login_body"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="33dp"
                         android:background="@drawable/login_background_white_shape"
-                        android:paddingTop="20dp"
-                        android:paddingBottom="20dp"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp">
+                        android:paddingTop="@dimen/login_body_padding_top"
+                        android:paddingBottom="@dimen/login_body_padding_bottom"
+                        android:paddingLeft="@dimen/login_body_padding_left"
+                        android:paddingRight="@dimen/login_body_padding_right">
 
 
                     <ImageView
@@ -144,8 +150,8 @@
                             android:inputType="textPassword"
                             android:paddingLeft="6dp"
                             android:text="@={vm.password}"
-                            android:layout_marginTop="42dp"
-                            android:layout_marginBottom="19dp"
+                            android:layout_marginTop="@dimen/login_space_big"
+                            android:layout_marginBottom="@dimen/login_space_medium"
                             android:textColorHint="@color/color_login_hint"
                             bind:onSendActionListener="@{() -> presenter.onNextClicked()}"
                             bind:focused="@{vm.passwordFocused}"
@@ -169,73 +175,70 @@
 
                 </RelativeLayout>
 
-                <ImageButton
+                <com.smapl_android.ui.widgets.OverlayImageButton
                         android:id="@+id/btn_login_forward"
                         android:layout_width="@dimen/btn_login_forward_size"
                         android:layout_height="@dimen/btn_login_forward_size"
-                        android:layout_below="@+id/login_body"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="-30dp"
                         android:background="@android:color/transparent"
                         android:onClick="@{() -> presenter.onNextClicked()}"
                         android:enabled="@{vm.inputsValid}"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/button_send"/>
+                        android:src="@drawable/button_send"
+                        custom:overlay_at="@+id/login_body"/>
+            </FrameLayout>
 
-                <RelativeLayout
-                        android:id="@+id/layaut_login_container"
+            <RelativeLayout
+                    android:id="@+id/layaut_login_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/login_space_medium"
+                    android:paddingRight="@dimen/login_space_medium"
+                    android:visibility="@{vm.login ? View.VISIBLE : View.GONE}">
+
+
+                <TextView
+                        android:id="@+id/text_login_or"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/or"
+                        android:layout_marginBottom="@dimen/login_space_medium"
+                        android:textColor="@color/text_color_or"
+                        android:textSize="@dimen/core_text_size"/>
+
+                <View
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_below="@+id/btn_login_forward"
-                        android:layout_marginTop="58dp"
-                        android:visibility="@{vm.login ? View.VISIBLE : View.GONE}">
+                        android:layout_height="1dp"
+                        android:layout_toLeftOf="@+id/text_login_or"
+                        android:layout_alignBottom="@+id/text_login_or"
+                        android:layout_marginBottom="6dp"
+                        android:background="@color/color_edit_set_car"/>
 
-
-                    <TextView
-                            android:id="@+id/text_login_or"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:text="@string/or"
-                            android:textColor="@color/text_color_or"
-                            android:textSize="@dimen/core_text_size"/>
-
-                    <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginRight="11dp"
-                            android:layout_toLeftOf="@id/text_login_or"
-                            android:src="@drawable/edit_text_line_background"/>
-
-                    <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginLeft="11dp"
-                            android:layout_toRightOf="@id/text_login_or"
-                            android:src="@drawable/edit_text_line_background"/>
-
-                </RelativeLayout>
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_toRightOf="@+id/text_login_or"
+                        android:layout_alignBottom="@+id/text_login_or"
+                        android:layout_marginBottom="6dp"
+                        android:background="@color/color_edit_set_car"/>
 
                 <Button
                         android:id="@+id/btn_login_facebook"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/btn_facebook_hight"
-                        android:layout_below="@id/layaut_login_container"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="@dimen/btn_facebook_margin_top"
+                        android:layout_below="@+id/text_login_or"
                         android:background="@drawable/btn_facebook_shape"
                         android:text="@string/btn_login_facebook"
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/core_text_size"
-                        android:onClick="@{() -> presenter.facebookLogin()}"
-                        android:visibility="@{vm.login ? View.VISIBLE : View.GONE}"/>
+                        android:onClick="@{() -> presenter.facebookLogin()}"/>
 
             </RelativeLayout>
 
-        </RelativeLayout>
-    </ScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </layout>
