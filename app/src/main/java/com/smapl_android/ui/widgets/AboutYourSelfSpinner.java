@@ -1,25 +1,17 @@
 package com.smapl_android.ui.widgets;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.smapl_android.R;
-
-/**
- * Created by dimazatolokin on 08.09.17.
- */
 
 public class AboutYourSelfSpinner extends RelativeLayout {
 
@@ -29,7 +21,6 @@ public class AboutYourSelfSpinner extends RelativeLayout {
     private ArrayAdapter<CharSequence> adapter;
     private Spinner spinner;
     private Context context;
-    // private View viewBottom;
 
     public AboutYourSelfSpinner(Context context) {
         super(context);
@@ -43,12 +34,6 @@ public class AboutYourSelfSpinner extends RelativeLayout {
 
     public AboutYourSelfSpinner(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public AboutYourSelfSpinner(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         init(context);
     }
 

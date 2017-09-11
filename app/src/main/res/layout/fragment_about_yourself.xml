@@ -99,20 +99,23 @@
                 <com.smapl_android.ui.widgets.AboutYourSelfSpinner
                     android:id="@+id/spinner_gender_registration"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/about_yourself_indent" />
 
                 <com.smapl_android.ui.widgets.AboutYourSelfSpinner
                     android:id="@+id/spinner_about_yourself_age"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/about_yourself_indent" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/about_yourself_indent_spinner" />
 
                 <com.smapl_android.ui.widgets.AboutYourSelfSpinner
                     android:id="@+id/spinner_about_yourself_car_brand"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/about_yourself_indent" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/about_yourself_indent_spinner" />
 
                 <EditText
                     android:id="@+id/edit_about_yourself_car_model"
@@ -130,7 +133,7 @@
                     style="@style/TextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/about_yourself_indent"
+                    android:layout_marginTop="@dimen/about_yourself_indent_edit_text"
                     android:hint="@string/car_year_of_issue"
                     android:imeOptions="actionDone"
                     android:inputType="number"
@@ -141,8 +144,9 @@
 
                 <com.smapl_android.ui.widgets.AboutYourSelfSpinner
                     android:id="@+id/spinner_about_yourself_car_color"
+                    android:layout_marginLeft="4dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/about_yourself_indent" />
 
 
