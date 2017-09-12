@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="item"
+            type="com.smapl_android.model.CampaignVM"/>
+    </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +22,7 @@
                 android:layout_height="@dimen/image_car_circle_size"
                 android:layout_marginLeft="7dp"
                 android:layout_marginTop="40dp"
-                android:src="@drawable/bentley" />
+                bind:photo="@{item.photo}"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -37,14 +42,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Стоимость: 10 грн"
+            android:text="@{`Стоимость: ` + item.budget}"
             android:textColor="#FFFFFF" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:text="Рекламная компания"
+            android:text="@{item.name}"
             android:textColor="#FFFFFF" />
 
         <TextView
@@ -56,7 +61,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="30dp"
             android:paddingTop="15dp"
-            android:text="A RelativeLayout is a very powerful utility for designing a user interface because it can eliminate nested view groups and keep your layout hierarchy flat, which improves performance. If you find yourself using several nested LinearLayout groups, you may be able to replace them with a single RelativeLayout."
+            android:text="@{item.description}"
             android:textColor="#FFFFFF" />
 
         <Button

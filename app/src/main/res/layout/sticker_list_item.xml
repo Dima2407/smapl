@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.smapl_android.model.StickerVM" />
+
+        <variable
+            name="presenter"
+            type="com.smapl_android.ui.fragments.CampaignDetailsFragment.Presenter" />
+    </data>
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
         android:paddingLeft="50dp"
-        android:paddingRight="50dp">
+        android:paddingRight="50dp"
+        android:paddingTop="10dp">
 
         <ImageView
             android:id="@+id/sticker_first_image"
-            android:background="@drawable/round_white_strip"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/audi8" />
+            android:background="@drawable/round_white_strip"
+            android:onClick="@{()->presenter.onLeftStickerClicked(item)}"
+            bind:photo="@{item.photoLeft}" />
 
         <ImageView
             android:id="@+id/sticker_second_image"
-            android:background="@drawable/round_white_strip"
-
             android:layout_width="100dp"
+
             android:layout_height="100dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/audi" />
+            android:background="@drawable/round_white_strip"
+            android:onClick="@{()->presenter.onRightStickerClicked(item)}"
+            bind:photo="@{item.photoRight}" />
     </RelativeLayout>
 </layout>
 
