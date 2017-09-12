@@ -27,32 +27,11 @@ public class RegistrationRequest {
     private String gender;
     @SerializedName("age")
     private String age;
+    @SerializedName("interest")
+    private String interests;
 
-    public RegistrationRequest(String email, String password, String name, String phoneNumber, int carYear, String carMark, String carModel, String carColor, String age, String gender) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.carYear = carYear;
-        this.carMark = carMark;
-        this.carModel = carModel;
-        this.carColor = carColor;
+    public RegistrationRequest() {
         this.type = "driver";
-        this.age = age;
-        this.gender = gender;
-    }
-
-    public RegistrationRequest(UserInfoViewModel user) {
-        this(user.email.get(),
-                user.password.get(),
-                user.name.get(),
-                user.phone.get(),
-                Integer.parseInt(user.carYearOfIssue.get()),
-                user.carBrand.get(),
-                user.carModel.get(),
-                user.color.get(),
-                user.gender.get(),
-                user.age.get());
     }
 
     public String getEmail() {
@@ -117,5 +96,29 @@ public class RegistrationRequest {
 
     public void setCarColor(String carColor) {
         this.carColor = carColor;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getInterests() {
+        return interests;
+    }
+
+    public void setInterests(String interests) {
+        this.interests = interests;
     }
 }

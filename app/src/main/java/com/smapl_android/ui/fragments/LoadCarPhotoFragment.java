@@ -144,10 +144,6 @@ public class LoadCarPhotoFragment extends BaseFragment {
     }
 
     private boolean registration() {
-        if (filePath != null) {
-            UploadService.uploadCarPhoto(getActivity(), filePath);
-            return true;
-        }
 
         final CoreRequest<Boolean> request = getCoreService()
                 .newRequest(getCoreActivity());
@@ -170,7 +166,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
                         }
                     }
                 });
-        getCoreService().registration(user, request);
+        getCoreService().registration(user.toRegistration(getContext()), request);
 
         return request.isError();
     }

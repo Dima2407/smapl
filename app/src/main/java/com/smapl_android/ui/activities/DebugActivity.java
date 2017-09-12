@@ -13,7 +13,7 @@ public class DebugActivity extends CoreActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fragment fragment = LoadCarPhotoFragment.create(new UserInfoViewModel(getApplicationContext()));
+        Fragment fragment = LoadCarPhotoFragment.create(new UserInfoViewModel());
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .add(android.R.id.content, fragment, LoadCarPhotoFragment.TAG)

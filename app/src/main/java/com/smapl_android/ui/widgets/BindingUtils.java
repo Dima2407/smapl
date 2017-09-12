@@ -5,36 +5,15 @@ import android.databinding.InverseBindingAdapter;
 import android.databinding.InverseBindingListener;
 import android.databinding.ObservableField;
 import android.support.v7.widget.AppCompatSpinner;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.smapl_android.R;
 
 public class BindingUtils {
-
-    @BindingAdapter(value = {"bind:selectedValue", "bind:selectedValueAttrChanged"}, requireAll = false)
-    public static void bindSpinnerData(AppCompatSpinner pAppCompatSpinner, String newSelectedValue, final InverseBindingListener newTextAttrChanged) {
-        pAppCompatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                newTextAttrChanged.onChange();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        if (newSelectedValue != null) {
-            int pos = ((ArrayAdapter<String>) pAppCompatSpinner.getAdapter()).getPosition(newSelectedValue);
-            pAppCompatSpinner.setSelection(pos, true);
-        }
-    }
-
-    @InverseBindingAdapter(attribute = "bind:selectedValue", event = "bind:selectedValueAttrChanged")
-    public static String captureSelectedValue(AppCompatSpinner pAppCompatSpinner) {
-        return (String) pAppCompatSpinner.getSelectedItem();
-    }
 
     @BindingAdapter("bind:onSendActionListener")
     public static void bindImeListener(EditText editText, final Runnable listener) {
@@ -68,4 +47,10 @@ public class BindingUtils {
         ImageLoader.getInstance().displayImage(url, imageView);
     }
 
+    @BindingAdapter("bind:error")
+    public static void setError(EditText editText, String error){
+        if(!TextUtils.isEmpty(error)){
+            editText.setError(error);
+        }
+    }
 }

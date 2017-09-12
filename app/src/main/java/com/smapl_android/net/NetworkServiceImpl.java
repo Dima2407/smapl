@@ -125,9 +125,8 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void registration(UserInfoViewModel user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
+    public void registration(RegistrationRequest registrationRequest, final OnResultCallback<RegistrationResponse, Throwable> callback) {
 
-        RegistrationRequest registrationRequest = new RegistrationRequest(user);
         final Call<RegistrationResponse> responseCall = apiService.registration(registrationRequest);
         responseCall.enqueue(createCallback(callback));
     }

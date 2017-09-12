@@ -73,40 +73,6 @@ abstract class DummyNetworkService implements NetworkService{
         }).start();*/
     }
 
-    @Override
-    public void registration(UserInfoViewModel user, final OnResultCallback<RegistrationResponse, Throwable> callback) {
-        /*final String phoneNumber = user.getPhoneNumber();
-        final String password = user.getPassword();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                    if (phoneNumber != null && "1111111111".equals(phoneNumber)) {
-                        RegistrationResponse result = new RegistrationResponse();
-                        String string = Utils.generateString("testString", 10);
-                        Random random = new Random();
-                        result.setCarColor(string);
-                        result.setCarMark(string);
-                        result.setCarModel(string);
-                        result.setCarYear(random.nextInt());
-                        result.setFirstName(string);
-                        result.setLastName(string);
-                        result.setMobileNumber(string);
-                        result.setCreatedAt(string);
-                        result.setUpdatedAt(string);
-                        callback.onResult(result, null);
-                    } else {
-                        callback.onResult(null, new Exception("phoneNumber isn't equals 1111111111"));
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();*/
-    }
-
 
     @Override
     public void getUserById(int id, String token, OnResultCallback<UserResponse, Throwable> callback) {
