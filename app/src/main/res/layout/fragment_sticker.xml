@@ -13,7 +13,11 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.smapl_android.ui.fragments.StickerFragment">
+        tools:context="com.smapl_android.ui.fragments.StickerFragment"
+        android:paddingLeft="@dimen/layout_padding_left"
+        android:paddingRight="@dimen/layout_padding_right"
+        android:paddingTop="@dimen/layout_padding_top"
+        android:paddingBottom="@dimen/layout_padding_bottom">
 
         <!-- TODO: Update blank fragment layout -->
         <ImageView

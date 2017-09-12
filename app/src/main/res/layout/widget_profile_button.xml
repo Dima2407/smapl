@@ -14,7 +14,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
+
+    <ImageView
+        android:id="@+id/arrow_right_button"
+        android:layout_height="25dp"
+        android:layout_width="25dp"
+        android:src="@drawable/right_arrow"/>
+
 
     <View
             android:id="@+id/bottom_line"

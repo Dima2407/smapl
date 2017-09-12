@@ -3,7 +3,7 @@
         xmlns:bind="http://schemas.android.com/apk/res-auto"
         xmlns:custom="http://schemas.android.com/apk/res-auto">
 
-    <data>
+    <data>v
         <import type="android.view.View"/>
 
         <variable
@@ -18,6 +18,7 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:orientation="vertical"
             android:background="@android:color/white">
 

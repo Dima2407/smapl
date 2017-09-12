@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:background="@drawable/bg"
-        android:layout_weight="1"
-        android:clickable="false"
-        android:scrollbars="none"/>
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="@drawable/bg"
+    android:clickable="false"
+    android:paddingBottom="@dimen/layout_padding_bottom"
+    android:paddingLeft="@dimen/layout_padding_left"
+    android:paddingRight="@dimen/layout_padding_right"
+    android:paddingTop="@dimen/layout_padding_top"
+    android:scrollbars="none" />
 

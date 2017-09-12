@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.smapl_android.R;
@@ -19,6 +20,7 @@ public class ProfileButton extends RelativeLayout {
     private final int visibleLines;
 
     private TextView contentView;
+    private ImageView rightButtonArrow;
     private View topLineView;
     private View bottomLineView;
 
@@ -44,6 +46,7 @@ public class ProfileButton extends RelativeLayout {
         contentView = (TextView) findViewById(R.id.content);
         topLineView = findViewById(R.id.top_line);
         bottomLineView = findViewById(R.id.bottom_line);
+        rightButtonArrow = (ImageView)findViewById(R.id.arrow_right_button);
 
         final LayoutParams tLayoutParams = (LayoutParams) topLineView.getLayoutParams();
         tLayoutParams.height = lineHeight;
