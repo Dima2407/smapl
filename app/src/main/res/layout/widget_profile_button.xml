@@ -20,7 +20,8 @@
         android:id="@+id/arrow_right_button"
         android:layout_height="25dp"
         android:layout_width="25dp"
-        android:src="@drawable/right_arrow"/>
+        android:src="@drawable/right_arrow"
+        android:layout_gravity="right"/>
 
 
     <View
