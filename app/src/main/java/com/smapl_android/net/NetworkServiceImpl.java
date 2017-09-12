@@ -22,8 +22,6 @@ import java.net.HttpURLConnection;
 class NetworkServiceImpl implements NetworkService {
 
     private final static String TAG = NetworkServiceImpl.class.getSimpleName();
-    private static final String GENDER_MAN = "man";
-    private static final String GENDER_WOMAN = "woman";
 
     private final ApiService apiService;
 
