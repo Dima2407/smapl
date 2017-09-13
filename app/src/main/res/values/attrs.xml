@@ -35,4 +35,9 @@
     <declare-styleable name="OverlayImageButton">
         <attr name="overlay_at" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="AboutYourSelfSpinner">
+        <attr name="items" format="reference"/>
+        <attr name="hint" format="string"/>
+    </declare-styleable>
 </resources>

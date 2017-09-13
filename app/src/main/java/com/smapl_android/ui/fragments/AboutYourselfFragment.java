@@ -7,8 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.smapl_android.R;
 import com.smapl_android.core.validation.ValidationException;
@@ -16,32 +14,18 @@ import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentAboutYourselfBinding;
 import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.ui.base.BaseFragment;
-import com.smapl_android.ui.widgets.AboutYourSelfSpinner;
 
 
 public class AboutYourselfFragment extends BaseFragment {
 
-    public static final String TAG = AboutYourselfFragment.class.getSimpleName();
-    private static final String GENDER_MAN = "man";
-    private static final String GENDER_WOMAN = "woman";
-
     private UserInfoViewModel user;
     private Presenter presenter = new Presenter();
-
-    private AboutYourSelfSpinner carBrand;
-    private EditText carYearOfIssue;
-    private AboutYourSelfSpinner carColor;
-    private EditText name;
-    private EditText carModel;
-    private TextView txtTitle;
-    private AboutYourSelfSpinner spinnerGender;
-    private AboutYourSelfSpinner spinnerAge;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentAboutYourselfBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about_yourself, container, false);
-        user = new UserInfoViewModel(getContext());
+        user = getArguments().getParcelable("user");
         binding.setUser(user);
         binding.setPresenter(presenter);
         return binding.getRoot();
@@ -50,19 +34,6 @@ public class AboutYourselfFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        txtTitle = (TextView) view.findViewById(R.id.text_about_yourself);
-        name = (EditText) view.findViewById(R.id.edit_about_yourself_name);
-        carYearOfIssue = (EditText) view.findViewById(R.id.edit_about_yourself_car_yaer_of_issue);
-        carModel = (EditText) view.findViewById(R.id.edit_about_yourself_car_model);
-        spinnerGender = (AboutYourSelfSpinner) view.findViewById(R.id.spinner_gender_registration);
-        spinnerGender.setParams(R.array.gender, getString(R.string.gender));
-        spinnerAge = (AboutYourSelfSpinner) view.findViewById(R.id.spinner_about_yourself_age);
-        spinnerAge.setParams(R.array.age, getString(R.string.age));
-        carBrand = (AboutYourSelfSpinner) view.findViewById(R.id.spinner_about_yourself_car_brand);
-        carBrand.setParams(R.array.car_brand, getString(R.string.hint_car_brand));
-        carColor = (AboutYourSelfSpinner) view.findViewById(R.id.spinner_about_yourself_car_color);
-        carColor.setParams(R.array.car_color, getString(R.string.hint_car_color));
     }
 
     @Override
@@ -82,51 +53,57 @@ public class AboutYourselfFragment extends BaseFragment {
             return;
         }
 
-        String phoneNumber = getArguments().getString("phoneNumber");
-        String password = getArguments().getString("password");
-
-        user.phone.set(phoneNumber);
-        user.password.set(password);
-        user.gender.set(spinnerGender.getSelectedItem().toString().equals(getString(R.string.man)) ? GENDER_MAN : GENDER_WOMAN);
-        user.age.set(spinnerAge.getSelectedItem().toString());
-        user.carBrand.set(carBrand.getSelectedItem().toString());
-        user.carYearOfIssue.set(carYearOfIssue.getText().toString());
-        user.color.set(carColor.getSelectedItem().toString());
-
         Fragment loadCarPhotoFragment = LoadCarPhotoFragment.create(user);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .addToBackStack(null)
-                .add(android.R.id.content, loadCarPhotoFragment, LoadCarPhotoFragment.TAG)
-                .commit();
+
+        getCoreActivity().replaceContentWithHistory(loadCarPhotoFragment);
 
     }
 
     private boolean validation() {
 
-        boolean isValidate = true;
+        try {
+            Validators.getNameValidator(getContext()).validate(user.name.get());
+        } catch (ValidationException e) {
+            user.nameError.set(e.getMessage());
+            return false;
+        }
+
+      /*  try {
+            Validators.getEmailValidator(getContext()).validate(email.getText().toString());
+        } catch (ValidationException e) {
+            email.setError(e.getMessage());
+            isValidate = false;
+        }*/
 
         try {
-            Validators.getNameValidator(getContext()).validate(name.getText().toString());
+            Validators.getCarModelValidator(getContext()).validate(user.carModel.get());
         } catch (ValidationException e) {
-            name.setError(e.getMessage());
-            isValidate = false;
+            user.carModelError.set(e.getMessage());
+            return false;
         }
 
         try {
-            Validators.getCarModelValidator(getContext()).validate(carModel.getText().toString());
+            Validators.getCarYearValidator(getContext()).validate(user.carYearOfIssue.get());
         } catch (ValidationException e) {
-            carModel.setError(e.getMessage());
-            isValidate = false;
+            user.carYearOfIssueError.set(e.getMessage());
+            return false;
         }
 
-        try {
-            Validators.getCarYearValidator(getContext()).validate(carYearOfIssue.getText().toString());
-        } catch (ValidationException e) {
-            carYearOfIssue.setError(e.getMessage());
-            isValidate = false;
-        }
+        return true;
+    }
 
-        return isValidate;
+    public static Fragment create(String phoneNumber, String password) {
+        Bundle bundle = new Bundle();
+        UserInfoViewModel infoViewModel = new UserInfoViewModel();
+        infoViewModel.phone.set(phoneNumber);
+        infoViewModel.password.set(password);
+
+        bundle.putParcelable("user", infoViewModel);
+
+        Fragment fragment = new AboutYourselfFragment();
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 
     public class Presenter {

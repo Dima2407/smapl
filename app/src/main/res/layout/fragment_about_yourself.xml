@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -95,14 +95,17 @@
                     android:layout_marginTop="25dp"
                     android:hint="@string/name"
                     android:imeOptions="actionDone"
-                    android:text="@{user.name}"
-                    android:textColorHint="@color/about_yourself_hint"
-                    app:addTextChangedListener="@{user.nameTextWatcher}" />
+                    android:text="@={user.name}"
+                    bind:error="@{user.nameError}"
+                    android:textColorHint="@color/about_yourself_hint"/>
 
                 <com.smapl_android.ui.widgets.AboutYourSelfSpinner
                     android:id="@+id/spinner_gender_registration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    custom:hint="@string/gender"
+                    custom:items="@array/gender"
+                    bind:selectedValue="@={user.gender}"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/about_yourself_indent" />
 
@@ -110,6 +113,9 @@
                     android:id="@+id/spinner_about_yourself_age"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    custom:hint="@string/age"
+                    custom:items="@array/age"
+                    bind:selectedValue="@={user.age}"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/about_yourself_indent_spinner" />
 
@@ -117,6 +123,9 @@
                     android:id="@+id/spinner_about_yourself_car_brand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    custom:hint="@string/hint_car_brand"
+                    custom:items="@array/car_brand"
+                    bind:selectedValue="@={user.carBrand}"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/about_yourself_indent_spinner" />
 
@@ -128,8 +137,8 @@
                     android:layout_marginTop="@dimen/about_yourself_indent"
                     android:hint="@string/car_model"
                     android:imeOptions="actionDone"
-                    android:text="@{user.carModel}"
-                    app:addTextChangedListener="@{user.carModelTextWatcher}" />
+                    android:text="@={user.carModel}"
+                    bind:error="@{user.carModelError}" />
 
                 <EditText
                     android:id="@+id/edit_about_yourself_car_yaer_of_issue"
@@ -141,8 +150,8 @@
                     android:imeOptions="actionDone"
                     android:inputType="number"
                     android:maxLength="4"
-                    android:text="@{user.carYearOfIssue}"
-                    app:addTextChangedListener="@{user.carYearTextWatcher}" />
+                    android:text="@={user.carYearOfIssue}"
+                    bind:error="@{user.carYearOfIssueError}"/>
 
 
                 <com.smapl_android.ui.widgets.AboutYourSelfSpinner
@@ -150,6 +159,9 @@
                     android:layout_marginLeft="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    custom:hint="@string/hint_car_color"
+                    custom:items="@array/car_color"
+                    bind:selectedValue="@={user.carColor}"
                     android:layout_marginTop="@dimen/about_yourself_indent" />
 
 
@@ -161,8 +173,7 @@
                     android:layout_marginBottom="182dp"
                     android:layout_marginTop="@dimen/about_yourself_indent"
                     android:hint="@string/hint_interests"
-                    android:text="@{user.interests}"
-                    app:addTextChangedListener="@{user.interestsTextWatcher}" />
+                    android:text="@={user.interests}" />
 
             </LinearLayout>
         </LinearLayout>

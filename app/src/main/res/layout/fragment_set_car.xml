@@ -71,12 +71,12 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/core_text_size" />
 
-                <android.support.v7.widget.AppCompatSpinner
+                <com.smapl_android.ui.widgets.AboutYourSelfSpinner
                     android:id="@+id/spinner_set_car_brand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:entries="@array/car_brand"
+                    custom:items="@array/car_brand"
                     bind:selectedValue="@={car.carBrand}"/>
 
             </LinearLayout>

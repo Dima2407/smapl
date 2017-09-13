@@ -117,13 +117,13 @@
 
             </RadioGroup>
 
-            <android.support.v7.widget.AppCompatSpinner
+            <com.smapl_android.ui.widgets.AboutYourSelfSpinner
                     android:id="@+id/edit_about_me_age"
                     android:layout_below="@id/radio_group_about_me_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:entries="@array/age_entities"
+                    custom:items="@array/age_entities"
                     bind:selectedValue="@={userEdit.age}"/>
 
             <EditText

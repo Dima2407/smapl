@@ -3,17 +3,12 @@ package com.smapl_android.net.responses;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.io.StringReader;
 
-public class GetCampaignListResponse extends ServerResponse<GetCampaignListResponse.CampaignList> {
+public class GetCampaignListResponse extends ServerResponse<GetCampaignListResponse.Campaign[]> {
 
     public Campaign[] getCampaigns() {
-        return getResult().campaigns;
-    }
-
-
-    public static class CampaignList {
-        @SerializedName("result")
-        private Campaign[] campaigns;
+        return getResult();
     }
 
     public static class Campaign implements Serializable {
@@ -44,6 +39,8 @@ public class GetCampaignListResponse extends ServerResponse<GetCampaignListRespo
         private String updatedAt;
         @SerializedName("id")
         private int id;
+        @SerializedName("logo")
+        private String logo;
 
         public String getName() {
             return name;
@@ -98,7 +95,7 @@ public class GetCampaignListResponse extends ServerResponse<GetCampaignListRespo
         }
 
         public String getImage (){
-            return getStickers()[0];
+            return logo;
         }
     }
 

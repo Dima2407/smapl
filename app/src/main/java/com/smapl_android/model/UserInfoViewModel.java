@@ -2,12 +2,14 @@ package com.smapl_android.model;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
+import android.databinding.Observable;
 import android.databinding.ObservableField;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 
 import com.smapl_android.R;
@@ -15,12 +17,16 @@ import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.net.requests.EditProfileRequest;
+import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.UserResponse;
 
 import java.util.Objects;
 
 public class UserInfoViewModel extends BaseObservable implements Parcelable {
+
+    private static final String GENDER_MAN = "male";
+    private static final String GENDER_WOMAN = "female";
 
     public final ObservableField<String> phone = new ObservableField<>();
     public final ObservableField<String> password = new ObservableField<>();
@@ -31,124 +37,48 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
     public final ObservableField<String> carBrand = new ObservableField<>();
     public final ObservableField<String> carModel = new ObservableField<>();
     public final ObservableField<String> carYearOfIssue = new ObservableField<>();
-    public final ObservableField<String> color = new ObservableField<>();
+    public final ObservableField<String> carColor = new ObservableField<>();
     public final ObservableField<String> interests = new ObservableField<>();
-    public final ObservableField<Drawable> phoneValid = new ObservableField<>();
-    public final ObservableField<Drawable> passwordValid = new ObservableField<>();
 
-    public final ObservableField<String> oldPhone = new ObservableField<>();
-    public final ObservableField<String> oldName = new ObservableField<>();
-    public final ObservableField<String> oldAge = new ObservableField<>();
-    public final ObservableField<String> oldInterests = new ObservableField<>();
-
-    public final TextWatcher nameTextWatcher = new TextWatcherAdapter(name);
-    public final TextWatcher emailTextWatcher = new TextWatcherAdapter(email);
-    // public final TextWatcher genderTextWatcher = new TextWatcherAdapter(gender);
-    public final TextWatcher ageTextWatcher = new TextWatcherAdapter(age);
-    public final TextWatcher carBrandTextWatcher = new TextWatcherAdapter(carBrand);
-    public final TextWatcher carModelTextWatcher = new TextWatcherAdapter(carModel);
-    public final TextWatcher carColorTextWatcher = new TextWatcherAdapter(color);
-    public final TextWatcher carYearTextWatcher = new TextWatcherAdapter(carYearOfIssue);
-    public final TextWatcher interestsTextWatcher = new TextWatcherAdapter(interests);
-
-    private Context context;
-
-    private Drawable markDrawable;
-
-    public final TextWatcher passwordTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            updatePasswordValidationMark(s);
-            if (!Objects.equals(password.get(), s.toString())) {
-                password.set(s.toString());
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
-
-    public final TextWatcher phoneTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            updatePhoneValidationMark(s);
-            if (!Objects.equals(phone.get(), s.toString())) {
-                phone.set(s.toString());
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
-
-
-    public UserInfoViewModel(Context context) {
-        this.context = context;
-    }
+    public final ObservableField<String> carModelError = new ObservableField<>();
+    public final ObservableField<String> nameError = new ObservableField<>();
+    public final ObservableField<String> carYearOfIssueError = new ObservableField<>();
 
     protected UserInfoViewModel(Parcel in) {
+        phone.set(in.readString());
+        password.set(in.readString());
+        name.set(in.readString());
+        email.set(in.readString());
+        gender.set(in.readString());
+        age.set(in.readString());
+        carBrand.set(in.readString());
+        carModel.set(in.readString());
+        carYearOfIssue.set(in.readString());
+        carColor.set(in.readString());
+        interests.set(in.readString());
     }
 
-    private Drawable getMarkDrawable() {
-        if (markDrawable == null) {
-            markDrawable = context.getResources().getDrawable(R.drawable.edit_text_mark);
-        }
-        return markDrawable;
-    }
-
-    private void updatePasswordValidationMark(CharSequence s) {
-        updateValidationMark(s, Validators.getPasswordValidator(context), passwordValid);
-    }
-
-    private void updatePhoneValidationMark(CharSequence s) {
-        updateValidationMark(s, Validators.getPhoneValidator(context), phoneValid);
-    }
-
-    private void updateValidationMark(CharSequence field, Validator<String> validator, ObservableField<Drawable> mark) {
-        try {
-            boolean correct = validator.validate(field.toString());
-            if (correct) {
-                mark.set(getMarkDrawable());
-            } else {
-                mark.set(null);
+    public UserInfoViewModel() {
+        carModel.addOnPropertyChangedCallback(new OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                carModelError.set("");
             }
-        } catch (ValidationException e) {
-            mark.set(null);
-        }
-    }
+        });
 
-    public void apply(UserResponse response) {
-        oldName.set(response.getName());
-        carBrand.set(response.getCarMark());
-        carModel.set(response.getCarModel());
-        color.set(response.getCarColor());
-        carYearOfIssue.set(response.getCarYear().toString());
-        oldAge.set(response.getAge() != null ? response.getAge().toString() : null);
-        oldPhone.set(response.getMobileNumber());
-        oldInterests.set(response.getInterests());
-    }
+        name.addOnPropertyChangedCallback(new OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                nameError.set("");
+            }
+        });
 
-    public UpdateCarRequest toUpdateCar() {
-        UpdateCarRequest request = new UpdateCarRequest();
-        request.setCarMark(carBrand.get());
-        request.setCarColor(color.get());
-        request.setCarYear(Integer.parseInt(carYearOfIssue.get()));
-        request.setCarModel(carModel.get());
-        return request;
+        carYearOfIssue.addOnPropertyChangedCallback(new OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                carYearOfIssueError.set("");
+            }
+        });
     }
 
     public static final Creator<UserInfoViewModel> CREATOR = new Creator<UserInfoViewModel>() {
@@ -170,5 +100,39 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(phone.get());
+        dest.writeString(password.get());
+        dest.writeString(name.get());
+        dest.writeString(email.get());
+        dest.writeString(gender.get());
+        dest.writeString(age.get());
+        dest.writeString(carBrand.get());
+        dest.writeString(carModel.get());
+        dest.writeString(carYearOfIssue.get());
+        dest.writeString(carColor.get());
+        dest.writeString(interests.get());
+    }
+
+    public RegistrationRequest toRegistration(Context context) {
+
+        RegistrationRequest request = new RegistrationRequest();
+        request.setName(name.get());
+        request.setPhoneNumber(phone.get());
+        if (!TextUtils.isEmpty(age.get())) {
+            request.setAge(age.get());
+        }
+        if (context.getString(R.string.man).equalsIgnoreCase(gender.get())) {
+            request.setGender(GENDER_MAN);
+        }else {
+            request.setGender(GENDER_WOMAN);
+        }
+        request.setInterests(interests.get());
+
+        request.setCarMark(carBrand.get());
+        request.setCarColor(carColor.get());
+        request.setCarYear(Integer.parseInt(carYearOfIssue.get()));
+        request.setCarModel(carModel.get());
+
+        return request;
     }
 }

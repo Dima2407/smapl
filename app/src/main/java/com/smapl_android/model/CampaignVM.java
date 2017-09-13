@@ -10,6 +10,8 @@ public class CampaignVM {
     public final ObservableField<String> description = new ObservableField<>();
 
     public final ObservableField<String> photo = new ObservableField<>();
+
+    public final ObservableField<String> budget = new ObservableField<>();
     private final GetCampaignListResponse.Campaign campaign;
 
     public CampaignVM(GetCampaignListResponse.Campaign c) {
@@ -17,6 +19,7 @@ public class CampaignVM {
         name.set(c.getName());
         description.set(c.getDescription());
         photo.set(c.getImage());
+        budget.set(c.getBudget());
     }
 
     public GetCampaignListResponse.Campaign getCampaign() {

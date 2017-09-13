@@ -20,6 +20,7 @@ import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.requests.EditProfileRequest;
+import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
 import com.smapl_android.storage.SessionStorage;
@@ -77,7 +78,7 @@ public class CoreService {
         });
     }
 
-    public void registration(final UserInfoViewModel user, final CoreRequest<Boolean> successOutput) {
+    public void registration(final RegistrationRequest user, final CoreRequest<Boolean> successOutput) {
 
         networkServiceImpl.registration(user, new NetworkService.OnResultCallback<RegistrationResponse, Throwable>() {
             @Override
@@ -91,7 +92,7 @@ public class CoreService {
                             }
                         });
                     } else {
-                        login(user.phone.get(), user.password.get(), successOutput);
+                        login(user.getPhoneNumber(), user.getPassword(), successOutput);
                     }
                 }
             }
@@ -161,7 +162,6 @@ public class CoreService {
 
     public void getCampaigns(final CoreRequest<List<GetCampaignListResponse.Campaign>> coreRequest){
         String token = sessionStorage.getAuthKey();
-        Log.d(TAG, "getCampaigns: " + token);
         networkServiceImpl.getCampaigns(token,  new NetworkService.OnResultCallback<GetCampaignListResponse, Throwable>() {
             @Override
             public void onResult(final GetCampaignListResponse result, final Throwable error) {

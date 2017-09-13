@@ -13,23 +13,29 @@ import com.smapl_android.ui.fragments.LoginFragment;
 
 public class AuthActivity extends CoreActivity {
 
+    public static final String LOGOUT_ACTION = "com.smapl_android.intent.action.LOGOUT";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        if(LOGOUT_ACTION.equalsIgnoreCase(getIntent().getAction())){
+            showLogin();
+        }else {
+            setContentView(R.layout.activity_splash);
 
-        final Handler splashHandler = new Handler();
-        splashHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                boolean loggedIn = getCoreService().isLoggedIn();
-                if (loggedIn) {
-                    openMainActivity();
-                } else {
-                    showLogin();
+            final Handler splashHandler = new Handler();
+            splashHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    boolean loggedIn = getCoreService().isLoggedIn();
+                    if (loggedIn) {
+                        openMainActivity();
+                    } else {
+                        showLogin();
+                    }
                 }
-            }
-        }, 1000);
+            }, 1000);
+        }
     }
 
     private void openMainActivity() {
