@@ -6,8 +6,10 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg"
         android:orientation="vertical"
-        android:paddingRight="12dp"
-        android:paddingLeft="12dp">
+        android:paddingLeft="@dimen/layout_padding_left"
+        android:paddingRight="@dimen/layout_padding_right"
+        android:paddingTop="@dimen/layout_padding_top"
+        android:paddingBottom="@dimen/layout_padding_bottom">
 
         <android.support.v7.widget.RecyclerView
             android:layout_marginTop="14dp"

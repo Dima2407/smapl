@@ -1,127 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:custom="http://schemas.android.com/apk/res-auto">
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-                name="user" type="com.smapl_android.model.UserInfo"/>
-        <variable name="presenter"
-                  type="com.smapl_android.ui.fragments.ProfileFragment.Presenter"/>
+            name="user"
+            type="com.smapl_android.model.UserInfo" />
+
+        <variable
+            name="presenter"
+            type="com.smapl_android.ui.fragments.ProfileFragment.Presenter" />
 
     </data>
+
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/img_smapl_background"
-                android:paddingLeft="6dp"
-                android:paddingRight="6dp"
-                android:paddingTop="36dp"
-                android:paddingBottom="36dp">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/img_smapl_background"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/layout_padding_bottom"
+            android:paddingLeft="@dimen/layout_padding_left"
+            android:paddingRight="@dimen/layout_padding_right"
+            android:paddingTop="@dimen/layout_padding_top">
+
             <com.smapl_android.ui.widgets.UserInfoBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    custom:leftSpace="6dp"
-                    custom:userName="@{user.name}"
-                    custom:carInfo="@{user.carBrandModel}"
-                    custom:carPhoto="@{user.carPhoto}"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:carInfo="@{user.carBrandModel}"
+                custom:carPhoto="@{user.carPhoto}"
+                custom:leftSpace="6dp"
+                custom:userName="@{user.name}" />
 
             <TextView
-                    android:id="@+id/text_map_balance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@{user.balance}"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/car_brand_model_profile_size"/>
+                android:id="@+id/text_map_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@{user.balance}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/car_brand_model_profile_size" />
 
             <TextView
-                    android:id="@+id/text_map_earn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{user.earn}"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/car_brand_model_profile_size"/>
+                android:id="@+id/text_map_earn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.earn}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/car_brand_model_profile_size" />
 
             <TextView
-                    android:id="@+id/text_map_drive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{user.drive}"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/car_brand_model_profile_size"/>
+                android:id="@+id/text_map_drive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.drive}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/car_brand_model_profile_size" />
 
             <com.smapl_android.ui.widgets.ProfileButton
-                    android:id="@+id/btn_to_campaign_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
-                    custom:content="@string/campaign_list"
-                    custom:line_height="1dp"
-                    custom:line_color="@android:color/darker_gray"
-                    custom:line_space="10dp"
-                    android:onClick="@{() -> presenter.goToCampaigns()}"/>
+                android:id="@+id/btn_to_campaign_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:onClick="@{() -> presenter.goToCampaigns()}"
+                custom:content="@string/campaign_list"
+
+                custom:line_color="@android:color/darker_gray"
+                custom:line_height="0.5dp"
+                custom:line_space="10dp" />
 
             <com.smapl_android.ui.widgets.ProfileButton
-                    android:id="@+id/btn_obtain_money"
-                    custom:content="@string/obtain_money"
-                    custom:line_height="1dp"
-                    custom:line_color="@android:color/darker_gray"
-                    custom:line_space="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
-                    android:onClick="@{() -> presenter.goToObtainMoney()}"/>
+                android:id="@+id/btn_obtain_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:onClick="@{() -> presenter.goToObtainMoney()}"
+                custom:content="@string/obtain_money"
+                custom:line_color="@android:color/darker_gray"
+                custom:line_height="0.5dp"
+                custom:line_space="10dp" />
 
             <com.smapl_android.ui.widgets.ProfileButton
-                    android:id="@+id/btn_about_me"
-                    custom:content="@string/edit_about_me"
-                    custom:line_height="1dp"
-                    custom:line_color="@android:color/darker_gray"
-                    custom:line_space="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
-                    android:onClick="@{() -> presenter.goToEditPersonalInfo()}"/>
+                android:id="@+id/btn_about_me"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:onClick="@{() -> presenter.goToEditPersonalInfo()}"
+                custom:content="@string/edit_about_me"
+                custom:line_color="@android:color/darker_gray"
+                custom:line_height="0.5dp"
+                custom:line_space="10dp" />
 
             <com.smapl_android.ui.widgets.ProfileButton
-                    android:id="@+id/btn_to_set_car_fragment"
-                    custom:content="@string/to_set_car"
-                    custom:line_height="1dp"
-                    custom:line_color="@android:color/darker_gray"
-                    custom:line_space="10dp"
-                    custom:lines="bottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{() -> presenter.goToEditCar()}"/>
+                android:id="@+id/btn_to_set_car_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> presenter.goToEditCar()}"
+                custom:content="@string/to_set_car"
+                custom:line_color="@android:color/darker_gray"
+                custom:line_height="0.5dp"
+                custom:line_space="10dp"
+                custom:lines="bottom" />
 
             <com.smapl_android.ui.widgets.ProfileButton
-                    android:id="@+id/btn_edit_password"
-                    custom:content="@string/change_password"
-                    custom:line_height="1dp"
-                    custom:line_color="@android:color/darker_gray"
-                    custom:line_space="10dp"
-                    custom:lines="bottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{() -> presenter.goToEditPassword()}"/>
+                android:id="@+id/btn_edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> presenter.goToEditPassword()}"
+                custom:content="@string/change_password"
+                custom:line_color="@android:color/darker_gray"
+                custom:line_height="0.5dp"
+                custom:line_space="10dp"
+                custom:lines="bottom" />
 
             <com.smapl_android.ui.widgets.ProfileButton
-                    android:id="@+id/btn_logout"
-                    android:layout_marginTop="36dp"
-                    custom:content="@string/logout"
-                    custom:line_height="1dp"
-                    custom:line_color="@android:color/darker_gray"
-                    custom:line_space="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{() -> presenter.logout()}"/>
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:onClick="@{() -> presenter.logout()}"
+                custom:content="@string/logout"
+                custom:line_color="@android:color/darker_gray"
+                custom:line_height="0.5dp"
+                custom:line_space="10dp" />
 
         </LinearLayout>
     </ScrollView>

@@ -18,12 +18,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/img_smapl_background">
+        android:background="@drawable/img_smapl_background"
+        android:paddingLeft="@dimen/layout_padding_left"
+        android:paddingRight="@dimen/layout_padding_right"
+        android:paddingTop="@dimen/layout_padding_top"
+        android:paddingBottom="@dimen/layout_padding_bottom"
+        >
 
 
         <com.smapl_android.ui.widgets.UserInfoBar
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 custom:leftSpace="6dp"

@@ -18,9 +18,10 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg"
         android:orientation="vertical"
-        android:paddingLeft="6dp"
-        android:paddingRight="6dp"
-        android:paddingBottom="36dp">
+        android:paddingLeft="@dimen/layout_padding_left"
+        android:paddingRight="@dimen/layout_padding_right"
+        android:paddingTop="@dimen/layout_padding_top"
+        android:paddingBottom="@dimen/layout_padding_bottom">
 
         <com.smapl_android.ui.widgets.SimpleTopBar
             android:id="@+id/linear_edit_car_menu"
