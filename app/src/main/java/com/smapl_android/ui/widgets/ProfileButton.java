@@ -2,11 +2,14 @@ package com.smapl_android.ui.widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.smapl_android.R;
 
 public class ProfileButton extends RelativeLayout {
@@ -20,7 +23,6 @@ public class ProfileButton extends RelativeLayout {
     private final int visibleLines;
 
     private TextView contentView;
-    private ImageView rightButtonArrow;
     private View topLineView;
     private View bottomLineView;
 
@@ -46,18 +48,18 @@ public class ProfileButton extends RelativeLayout {
         contentView = (TextView) findViewById(R.id.content);
         topLineView = findViewById(R.id.top_line);
         bottomLineView = findViewById(R.id.bottom_line);
-        rightButtonArrow = (ImageView)findViewById(R.id.arrow_right_button);
 
         final LayoutParams tLayoutParams = (LayoutParams) topLineView.getLayoutParams();
         tLayoutParams.height = lineHeight;
         tLayoutParams.bottomMargin = lineSpace;
         topLineView.setLayoutParams(tLayoutParams);
 
-        if((visibleLines & TOP_VISIBLE) == TOP_VISIBLE){
+        if ((visibleLines & TOP_VISIBLE) == TOP_VISIBLE) {
             topLineView.setVisibility(VISIBLE);
-        }else {
+        } else {
             topLineView.setVisibility(INVISIBLE);
         }
+
 
         final LayoutParams cLayoutParams = (LayoutParams) contentView.getLayoutParams();
 
@@ -70,9 +72,9 @@ public class ProfileButton extends RelativeLayout {
         bLayoutParams.addRule(BELOW, R.id.content);
         bottomLineView.setLayoutParams(bLayoutParams);
 
-        if((visibleLines & BOTTOM_VISIBLE) == BOTTOM_VISIBLE){
+        if ((visibleLines & BOTTOM_VISIBLE) == BOTTOM_VISIBLE) {
             bottomLineView.setVisibility(VISIBLE);
-        }else {
+        } else {
             bottomLineView.setVisibility(INVISIBLE);
         }
 
