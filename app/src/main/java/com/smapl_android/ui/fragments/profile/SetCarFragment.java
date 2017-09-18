@@ -1,4 +1,4 @@
-package com.smapl_android.ui.fragments;
+package com.smapl_android.ui.fragments.profile;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
@@ -16,6 +19,9 @@ import com.smapl_android.model.CarInfoEditVM;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.UserResponse;
 import com.smapl_android.ui.base.BaseFragment;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class SetCarFragment extends BaseFragment {
 
@@ -34,6 +40,7 @@ public class SetCarFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        carInfo.init(getActivity());
         carInfo.apply(getCoreActivity().getUserInfo());
     }
 
@@ -70,6 +77,44 @@ public class SetCarFragment extends BaseFragment {
             });
             getCoreService()
                     .updateCar(updateUserRequest, request);
+        }
+
+        public void selectCarBrand(){
+            List<String> strings = Arrays.asList(getActivity().getResources().getStringArray(R.array.car_brand));
+            final int selectedIndex = strings.indexOf(carInfo.carBrand.get());
+            new MaterialDialog.Builder(getActivity())
+                    .theme(Theme.LIGHT)
+                    .title(R.string.select_car_brand)
+                    .items(R.array.car_brand)
+                    .itemsCallbackSingleChoice(selectedIndex, new MaterialDialog.ListCallbackSingleChoice() {
+                        @Override
+                        public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                            carInfo.carBrand.set(text.toString());
+                            return true;
+                        }
+                    })
+                    .alwaysCallSingleChoiceCallback()
+                    .negativeText(android.R.string.cancel)
+                    .show();
+        }
+
+        public void selectCarColor(){
+            List<String> strings = Arrays.asList(getActivity().getResources().getStringArray(R.array.car_color));
+            final int selectedIndex = strings.indexOf(carInfo.carColor.get());
+            new MaterialDialog.Builder(getActivity())
+                    .theme(Theme.LIGHT)
+                    .title(R.string.select_car_color)
+                    .items(R.array.car_color)
+                    .itemsCallbackSingleChoice(selectedIndex, new MaterialDialog.ListCallbackSingleChoice() {
+                        @Override
+                        public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                            carInfo.carColor.set(text.toString());
+                            return true;
+                        }
+                    })
+                    .alwaysCallSingleChoiceCallback()
+                    .negativeText(android.R.string.cancel)
+                    .show();
         }
     }
 }

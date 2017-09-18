@@ -49,21 +49,7 @@ public class UserInfoEditVM extends BaseObservable {
         ageValidator = Validators.getAgeValidator(context);
         maleText = context.getString(R.string.man);
         femaleText = context.getString(R.string.woman);
-    }
 
-
-    public void apply(UserInfo userInfo) {
-        name.set(userInfo.name.get());
-        if (GENDER_MAN.equalsIgnoreCase(userInfo.getResponse().getGender())) {
-            gender.set(maleText);
-        } else if (GENDER_WOMAN.equalsIgnoreCase(userInfo.getResponse().getGender())) {
-            gender.set(femaleText);
-        } else {
-            gender.set("");
-        }
-        phone.set(userInfo.getResponse().getMobileNumber());
-        age.set(userInfo.getResponse().getAge());
-        interests.set(TextUtils.join(",", userInfo.getResponse().getInterests()));
         phone.addOnPropertyChangedCallback(new OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
@@ -116,6 +102,21 @@ public class UserInfoEditVM extends BaseObservable {
                 }
             }
         });
+    }
+
+
+    public void apply(UserInfo userInfo) {
+        name.set(userInfo.name.get());
+        if (GENDER_MAN.equalsIgnoreCase(userInfo.getResponse().getGender())) {
+            gender.set(maleText);
+        } else if (GENDER_WOMAN.equalsIgnoreCase(userInfo.getResponse().getGender())) {
+            gender.set(femaleText);
+        } else {
+            gender.set("");
+        }
+        phone.set(userInfo.getResponse().getMobileNumber());
+        age.set(userInfo.getResponse().getAge());
+        interests.set(TextUtils.join(",", userInfo.getResponse().getInterests()));
     }
 
     public EditProfileRequest toUpdateRequest() {

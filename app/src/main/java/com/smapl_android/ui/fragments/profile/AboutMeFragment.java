@@ -1,4 +1,4 @@
-package com.smapl_android.ui.fragments;
+package com.smapl_android.ui.fragments.profile;
 
 import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;

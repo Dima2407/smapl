@@ -15,7 +15,7 @@
 
         <variable
             name="presenter"
-            type="com.smapl_android.ui.fragments.AboutMeFragment.Presenter" />
+            type="com.smapl_android.ui.fragments.profile.AboutMeFragment.Presenter" />
     </data>
 
     <LinearLayout
