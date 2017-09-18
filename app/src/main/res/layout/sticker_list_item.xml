@@ -27,18 +27,19 @@
             android:layout_height="100dp"
             android:layout_alignParentLeft="true"
             android:background="@drawable/round_white_strip"
+            android:padding="1dp"
             android:onClick="@{()->presenter.onLeftStickerClicked(item)}"
-            bind:photo="@{item.photoLeft}" />
+            bind:roundedSquarePhoto="@{item.photoLeft}" />
 
         <ImageView
             android:id="@+id/sticker_second_image"
             android:layout_width="100dp"
-
             android:layout_height="100dp"
+            android:padding="1dp"
             android:layout_alignParentRight="true"
             android:background="@drawable/round_white_strip"
             android:onClick="@{()->presenter.onRightStickerClicked(item)}"
-            bind:photo="@{item.photoRight}" />
+            bind:roundedSquarePhoto="@{item.photoRight}" />
     </RelativeLayout>
 </layout>
 

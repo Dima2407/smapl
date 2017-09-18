@@ -33,5 +33,8 @@
     <dimen name="layout_padding_left">16dp</dimen>
     <dimen name="layout_padding_right">16dp</dimen>
     <dimen name="layout_padding_bottom">16dp</dimen>
+    <dimen name="bar_height">42dp</dimen>
+    <dimen name="user_info_space">34dp</dimen>
+    <dimen name="photo_corner">8dp</dimen>
 
 </resources>

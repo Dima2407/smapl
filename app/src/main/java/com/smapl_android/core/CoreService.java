@@ -108,6 +108,8 @@ public class CoreService {
     public void getUser(final CoreRequest<UserResponse> coreRequest) {
         int userId = sessionStorage.getUserId();
         String token = sessionStorage.getAuthKey();
+        Log.d(TAG, "getUser: " + userId);
+        Log.d(TAG, "getUser: " + token);
         networkServiceImpl.getUserById(userId, token, getCallback(coreRequest));
     }
 

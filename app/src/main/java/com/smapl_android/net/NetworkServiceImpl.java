@@ -3,6 +3,7 @@ package com.smapl_android.net;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.smapl_android.model.UserInfoViewModel;
+import com.smapl_android.net.requests.CoordinateRequest;
 import com.smapl_android.net.requests.UserRequestBody;
 import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.requests.LoginRequest;
@@ -155,5 +156,23 @@ class NetworkServiceImpl implements NetworkService {
     public void logout(String token, OnResultCallback<Boolean, Throwable> callback) {
         final Call<EmptyResponse> logout = apiService.logout(token);
         logout.enqueue(createBooleanEmptyBody(callback));
+    }
+
+    @Override
+    public void startTracking(String token, CoordinateRequest request, OnResultCallback<TrackingResponse, Throwable> callback) {
+        Call<TrackingResponse> tracking = apiService.tracking(token, request);
+        tracking.enqueue(createCallback(callback));
+    }
+
+    @Override
+    public void updateTracking(String token, CoordinateRequest request, OnResultCallback<TrackingResponse, Throwable> callback) {
+        Call<TrackingResponse> tracking = apiService.tracking(token, request);
+        tracking.enqueue(createCallback(callback));
+    }
+
+    @Override
+    public void stopTracking(String token, CoordinateRequest request, OnResultCallback<TrackingResponse, Throwable> callback) {
+        Call<TrackingResponse> tracking = apiService.tracking(token, request);
+        tracking.enqueue(createCallback(callback));
     }
 }

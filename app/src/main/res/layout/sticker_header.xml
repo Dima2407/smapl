@@ -16,13 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/campaign_details_image"
                 android:layout_width="@dimen/image_car_circle_size"
                 android:layout_height="@dimen/image_car_circle_size"
                 android:layout_marginLeft="7dp"
                 android:layout_marginTop="40dp"
-                bind:photo="@{item.photo}"/>
+                bind:circlePhoto="@{item.photo}"/>
 
             <Button
                 android:layout_width="match_parent"

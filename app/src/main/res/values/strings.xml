@@ -175,4 +175,5 @@
     <string name="error_empty_car_brand">Вы не выбрали марку авто</string>
     <string name="error_empty_color">Вы не выбрали цвет</string>
     <string name="error_password_same">Новый пароль не может быть такимже как старый</string>
+    <string name="campaign_details">Рекламная кампания</string>
 </resources>

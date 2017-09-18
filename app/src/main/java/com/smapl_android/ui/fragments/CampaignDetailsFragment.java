@@ -28,11 +28,14 @@ import java.util.List;
 public class CampaignDetailsFragment extends BaseFragment {
     private RecyclerView stickersRecycleView;
     private final static String EXTRA_CAMPAIGN = GetCampaignListResponse.Campaign.class.getName();
+    private Presenter presenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final FragmentCampaignDetailsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_campaign_details, container, false);
+        presenter = new Presenter();
+        binding.setPresenter(presenter);
         return binding.getRoot();
     }
 
@@ -48,7 +51,7 @@ public class CampaignDetailsFragment extends BaseFragment {
 
         GetCampaignListResponse.Campaign campaign = (GetCampaignListResponse.Campaign) getArguments().getSerializable(EXTRA_CAMPAIGN);
 
-        CampaignDetailsFragment.CampaignsDetailsListAdapter campaignsDetailsListAdapter = new CampaignDetailsFragment.CampaignsDetailsListAdapter(campaign, new Presenter());
+        CampaignsDetailsListAdapter campaignsDetailsListAdapter = new CampaignsDetailsListAdapter(campaign, presenter);
 
         stickersRecycleView.setAdapter(campaignsDetailsListAdapter);
     }
@@ -84,6 +87,10 @@ public class CampaignDetailsFragment extends BaseFragment {
 
         public void onRightStickerClicked(StickerVM sticker) {
             getCoreActivity().replaceContentWithHistory(new StickerFragment());
+        }
+
+        public void onClickBack() {
+            getCoreActivity().onBackPressed();
         }
 
     }

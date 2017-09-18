@@ -21,6 +21,7 @@ public class SimpleTopBar extends LinearLayout {
     private final Button buttonLeft;
     private final Button buttonRight;
     private final TextView textTitle;
+    private final int barHeight;
 
     public SimpleTopBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -37,6 +38,7 @@ public class SimpleTopBar extends LinearLayout {
         } finally {
             a.recycle();
         }
+        barHeight = context.getResources().getDimensionPixelSize(R.dimen.bar_height);
         buttonLeft = (Button) findViewById(R.id.btn_left);
         buttonRight = (Button) findViewById(R.id.btn_right);
         textTitle = (TextView) findViewById(R.id.title_center);
@@ -73,5 +75,11 @@ public class SimpleTopBar extends LinearLayout {
         } else {
             itemView.setText(itemText);
         }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(getMeasuredWidth(), barHeight);
     }
 }

@@ -14,10 +14,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/layout_padding_bottom"
-        android:paddingLeft="@dimen/layout_padding_left"
-        android:paddingRight="@dimen/layout_padding_right"
-        android:paddingTop="@dimen/layout_padding_top">
+        >
 
         <com.smapl_android.ui.widgets.SimpleTopBar
             android:id="@+id/linear_edit_car_menu"
@@ -30,7 +27,11 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/campaign_recycle_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/layout_padding_bottom"
+            android:paddingLeft="@dimen/layout_padding_left"
+            android:paddingRight="@dimen/layout_padding_right"
+            android:paddingTop="@dimen/layout_padding_top"/>
 
     </LinearLayout>
 </layout>

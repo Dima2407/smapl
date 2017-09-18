@@ -47,4 +47,7 @@ public interface ApiService {
 
     @POST("api/user/logout")
     Call<EmptyResponse> logout(@Query("access_token") String token);
+
+    @POST("api/trackings/save")
+    Call<TrackingResponse> tracking(@Query("access_token") String token, @Body CoordinateRequest request);
 }

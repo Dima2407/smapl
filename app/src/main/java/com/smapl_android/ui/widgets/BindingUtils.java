@@ -1,16 +1,17 @@
 package com.smapl_android.ui.widgets;
 
 import android.databinding.BindingAdapter;
-import android.databinding.InverseBindingAdapter;
-import android.databinding.InverseBindingListener;
 import android.databinding.ObservableField;
-import android.support.v7.widget.AppCompatSpinner;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
-import com.nostra13.universalimageloader.core.ImageLoader;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.smapl_android.R;
 
 public class BindingUtils {
@@ -42,9 +43,24 @@ public class BindingUtils {
         });
     }
 
-    @BindingAdapter("bind:photo")
+    @BindingAdapter("photo")
     public static void setPhoto(ImageView imageView, String url){
-        ImageLoader.getInstance().displayImage(url, imageView);
+        Glide.with(imageView.getContext()).load(url).into(imageView);
+    }
+
+    @BindingAdapter("circlePhoto")
+    public static void setCirclePhoto(ImageView imageView, String url){
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.transform(new CircleCrop());
+        Glide.with(imageView.getContext()).load(url).apply(requestOptions).into(imageView);
+    }
+
+    @BindingAdapter("roundedSquarePhoto")
+    public static void setRoundedSquarePhoto(ImageView imageView, String url){
+        RequestOptions requestOptions = new RequestOptions();
+        int radius = imageView.getContext().getResources().getDimensionPixelSize(R.dimen.photo_corner);
+        requestOptions.transform(new RoundedCorners(radius));
+        Glide.with(imageView.getContext()).load(url).apply(requestOptions).into(imageView);
     }
 
     @BindingAdapter("bind:error")

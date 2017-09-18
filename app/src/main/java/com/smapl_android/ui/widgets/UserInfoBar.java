@@ -5,11 +5,13 @@ import android.content.res.TypedArray;
 import android.databinding.BindingAdapter;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.nostra13.universalimageloader.core.ImageLoader;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.smapl_android.R;
 
 public class UserInfoBar extends RelativeLayout {
@@ -51,6 +53,7 @@ public class UserInfoBar extends RelativeLayout {
         cParams.topMargin = leftSpace;
 
         textCarBrandModel.setLayoutParams(cParams);
+        setPadding(0, getResources().getDimensionPixelSize(R.dimen.user_info_space), 0, getResources().getDimensionPixelSize(R.dimen.user_info_space));
     }
 
     @BindingAdapter("userName")
@@ -65,6 +68,6 @@ public class UserInfoBar extends RelativeLayout {
 
     @BindingAdapter("carPhoto")
     public static void setCarPhoto(UserInfoBar container, String url){
-        ImageLoader.getInstance().displayImage(url, container.imageCarPhoto);
+        BindingUtils.setCirclePhoto(container.imageCarPhoto, url);
     }
 }
