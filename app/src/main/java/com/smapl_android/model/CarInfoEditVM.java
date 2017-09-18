@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.databinding.BaseObservable;
 import android.databinding.Observable;
 import android.databinding.ObservableField;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 
 import com.smapl_android.R;
@@ -24,6 +25,8 @@ public class CarInfoEditVM extends BaseObservable {
 
     public final ObservableField<String> carYear = new ObservableField<>();
 
+    public final ObservableField<Boolean> nextActive = new ObservableField<>(false);
+
 
     //region errors
     public final ObservableField<String> carBrandError = new ObservableField<>();
@@ -34,6 +37,7 @@ public class CarInfoEditVM extends BaseObservable {
     private Validator<String> carYearValidator;
     private Validator<String> carBrandValidator;
     private Validator<String> carColorValidator;
+    private OnPropertyChangedCallback errorWatcher;
 
     //endregion
     public void init(Context context) {
@@ -89,6 +93,20 @@ public class CarInfoEditVM extends BaseObservable {
                 }
             }
         });
+
+        errorWatcher = new OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                nextActive.set(TextUtils.isEmpty(carBrandError.get())
+                        && TextUtils.isEmpty(carColorError.get())
+                        && TextUtils.isEmpty(carModelError.get())
+                        && TextUtils.isEmpty(carYearError.get()));
+            }
+        };
+        carBrandError.addOnPropertyChangedCallback(errorWatcher);
+        carModelError.addOnPropertyChangedCallback(errorWatcher);
+        carYearError.addOnPropertyChangedCallback(errorWatcher);
+        carColorError.addOnPropertyChangedCallback(errorWatcher);
 
     }
 

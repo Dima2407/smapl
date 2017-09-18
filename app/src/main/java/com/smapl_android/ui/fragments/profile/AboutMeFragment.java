@@ -49,14 +49,6 @@ public class AboutMeFragment extends BaseFragment {
 
     private void save() {
 
-        try {
-            Validators.getNameValidator(getContext()).validate(user.name.get());
-            Validators.getPhoneValidator(getContext()).validate(user.phone.get());
-        } catch (ValidationException e) {
-            showMessage(e.getMessage());
-            return;
-        }
-
         final EditProfileRequest editProfileRequest = user.toUpdateRequest();
 
         final CoreRequest<UserResponse> request = getCoreActivity().newWaitingRequest(new SuccessOutput<UserResponse>() {

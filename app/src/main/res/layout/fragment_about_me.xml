@@ -31,6 +31,7 @@
             custom:leftClick="@{() -> presenter.onClickBack()}"
             custom:leftText="@string/back"
             custom:rightClick="@{() -> presenter.onClickForward()}"
+            custom:rightEnabled="@{userEdit.nextActive}"
             custom:rightText="@string/save" />
 
         <LinearLayout

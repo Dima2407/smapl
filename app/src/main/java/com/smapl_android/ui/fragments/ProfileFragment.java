@@ -14,6 +14,7 @@ import com.smapl_android.databinding.FragmentProfileBinding;
 import com.smapl_android.ui.activities.AuthActivity;
 import com.smapl_android.ui.base.BaseFragment;
 import com.smapl_android.ui.fragments.profile.AboutMeFragment;
+import com.smapl_android.ui.fragments.profile.ChangePasswordFragment;
 import com.smapl_android.ui.fragments.profile.SetCarFragment;
 
 public class ProfileFragment extends BaseFragment {

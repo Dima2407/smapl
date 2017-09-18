@@ -27,6 +27,7 @@ public class UserInfoEditVM extends BaseObservable {
     public final ObservableField<String> gender = new ObservableField<>();
     public final ObservableField<String> age = new ObservableField<>();
     public final ObservableField<String> interests = new ObservableField<>();
+    public final ObservableField<Boolean> nextActive = new ObservableField<>(false);
 
     //region errors
     public final ObservableField<String> phoneError = new ObservableField<>();
@@ -41,6 +42,7 @@ public class UserInfoEditVM extends BaseObservable {
     private Validator<String> ageValidator;
     private String maleText;
     private String femaleText;
+    private OnPropertyChangedCallback errorWatcher;
 
     public void init(Context context) {
         phoneValidator = Validators.getPhoneValidator(context);
@@ -102,6 +104,20 @@ public class UserInfoEditVM extends BaseObservable {
                 }
             }
         });
+
+        errorWatcher = new OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                nextActive.set(TextUtils.isEmpty(phoneError.get())
+                        && TextUtils.isEmpty(nameError.get())
+                        && TextUtils.isEmpty(genderError.get())
+                        && TextUtils.isEmpty(ageError.get()));
+            }
+        };
+        phoneError.addOnPropertyChangedCallback(errorWatcher);
+        nameError.addOnPropertyChangedCallback(errorWatcher);
+        ageError.addOnPropertyChangedCallback(errorWatcher);
+        genderError.addOnPropertyChangedCallback(errorWatcher);
     }
 
 

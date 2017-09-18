@@ -1,4 +1,4 @@
-package com.smapl_android.ui.fragments;
+package com.smapl_android.ui.fragments.profile;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -27,6 +27,12 @@ public class ChangePasswordFragment extends BaseFragment {
         binding.setPassword(viewPassword);
         binding.setPresenter(new Presenter());
         return binding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        viewPassword.init(getActivity());
     }
 
     private void changePassword() {

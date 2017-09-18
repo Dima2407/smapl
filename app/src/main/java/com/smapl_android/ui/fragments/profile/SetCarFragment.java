@@ -53,14 +53,6 @@ public class SetCarFragment extends BaseFragment {
 
         public void onSaveClicked() {
 
-            try {
-                Validators.getCarYearValidator(getContext()).validate(carInfo.carYear.get());
-                Validators.getCarModelValidator(getContext()).validate(carInfo.carModel.get());
-            } catch (ValidationException e) {
-                showMessage(e.getMessage());
-                return;
-            }
-
             final UpdateCarRequest updateUserRequest = carInfo.toUpdateCar();
 
             final CoreRequest<UserResponse> request = getCoreActivity().newWaitingRequest(new SuccessOutput<UserResponse>() {

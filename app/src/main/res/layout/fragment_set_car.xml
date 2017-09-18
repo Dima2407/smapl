@@ -32,6 +32,7 @@
             custom:leftClick="@{() -> presenter.onBackClicked()}"
             custom:leftText="@string/back"
             custom:rightClick="@{() -> presenter.onSaveClicked()}"
+            custom:rightEnabled="@{car.nextActive}"
             custom:rightText="@string/save" />
 
         <LinearLayout

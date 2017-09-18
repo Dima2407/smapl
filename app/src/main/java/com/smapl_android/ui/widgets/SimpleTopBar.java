@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.smapl_android.R;
 
 public class SimpleTopBar extends LinearLayout {
@@ -36,9 +37,9 @@ public class SimpleTopBar extends LinearLayout {
         } finally {
             a.recycle();
         }
-        buttonLeft = (Button)findViewById(R.id.btn_left);
-        buttonRight = (Button)findViewById(R.id.btn_right);
-        textTitle = (TextView)findViewById(R.id.title_center);
+        buttonLeft = (Button) findViewById(R.id.btn_left);
+        buttonRight = (Button) findViewById(R.id.btn_right);
+        textTitle = (TextView) findViewById(R.id.title_center);
 
         setTextForItem(buttonLeft, leftText);
         setTextForItem(textTitle, centerText);
@@ -61,10 +62,15 @@ public class SimpleTopBar extends LinearLayout {
         }
     }
 
-    public void setTextForItem(TextView itemView, String itemText){
-        if(TextUtils.isEmpty(itemText)){
+    @BindingAdapter("rightEnabled")
+    public static void setRightClickEnabled(SimpleTopBar container, boolean enabled) {
+        container.buttonRight.setEnabled(enabled);
+    }
+
+    public void setTextForItem(TextView itemView, String itemText) {
+        if (TextUtils.isEmpty(itemText)) {
             itemView.setVisibility(GONE);
-        }else {
+        } else {
             itemView.setText(itemText);
         }
     }
