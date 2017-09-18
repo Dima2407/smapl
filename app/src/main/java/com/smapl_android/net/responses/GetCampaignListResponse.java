@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.io.StringReader;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class GetCampaignListResponse extends ServerResponse<GetCampaignListResponse.Campaign[]> {
 
@@ -30,7 +33,7 @@ public class GetCampaignListResponse extends ServerResponse<GetCampaignListRespo
         @SerializedName("age")
         private String age;
         @SerializedName("sticker")
-        private String[] stickers;
+        private List<String> stickers;
         @SerializedName("description")
         private String description;
         @SerializedName("created_at")
@@ -74,7 +77,10 @@ public class GetCampaignListResponse extends ServerResponse<GetCampaignListRespo
             return age;
         }
 
-        public String[] getStickers() {
+        public List<String> getStickers() {
+            if(stickers == null){
+                return Collections.emptyList();
+            }
             return stickers;
         }
 

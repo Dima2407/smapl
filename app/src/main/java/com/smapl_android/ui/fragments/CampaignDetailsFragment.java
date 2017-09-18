@@ -49,21 +49,20 @@ public class CampaignDetailsFragment extends BaseFragment {
         stickersRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        GetCampaignListResponse.Campaign campaign = (GetCampaignListResponse.Campaign) getArguments().getSerializable(EXTRA_CAMPAIGN);
+        GetCampaignListResponse.Campaign campaign = getCampaign();
 
         CampaignsDetailsListAdapter campaignsDetailsListAdapter = new CampaignsDetailsListAdapter(campaign, presenter);
 
         stickersRecycleView.setAdapter(campaignsDetailsListAdapter);
     }
 
+    private GetCampaignListResponse.Campaign getCampaign() {
+        return (GetCampaignListResponse.Campaign) getArguments().getSerializable(EXTRA_CAMPAIGN);
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final CoreRequest<List<GetCampaignListResponse.Campaign>> request = getCoreService()
-                .newRequest(getCoreActivity());
-
-
-        getCoreService().getCampaigns(request);
     }
 
     public static Fragment newInstance(GetCampaignListResponse.Campaign campaign) {
@@ -82,11 +81,11 @@ public class CampaignDetailsFragment extends BaseFragment {
     public class Presenter {
 
         public void onLeftStickerClicked(StickerVM sticker) {
-            getCoreActivity().replaceContentWithHistory(new StickerFragment());
+            getCoreActivity().replaceContentWithHistory(StickerFragment.newInstance(getCampaign(), sticker.photoLeft.get()));
         }
 
         public void onRightStickerClicked(StickerVM sticker) {
-            getCoreActivity().replaceContentWithHistory(new StickerFragment());
+            getCoreActivity().replaceContentWithHistory(StickerFragment.newInstance(getCampaign(), sticker.photoRight.get()));
         }
 
         public void onClickBack() {
@@ -143,10 +142,10 @@ public class CampaignDetailsFragment extends BaseFragment {
             } else {
                 StickerVM vm = new StickerVM();
                 int stickersStart = (position - 1) * 2;
-                String[] stickers = campaign.getStickers();
-                vm.photoLeft.set(stickers[stickersStart]);
-                if (stickersStart + 1 < stickers.length)
-                    vm.photoRight.set(stickers[stickersStart + 1]);
+                List<String> stickers = campaign.getStickers();
+                vm.photoLeft.set(stickers.get(stickersStart));
+                if (stickersStart + 1 < stickers.size())
+                    vm.photoRight.set(stickers.get(stickersStart + 1));
                 ItemVH itemVH = (ItemVH) holder;
                 itemVH.bind(vm, presenter);
             }
@@ -155,7 +154,7 @@ public class CampaignDetailsFragment extends BaseFragment {
 
         @Override
         public int getItemCount() {
-            int stickers = campaign.getStickers().length;
+            int stickers = campaign.getStickers().size();
             return 1 + stickers / 2 + stickers % 2;
         }
 
