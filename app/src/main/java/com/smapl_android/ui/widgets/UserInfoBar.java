@@ -48,6 +48,7 @@ public class UserInfoBar extends RelativeLayout {
         final LayoutParams cParams = (LayoutParams) textCarBrandModel.getLayoutParams();
         cParams.addRule(BELOW, textUserName.getId());
         cParams.addRule(ALIGN_LEFT, textUserName.getId());
+        cParams.topMargin = leftSpace;
 
         textCarBrandModel.setLayoutParams(cParams);
     }

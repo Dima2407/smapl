@@ -7,7 +7,6 @@ import android.util.Log;
 import com.smapl_android.net.ApiService;
 import com.smapl_android.storage.SessionStorage;
 import okhttp3.*;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,9 +60,7 @@ public class UploadService extends IntentService {
                 .post(requestBody.build())
                 .build();
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        OkHttpClient client = new OkHttpClient.Builder().build();
 
 
         Response response = null;

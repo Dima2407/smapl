@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.databinding.BindingAdapter;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -42,6 +43,8 @@ public class SimpleTopBar extends LinearLayout {
         setTextForItem(buttonLeft, leftText);
         setTextForItem(textTitle, centerText);
         setTextForItem(buttonRight, rightText);
+        setGravity(Gravity.CENTER_VERTICAL);
+        setBackgroundResource(R.drawable.bar_bg);
     }
 
     @BindingAdapter("leftClick")

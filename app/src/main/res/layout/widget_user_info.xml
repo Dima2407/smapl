@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_map_car_photo"
-            android:layout_width="@dimen/image_car_circle_size"
-            android:layout_height="@dimen/image_car_circle_size"/>
+        android:id="@+id/img_map_car_photo"
+        android:layout_width="@dimen/image_car_circle_size"
+        android:layout_height="@dimen/image_car_circle_size" />
 
     <TextView
-            android:id="@+id/text_map_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/name_profile_size"/>
+        android:id="@+id/text_map_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/name_profile_size" />
 
     <TextView
-            android:id="@+id/text_map_car_brand_model"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/text_map_user_name"
-            android:layout_below="@id/text_map_user_name"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/car_brand_model_profile_size"/>
+        android:id="@+id/text_map_car_brand_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/car_brand_model_profile_size" />
 
 </merge>

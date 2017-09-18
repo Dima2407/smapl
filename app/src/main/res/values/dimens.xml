@@ -10,7 +10,7 @@
     <dimen name="image_car_circle_size">60dp</dimen>
     <dimen name="text_menu_bottom_size">17sp</dimen>
     <dimen name="name_profile_size">22sp</dimen>
-    <dimen name="car_brand_model_profile_size">12dp</dimen>
+    <dimen name="car_brand_model_profile_size">12sp</dimen>
     <dimen name="btn_login_forward_size">51dp</dimen>
     <dimen name="btn_facebook_hight">34dp</dimen>
     <dimen name="login_logotip_hight">313dp</dimen>

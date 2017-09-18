@@ -1,144 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:custom="http://schemas.android.com/apk/res-auto" xmlns:bind="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <variable name="userEdit" type="com.smapl_android.model.UserInfoEditVM"/>
         <variable
-                name="user"
-                type="com.smapl_android.model.UserInfo"/>
+            name="userEdit"
+            type="com.smapl_android.model.UserInfoEditVM" />
 
         <variable
-                name="presenter"
-                type="com.smapl_android.ui.fragments.AboutMeFragment.Presenter"/>
+            name="user"
+            type="com.smapl_android.model.UserInfo" />
+
+        <variable
+            name="presenter"
+            type="com.smapl_android.ui.fragments.AboutMeFragment.Presenter" />
     </data>
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg"
-            android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:orientation="vertical">
 
         <com.smapl_android.ui.widgets.SimpleTopBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                custom:leftText="@string/back"
-                custom:centerText="@string/change_password_password"
-                custom:rightText="@string/save"
-                custom:leftClick="@{() -> presenter.onClickBack()}"
-                custom:rightClick="@{() -> presenter.onClickForward()}"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:centerText="@string/change_password_password"
+            custom:leftClick="@{() -> presenter.onClickBack()}"
+            custom:leftText="@string/back"
+            custom:rightClick="@{() -> presenter.onClickForward()}"
+            custom:rightText="@string/save" />
 
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="40dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="40dp">
 
             <com.smapl_android.ui.widgets.UserInfoBar
-                    android:id="@+id/img_circle_about_me_photo"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginLeft="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                custom:carInfo="@{user.carBrandModel}"
+                custom:carPhoto="@{user.carPhoto}"
+                custom:leftSpace="6dp"
+                custom:userName="@{user.name}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="40dp">
+
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    custom:leftSpace="6dp"
-                    custom:userName="@{user.name}"
-                    custom:carInfo="@{user.carBrandModel}"
-                    custom:carPhoto="@{user.carPhoto}"/>
+                    custom:error="@{userEdit.phoneError}"
+                    custom:errorEnabled="true">
 
-            <EditText
-                    android:id="@+id/edit_about_me_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/img_circle_about_me_photo"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/edit_text_line_background"
-                    android:hint="@string/hint_phone"
-                    android:inputType="phone"
-                    android:paddingTop="@dimen/edit_password_edit_padding_top"
-                    android:text="@={userEdit.phone}"
-                    android:textColorHint="@android:color/white"
-                    android:textSize="@dimen/core_text_size"/>
-
-            <EditText
-                    android:id="@+id/edit_about_me_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/edit_about_me_phone"
-                    android:background="@drawable/edit_text_line_background"
-                    android:hint="@string/hint_name"
-                    android:paddingTop="@dimen/edit_password_edit_padding_top"
-                    android:text="@={userEdit.name}"
-                    android:textColorHint="@android:color/white"
-                    android:textSize="@dimen/core_text_size"/>
-
-            <RadioGroup
-                    android:id="@+id/radio_group_about_me_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/edit_about_me_name"
-                    android:background="@drawable/edit_text_line_background"
-                    android:orientation="horizontal"
-                    android:paddingTop="@dimen/edit_password_edit_padding_top">
-
-                <TextView
-                        android:layout_width="wrap_content"
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/gender"
+                        android:hint="@string/hint_phone"
+                        android:inputType="phone"
+                        android:text="@={userEdit.phone}"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/core_text_size"/>
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="@string/man"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/core_text_size"/>
+                </android.support.design.widget.TextInputLayout>
 
-                <RadioButton
-                        android:id="@+id/radio_about_me_man"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="@={userEdit.male}"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="@string/woman"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/core_text_size"/>
-
-                <RadioButton
-                        android:id="@+id/radio_about_me_woman"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="@={userEdit.female}"/>
-
-            </RadioGroup>
-
-            <com.smapl_android.ui.widgets.AboutYourSelfSpinner
-                    android:id="@+id/edit_about_me_age"
-                    android:layout_below="@id/radio_group_about_me_gender"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    custom:items="@array/age_entities"
-                    bind:selectedValue="@={userEdit.age}"/>
+                    custom:error="@{userEdit.nameError}"
+                    custom:errorEnabled="true">
 
-            <EditText
-                    android:id="@+id/edit_about_me_interests"
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_name"
+                        android:inputType="text"
+                        android:text="@={userEdit.name}"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/edit_about_me_age"
-                    android:background="@drawable/edit_text_line_background"
-                    android:hint="@string/hint_interests"
-                    android:paddingTop="@dimen/edit_password_edit_padding_top"
-                    android:text="@{userEdit.interests}"
-                    android:textColorHint="@android:color/white"
-                    android:textSize="@dimen/core_text_size"/>
+                    custom:error="@{userEdit.genderError}"
+                    custom:errorEnabled="true">
 
-        </RelativeLayout>
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/gender"
+                        android:inputType="text"
+                        android:onClick="@{ () -> presenter.selectGender()}"
+                        android:text="@={userEdit.gender}"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    custom:error="@{userEdit.ageError}"
+                    custom:errorEnabled="true">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/age"
+                        android:inputType="text"
+                        android:onClick="@{ () -> presenter.selectAge()}"
+                        android:text="@={userEdit.age}"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/hint_interests"
+                        android:inputType="text"
+                        android:onClick="@{ () -> presenter.selectInterests()}"
+                        android:text="@={userEdit.interests}"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

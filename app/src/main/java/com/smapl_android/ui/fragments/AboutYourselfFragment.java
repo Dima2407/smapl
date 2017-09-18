@@ -68,12 +68,12 @@ public class AboutYourselfFragment extends BaseFragment {
             return false;
         }
 
-      /*  try {
-            Validators.getEmailValidator(getContext()).validate(email.getText().toString());
+        try {
+            Validators.getEmailValidator(getContext()).validate(user.email.get());
         } catch (ValidationException e) {
-            email.setError(e.getMessage());
-            isValidate = false;
-        }*/
+            user.emailError.set(e.getMessage());
+            return false;
+        }
 
         try {
             Validators.getCarModelValidator(getContext()).validate(user.carModel.get());

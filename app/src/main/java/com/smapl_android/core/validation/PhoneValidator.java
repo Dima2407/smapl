@@ -3,11 +3,14 @@ package com.smapl_android.core.validation;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import java.util.regex.Pattern;
+
 public class PhoneValidator extends BaseValidator<String> {
-    private static final int PHONE_NUMBER_LENGTH = 10;
+    private static final int PHONE_NUMBER_LENGTH = 13;
     private final String errorMessageEmpty;
     private final String errorMessageLength;
     private final String errorMessageContent;
+    private static final Pattern PATTERN = Pattern.compile("^(\\+380\\d{9})$");
 
     PhoneValidator(String errorMessageEmpty, String errorMessageLength, String errorMessageContent) {
         this.errorMessageEmpty = errorMessageEmpty;
@@ -25,7 +28,7 @@ public class PhoneValidator extends BaseValidator<String> {
             throw new ValidationException(errorMessageLength);
         }
 
-        if (!Patterns.PHONE.matcher(value).matches()) {
+        if (!PATTERN.matcher(value).matches()) {
             throw new ValidationException(errorMessageContent);
         }
         return true;

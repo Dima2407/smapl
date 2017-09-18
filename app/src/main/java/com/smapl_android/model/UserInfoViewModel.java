@@ -43,6 +43,7 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
     public final ObservableField<String> carModelError = new ObservableField<>();
     public final ObservableField<String> nameError = new ObservableField<>();
     public final ObservableField<String> carYearOfIssueError = new ObservableField<>();
+    public final ObservableField<String> emailError = new ObservableField<>();
 
     protected UserInfoViewModel(Parcel in) {
         phone.set(in.readString());
@@ -77,6 +78,12 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 carYearOfIssueError.set("");
+            }
+        });
+        email.addOnPropertyChangedCallback(new OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                emailError.set("");
             }
         });
     }
@@ -116,7 +123,9 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
     public RegistrationRequest toRegistration(Context context) {
 
         RegistrationRequest request = new RegistrationRequest();
+        request.setEmail(email.get());
         request.setName(name.get());
+        request.setPassword(password.get());
         request.setPhoneNumber(phone.get());
         if (!TextUtils.isEmpty(age.get())) {
             request.setAge(age.get());

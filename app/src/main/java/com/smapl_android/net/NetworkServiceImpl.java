@@ -51,29 +51,6 @@ class NetworkServiceImpl implements NetworkService {
         return apiCallback;
     }
 
-    private static Callback<ResponseBody> createBoolean(final OnResultCallback<Boolean, Throwable> callback) {
-        final Callback<ResponseBody> apiCallback = new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Response<Boolean> converted = null;
-                if (response.isSuccessful()) {
-                    converted = Response.success(true);
-                } else {
-                    converted = Response.error(response.code(), response.errorBody());
-                }
-                processResponse(converted, callback);
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (callback != null) {
-                    callback.onResult(null, t);
-                }
-            }
-        };
-        return apiCallback;
-    }
-
     private static Callback<EmptyResponse> createBooleanEmptyBody(final OnResultCallback<Boolean, Throwable> callback) {
         final Callback<EmptyResponse> apiCallback = new Callback<EmptyResponse>() {
             @Override
@@ -107,9 +84,14 @@ class NetworkServiceImpl implements NetworkService {
             if (callback != null) {
                 String errorMessage = "error";
                 try {
+                    Gson gson = new Gson();
                     errorMessage = response.errorBody().string();
-                } catch (IOException e) {
-                    errorMessage = e.getMessage();
+                    ErrorResponse errorResponse = gson.fromJson(errorMessage, ErrorResponse.class);
+                    if(errorResponse != null){
+                        errorMessage = errorResponse.getMessageError();
+                    }
+                } catch (Exception e) {
+                    //errorMessage = e.getMessage();
                 }
                 callback.onResult(response.body(), new Exception(errorMessage));
             }
@@ -132,7 +114,6 @@ class NetworkServiceImpl implements NetworkService {
     @Override
     public void getUserById(int id, String token, final OnResultCallback<UserResponse, Throwable> callback) {
         final Call<UserResponse> userByIdCall = apiService.getUserById(id, token);
-        Log.d(TAG, token);
         userByIdCall.enqueue(createCallback(callback));
     }
 

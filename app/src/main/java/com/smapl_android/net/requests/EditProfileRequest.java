@@ -17,7 +17,7 @@ public class EditProfileRequest {
     private String gender;
 
     @SerializedName("interest")
-    private String interests;
+    private String[] interests;
 
     public String getName() {
         return name;
@@ -51,11 +51,11 @@ public class EditProfileRequest {
         this.gender = gender;
     }
 
-    public String getInterests() {
+    public String[] getInterests() {
         return interests;
     }
 
-    public void setInterests(String interests) {
+    public void setInterests(String[] interests) {
         this.interests = interests;
     }
 }

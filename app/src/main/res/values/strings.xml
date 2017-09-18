@@ -5,6 +5,7 @@
     <string name="login">Войти</string>
     <string name="wait_login">Waiting!</string>
     <string name="error_empty_phone_number">Вы не ввели номер телефона</string>
+    <string name="error_empty_gender">Вы не ви выбрали пол</string>
     <string name="error_wrong_phone_number">Вы ввели некорректный номер телефона</string>
     <string name="error_phone_number_lenght">Длина номера должна быть 10 цифр</string>
     <string name="error_password_short">Вы ввели слишком короткий пароль</string>
@@ -13,6 +14,7 @@
     <string name="forward">forward</string>
     <string name="name">Имя</string>
     <string name="gender">Пол</string>
+    <string name="select_gender">Выберите пол</string>
     <string name="car_model">Модель авто</string>
     <string name="car_year_of_issue">Год выпуска авто</string>
     <string name="load_car_photo">Загрузите фото вашего автомобиля</string>
@@ -60,9 +62,9 @@
     <string name="error_empty_car_year">Введите год выпуска автомобиля</string>
     <string name="error_incorrect_car_year">Вы ввели некорректный год выпуска автомобиля</string>
     <string name="logout">Выйти</string>
-    <string name="hint_phone">Телефон:</string>
-    <string name="hint_name">Имя:</string>
-    <string name="hint_about_me_interests">Интересы:</string>
+    <string name="hint_phone">Телефон</string>
+    <string name="hint_name">Имя</string>
+    <string name="hint_about_me_interests">Интересы</string>
     <string name="age">Возраст</string>
     <string name="about_me">Обо мне</string>
     <string name="about_me_no_changes">Вы не внесли никаких изменений</string>
@@ -159,10 +161,13 @@
     </string-array>
 
     <string-array name="gender">
-        <item>Мужской</item>
-        <item>Женский</item>
+        <item>@string/man</item>
+        <item>@string/woman</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_age">Выберите возраст</string>
+    <string name="error_empty_age">Вы не выбрали возраст</string>
+    <string name="select_interests">Выберите интересы</string>
 </resources>

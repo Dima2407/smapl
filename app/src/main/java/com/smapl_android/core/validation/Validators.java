@@ -10,6 +10,8 @@ public final class Validators {
     private static EmailValidator emailValidator;
     private static CarModelValidator carModelValidator;
     private static CarYearValidator carYearValidator;
+    private static GenericEmptyValidator genderValidator;
+    private static GenericEmptyValidator ageValidator;
 
     private Validators() {
     }
@@ -59,5 +61,19 @@ public final class Validators {
                     context.getString(R.string.error_incorrect_car_year));
         }
         return carYearValidator;
+    }
+
+    public static Validator<String> getGenderValidator(Context context){
+        if(genderValidator == null){
+            genderValidator = new GenericEmptyValidator(context.getString(R.string.error_empty_gender));
+        }
+        return genderValidator;
+    }
+
+    public static Validator<String> getAgeValidator(Context context) {
+        if( ageValidator== null){
+            ageValidator = new GenericEmptyValidator(context.getString(R.string.error_empty_age));
+        }
+        return ageValidator;
     }
 }

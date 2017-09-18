@@ -98,6 +98,18 @@
                     android:text="@={user.name}"
                     bind:error="@{user.nameError}"
                     android:textColorHint="@color/about_yourself_hint"/>
+                <EditText
+                    android:id="@+id/edit_about_yourself_email"
+                    style="@style/TextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:hint="@string/email"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
+                    android:text="@={user.email}"
+                    bind:error="@{user.emailError}"
+                    android:textColorHint="@color/about_yourself_hint"/>
 
                 <com.smapl_android.ui.widgets.AboutYourSelfSpinner
                     android:id="@+id/spinner_gender_registration"
@@ -114,7 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     custom:hint="@string/age"
-                    custom:items="@array/age"
+                    custom:items="@array/age_entities"
                     bind:selectedValue="@={user.age}"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/about_yourself_indent_spinner" />
