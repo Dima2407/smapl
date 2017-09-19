@@ -3,15 +3,17 @@ package com.smapl_android.ui.fragments;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.databinding.DataBindingUtil;
+import android.databinding.ObservableField;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,20 +26,24 @@ import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.core.UploadService;
+import com.smapl_android.databinding.FragmentCarLoadPhotoBinding;
 import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.ui.base.BaseFragment;
 import com.smapl_android.ui.base.OnImageRequestListener;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 public class LoadCarPhotoFragment extends BaseFragment {
 
     public static final String TAG = LoadCarPhotoFragment.class.getSimpleName();
-    private RelativeLayout imgLayout;
     private UserInfoViewModel user;
-    private ImageView circleImageView;
-    private String filePath;
+    private Presenter presenter;
 
 
     public static Fragment create(UserInfoViewModel user) {
@@ -53,7 +59,10 @@ public class LoadCarPhotoFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_car_load_photo, container, false);
+        FragmentCarLoadPhotoBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_car_load_photo, container, false);
+        presenter = new Presenter();
+        binding.setPresenter(presenter);
+        return binding.getRoot();
     }
 
     @Override
@@ -61,38 +70,6 @@ public class LoadCarPhotoFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         user = getArguments().getParcelable("user");
-
-        circleImageView = (ImageView) view.findViewById(R.id.img_circle_load_photo);
-
-        imgLayout = (RelativeLayout) view.findViewById(R.id.relative_img_load_photo);
-        imgLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-        });
-
-        view.findViewById(R.id.btn_load_car_photo_forward).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registration();
-            }
-        });
-
-        view.findViewById(R.id.btn_load_car_photo_skip).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filePath = null;
-                registration();
-            }
-        });
-
-        view.findViewById(R.id.btn_load_car_photo_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getCoreActivity().onBackPressed();
-            }
-        });
     }
 
     private void showDialog() {
@@ -122,10 +99,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
             public void onResult(Uri data) {
                 Log.d(TAG, "onResult: " + data);
                 if (data != null) {
-                    filePath = createFileFromUri(data).getAbsolutePath();
-                    Bitmap bitmap = decodeBitmapFromUri(filePath, circleImageView.getWidth(),
-                            circleImageView.getHeight());
-                    circleImageView.setImageBitmap(bitmap);
+                    presenter.carPhoto.set(createFileFromUri(data).getAbsolutePath());
                 }
             }
         });
@@ -137,10 +111,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
             public void onResult(Uri data) {
                 Log.d(TAG, "onResult: " + data);
                 if (data != null) {
-                    filePath = getRealPathFromURI(getContext(), data);
-                    Bitmap bitmap = decodeBitmapFromUri(filePath, circleImageView.getWidth(),
-                            circleImageView.getHeight());
-                    circleImageView.setImageBitmap(bitmap);
+                    presenter.carPhoto.set(getRealPathFromURI(getContext(), data));
                 }
             }
         });
@@ -159,8 +130,8 @@ public class LoadCarPhotoFragment extends BaseFragment {
 
                         if (result) {
 
-                            if (filePath != null) {
-                                UploadService.uploadCarPhoto(getActivity(), filePath);
+                            if (!TextUtils.isEmpty(presenter.carPhoto.get())) {
+                                UploadService.uploadCarPhoto(getActivity(), presenter.carPhoto.get());
                             }
 
                             MainScreenFragment mainScreenFragment = new MainScreenFragment();
@@ -172,38 +143,6 @@ public class LoadCarPhotoFragment extends BaseFragment {
         getCoreService().registration(user.toRegistration(getContext()), request);
 
         return request.isError();
-    }
-
-
-    private Bitmap decodeBitmapFromUri(String filePath, int reqWidth, int reqHeight) {
-
-
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(filePath, options);
-
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(filePath, options);
-    }
-
-    private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            while ((halfHeight / inSampleSize) >= reqHeight
-                    && (halfWidth / inSampleSize) >= reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-        return inSampleSize;
     }
 
     private String getRealPathFromURI(Context context, Uri contentUri) {
@@ -226,17 +165,15 @@ public class LoadCarPhotoFragment extends BaseFragment {
         Bitmap bitmap = null;
         try (InputStream is = getContext().getContentResolver().openInputStream(uri)) {
             bitmap = BitmapFactory.decodeStream(is);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.e(TAG, "createFileFromUri: ", e);
         }
 
         File file = new File(getContext().getCacheDir(), "photo");
         try {
             file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.e(TAG, "createFileFromUri: ", e);
         }
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -246,12 +183,29 @@ public class LoadCarPhotoFragment extends BaseFragment {
         try (FileOutputStream fos = new FileOutputStream(file)) {
             fos.write(bitmapdata);
             fos.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.e(TAG, "createFileFromUri: ", e);
         }
 
         return file;
     }
 
+    public class Presenter extends BasePresenter {
+
+        public ObservableField<String> carPhoto = new ObservableField<>();
+
+        public void onClickForward() {
+            registration();
+        }
+
+        public void onClickSkip() {
+            carPhoto.set("");
+            registration();
+        }
+
+        public void onClickSelectPhoto() {
+            showDialog();
+        }
+    }
 
 }
