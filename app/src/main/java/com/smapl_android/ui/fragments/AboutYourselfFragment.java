@@ -25,63 +25,26 @@ public class AboutYourselfFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentAboutYourselfBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about_yourself, container, false);
-//        user = getArguments().getParcelable("user");
+        user = getArguments().getParcelable("user");
         binding.setUser(user);
         binding.setPresenter(presenter);
         return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        user.init(getActivity());
     }
 
     private void registration() {
 
         hideKeyboard();
 
-        if (!validation()) {
-            showMessage(getString(R.string.fill_all_fields));
-            return;
-        }
-
         Fragment loadCarPhotoFragment = LoadCarPhotoFragment.create(user);
 
         getCoreActivity().replaceContentWithHistory(loadCarPhotoFragment);
 
-    }
-
-    private boolean validation() {
-
-        try {
-            Validators.getNameValidator(getContext()).validate(user.name.get());
-        } catch (ValidationException e) {
-            user.nameError.set(e.getMessage());
-            return false;
-        }
-
-        try {
-            Validators.getEmailValidator(getContext()).validate(user.email.get());
-        } catch (ValidationException e) {
-            user.emailError.set(e.getMessage());
-            return false;
-        }
-
-        try {
-            Validators.getCarModelValidator(getContext()).validate(user.carModel.get());
-        } catch (ValidationException e) {
-            user.carModelError.set(e.getMessage());
-            return false;
-        }
-
-        try {
-            Validators.getCarYearValidator(getContext()).validate(user.carYearOfIssue.get());
-        } catch (ValidationException e) {
-            user.carYearOfIssueError.set(e.getMessage());
-            return false;
-        }
-
-        return true;
     }
 
     public static Fragment create(String phoneNumber, String password) {
@@ -102,6 +65,26 @@ public class AboutYourselfFragment extends BaseFragment {
 
         public void onClickForward() {
             registration();
+        }
+
+        public void selectGender(){
+            selectGender(user.gender);
+        }
+
+        public void selectAge(){
+            selectAge(user.age);
+        }
+
+        public void selectInterests(){
+            selectInterests(user.interests);
+        }
+
+        public void selectCarBrand(){
+            selectCarBrand(user.carBrand);
+        }
+
+        public void selectCarColor(){
+            selectCarColor(user.carColor);
         }
 
     }

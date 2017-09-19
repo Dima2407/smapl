@@ -1,19 +1,15 @@
 package com.smapl_android.model;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.databinding.BaseObservable;
 import android.databinding.Observable;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 
-import com.smapl_android.R;
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.net.requests.UpdateCarRequest;
-import com.smapl_android.net.responses.UserResponse;
 
 public class CarInfoEditVM extends BaseObservable {
 

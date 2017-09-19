@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:custom="http://schemas.android.com/apk/res-auto"
-        xmlns:bind="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -16,178 +16,231 @@
     </data>
 
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.smapl_android.ui.widgets.SimpleTopBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:centerText="@string/text_about_yourself_menu"
+            custom:leftClick="@{() -> presenter.onClickBack()}"
+            custom:leftText="@string/back"
+            custom:rightClick="@{() -> presenter.onClickForward()}"
+            custom:rightEnabled="@{user.nextActive}"
+            custom:rightText="@string/save" />
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:orientation="vertical"
-            >
-
-            <LinearLayout
-                android:id="@+id/linear_about_yourself_menu"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:background="@color/background_blue"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_about_yourself_cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:onClick="@{() -> presenter.onClickBack()}"
-                    android:text="@string/back"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_menu_bottom_size" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="11dp"
-                    android:layout_weight="5"
-                    android:background="@android:color/transparent"
-                    android:text="@string/text_about_yourself_menu"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_menu_bottom_size" />
-
-                <Button
-                    android:id="@+id/btn_about_yourself_forward"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:onClick="@{() -> presenter.onClickForward()}"
-                    android:text="@string/save"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_menu_bottom_size" />
-
-            </LinearLayout>
+            android:fillViewport="true"
+            android:paddingBottom="60dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="60dp"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="26dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text_about_yourself"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/text_about_yourself"
+                    android:layout_marginBottom="25dp"
                     android:textAlignment="center" />
 
-                <EditText
-                    android:id="@+id/edit_about_yourself_name"
-                    style="@style/TextStyle"
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:hint="@string/name"
-                    android:imeOptions="actionDone"
-                    android:text="@={user.name}"
-                    bind:error="@{user.nameError}"
-                    android:textColorHint="@color/about_yourself_hint"/>
-                <EditText
-                    android:id="@+id/edit_about_yourself_email"
-                    style="@style/TextStyle"
+                    custom:error="@{user.nameError}"
+                    custom:errorEnabled="true">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/name"
+                        android:inputType="text"
+                        android:text="@={user.name}"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:hint="@string/email"
-                    android:imeOptions="actionDone"
-                    android:inputType="textEmailAddress"
-                    android:text="@={user.email}"
-                    bind:error="@{user.emailError}"
-                    android:textColorHint="@color/about_yourself_hint"/>
+                    custom:error="@{user.emailError}"
+                    custom:errorEnabled="true">
 
-                <com.smapl_android.ui.widgets.AboutYourSelfSpinner
-                    android:id="@+id/spinner_gender_registration"
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:text="@={user.email}"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    custom:hint="@string/gender"
-                    custom:items="@array/gender"
-                    bind:selectedValue="@={user.gender}"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="@dimen/about_yourself_indent" />
+                    custom:error="@{user.genderError}"
+                    custom:errorEnabled="true">
 
-                <com.smapl_android.ui.widgets.AboutYourSelfSpinner
-                    android:id="@+id/spinner_about_yourself_age"
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/gender"
+                        android:inputType="text"
+                        android:onClick="@{ () -> presenter.selectGender()}"
+                        android:text="@={user.gender}"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    custom:hint="@string/age"
-                    custom:items="@array/age_entities"
-                    bind:selectedValue="@={user.age}"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="@dimen/about_yourself_indent_spinner" />
+                    custom:error="@{user.ageError}"
+                    custom:errorEnabled="true">
 
-                <com.smapl_android.ui.widgets.AboutYourSelfSpinner
-                    android:id="@+id/spinner_about_yourself_car_brand"
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/age"
+                        android:inputType="text"
+                        android:onClick="@{ () -> presenter.selectAge()}"
+                        android:text="@={user.age}"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    custom:hint="@string/hint_car_brand"
-                    custom:items="@array/car_brand"
-                    bind:selectedValue="@={user.carBrand}"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="@dimen/about_yourself_indent_spinner" />
+                    custom:error="@{user.carBrandError}"
+                    custom:errorEnabled="true">
 
-                <EditText
-                    android:id="@+id/edit_about_yourself_car_model"
-                    style="@style/TextStyle"
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/hint_car_brand"
+                        android:inputType="text"
+                        android:onClick="@{ () -> presenter.selectCarBrand()}"
+                        android:text="@={user.carBrand}"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/about_yourself_indent"
-                    android:hint="@string/car_model"
-                    android:imeOptions="actionDone"
-                    android:text="@={user.carModel}"
-                    bind:error="@{user.carModelError}" />
+                    custom:error="@{user.carModelError}"
+                    custom:errorEnabled="true">
 
-                <EditText
-                    android:id="@+id/edit_about_yourself_car_yaer_of_issue"
-                    style="@style/TextStyle"
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/car_model"
+                        android:inputType="text"
+                        android:text="@={user.carModel}"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/about_yourself_indent_edit_text"
-                    android:hint="@string/car_year_of_issue"
-                    android:imeOptions="actionDone"
-                    android:inputType="number"
-                    android:maxLength="4"
-                    android:text="@={user.carYearOfIssue}"
-                    bind:error="@{user.carYearOfIssueError}"/>
+                    custom:error="@{user.carYearError}"
+                    custom:errorEnabled="true">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/car_year_of_issue"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:text="@={user.carYear}"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
 
 
-                <com.smapl_android.ui.widgets.AboutYourSelfSpinner
-                    android:id="@+id/spinner_about_yourself_car_color"
-                    android:layout_marginLeft="4dp"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    custom:hint="@string/hint_car_color"
-                    custom:items="@array/car_color"
-                    bind:selectedValue="@={user.carColor}"
-                    android:layout_marginTop="@dimen/about_yourself_indent" />
+                    custom:error="@{user.carColorError}"
+                    custom:errorEnabled="true">
 
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/hint_car_color"
+                        android:inputType="text"
+                        android:onClick="@{ () -> presenter.selectCarColor()}"
+                        android:text="@={user.carColor}"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
 
-                <EditText
-                    android:id="@+id/edit_about_yourself_interests"
-                    style="@style/TextStyle"
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="182dp"
-                    android:layout_marginTop="@dimen/about_yourself_indent"
-                    android:hint="@string/hint_interests"
-                    android:text="@={user.interests}" />
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/hint_interests"
+                        android:inputType="text"
+                        android:onClick="@{ () -> presenter.selectInterests()}"
+                        android:text="@={user.interests}"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/white"
+                        android:textSize="@dimen/core_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
+
 </layout>
