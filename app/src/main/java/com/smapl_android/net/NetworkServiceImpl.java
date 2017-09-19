@@ -175,4 +175,10 @@ class NetworkServiceImpl implements NetworkService {
         Call<TrackingResponse> tracking = apiService.tracking(token, request);
         tracking.enqueue(createCallback(callback));
     }
+
+    @Override
+    public void getHistory(String token, int userId, OnResultCallback<ResponseBody, Throwable> callback) {
+        Call<ResponseBody> tracking = apiService.getHistory(userId, token);
+        tracking.enqueue(createCallback(callback));
+    }
 }

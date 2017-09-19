@@ -1,7 +1,5 @@
 package com.smapl_android;
 
-import android.location.Location;
-
 import com.google.gson.Gson;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
@@ -18,12 +16,11 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.ResponseBody;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -41,7 +38,7 @@ public class ApiUnitTest {
         networkService = NetworkServiceFactory.create(false);
     }
 
-    @Test
+   // @Test
     public void checkLoginSuccess() throws Exception {
         CountDownLatch latch = new CountDownLatch(1);
         networkService.login("+380333333333", "qwerty", new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
@@ -146,7 +143,7 @@ public class ApiUnitTest {
         latch.await();
     }
 
-    @Test
+   // @Test
     public void stopTracking() throws Exception {
         String token = "EReDjOvsWXagMTv4bmShkqO23oBeB8cs8jbGA1EGE30GwZBZBUTUyQfBH2wA6ffK";
         final CoordinateRequest request = CoordinateRequest.stop();
@@ -179,7 +176,7 @@ public class ApiUnitTest {
         latch.await();
     }
 
-    @Test
+   // @Test
     public void updateTracking() throws Exception {
         String token = "EReDjOvsWXagMTv4bmShkqO23oBeB8cs8jbGA1EGE30GwZBZBUTUyQfBH2wA6ffK";
         final CoordinateRequest request = CoordinateRequest.inProgress();
@@ -206,6 +203,32 @@ public class ApiUnitTest {
                     latch.countDown();
                 }
 
+            }
+        });
+        latch.await();
+    }
+
+    @Test
+    public void getHistory() throws Exception {
+        String token = "EReDjOvsWXagMTv4bmShkqO23oBeB8cs8jbGA1EGE30GwZBZBUTUyQfBH2wA6ffK";
+        int userId  = 101;
+
+        final CountDownLatch latch = new CountDownLatch(1);
+        networkService.getHistory(token, userId, new NetworkService.OnResultCallback<ResponseBody, Throwable>() {
+            @Override
+            public void onResult(ResponseBody result, Throwable error) {
+                try {
+                    if (error != null) {
+                        System.out.println(error.getMessage());
+                    }
+                    try {
+                        System.out.println(result.string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } finally {
+                    latch.countDown();
+                }
             }
         });
         latch.await();

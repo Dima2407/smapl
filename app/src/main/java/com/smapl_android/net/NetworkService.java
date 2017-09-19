@@ -41,6 +41,8 @@ public interface NetworkService {
 
     void stopTracking(String token, CoordinateRequest request, OnResultCallback<TrackingResponse, Throwable> callback);
 
+    void getHistory(String token, int userId, OnResultCallback<ResponseBody, Throwable> callback);
+
     interface OnResultCallback<T, E> {
         void onResult(T result, E error);
     }

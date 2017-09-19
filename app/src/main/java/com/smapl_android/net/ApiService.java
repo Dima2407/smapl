@@ -25,15 +25,14 @@ public interface ApiService {
     @POST("api/user/change-password")
     @FormUrlEncoded
     Call<EmptyResponse> editPassword(@Query("access_token") String token,
-                                    @Field("oldPassword") String oldPassword,
-                                    @Field("newPassword") String newPassword);
+                                     @Field("oldPassword") String oldPassword,
+                                     @Field("newPassword") String newPassword);
 
     @PATCH("api/user/{id}")
     Call<UserResponse> editProfile(@Path("id") int userId, @Query("access_token") String token, @Body EditProfileRequest editProfileRequest);
 
     @PATCH("api/user/{id}")
     Call<UserResponse> editProfile(@Path("id") int userId, @Query("access_token") String token, @Body UpdateCarRequest editProfileRequest);
-
 
 
     @POST("api/user/forgot_password")
@@ -49,5 +48,9 @@ public interface ApiService {
     Call<EmptyResponse> logout(@Query("access_token") String token);
 
     @POST("api/trackings/save")
+    @Headers(value = "Content-Type: application/json")
     Call<TrackingResponse> tracking(@Query("access_token") String token, @Body CoordinateRequest request);
+
+    @GET("api/trackings/user/{id}")
+    Call<ResponseBody> getHistory(@Path("id") int userId, @Query("access_token") String token);
 }

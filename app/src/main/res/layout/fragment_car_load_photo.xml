@@ -70,7 +70,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/vector_smart_object_11"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/img_circle_load_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

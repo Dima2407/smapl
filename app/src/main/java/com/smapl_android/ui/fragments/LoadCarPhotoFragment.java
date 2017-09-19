@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,7 +16,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import com.bumptech.glide.Glide;
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
@@ -23,7 +27,6 @@ import com.smapl_android.core.UploadService;
 import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.ui.base.BaseFragment;
 import com.smapl_android.ui.base.OnImageRequestListener;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 import java.io.*;
 
@@ -33,7 +36,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
     public static final String TAG = LoadCarPhotoFragment.class.getSimpleName();
     private RelativeLayout imgLayout;
     private UserInfoViewModel user;
-    private CircleImageView circleImageView;
+    private ImageView circleImageView;
     private String filePath;
 
 
@@ -59,7 +62,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
 
         user = getArguments().getParcelable("user");
 
-        circleImageView = (CircleImageView) view.findViewById(R.id.img_circle_load_photo);
+        circleImageView = (ImageView) view.findViewById(R.id.img_circle_load_photo);
 
         imgLayout = (RelativeLayout) view.findViewById(R.id.relative_img_load_photo);
         imgLayout.setOnClickListener(new View.OnClickListener() {
