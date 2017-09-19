@@ -3,6 +3,7 @@ package com.smapl_android.ui.activities;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 
 import com.smapl_android.R;
 import com.smapl_android.SmaplApplication;
@@ -33,5 +34,11 @@ public class MainActivity extends CoreActivity {
         replaceContent(fragment);
     }
 
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            moveTaskToBack(true);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

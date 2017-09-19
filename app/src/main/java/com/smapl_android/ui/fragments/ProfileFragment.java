@@ -60,6 +60,7 @@ public class ProfileFragment extends BaseFragment {
                     Intent intent = new Intent(getContext(), AuthActivity.class);
                     intent.setAction(AuthActivity.LOGOUT_ACTION);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
             });

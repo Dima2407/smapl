@@ -38,10 +38,10 @@ public class ApiUnitTest {
         networkService = NetworkServiceFactory.create(false);
     }
 
-   // @Test
+    @Test
     public void checkLoginSuccess() throws Exception {
         CountDownLatch latch = new CountDownLatch(1);
-        networkService.login("+380333333333", "qwerty", new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
+        networkService.login("+380333333333", "poiuyt", new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
             @Override
             public void onResult(LoginResponse result, Throwable error) {
                 assertThat(error, CoreMatchers.nullValue());

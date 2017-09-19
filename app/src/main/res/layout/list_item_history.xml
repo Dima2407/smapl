@@ -59,7 +59,7 @@
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        android:text="Компания:"
+                        android:text="Кампания:"
                         android:textColor="#89ffffff"
                         android:textSize="13sp"/>
 

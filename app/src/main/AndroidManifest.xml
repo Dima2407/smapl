@@ -23,7 +23,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <activity android:name=".ui.activities.AuthActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait">
         <intent-filter>
             <action android:name="android.intent.action.MAIN"/>
 
@@ -31,7 +32,9 @@
         </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activities.MainActivity">
+        <activity android:name=".ui.activities.MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait">
         </activity>
 
 <!--        <activity android:name=".ui.activities.DebugActivity">

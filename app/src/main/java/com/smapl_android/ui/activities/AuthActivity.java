@@ -40,6 +40,7 @@ public class AuthActivity extends CoreActivity {
 
     private void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
