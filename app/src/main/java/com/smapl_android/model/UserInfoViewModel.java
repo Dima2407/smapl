@@ -15,6 +15,8 @@ import com.smapl_android.core.validation.Validator;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.net.requests.RegistrationRequest;
 
+import org.w3c.dom.Text;
+
 public class UserInfoViewModel extends BaseObservable implements Parcelable {
 
     private static final String GENDER_MAN = "male";
@@ -172,7 +174,9 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         }else {
             request.setGender(GENDER_WOMAN);
         }
-        request.setInterests(interests.get());
+        if(!TextUtils.isEmpty(interests.get())){
+            request.setInterests(interests.get().split(","));
+        }
 
         request.setCarMark(carBrand.get());
         request.setCarColor(carColor.get());
