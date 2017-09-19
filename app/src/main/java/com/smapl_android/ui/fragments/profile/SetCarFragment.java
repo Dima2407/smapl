@@ -12,8 +12,6 @@ import com.afollestad.materialdialogs.Theme;
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
-import com.smapl_android.core.validation.ValidationException;
-import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentSetCarBinding;
 import com.smapl_android.model.CarInfoEditVM;
 import com.smapl_android.net.requests.UpdateCarRequest;
@@ -44,12 +42,7 @@ public class SetCarFragment extends BaseFragment {
         carInfo.apply(getCoreActivity().getUserInfo());
     }
 
-    public class Presenter {
-
-        public void onBackClicked() {
-            getActivity().onBackPressed();
-
-        }
+    public class Presenter extends BasePresenter {
 
         public void onSaveClicked() {
 
@@ -62,7 +55,7 @@ public class SetCarFragment extends BaseFragment {
                     showMessage(getString(R.string.changes_saved), new Runnable() {
                         @Override
                         public void run() {
-                            getActivity().onBackPressed();
+                            onClickBack();
                         }
                     });
                 }

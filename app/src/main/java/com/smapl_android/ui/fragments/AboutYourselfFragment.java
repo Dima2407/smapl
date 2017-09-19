@@ -25,7 +25,7 @@ public class AboutYourselfFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentAboutYourselfBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about_yourself, container, false);
-        user = getArguments().getParcelable("user");
+//        user = getArguments().getParcelable("user");
         binding.setUser(user);
         binding.setPresenter(presenter);
         return binding.getRoot();
@@ -34,14 +34,6 @@ public class AboutYourselfFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        hideKeyboard();
-
     }
 
     private void registration() {
@@ -106,11 +98,7 @@ public class AboutYourselfFragment extends BaseFragment {
         return fragment;
     }
 
-    public class Presenter {
-
-        public void onClickBack() {
-            getActivity().onBackPressed();
-        }
+    public class Presenter extends BasePresenter {
 
         public void onClickForward() {
             registration();

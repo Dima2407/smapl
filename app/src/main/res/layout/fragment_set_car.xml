@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             custom:centerText="@string/set_car"
-            custom:leftClick="@{() -> presenter.onBackClicked()}"
+            custom:leftClick="@{() -> presenter.onClickBack()}"
             custom:leftText="@string/back"
             custom:rightClick="@{() -> presenter.onSaveClicked()}"
             custom:rightEnabled="@{car.nextActive}"

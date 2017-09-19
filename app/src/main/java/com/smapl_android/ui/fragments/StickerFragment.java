@@ -64,7 +64,7 @@ public class StickerFragment extends BaseFragment {
     }
 
 
-    public class Presenter {
+    public class Presenter extends BasePresenter{
 
         public final ObservableField<String> currentPhoto = new ObservableField<>();
 
@@ -95,11 +95,6 @@ public class StickerFragment extends BaseFragment {
             currentIndex++;
             currentPhoto.set(stickers.get(currentIndex));
         }
-
-        public void onClickCloseButton() {
-            getCoreActivity().onBackPressed();
-        }
-
     }
 
 }

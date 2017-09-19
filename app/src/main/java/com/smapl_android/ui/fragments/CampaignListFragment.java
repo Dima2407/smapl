@@ -109,10 +109,7 @@ public class CampaignListFragment extends BaseFragment {
         }
     }
 
-    public class Presenter {
-        public void onClickBack() {
-            getCoreActivity().onBackPressed();
-        }
+    public class Presenter extends BasePresenter {
 
         public void onCampaignClicked(CampaignVM campaignVM) {
             getCoreActivity().replaceContentWithHistory(CampaignDetailsFragment.newInstance(campaignVM));

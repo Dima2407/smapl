@@ -2,7 +2,6 @@ package com.smapl_android.ui.fragments;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,12 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.smapl_android.R;
-import com.smapl_android.core.CoreRequest;
 import com.smapl_android.databinding.FragmentCampaignDetailsBinding;
 import com.smapl_android.databinding.StickerHeaderBinding;
 import com.smapl_android.databinding.StickerListItemBinding;
 import com.smapl_android.model.StickerVM;
-import com.smapl_android.model.UserInfo;
 import com.smapl_android.model.CampaignVM;
 import com.smapl_android.net.responses.GetCampaignListResponse;
 import com.smapl_android.ui.base.BaseFragment;
@@ -78,7 +75,7 @@ public class CampaignDetailsFragment extends BaseFragment {
     }
 
 
-    public class Presenter {
+    public class Presenter extends BasePresenter {
 
         public void onLeftStickerClicked(StickerVM sticker) {
             getCoreActivity().replaceContentWithHistory(StickerFragment.newInstance(getCampaign(), sticker.photoLeft.get()));
@@ -87,11 +84,6 @@ public class CampaignDetailsFragment extends BaseFragment {
         public void onRightStickerClicked(StickerVM sticker) {
             getCoreActivity().replaceContentWithHistory(StickerFragment.newInstance(getCampaign(), sticker.photoRight.get()));
         }
-
-        public void onClickBack() {
-            getCoreActivity().onBackPressed();
-        }
-
     }
 
     private class CampaignsDetailsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

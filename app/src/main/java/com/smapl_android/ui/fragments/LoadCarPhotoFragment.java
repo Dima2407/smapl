@@ -90,7 +90,7 @@ public class LoadCarPhotoFragment extends BaseFragment {
         view.findViewById(R.id.btn_load_car_photo_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().onBackPressed();
+                getCoreActivity().onBackPressed();
             }
         });
     }

@@ -28,7 +28,7 @@ public class ForgetPasswordFragment extends BaseFragment {
         return binding.getRoot();
     }
 
-    public class Presenter {
+    public class Presenter extends BasePresenter {
 
         public void sendRequest() {
             hideKeyboard();
@@ -50,17 +50,13 @@ public class ForgetPasswordFragment extends BaseFragment {
                         showMessage(getString(R.string.password_changed), new Runnable() {
                             @Override
                             public void run() {
-                                getActivity().onBackPressed();
+                                onClickBack();
                             }
                         });
                     }
                 }
             });
             getCoreService().restorePassword(email, request);
-        }
-
-        public void onClickBack() {
-            getActivity().onBackPressed();
         }
 
     }

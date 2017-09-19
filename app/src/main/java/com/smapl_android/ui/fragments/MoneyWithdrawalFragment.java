@@ -39,11 +39,7 @@ public class MoneyWithdrawalFragment extends BaseFragment {
 
     }
 
-    public class Presenter{
-
-        public void onClickBack(){
-            getCoreActivity().onBackPressed();
-        }
+    public class Presenter extends BasePresenter{
 
     }
 

@@ -1,14 +1,10 @@
 package com.smapl_android.ui.base;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import com.smapl_android.R;
 import com.smapl_android.core.CoreService;
-import com.smapl_android.ui.base.CoreActivity;
 
 public abstract class BaseFragment extends Fragment {
 
@@ -19,7 +15,7 @@ public abstract class BaseFragment extends Fragment {
     protected CoreActivity getCoreActivity() {
         final FragmentActivity activity = getActivity();
         if (activity instanceof CoreActivity) {
-            return  (CoreActivity) activity;
+            return (CoreActivity) activity;
         }
         throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
     }
@@ -29,7 +25,7 @@ public abstract class BaseFragment extends Fragment {
         if (activity instanceof CoreActivity) {
             CoreActivity coreActivity = (CoreActivity) activity;
             coreActivity.showProgress(title, message);
-        }else {
+        } else {
             throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
         }
     }
@@ -39,7 +35,7 @@ public abstract class BaseFragment extends Fragment {
         if (activity instanceof CoreActivity) {
             CoreActivity coreActivity = (CoreActivity) activity;
             coreActivity.hideProgress();
-        }else {
+        } else {
             throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
         }
     }
@@ -54,7 +50,7 @@ public abstract class BaseFragment extends Fragment {
         if (activity instanceof CoreActivity) {
             CoreActivity coreActivity = (CoreActivity) activity;
             coreActivity.showMessage(getString(R.string.app_name), message, completed);
-        }else {
+        } else {
             throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
         }
     }
@@ -64,8 +60,21 @@ public abstract class BaseFragment extends Fragment {
         if (activity instanceof CoreActivity) {
             CoreActivity coreActivity = (CoreActivity) activity;
             coreActivity.hideKeyboard();
-        }else {
+        } else {
             throw new UnsupportedOperationException("Not in " + CoreActivity.class.getName());
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        hideKeyboard();
+    }
+
+    protected class BasePresenter {
+        public void onClickBack() {
+            hideKeyboard();
+            getCoreActivity().onBackPressed();
         }
     }
 }

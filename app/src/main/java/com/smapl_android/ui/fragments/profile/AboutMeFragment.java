@@ -14,8 +14,6 @@ import com.afollestad.materialdialogs.Theme;
 import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
-import com.smapl_android.core.validation.ValidationException;
-import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentAboutMeBinding;
 import com.smapl_android.model.UserInfoEditVM;
 import com.smapl_android.net.requests.EditProfileRequest;
@@ -47,37 +45,27 @@ public class AboutMeFragment extends BaseFragment {
         user.apply(getCoreActivity().getUserInfo());
     }
 
-    private void save() {
-
-        final EditProfileRequest editProfileRequest = user.toUpdateRequest();
-
-        final CoreRequest<UserResponse> request = getCoreActivity().newWaitingRequest(new SuccessOutput<UserResponse>() {
-            @Override
-            public void onSuccess(UserResponse result) {
-                getCoreActivity().getUserInfo().apply(getResources(), result);
-                showMessage(getString(R.string.changes_saved), new Runnable() {
-                    @Override
-                    public void run() {
-                        getActivity().onBackPressed();
-                    }
-                });
-
-            }
-        });
-
-        getCoreService().editProfile(editProfileRequest, request);
-    }
-
-    public class Presenter {
+    public class Presenter extends BasePresenter {
 
         public void onClickForward() {
             hideKeyboard();
-            save();
-        }
+            final EditProfileRequest editProfileRequest = user.toUpdateRequest();
 
-        public void onClickBack() {
-            hideKeyboard();
-            getActivity().onBackPressed();
+            final CoreRequest<UserResponse> request = getCoreActivity().newWaitingRequest(new SuccessOutput<UserResponse>() {
+                @Override
+                public void onSuccess(UserResponse result) {
+                    getCoreActivity().getUserInfo().apply(getResources(), result);
+                    showMessage(getString(R.string.changes_saved), new Runnable() {
+                        @Override
+                        public void run() {
+                            onClickBack();
+                        }
+                    });
+
+                }
+            });
+
+            getCoreService().editProfile(editProfileRequest, request);
         }
 
         public void selectGender(){

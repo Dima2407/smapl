@@ -30,7 +30,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/button_close"
-            android:onClick="@{() -> presenter.onClickCloseButton()}"/>
+            android:onClick="@{() -> presenter.onClickBack()}"/>
 
 
         <ImageView

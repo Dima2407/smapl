@@ -35,44 +35,35 @@ public class ChangePasswordFragment extends BaseFragment {
         viewPassword.init(getActivity());
     }
 
-    private void changePassword() {
-
-        String oldPasswordStr = viewPassword.oldPassword.get();
-        String newPasswordStr = viewPassword.newPassword.get();
-        try {
-            final Validator<String> passwordValidator = Validators.getPasswordValidator(getContext());
-            passwordValidator.validate(oldPasswordStr);
-            passwordValidator.validate(newPasswordStr);
-        } catch (ValidationException e) {
-            showMessage(e.getMessage());
-            return;
-        }
-
-        final CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
-            @Override
-            public void onSuccess(Boolean result) {
-                if (result) {
-                    showMessage(getString(R.string.password_changed), new Runnable() {
-                        @Override
-                        public void run() {
-                            getCoreActivity().onBackPressed();
-                        }
-                    });
-                }
-            }
-        });
-        getCoreService().changePassword(oldPasswordStr, newPasswordStr, request);
-    }
-
-    public class Presenter {
+    public class Presenter extends BasePresenter {
 
         public void onClickForward() {
             hideKeyboard();
-            changePassword();
-        }
+            String oldPasswordStr = viewPassword.oldPassword.get();
+            String newPasswordStr = viewPassword.newPassword.get();
+            try {
+                final Validator<String> passwordValidator = Validators.getPasswordValidator(getContext());
+                passwordValidator.validate(oldPasswordStr);
+                passwordValidator.validate(newPasswordStr);
+            } catch (ValidationException e) {
+                showMessage(e.getMessage());
+                return;
+            }
 
-        public void onClickBack() {
-            getCoreActivity().onBackPressed();
+            final CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
+                @Override
+                public void onSuccess(Boolean result) {
+                    if (result) {
+                        showMessage(getString(R.string.password_changed), new Runnable() {
+                            @Override
+                            public void run() {
+                                onClickBack();
+                            }
+                        });
+                    }
+                }
+            });
+            getCoreService().changePassword(oldPasswordStr, newPasswordStr, request);
         }
 
     }
