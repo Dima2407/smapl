@@ -21,9 +21,8 @@
                 android:id="@+id/current_balance_TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{user.balance}"
-                android:textAlignment="center"
-                android:textColor="#FFFFFFFF"
+                android:text="@{@string/balance_format(user.balance)}"
+                android:textColor="@android:color/white"
                 android:textSize="18sp"/>
     </LinearLayout>
 </layout>

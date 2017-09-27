@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.facebook.CallbackManager;
@@ -13,10 +12,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.smapl_android.core.validation.ValidationException;
-import com.smapl_android.core.validation.Validator;
-import com.smapl_android.core.validation.Validators;
-import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.requests.EditProfileRequest;
@@ -180,6 +175,33 @@ public class CoreService {
                             @Override
                             public void run() {
                                 coreRequest.processResult(Arrays.asList(result.getCampaigns()));
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    public void getHistory(final  CoreRequest<List<GetTrackingHistoryResponse.TrackingHistory>> coreRequest){
+        String token = sessionStorage.getAuthKey();
+        int userId = sessionStorage.getUserId();
+        networkServiceImpl.getHistory(token, userId, new NetworkService.OnResultCallback<GetTrackingHistoryResponse, Throwable>() {
+            @Override
+            public void onResult(final GetTrackingHistoryResponse result, final Throwable error) {
+                if (coreRequest != null) {
+                    if (error != null) {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processError(error.getMessage());
+                            }
+                        });
+                    } else {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processResult(Arrays.asList(result.getHistory()));
                             }
                         });
                     }

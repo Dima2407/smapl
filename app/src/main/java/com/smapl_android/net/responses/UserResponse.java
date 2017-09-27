@@ -43,6 +43,12 @@ public class UserResponse extends ServerResponse<UserResponse>{
     @SerializedName("gender")
     private String gender;
 
+    @SerializedName("total_amount")
+    private Integer totalAmount;
+
+    @SerializedName("total_distance")
+    private Double totalDistance;
+
     public String getName() {
         return getResult().name;
     }
@@ -75,14 +81,6 @@ public class UserResponse extends ServerResponse<UserResponse>{
         return getResult().interests;
     }
 
-    public String getCreatedAt() {
-        return getResult().createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return getResult().updatedAt;
-    }
-
     public String getAge() {
         return getResult().age;
     }
@@ -93,5 +91,15 @@ public class UserResponse extends ServerResponse<UserResponse>{
 
     public String getGender() {
         return getResult().gender;
+    }
+
+    public int getTotalAmount() {
+        Integer totalAmount= getResult().totalAmount;
+        return totalAmount != null ? totalAmount : 0;
+    }
+
+    public double getTotalDistance() {
+        Double totalDistance = getResult().totalDistance;
+        return totalDistance != null ? totalDistance : 0;
     }
 }

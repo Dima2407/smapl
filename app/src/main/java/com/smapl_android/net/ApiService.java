@@ -3,7 +3,6 @@ package com.smapl_android.net;
 import com.smapl_android.net.requests.*;
 import com.smapl_android.net.responses.*;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -52,5 +51,5 @@ public interface ApiService {
     Call<TrackingResponse> tracking(@Query("access_token") String token, @Body CoordinateRequest request);
 
     @GET("api/trackings/user/{id}")
-    Call<ResponseBody> getHistory(@Path("id") int userId, @Query("access_token") String token);
+    Call<GetTrackingHistoryResponse> getHistory(@Path("id") int userId, @Query("access_token") String token, @Query("page") int page);
 }

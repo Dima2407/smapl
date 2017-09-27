@@ -27,7 +27,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textStyle="bold"
-                    android:text="@{user.driveAmount}"
+                    android:text="@{@string/drive_format(user.drive)}"
                     android:textColor="@android:color/white"/>
         </LinearLayout>
 
@@ -35,21 +35,20 @@
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-        >
+                android:orientation="horizontal">
 
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Всего заработали:"
+                    android:text="@string/total_earn"
                     android:textColor="@android:color/white"/>
 
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{user.earnAmount}"
+                    android:text="@{@string/total_earn_format(user.earn)}"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"/>
         </LinearLayout>

@@ -44,12 +44,7 @@ public class CampaignListFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final CoreRequest<List<GetCampaignListResponse.Campaign>> request = getCoreService()
-                .newRequest(getCoreActivity());
-        request
-                .withLoading(R.string.wait_login)
-                .handleErrorAsDialog()
-                .handleSuccess(new SuccessOutput<List<GetCampaignListResponse.Campaign>>() {
+        final CoreRequest<List<GetCampaignListResponse.Campaign>> request = getCoreActivity().newWaitingRequest(new SuccessOutput<List<GetCampaignListResponse.Campaign>>() {
                     @Override
                     public void onSuccess(List<GetCampaignListResponse.Campaign> result) {
                         campaignRecycleView.setAdapter(new CampaignAdapter(result, presenter));

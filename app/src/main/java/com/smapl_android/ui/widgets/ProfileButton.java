@@ -23,7 +23,6 @@ public class ProfileButton extends RelativeLayout {
     private final int visibleLines;
 
     private TextView contentView;
-    private View topLineView;
     private View bottomLineView;
 
     public ProfileButton(Context context, AttributeSet attrs) {
@@ -46,25 +45,7 @@ public class ProfileButton extends RelativeLayout {
         }
 
         contentView = (TextView) findViewById(R.id.content);
-        topLineView = findViewById(R.id.top_line);
         bottomLineView = findViewById(R.id.bottom_line);
-
-        final LayoutParams tLayoutParams = (LayoutParams) topLineView.getLayoutParams();
-        tLayoutParams.height = lineHeight;
-        tLayoutParams.bottomMargin = lineSpace;
-        topLineView.setLayoutParams(tLayoutParams);
-
-        if ((visibleLines & TOP_VISIBLE) == TOP_VISIBLE) {
-            topLineView.setVisibility(VISIBLE);
-        } else {
-            topLineView.setVisibility(INVISIBLE);
-        }
-
-
-        final LayoutParams cLayoutParams = (LayoutParams) contentView.getLayoutParams();
-
-        cLayoutParams.addRule(BELOW, R.id.top_line);
-        contentView.setLayoutParams(cLayoutParams);
 
         final LayoutParams bLayoutParams = (LayoutParams) bottomLineView.getLayoutParams();
         bLayoutParams.height = lineHeight;
@@ -79,7 +60,6 @@ public class ProfileButton extends RelativeLayout {
         }
 
 
-        topLineView.setBackgroundColor(lineColor);
         bottomLineView.setBackgroundColor(lineColor);
 
         contentView.setText(content);

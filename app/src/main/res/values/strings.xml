@@ -74,12 +74,13 @@
     <string name="woman">женщина</string>
     <string name="wrong_age">Некорректный возраст</string>
     <string name="balance_format">Баланс: %d грн</string>
-    <string name="total_earn_format">Всего заработали: %d грн</string>
-    <string name="drive_format">Всего проехали: %d км</string>
+    <string name="total_earn_format">%d грн</string>
+    <string name="drive_format">%.3f км</string>
     <string name="campaign_list">Рекламные кампании</string>
     <string name="obtain_money">Вывод денег</string>
     <string name="edit_about_me">Редактировать личную информацию</string>
-    <string name="total_drive">Всего проехали:</string>
+    <string name="total_drive">Всего проехали: </string>
+    <string name="total_earn">Всего заработали: </string>
     <string name="restore_password">Восстановление пароля</string>
     <string name="mail_address">Введите почтовый адресс</string>
     <string name="send_request">Отправить запрос</string>

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.smapl_android.R;
 import com.smapl_android.databinding.FragmentCampaignDetailsBinding;
-import com.smapl_android.databinding.StickerHeaderBinding;
+import com.smapl_android.databinding.ListItemCampaignDetailsHeaderBinding;
 import com.smapl_android.databinding.StickerListItemBinding;
 import com.smapl_android.model.StickerVM;
 import com.smapl_android.model.CampaignVM;
@@ -106,7 +106,7 @@ public class CampaignDetailsFragment extends BaseFragment {
 
             if (viewType == HEADER) {
 
-                StickerHeaderBinding binding = DataBindingUtil.inflate(inflater, R.layout.sticker_header, parent, false);
+                ListItemCampaignDetailsHeaderBinding binding = DataBindingUtil.inflate(inflater, R.layout.list_item_campaign_details_header, parent, false);
                 RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 binding.getRoot().setLayoutParams(lp);
@@ -171,9 +171,9 @@ public class CampaignDetailsFragment extends BaseFragment {
 
     private static final class HeaderVH extends RecyclerView.ViewHolder {
 
-        private final StickerHeaderBinding binding;
+        private final ListItemCampaignDetailsHeaderBinding binding;
 
-        public HeaderVH(StickerHeaderBinding binding) {
+        public HeaderVH(ListItemCampaignDetailsHeaderBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

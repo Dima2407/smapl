@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/you_earned_TextView"
                 android:layout_centerHorizontal="true"
-                android:text="@{user.balanceAmount}"
+                android:text="@{` ` + user.balance}"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 

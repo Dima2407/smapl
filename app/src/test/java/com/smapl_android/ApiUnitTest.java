@@ -33,6 +33,8 @@ public class ApiUnitTest {
 
     private NetworkService networkService;
 
+    private final String token = "AqOv1a20V7ek1n1ARlS4JQ8DhQbgGiWTmaXwqm1k0RgQPnC6ULXZYKMIUXNlMTQh";
+
     @Before
     public void initNetwork() {
         networkService = NetworkServiceFactory.create(false);
@@ -41,7 +43,7 @@ public class ApiUnitTest {
     @Test
     public void checkLoginSuccess() throws Exception {
         CountDownLatch latch = new CountDownLatch(1);
-        networkService.login("+380444444444", "qwerty", new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
+        networkService.login("+380333333333", "poiuyt", new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
             @Override
             public void onResult(LoginResponse result, Throwable error) {
                 assertThat(error, CoreMatchers.nullValue());
@@ -108,7 +110,6 @@ public class ApiUnitTest {
 
     @Test
     public void startTracking() throws Exception {
-        String token = "EReDjOvsWXagMTv4bmShkqO23oBeB8cs8jbGA1EGE30GwZBZBUTUyQfBH2wA6ffK";
         final CoordinateRequest request = CoordinateRequest.start();
 
         request.addCoordinate(30.525339, 50.413468);
@@ -143,9 +144,8 @@ public class ApiUnitTest {
         latch.await();
     }
 
-   // @Test
+    @Test
     public void stopTracking() throws Exception {
-        String token = "EReDjOvsWXagMTv4bmShkqO23oBeB8cs8jbGA1EGE30GwZBZBUTUyQfBH2wA6ffK";
         final CoordinateRequest request = CoordinateRequest.stop();
         request.addCoordinate(30.539685, 50.445396);
         request.addCoordinate(30.536980, 50.446891);
@@ -176,9 +176,8 @@ public class ApiUnitTest {
         latch.await();
     }
 
-   // @Test
+   @Test
     public void updateTracking() throws Exception {
-        String token = "EReDjOvsWXagMTv4bmShkqO23oBeB8cs8jbGA1EGE30GwZBZBUTUyQfBH2wA6ffK";
         final CoordinateRequest request = CoordinateRequest.inProgress();
         request.addCoordinate(30.521618, 50.423681);
         request.addCoordinate(30.525344, 50.424884);
@@ -208,7 +207,7 @@ public class ApiUnitTest {
         latch.await();
     }
 
-    @Test
+    //@Test
     public void getHistory() throws Exception {
         String token = "EReDjOvsWXagMTv4bmShkqO23oBeB8cs8jbGA1EGE30GwZBZBUTUyQfBH2wA6ffK";
         int userId  = 101;

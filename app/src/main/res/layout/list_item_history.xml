@@ -99,7 +99,7 @@
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.7"
-                        android:text="@{item.distancePassed}"
+                        android:text="@{@string/drive_format(item.distancePassed)}"
                         android:textColor="#ffffffff"
                         android:textSize="13sp"/>
 
@@ -130,7 +130,7 @@
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.7"
-                        android:text="@{item.earnedPoints}"
+                        android:text="@{@string/total_earn_format(item.earnedPoints)}"
                         android:textColor="@android:color/white"
                         android:textSize="13sp"/>
 

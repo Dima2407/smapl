@@ -12,10 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.smapl_android.R;
+import com.smapl_android.core.CoreRequest;
+import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.databinding.CarHistoryFooterViewBinding;
 import com.smapl_android.databinding.CarHistoryHeaderViewBinding;
 import com.smapl_android.databinding.ListItemHistoryBinding;
 import com.smapl_android.model.UserInfo;
+import com.smapl_android.net.responses.GetCampaignListResponse;
+import com.smapl_android.net.responses.GetTrackingHistoryResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
 import java.text.DateFormat;
@@ -50,29 +54,14 @@ public class HistoryFragment extends BaseFragment {
     private void prepareCarsList() {
         carsHistoryListView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        final ArrayList<CarHistory> carsList = new ArrayList<>();
-
-        Date date1 = getDate(2008, 10, 23);
-        Date date2 = getDate(2009, 4, 19);
-        Date date3 = getDate(2010, 11, 8);
-        Date date4 = getDate(2011, 1, 2);
-        Date date5 = getDate(2012, 3, 25);
-
-        CarHistory carHistory1 = new CarHistory(date1, "Armani", 123, 678);
-        CarHistory carHistory2 = new CarHistory(date2, "Nike", 3, 100);
-        CarHistory carHistory3 = new CarHistory(date3, "Adidas", 2000, 13);
-        CarHistory carHistory4 = new CarHistory(date4, "Puma", 2000, 12);
-        CarHistory carHistory5 = new CarHistory(date5, "Reebok", 2000, 14);
-
-
-        carsList.add(carHistory1);
-        carsList.add(carHistory2);
-        carsList.add(carHistory3);
-        carsList.add(carHistory4);
-        carsList.add(carHistory5);
-
-        HistoryAdapter adapter = new HistoryAdapter(getCoreActivity().getUserInfo(), carsList);
-        carsHistoryListView.setAdapter(adapter);
+        final CoreRequest<List<GetTrackingHistoryResponse.TrackingHistory>> request = getCoreActivity().newWaitingRequest(new SuccessOutput<List<GetTrackingHistoryResponse.TrackingHistory>>() {
+            @Override
+            public void onSuccess(List<GetTrackingHistoryResponse.TrackingHistory> result) {
+                HistoryAdapter adapter = new HistoryAdapter(getCoreActivity().getUserInfo(), result);
+                carsHistoryListView.setAdapter(adapter);
+            }
+        });
+        getCoreService().getHistory(request);
     }
 
     @Override
@@ -91,11 +80,13 @@ public class HistoryFragment extends BaseFragment {
 
 
         private final UserInfo userInfo;
-        private final List<CarHistory> items;
+        private final List<CarHistory> items = new ArrayList<>();
 
-        private HistoryAdapter(UserInfo userInfo, List<CarHistory> items) {
+        private HistoryAdapter(UserInfo userInfo, List<GetTrackingHistoryResponse.TrackingHistory> items) {
             this.userInfo = userInfo;
-            this.items = items;
+            for (GetTrackingHistoryResponse.TrackingHistory item : items){
+                this.items.add(new CarHistory(item.getDate(), item.getCompanyName(), item.getTotalDistance(), item.getTotalAmount()));
+            }
         }
 
         @Override
@@ -209,15 +200,15 @@ public class HistoryFragment extends BaseFragment {
         private static final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
         public final ObservableField<String> date = new ObservableField<>();
         public final ObservableField<String> companyName = new ObservableField<>();
-        public final ObservableField<String> distancePassed = new ObservableField<>();
-        public final ObservableField<String> earnedPoints = new ObservableField<>();
+        public final ObservableField<Double> distancePassed = new ObservableField<>();
+        public final ObservableField<Integer> earnedPoints = new ObservableField<>();
 
 
-        public CarHistory(Date date, String companyName, int distancePassed, int earnedPoints) {
+        public CarHistory(Date date, String companyName, double distancePassed, int earnedPoints) {
             this.date.set(dateFormat.format(date));
             this.companyName.set(companyName);
-            this.distancePassed.set(String.format("%d км", distancePassed));
-            this.earnedPoints.set(String.format("%d грн", earnedPoints));
+            this.distancePassed.set(distancePassed);
+            this.earnedPoints.set(earnedPoints);
         }
     }
 }
