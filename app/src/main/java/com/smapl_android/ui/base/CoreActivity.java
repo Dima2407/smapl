@@ -25,7 +25,6 @@ import com.smapl_android.services.GeolocationService;
 public abstract class CoreActivity extends AppCompatActivity {
 
     private static final String TAG = CoreActivity.class.getSimpleName();
-    protected final UserInfo userInfo = new UserInfo();
 
     private final PermissionsManager permissionsManager = new PermissionsManager();
     private final ImageManager imageManager = new ImageManager();
@@ -36,12 +35,6 @@ public abstract class CoreActivity extends AppCompatActivity {
         final SmaplApplication application = (SmaplApplication) getApplication();
         return application.getCoreService();
     }
-
-    public GeolocationService getGeolocationService() {
-        final SmaplApplication application = (SmaplApplication) getApplication();
-        return application.getGeolocationService();
-    }
-
 
     public void showProgress(String message) {
         showProgress(getString(R.string.app_name), message);
@@ -229,7 +222,7 @@ public abstract class CoreActivity extends AppCompatActivity {
     }
 
     public UserInfo getUserInfo() {
-        return userInfo;
+        return getCoreService().getUserInfo();
     }
 
     public <T> CoreRequest<T> newWaitingRequest(SuccessOutput<T> successOutput) {

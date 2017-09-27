@@ -25,7 +25,7 @@ public class MainActivity extends CoreActivity {
         final CoreRequest<UserResponse> request = newWaitingRequest(new SuccessOutput<UserResponse>() {
                     @Override
                     public void onSuccess(UserResponse result) {
-                        userInfo.apply(getResources(), result);
+                        getUserInfo().apply(getResources(), result);
                     }
                 });
 

@@ -69,9 +69,14 @@
         </provider>
 
         <service android:name=".core.UploadService"/>
-        <service android:name=".services.GeolocationService"
-                 android:enabled="true"
-                 android:exported="true" />
+        <service
+            android:name=".services.GeolocationService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".services.TrackingService"
+            android:enabled="true"
+            android:exported="true" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

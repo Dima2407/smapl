@@ -14,6 +14,7 @@ import com.smapl_android.R;
 import com.smapl_android.databinding.FragmentMapBinding;
 import com.smapl_android.services.GeolocationService;
 import com.smapl_android.ui.base.BaseFragment;
+import com.smapl_android.ui.base.OnPermissionsRequestListener;
 
 public class MapFragment extends BaseFragment {
 
@@ -33,14 +34,18 @@ public class MapFragment extends BaseFragment {
     public class Presenter{
 
         public void startGeolocationService() {
-            getCoreActivity().getUserInfo().inDrive.set(true);
-            if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                        1);
-                return;
-            }
-            getCoreActivity().startService(new Intent(getActivity(), GeolocationService.class));
+            getCoreActivity().runWithPermissions(new OnPermissionsRequestListener() {
+                @Override
+                public void onSuccess() {
+                    getCoreActivity().getUserInfo().inDrive.set(true);
+                    getCoreActivity().startService(new Intent(getActivity(), GeolocationService.class));
+                }
+
+                @Override
+                public void onFail() {
+
+                }
+            }, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION);
         }
 
 

@@ -14,7 +14,6 @@ import java.io.File;
 public class SmaplApplication extends Application {
 
     private CoreService coreService;
-    private GeolocationService geolocationService;
 
     @Override
     public void onCreate() {
@@ -24,14 +23,9 @@ public class SmaplApplication extends Application {
                 .build();
         Fabric.with(this, crashlyticsKit);
         coreService = new CoreService(this);
-        geolocationService = new GeolocationService();
     }
 
     public CoreService getCoreService() {
         return coreService;
-    }
-
-    public GeolocationService getGeolocationService(){
-        return geolocationService;
     }
 }

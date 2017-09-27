@@ -6,14 +6,17 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.util.Pair;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.smapl_android.model.UserInfo;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
+import com.smapl_android.net.requests.CoordinateRequest;
 import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
@@ -21,6 +24,7 @@ import com.smapl_android.net.responses.*;
 import com.smapl_android.storage.SessionStorage;
 import com.smapl_android.ui.base.CoreActivity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,6 +33,8 @@ public class CoreService {
     private static final String TAG = CoreService.class.getSimpleName();
 
     private final SessionStorage sessionStorage;
+
+    private final UserInfo userInfo = new UserInfo();
 
     private final NetworkService networkServiceImpl;
 
@@ -230,6 +236,58 @@ public class CoreService {
             @Override
             public void onError(FacebookException error) {
                 request.processError(error.getMessage());
+            }
+        });
+    }
+
+    public void stopTracking(List<Pair<Double, Double>> coordinates) {
+        String token = sessionStorage.getAuthKey();
+        final CoordinateRequest request = CoordinateRequest.stop();
+        for(Pair<Double, Double> location : coordinates){
+            request.addCoordinate(location.first, location.second);
+        }
+        networkServiceImpl.stopTracking(token, request, new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
+            @Override
+            public void onResult(TrackingResponse result, Throwable error) {
+                if(error != null) return;
+                getUserInfo().drive.set(result.getTotalDistance());
+                getUserInfo().earn.set((int) result.getTotalAmount());
+            }
+        });
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void startTracking(List<Pair<Double, Double>> coordinates) {
+        String token = sessionStorage.getAuthKey();
+        final CoordinateRequest request = CoordinateRequest.start();
+        for(Pair<Double, Double> location : coordinates){
+            request.addCoordinate(location.first, location.second);
+        }
+        networkServiceImpl.startTracking(token, request, new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
+            @Override
+            public void onResult(TrackingResponse result, Throwable error) {
+                if(error != null) return;
+                getUserInfo().drive.set(result.getTotalDistance());
+                getUserInfo().earn.set((int) result.getTotalAmount());
+            }
+        });
+    }
+
+    public void updateTracking(List<Pair<Double, Double>> coordinates) {
+        String token = sessionStorage.getAuthKey();
+        final CoordinateRequest request = CoordinateRequest.inProgress();
+        for(Pair<Double, Double> location : coordinates){
+            request.addCoordinate(location.first, location.second);
+        }
+        networkServiceImpl.updateTracking(token, request, new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
+            @Override
+            public void onResult(TrackingResponse result, Throwable error) {
+                if(error != null) return;
+                getUserInfo().drive.set(result.getTotalDistance());
+                getUserInfo().earn.set((int) result.getTotalAmount());
             }
         });
     }
