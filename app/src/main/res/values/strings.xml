@@ -73,8 +73,8 @@
     <string name="man">мужчина</string>
     <string name="woman">женщина</string>
     <string name="wrong_age">Некорректный возраст</string>
-    <string name="balance_format">Баланс: %d грн</string>
-    <string name="total_earn_format">%d грн</string>
+    <string name="balance_format">Баланс: %.2f баллов</string>
+    <string name="total_earn_format">%.2f грн</string>
     <string name="drive_format">%.3f км</string>
     <string name="campaign_list">Рекламные кампании</string>
     <string name="obtain_money">Вывод денег</string>
@@ -118,10 +118,21 @@
     </string-array>
 
     <string-array name="interests">
-        <item>спорт</item>
-        <item>игры</item>
-        <item>автомобили</item>
-        <item>активный отдых</item>
+        <item>Недвижимость</item>
+        <item>Транспорт</item>
+        <item>Электроника</item>
+        <item>Строительство, ремонт</item>
+        <item>Мебель, интерьер</item>
+        <item>Дом, сад</item>
+        <item>Одежда, аксессуары</item>
+        <item>Детские товары</item>
+        <item>Животные</item>
+        <item>Растения</item>
+        <item>Красота, здоровье</item>
+        <item>Спорт</item>
+        <item>Бизнес</item>
+        <item>Рестораны, еда</item>
+        <item>Клубы, ночная жизнь</item>
     </string-array>
 
     <string-array name="gender">

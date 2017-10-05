@@ -21,9 +21,7 @@ public class UserInfo extends BaseObservable {
 
     public final ObservableField<String> carPhoto = new ObservableField<>();
 
-    public final ObservableField<Integer> balance = new ObservableField<>(0);
-
-    public final ObservableField<Integer> earn = new ObservableField<>(0);
+    public final ObservableField<Double> earn = new ObservableField<>(0.0);
 
     public final ObservableField<Double> drive = new ObservableField<>(0.0);
 
@@ -39,7 +37,6 @@ public class UserInfo extends BaseObservable {
         carModel.set(response.getCarModel());
         carColor.set(response.getCarColor());
         carYear.set(String.valueOf(response.getCarYear()));
-        balance.set(response.getTotalAmount());
         earn.set(response.getTotalAmount());
         drive.set(response.getTotalDistance());
         carPhoto.set(response.getCarPhoto());

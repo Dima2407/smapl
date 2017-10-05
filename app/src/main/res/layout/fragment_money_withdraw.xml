@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="46dp"
-            android:text="@{user.balance}"
+            android:text="@{`` + user.earn}"
             android:textColor="#FFFFFFFF"
             android:textSize="20sp" />
 

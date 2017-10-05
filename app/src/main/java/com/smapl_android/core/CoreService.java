@@ -251,7 +251,7 @@ public class CoreService {
             public void onResult(TrackingResponse result, Throwable error) {
                 if(error != null) return;
                 getUserInfo().drive.set(result.getTotalDistance());
-                getUserInfo().earn.set((int) result.getTotalAmount());
+                getUserInfo().earn.set(result.getTotalAmount());
             }
         });
     }
@@ -271,7 +271,7 @@ public class CoreService {
             public void onResult(TrackingResponse result, Throwable error) {
                 if(error != null) return;
                 getUserInfo().drive.set(result.getTotalDistance());
-                getUserInfo().earn.set((int) result.getTotalAmount());
+                getUserInfo().earn.set(result.getTotalAmount());
             }
         });
     }
@@ -287,7 +287,7 @@ public class CoreService {
             public void onResult(TrackingResponse result, Throwable error) {
                 if(error != null) return;
                 getUserInfo().drive.set(result.getTotalDistance());
-                getUserInfo().earn.set((int) result.getTotalAmount());
+                getUserInfo().earn.set(result.getTotalAmount());
             }
         });
     }

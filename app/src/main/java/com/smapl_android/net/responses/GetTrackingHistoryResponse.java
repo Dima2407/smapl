@@ -20,7 +20,7 @@ public class GetTrackingHistoryResponse extends ServerResponse<GetTrackingHistor
         @SerializedName("company_name")
         private String companyName;
         @SerializedName("total_amount")
-        private int totalAmount;
+        private double totalAmount;
         @SerializedName("total_distance")
         private double totalDistance;
         @SerializedName("started_at")
@@ -32,7 +32,7 @@ public class GetTrackingHistoryResponse extends ServerResponse<GetTrackingHistor
             return companyName;
         }
 
-        public int getTotalAmount() {
+        public double getTotalAmount() {
             return totalAmount;
         }
 

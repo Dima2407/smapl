@@ -20,6 +20,7 @@ import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.responses.UserResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,14 +43,14 @@ public class AboutMeFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         user.init(getActivity());
-        user.apply(getCoreActivity().getUserInfo());
+        user.apply(getCoreActivity().getUserInfo(), Arrays.asList(getResources().getStringArray(R.array.interests)));
     }
 
     public class Presenter extends BasePresenter {
 
         public void onClickForward() {
             hideKeyboard();
-            final EditProfileRequest editProfileRequest = user.toUpdateRequest();
+            final EditProfileRequest editProfileRequest = user.toUpdateRequest(Arrays.asList(getResources().getStringArray(R.array.interests)));
 
             final CoreRequest<UserResponse> request = getCoreActivity().newWaitingRequest(new SuccessOutput<UserResponse>() {
                 @Override

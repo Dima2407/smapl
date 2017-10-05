@@ -45,7 +45,7 @@ public class TrackingService extends Service {
 
     private void processLocation(double lat, double lon) {
         Log.d(TrackingService.class.getSimpleName(), "processLocation: " + lat + " " + lon);
-        locations.add(new Pair<Double, Double>(lat, lon));
+        locations.add(new Pair<>(lat, lon));
         if(locations.size() > 10){
             getCoreService().updateTracking(new ArrayList<>(locations));
             locations.clear();

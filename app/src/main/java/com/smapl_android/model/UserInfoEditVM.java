@@ -16,6 +16,7 @@ import com.smapl_android.net.requests.EditProfileRequest;
 import org.w3c.dom.Text;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class UserInfoEditVM extends BaseObservable {
 
@@ -121,7 +122,7 @@ public class UserInfoEditVM extends BaseObservable {
     }
 
 
-    public void apply(UserInfo userInfo) {
+    public void apply(UserInfo userInfo, List<String> interestsArray) {
         name.set(userInfo.name.get());
         if (GENDER_MAN.equalsIgnoreCase(userInfo.getResponse().getGender())) {
             gender.set(maleText);
@@ -132,10 +133,22 @@ public class UserInfoEditVM extends BaseObservable {
         }
         phone.set(userInfo.getResponse().getMobileNumber());
         age.set(userInfo.getResponse().getAge());
-        interests.set(TextUtils.join(",", userInfo.getResponse().getInterests()));
+        String[] interestsKeys = userInfo.getResponse().getInterests();
+        String[] interests = new String[interestsKeys.length];
+        for (int i = 0; i < interestsKeys.length; i++) {
+            String key = interestsKeys[i];
+            int index = i;
+            try {
+                index = Integer.parseInt(key) - 1;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            interests[i] = interestsArray.get(index);
+        }
+        this.interests.set(TextUtils.join(",", interests));
     }
 
-    public EditProfileRequest toUpdateRequest() {
+    public EditProfileRequest toUpdateRequest(List<String> interestsArray) {
         EditProfileRequest request = new EditProfileRequest();
         request.setName(name.get());
         request.setPhone(phone.get());
@@ -148,7 +161,14 @@ public class UserInfoEditVM extends BaseObservable {
         if (femaleText.equalsIgnoreCase(gender.get())) {
             request.setGender(GENDER_WOMAN);
         }
-        request.setInterests(interests.get().split(","));
+        String[] interestsValues = interests.get().split(",");
+        String[] interests = new String[interestsValues.length];
+        for (int i = 0; i < interestsValues.length; i++) {
+            String value = interestsValues[i];
+            int index = interestsArray.indexOf(value) + 1;
+            interests[i] = String.valueOf(index);
+        }
+        request.setInterests(interests);
 
         return request;
     }

@@ -44,7 +44,7 @@ public class UserResponse extends ServerResponse<UserResponse>{
     private String gender;
 
     @SerializedName("total_amount")
-    private Integer totalAmount;
+    private Double totalAmount;
 
     @SerializedName("total_distance")
     private Double totalDistance;
@@ -93,8 +93,8 @@ public class UserResponse extends ServerResponse<UserResponse>{
         return getResult().gender;
     }
 
-    public int getTotalAmount() {
-        Integer totalAmount= getResult().totalAmount;
+    public double getTotalAmount() {
+        Double totalAmount= getResult().totalAmount;
         return totalAmount != null ? totalAmount : 0;
     }
 

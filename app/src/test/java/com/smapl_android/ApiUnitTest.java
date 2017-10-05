@@ -33,7 +33,7 @@ public class ApiUnitTest {
 
     private NetworkService networkService;
 
-    private final String token = "AqOv1a20V7ek1n1ARlS4JQ8DhQbgGiWTmaXwqm1k0RgQPnC6ULXZYKMIUXNlMTQh";
+    private final String token = "nkGiRJq5hUL8tvoLvTP58pw4b4TkzXwxiyoN1BWnfZNSKb5OljU1BkH591uEfC5m";
 
     @Before
     public void initNetwork() {
@@ -43,7 +43,7 @@ public class ApiUnitTest {
     @Test
     public void checkLoginSuccess() throws Exception {
         CountDownLatch latch = new CountDownLatch(1);
-        networkService.login("+380333333333", "poiuyt", new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
+        networkService.login("+380932225588", "котики", new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
             @Override
             public void onResult(LoginResponse result, Throwable error) {
                 assertThat(error, CoreMatchers.nullValue());
@@ -202,32 +202,6 @@ public class ApiUnitTest {
                     latch.countDown();
                 }
 
-            }
-        });
-        latch.await();
-    }
-
-    //@Test
-    public void getHistory() throws Exception {
-        String token = "EReDjOvsWXagMTv4bmShkqO23oBeB8cs8jbGA1EGE30GwZBZBUTUyQfBH2wA6ffK";
-        int userId  = 101;
-
-        final CountDownLatch latch = new CountDownLatch(1);
-        networkService.getHistory(token, userId, new NetworkService.OnResultCallback<ResponseBody, Throwable>() {
-            @Override
-            public void onResult(ResponseBody result, Throwable error) {
-                try {
-                    if (error != null) {
-                        System.out.println(error.getMessage());
-                    }
-                    try {
-                        System.out.println(result.string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } finally {
-                    latch.countDown();
-                }
             }
         });
         latch.await();

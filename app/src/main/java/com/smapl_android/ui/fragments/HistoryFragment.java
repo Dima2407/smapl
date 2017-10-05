@@ -201,10 +201,10 @@ public class HistoryFragment extends BaseFragment {
         public final ObservableField<String> date = new ObservableField<>();
         public final ObservableField<String> companyName = new ObservableField<>();
         public final ObservableField<Double> distancePassed = new ObservableField<>();
-        public final ObservableField<Integer> earnedPoints = new ObservableField<>();
+        public final ObservableField<Double> earnedPoints = new ObservableField<>();
 
 
-        public CarHistory(Date date, String companyName, double distancePassed, int earnedPoints) {
+        public CarHistory(Date date, String companyName, double distancePassed, double earnedPoints) {
             this.date.set(dateFormat.format(date));
             this.companyName.set(companyName);
             this.distancePassed.set(distancePassed);
