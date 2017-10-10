@@ -151,6 +151,11 @@
     <string name="error_empty_color">Вы не выбрали цвет</string>
     <string name="error_password_same">Новый пароль не может быть такимже как старый</string>
     <string name="campaign_details">Рекламная кампания</string>
+    <string name="internet_error">нет доступа к Интернету. Проверьте подключение и повторите попытку</string>
+    <string name="txt_btn_to_retry">Повторить попытку</string>
+    <string name="server_error">Ошибка сервера</string>
+    <string name="server_error_full">На сервере произошла непредвиденная ошибка. Пожалуйста, подождите. Она вскоре будет исправлена.</string>
+    <string name="txt_btn_return_to_main">Вернуться на главную</string>
     <string name="participate">Участвовать</string>
     <string name="ask_question">Задать вопрос</string>
     <string name="stickers">Стикеры</string>
