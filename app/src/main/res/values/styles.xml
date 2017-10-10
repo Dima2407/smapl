@@ -19,4 +19,15 @@
         <item name="android:color">@color/about_yourself_hint</item>
     </style>
 
+    <style name="AdRiderInputTextAppearance" parent="TextAppearance.Design.Hint">
+        <item name="android:textColor">@android:color/white</item>
+
+    </style>
+
+    <style name="AdRiderEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:backgroundTint">@android:color/white</item>
+    </style>
+
 </resources>

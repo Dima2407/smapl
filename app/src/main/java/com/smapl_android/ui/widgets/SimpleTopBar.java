@@ -8,17 +8,19 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.smapl_android.R;
 
-public class SimpleTopBar extends LinearLayout {
+public class SimpleTopBar extends FrameLayout {
 
     private final String centerText;
     private final String leftText;
     private final String rightText;
-    private final Button buttonLeft;
+    private final LinearLayout buttonLeftContainer;
+    private final TextView buttonLeft;
     private final Button buttonRight;
     private final TextView textTitle;
     private final int barHeight;
@@ -39,21 +41,26 @@ public class SimpleTopBar extends LinearLayout {
             a.recycle();
         }
         barHeight = context.getResources().getDimensionPixelSize(R.dimen.bar_height);
-        buttonLeft = (Button) findViewById(R.id.btn_left);
+        buttonLeftContainer = (LinearLayout) findViewById(R.id.btn_left_container);
+        buttonLeft = (TextView) findViewById(R.id.btn_left);
         buttonRight = (Button) findViewById(R.id.btn_right);
         textTitle = (TextView) findViewById(R.id.title_center);
 
         setTextForItem(buttonLeft, leftText);
+        if(TextUtils.isEmpty(leftText)){
+            buttonLeftContainer.setVisibility(GONE);
+        }else {
+            buttonLeftContainer.setVisibility(VISIBLE);
+        }
         setTextForItem(textTitle, centerText);
         setTextForItem(buttonRight, rightText);
-        setGravity(Gravity.CENTER_VERTICAL);
         setBackgroundResource(R.drawable.bar_bg);
     }
 
     @BindingAdapter("leftClick")
     public static void setLeftClick(SimpleTopBar container, OnClickListener listener) {
         if (listener != null) {
-            container.buttonLeft.setOnClickListener(listener);
+            container.buttonLeftContainer.setOnClickListener(listener);
         }
     }
 

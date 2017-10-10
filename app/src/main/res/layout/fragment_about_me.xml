@@ -54,6 +54,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     custom:error="@{userEdit.phoneError}"
+                    custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                    android:textColorHint="@android:color/white"
                     custom:errorEnabled="true">
 
                     <android.support.design.widget.TextInputEditText
@@ -62,9 +64,7 @@
                         android:hint="@string/hint_phone"
                         android:inputType="phone"
                         android:text="@={userEdit.phone}"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/white"
-                        android:textSize="@dimen/core_text_size" />
+                        style="@style/AdRiderEditText" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -72,6 +72,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     custom:error="@{userEdit.nameError}"
+                    custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                    android:textColorHint="@android:color/white"
                     custom:errorEnabled="true">
 
                     <android.support.design.widget.TextInputEditText
@@ -80,9 +82,7 @@
                         android:hint="@string/hint_name"
                         android:inputType="text"
                         android:text="@={userEdit.name}"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/white"
-                        android:textSize="@dimen/core_text_size" />
+                        style="@style/AdRiderEditText"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -90,6 +90,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     custom:error="@{userEdit.genderError}"
+                    custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                    android:textColorHint="@android:color/white"
                     custom:errorEnabled="true">
 
                     <android.support.design.widget.TextInputEditText
@@ -102,9 +104,7 @@
                         android:inputType="text"
                         android:onClick="@{ () -> presenter.selectGender()}"
                         android:text="@={userEdit.gender}"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/white"
-                        android:textSize="@dimen/core_text_size" />
+                        style="@style/AdRiderEditText"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -113,6 +113,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     custom:error="@{userEdit.ageError}"
+                    custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                    android:textColorHint="@android:color/white"
                     custom:errorEnabled="true">
 
                     <android.support.design.widget.TextInputEditText
@@ -125,15 +127,15 @@
                         android:inputType="text"
                         android:onClick="@{ () -> presenter.selectAge()}"
                         android:text="@={userEdit.age}"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/white"
-                        android:textSize="@dimen/core_text_size" />
+                        style="@style/AdRiderEditText" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                    android:textColorHint="@android:color/white">
 
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
@@ -145,9 +147,7 @@
                         android:inputType="text"
                         android:onClick="@{ () -> presenter.selectInterests()}"
                         android:text="@={userEdit.interests}"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/white"
-                        android:textSize="@dimen/core_text_size" />
+                        style="@style/AdRiderEditText"/>
 
                 </android.support.design.widget.TextInputLayout>
 

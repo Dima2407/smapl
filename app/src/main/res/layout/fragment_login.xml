@@ -225,17 +225,31 @@
                         android:layout_marginBottom="6dp"
                         android:background="@color/color_edit_set_car"/>
 
-                <Button
+                <RelativeLayout
                         android:id="@+id/btn_login_facebook"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/btn_facebook_hight"
                         android:layout_below="@+id/text_login_or"
                         android:background="@drawable/btn_facebook_shape"
+                        android:onClick="@{() -> presenter.facebookLogin()}">
+
+                    <ImageView
+                        android:layout_width="6dp"
+                        android:layout_height="11dp"
+                        android:src="@drawable/ic_facebook"
+                        android:layout_toStartOf="@+id/txt_fb"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="7dp"/>
+
+                    <TextView
+                        android:id="@+id/txt_fb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
                         android:text="@string/btn_login_facebook"
-                        android:textAllCaps="false"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/core_text_size"
-                        android:onClick="@{() -> presenter.facebookLogin()}"/>
+                        android:textSize="@dimen/core_text_size"/>
+                </RelativeLayout>
 
             </RelativeLayout>
 

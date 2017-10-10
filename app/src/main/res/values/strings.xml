@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">smapl-android</string>
+    <string name="app_name">Smapl</string>
     <string name="error_empty_login">Вы не ввели логин</string>
     <string name="error_empty_password">Вы не ввели пароль</string>
     <string name="login">Войти</string>
@@ -151,4 +151,13 @@
     <string name="error_empty_color">Вы не выбрали цвет</string>
     <string name="error_password_same">Новый пароль не может быть такимже как старый</string>
     <string name="campaign_details">Рекламная кампания</string>
+    <string name="participate">Участвовать</string>
+    <string name="ask_question">Задать вопрос</string>
+    <string name="stickers">Стикеры</string>
+    <string name="history">Список поездок</string>
+    <string name="api_error_450">Такого email нет в базе</string>
+    <string name="api_error_451">Неверный телефон, или пароль</string>
+    <string name="api_error_452">Такой телефон уже есть в базе</string>
+    <string name="api_error_453">Такой email уже есть в базе</string>
+    <string name="api_error_454">Вам следует выбрать компанию и послать запрос «Принять участие»</string>
 </resources>

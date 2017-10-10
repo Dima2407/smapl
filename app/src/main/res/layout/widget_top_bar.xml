@@ -3,23 +3,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_left"
+    <LinearLayout
+        android:id="@+id/btn_left_container"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
+        android:orientation="horizontal"
         android:paddingStart="8dp"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text_menu_bottom_size" />
+        android:layout_gravity="left|center_vertical">
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="21dp"
+            android:layout_marginEnd="2dp"
+            android:src="@drawable/ic_back"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/btn_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_marginStart="2dp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_menu_bottom_size"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/title_center"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@android:color/transparent"
-        android:gravity="center_vertical"
+        android:layout_gravity="center"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_menu_bottom_size"
@@ -28,9 +44,10 @@
     <Button
         android:id="@+id/btn_right"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:paddingEnd="8dp"
+        android:layout_gravity="right|center_vertical"
         android:textAllCaps="false"
         android:textColor="@color/btn_top_bar"
         android:textSize="@dimen/text_menu_bottom_size" />

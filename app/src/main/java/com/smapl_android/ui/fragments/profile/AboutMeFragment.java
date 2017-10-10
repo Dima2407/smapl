@@ -43,14 +43,14 @@ public class AboutMeFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         user.init(getActivity());
-        user.apply(getCoreActivity().getUserInfo(), Arrays.asList(getResources().getStringArray(R.array.interests)));
+        user.apply(getCoreActivity().getUserInfo(), getActivity());
     }
 
     public class Presenter extends BasePresenter {
 
         public void onClickForward() {
             hideKeyboard();
-            final EditProfileRequest editProfileRequest = user.toUpdateRequest(Arrays.asList(getResources().getStringArray(R.array.interests)));
+            final EditProfileRequest editProfileRequest = user.toUpdateRequest(getActivity());
 
             final CoreRequest<UserResponse> request = getCoreActivity().newWaitingRequest(new SuccessOutput<UserResponse>() {
                 @Override

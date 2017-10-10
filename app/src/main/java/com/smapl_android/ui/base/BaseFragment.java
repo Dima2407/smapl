@@ -11,6 +11,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.smapl_android.R;
 import com.smapl_android.core.CoreService;
+import com.smapl_android.model.InterestsUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -125,16 +126,9 @@ public abstract class BaseFragment extends Fragment {
         }
 
         protected void selectInterests(final ObservableField<String> interests) {
-            List<String> strings = Arrays.asList(getActivity().getResources().getStringArray(R.array.interests));
-            Integer[] selectedIndex = null;
+            Integer[] selectedIndex = InterestsUtils.prepareSelected(interests.get(), getActivity());
             final  String originalInterests = interests.get();
-            if (!TextUtils.isEmpty(interests.get())) {
-                final String[] items = interests.get().split(",");
-                selectedIndex = new Integer[items.length];
-                for (int i = 0; i < items.length; i++) {
-                    selectedIndex[i] = strings.indexOf(items[i]);
-                }
-            }
+
             new MaterialDialog.Builder(getActivity())
                     .theme(Theme.LIGHT)
                     .title(R.string.select_interests)

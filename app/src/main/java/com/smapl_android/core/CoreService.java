@@ -60,7 +60,7 @@ public class CoreService {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                coreRequest.processError(error.getMessage());
+                                coreRequest.processError(error);
                             }
                         });
 
@@ -89,7 +89,7 @@ public class CoreService {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                successOutput.processError(error.getMessage());
+                                successOutput.processError(error);
                             }
                         });
                     } else {
@@ -134,7 +134,7 @@ public class CoreService {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                coreRequest.processError(error.getMessage());
+                                coreRequest.processError(error);
                             }
                         });
 
@@ -173,7 +173,7 @@ public class CoreService {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                coreRequest.processError(error.getMessage());
+                                coreRequest.processError(error);
                             }
                         });
                     } else {
@@ -200,7 +200,7 @@ public class CoreService {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                coreRequest.processError(error.getMessage());
+                                coreRequest.processError(error);
                             }
                         });
                     } else {
@@ -235,7 +235,7 @@ public class CoreService {
 
             @Override
             public void onError(FacebookException error) {
-                request.processError(error.getMessage());
+                request.processError(error);
             }
         });
     }
@@ -260,7 +260,7 @@ public class CoreService {
         return userInfo;
     }
 
-    public void startTracking(List<Pair<Double, Double>> coordinates) {
+    public void startTracking(final  CoreRequest<TrackingResponse> coreRequest, List<Pair<Double, Double>> coordinates) {
         String token = sessionStorage.getAuthKey();
         final CoordinateRequest request = CoordinateRequest.start();
         for(Pair<Double, Double> location : coordinates){
@@ -268,10 +268,24 @@ public class CoreService {
         }
         networkServiceImpl.startTracking(token, request, new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
             @Override
-            public void onResult(TrackingResponse result, Throwable error) {
-                if(error != null) return;
-                getUserInfo().drive.set(result.getTotalDistance());
-                getUserInfo().earn.set(result.getTotalAmount());
+            public void onResult(final TrackingResponse result, final Throwable error) {
+                if (coreRequest != null) {
+                    if (error != null) {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processError(error);
+                            }
+                        });
+                    } else {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processResult(result);
+                            }
+                        });
+                    }
+                }
             }
         });
     }

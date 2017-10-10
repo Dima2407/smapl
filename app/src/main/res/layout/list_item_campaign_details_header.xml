@@ -1,88 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="item"
-            type="com.smapl_android.model.CampaignVM"/>
+            type="com.smapl_android.model.CampaignVM" />
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/campaign_details_image"
-                android:layout_width="@dimen/image_car_circle_size"
-                android:layout_height="@dimen/image_car_circle_size"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="40dp"
-                bind:circlePhoto="@{item.photo}"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="55dp"
-                android:layout_toRightOf="@id/campaign_details_image"
-                android:background="#7dcceb"
-                android:text="Участвовать"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
-
-
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{`Стоимость: ` + item.budget}"
-            android:textColor="#FFFFFF" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="@{item.name}"
-            android:textColor="#FFFFFF" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/rounded_background"
-            android:paddingBottom="30dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="30dp"
-            android:paddingTop="15dp"
-            android:text="@{item.description}"
-            android:textColor="#FFFFFF" />
+        <ImageView
+            android:id="@+id/campaign_details_image"
+            android:layout_width="@dimen/image_car_circle_size"
+            android:layout_height="@dimen/image_car_circle_size"
+            bind:circlePhoto="@{item.photo}" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="13dp"
+            android:layout_toEndOf="@+id/campaign_details_image"
             android:background="#7dcceb"
-
-            android:text="Задать вопрос"
+            android:text="@string/participate"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp" />
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
 
         <TextView
+            android:id="@+id/txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:text="Стикеры"
-            android:textColor="#FFFFFF" />
+            android:layout_marginTop="41dp"
+            android:layout_below="@+id/campaign_details_image"
+            android:textSize="22sp"
+            android:text="@{item.name}"
+            android:textColor="@android:color/white" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/txt_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Стоимость: ` + item.budget}"
+            android:layout_below="@+id/txt_name"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="6dp"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/txt_description"
+            android:layout_below="@+id/txt_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_background"
+            android:paddingBottom="30dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="30dp"
+            android:paddingTop="15dp"
+            android:textSize="13sp"
+            android:text="@{item.description}"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_ask"
+            android:layout_below="@+id/txt_description"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="23dp"
+            android:background="#7dcceb"
+            android:text="@string/ask_question"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_below="@+id/btn_ask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:text="@string/stickers"
+            android:textSize="15sp"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
 
 </layout>

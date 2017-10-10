@@ -28,7 +28,7 @@ public class RegistrationRequest {
     @SerializedName("age")
     private String age;
     @SerializedName("interest")
-    private String[] interests;
+    private String interests = "";
 
     public RegistrationRequest() {
         this.type = "driver";
@@ -114,11 +114,11 @@ public class RegistrationRequest {
         this.age = age;
     }
 
-    public String [] getInterests() {
+    public String  getInterests() {
         return interests;
     }
 
-    public void setInterests(String[] interests) {
+    public void setInterests(String interests) {
         this.interests = interests;
     }
 }

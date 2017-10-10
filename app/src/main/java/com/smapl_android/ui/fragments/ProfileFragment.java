@@ -54,16 +54,19 @@ public class ProfileFragment extends BaseFragment {
         }
 
         public void logout() {
-            final CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
-                @Override
-                public void onSuccess(Boolean result) {
-                    Intent intent = new Intent(getContext(), AuthActivity.class);
-                    intent.setAction(AuthActivity.LOGOUT_ACTION);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }
-            });
+            final CoreRequest<Boolean> request = getCoreService().newRequest(getCoreActivity());
+
+            request.withLoading(R.string.wait_login)
+                    .handleSuccess(new SuccessOutput<Boolean>() {
+                        @Override
+                        public void onSuccess(Boolean result) {
+                            Intent intent = new Intent(getContext(), AuthActivity.class);
+                            intent.setAction(AuthActivity.LOGOUT_ACTION);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
+                    });
             getCoreService().logout(request);
         }
     }

@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.smapl_android.R;
 import com.smapl_android.databinding.FragmentCampaignDetailsBinding;
 import com.smapl_android.databinding.ListItemCampaignDetailsHeaderBinding;
-import com.smapl_android.databinding.StickerListItemBinding;
+import com.smapl_android.databinding.ListItemStickerBinding;
 import com.smapl_android.model.StickerVM;
 import com.smapl_android.model.CampaignVM;
 import com.smapl_android.net.responses.GetCampaignListResponse;
@@ -112,7 +112,7 @@ public class CampaignDetailsFragment extends BaseFragment {
                 binding.getRoot().setLayoutParams(lp);
                 return new HeaderVH(binding);
             }
-            StickerListItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.sticker_list_item, parent, false);
+            ListItemStickerBinding binding = DataBindingUtil.inflate(inflater, R.layout.list_item_sticker, parent, false);
 
             return new ItemVH(binding);
         }
@@ -154,9 +154,9 @@ public class CampaignDetailsFragment extends BaseFragment {
 
     public static class ItemVH extends RecyclerView.ViewHolder {
 
-        private StickerListItemBinding binding;
+        private ListItemStickerBinding binding;
 
-        public ItemVH(StickerListItemBinding binding) {
+        public ItemVH(ListItemStickerBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

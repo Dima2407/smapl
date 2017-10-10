@@ -55,6 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 custom:error="@{car.carBrandError}"
+                custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                android:textColorHint="@android:color/white"
                 custom:errorEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
@@ -67,9 +69,7 @@
                     android:inputType="text"
                     android:onClick="@{ () -> presenter.selectCarBrand()}"
                     android:text="@={car.carBrand}"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:textSize="@dimen/core_text_size" />
+                    style="@style/AdRiderEditText"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -77,6 +77,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 custom:error="@{car.carModelError}"
+                custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                android:textColorHint="@android:color/white"
                 custom:errorEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
@@ -85,9 +87,7 @@
                     android:hint="@string/hint_car_model"
                     android:inputType="text"
                     android:text="@={car.carModel}"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:textSize="@dimen/core_text_size" />
+                    style="@style/AdRiderEditText"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -96,6 +96,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 custom:error="@{car.carYearError}"
+                custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                android:textColorHint="@android:color/white"
                 custom:errorEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
@@ -105,9 +107,7 @@
                     android:inputType="number"
                     android:maxLength="4"
                     android:text="@={car.carYear}"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:textSize="@dimen/core_text_size" />
+                    style="@style/AdRiderEditText" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -116,6 +116,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 custom:error="@{car.carColorError}"
+                custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                android:textColorHint="@android:color/white"
                 custom:errorEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
@@ -128,9 +130,7 @@
                     android:inputType="text"
                     android:onClick="@{ () -> presenter.selectCarColor()}"
                     android:text="@={car.carColor}"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:textSize="@dimen/core_text_size" />
+                    style="@style/AdRiderEditText" />
 
             </android.support.design.widget.TextInputLayout>
 

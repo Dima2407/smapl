@@ -3,6 +3,7 @@ package com.smapl_android.core;
 import android.util.Log;
 
 import com.smapl_android.R;
+import com.smapl_android.net.responses.ErrorResponse;
 import com.smapl_android.ui.base.CoreActivity;
 
 import java.lang.ref.WeakReference;
@@ -23,15 +24,41 @@ public class CoreRequest<T> {
 
     private final ErrorOutput errorOutput = new ErrorOutput() {
         @Override
-        public void onError(String error) {
+        public void onError(Throwable error) {
             if (activity.get() != null) {
                 activity.get().hideProgress();
             }
             if (displayError) {
                 if (activity.get() != null) {
+                    String message = error.getMessage();
+                    if(error instanceof ErrorResponse){
+                        ErrorResponse exception = (ErrorResponse) error;
+                        switch (exception.getCode()){
+                            case 401:
+                                message = activity.get().getString(R.string.api_error_451);
+                                break;
+                            case 450:
+                                message = activity.get().getString(R.string.api_error_450);
+                                break;
+                            case 451:
+                                message = activity.get().getString(R.string.api_error_451);
+                                break;
+                            case 452:
+                                message = activity.get().getString(R.string.api_error_452);
+                                break;
+                            case 453:
+                                message = activity.get().getString(R.string.api_error_453);
+                                break;
+                            case 454:
+                                message = activity.get().getString(R.string.api_error_454);
+                                break;
+                        }
+                    }
                     activity.get().showMessage(activity.get().getString(R.string.app_name),
-                            error);
+                            message);
                 }
+            }else {
+                processResult(null);
             }
         }
     };
@@ -76,15 +103,11 @@ public class CoreRequest<T> {
         }
     }
 
-    void processError(String error) {
+    void processError(Throwable error) {
         errorOutput.onError(error);
     }
 
     public boolean isError() {
         return !displayError;
-    }
-
-    public WeakReference<CoreActivity> getActivity() {
-        return activity;
     }
 }

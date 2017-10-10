@@ -5,6 +5,7 @@ import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.requests.CoordinateRequest;
 import com.smapl_android.net.requests.RegistrationRequest;
+import com.smapl_android.net.responses.ErrorResponse;
 import com.smapl_android.net.responses.LoginResponse;
 import com.smapl_android.net.responses.RegistrationResponse;
 import com.smapl_android.net.responses.TrackingResponse;
@@ -33,7 +34,7 @@ public class ApiUnitTest {
 
     private NetworkService networkService;
 
-    private final String token = "nkGiRJq5hUL8tvoLvTP58pw4b4TkzXwxiyoN1BWnfZNSKb5OljU1BkH591uEfC5m";
+    private final String token = "PmlQBQWKXWEXY5UsnCnsCTRsOvGe3fPUQiK6pBtLAK5yjFTeGWwCK9tVEoOMcrbT";
 
     @Before
     public void initNetwork() {
@@ -43,7 +44,7 @@ public class ApiUnitTest {
     @Test
     public void checkLoginSuccess() throws Exception {
         CountDownLatch latch = new CountDownLatch(1);
-        networkService.login("+380932225588", "котики", new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
+        networkService.login("+380333333334", "qwerty", new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
             @Override
             public void onResult(LoginResponse result, Throwable error) {
                 assertThat(error, CoreMatchers.nullValue());
@@ -55,7 +56,7 @@ public class ApiUnitTest {
         latch.await(WAIT_TIMEOUT, TimeUnit.SECONDS);
     }
 
-    //@Test
+    @Test
     public void createUser() throws Exception {
         networkService = NetworkServiceFactory.create(false);
         final CountDownLatch latch = new CountDownLatch(1);
@@ -63,22 +64,21 @@ public class ApiUnitTest {
         request.setPassword("qwerty");
         request.setName("Bob");
         request.setGender("male");
-        request.setEmail("goo@g.com");
+        request.setEmail("boo3@g.com");
         request.setAge("18-25");
         //request.setPhoneNumber("+380978742913");
-        request.setPhoneNumber("+380333333333");
+        request.setPhoneNumber("+380333333335");
         request.setCarYear(2000);
         request.setCarColor("Красный");
         request.setCarMark("Aston Martin");
         request.setCarModel("Aston Martin");
         String data = new Gson().toJson(request);
+        System.out.println(data);
         networkService.registration(request, new NetworkService.OnResultCallback<RegistrationResponse, Throwable>() {
             @Override
             public void onResult(RegistrationResponse result, Throwable error) {
-                String message = error.getMessage();
                 assertThat(error, CoreMatchers.nullValue());
                 assertThat(result, CoreMatchers.notNullValue());
-                assertThat(result, CoreMatchers.allOf(CoreMatchers.notNullValue()));
                 latch.countDown();
             }
         });
@@ -129,7 +129,8 @@ public class ApiUnitTest {
             public void onResult(TrackingResponse result, Throwable error) {
                 try {
                     if (error != null) {
-                        System.out.println(error.getMessage());
+                        ErrorResponse errorResponse = (ErrorResponse) error;
+                        System.out.println(errorResponse.getCode() + errorResponse.getMessage());
                     }
                     assertThat(result, CoreMatchers.notNullValue());
                     assertThat(result.getStatus(), CoreMatchers.is("start"));

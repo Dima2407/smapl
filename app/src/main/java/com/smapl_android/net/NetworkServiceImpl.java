@@ -83,13 +83,14 @@ class NetworkServiceImpl implements NetworkService {
                     Gson gson = new Gson();
                     errorMessage = response.errorBody().string();
                     ErrorResponse errorResponse = gson.fromJson(errorMessage, ErrorResponse.class);
-                    if(errorResponse != null){
-                        errorMessage = errorResponse.getMessageError();
+                    if (errorResponse != null) {
+                        callback.onResult(response.body(), errorResponse);
+                    } else {
+                        callback.onResult(response.body(), new Exception(errorMessage));
                     }
                 } catch (Exception e) {
-                    //errorMessage = e.getMessage();
+                    callback.onResult(response.body(), e);
                 }
-                callback.onResult(response.body(), new Exception(errorMessage));
             }
         }
     }

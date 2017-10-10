@@ -12,35 +12,39 @@
             type="com.smapl_android.ui.fragments.CampaignDetailsFragment.Presenter" />
     </data>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
         android:paddingTop="10dp">
 
         <ImageView
             android:id="@+id/sticker_first_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
+            android:layout_width="0.0dp"
+            android:layout_height="82dp"
+            android:layout_weight="1"
             android:background="@drawable/round_white_strip"
             android:padding="1dp"
             android:onClick="@{()->presenter.onLeftStickerClicked(item)}"
+            android:scaleType="fitXY"
             bind:roundedSquarePhoto="@{item.photoLeft}" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="21dp"
+            android:layout_height="match_parent" />
 
         <ImageView
             android:id="@+id/sticker_second_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="0.0dp"
+            android:layout_height="82dp"
+            android:layout_weight="1"
             android:padding="1dp"
-            android:layout_alignParentRight="true"
             android:background="@drawable/round_white_strip"
             android:onClick="@{()->presenter.onRightStickerClicked(item)}"
+            android:scaleType="fitXY"
             bind:roundedSquarePhoto="@{item.photoRight}" />
-    </RelativeLayout>
+    </LinearLayout>
 </layout>
 
 

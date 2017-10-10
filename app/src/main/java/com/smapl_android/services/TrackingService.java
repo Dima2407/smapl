@@ -63,10 +63,4 @@ public class TrackingService extends Service {
         getCoreService().stopTracking(new ArrayList<>(locations));
         locations.clear();
     }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        getCoreService().startTracking(new ArrayList<>(locations));
-    }
 }

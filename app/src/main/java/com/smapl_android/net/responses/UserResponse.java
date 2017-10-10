@@ -32,7 +32,7 @@ public class UserResponse extends ServerResponse<UserResponse>{
     private String carPhoto;
 
     @SerializedName("interest")
-    private String [] interests;
+    private String interests;
 
     @SerializedName("created_at")
     private String createdAt;
@@ -77,7 +77,7 @@ public class UserResponse extends ServerResponse<UserResponse>{
         return getResult().carColor;
     }
 
-    public String[] getInterests() {
+    public String getInterests() {
         return getResult().interests;
     }
 

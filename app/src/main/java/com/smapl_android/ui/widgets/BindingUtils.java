@@ -57,6 +57,12 @@ public class BindingUtils {
 
     @BindingAdapter("roundedSquarePhoto")
     public static void setRoundedSquarePhoto(ImageView imageView, String url){
+        if(TextUtils.isEmpty(url)){
+            imageView.setVisibility(View.INVISIBLE);
+            return;
+        }else {
+            imageView.setVisibility(View.VISIBLE);
+        }
         RequestOptions requestOptions = new RequestOptions();
         int radius = imageView.getContext().getResources().getDimensionPixelSize(R.dimen.photo_corner);
         requestOptions.transform(new RoundedCorners(radius));
