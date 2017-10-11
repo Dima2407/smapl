@@ -37,7 +37,11 @@ public class MainActivity extends CoreActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            moveTaskToBack(true);
+            int count = getSupportFragmentManager().getBackStackEntryCount();
+
+            if (count == 0) {
+                moveTaskToBack(true);
+            }
         }
         return super.onKeyDown(keyCode, event);
     }
