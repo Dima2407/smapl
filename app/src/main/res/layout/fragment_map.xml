@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/you_earned_TextView"
                 android:layout_centerHorizontal="true"
-                android:text="@{@string/earn_format(user.earn)}"
+                android:text="@{@string/earn_format(user.currentEarn)}"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="10 баллов"
+                    android:text="@{@string/total_earn_format(user.currentEarn)}"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
                     android:textSize="22.2sp" />
@@ -129,7 +129,7 @@
                     android:layout_toRightOf="@+id/income_points_TextView"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="10 км"
+                    android:text="@{@string/drive_format(user.currentDrive)}"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/name_profile_size" />

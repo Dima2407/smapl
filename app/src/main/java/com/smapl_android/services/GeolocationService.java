@@ -76,13 +76,11 @@ public class GeolocationService extends Service {
             }
         });
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
-        startService(new Intent(this, TrackingService.class));
     }
 
     @Override
     public void onDestroy() {
         fusedLocationProviderClient.removeLocationUpdates(locationCallback);
-        stopService(new Intent(this, TrackingService.class));
         super.onDestroy();
     }
 }

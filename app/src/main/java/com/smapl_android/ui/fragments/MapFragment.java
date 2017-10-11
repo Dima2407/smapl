@@ -17,10 +17,12 @@ import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.databinding.FragmentMapBinding;
 import com.smapl_android.net.responses.TrackingResponse;
 import com.smapl_android.services.GeolocationService;
+import com.smapl_android.services.TrackingService;
 import com.smapl_android.ui.base.BaseFragment;
 import com.smapl_android.ui.base.OnPermissionsRequestListener;
 
 import java.util.Collections;
+import java.util.List;
 
 public class MapFragment extends BaseFragment {
 
@@ -45,12 +47,12 @@ public class MapFragment extends BaseFragment {
                         @Override
                         public void onSuccess(TrackingResponse result) {
                             getCoreActivity().getUserInfo().inDrive.set(true);
-                            getCoreActivity().getUserInfo().drive.set(result.getTotalDistance());
-                            getCoreActivity().getUserInfo().earn.set(result.getTotalAmount());
+                            getCoreActivity().getUserInfo().currentDrive.set(result.getTotalDistance());
+                            getCoreActivity().getUserInfo().currentEarn.set(result.getTotalAmount());
                             getCoreActivity().startService(new Intent(getActivity(), GeolocationService.class));
                         }
                     });
-                    getCoreService().startTracking(request, Collections.<Pair<Double,Double>>emptyList());
+                    getCoreService().startTracking(request);
                 }
 
                 @Override
@@ -62,9 +64,20 @@ public class MapFragment extends BaseFragment {
 
 
         public void stopGeolocationService() {
-            getCoreActivity().getUserInfo().inDrive.set(false);
-
+            List<Pair<Double, Double>> lastLocations = TrackingService.getLastLocations();
             getCoreActivity().stopService(new Intent(getActivity(), GeolocationService.class));
+            getCoreActivity().stopService(new Intent(getActivity(), TrackingService.class));
+            CoreRequest<TrackingResponse> request = getCoreActivity().newWaitingRequest(new SuccessOutput<TrackingResponse>() {
+                @Override
+                public void onSuccess(TrackingResponse result) {
+                    getCoreActivity().getUserInfo().inDrive.set(false);
+                    getCoreActivity().getUserInfo().currentDrive.set(result.getTotalDistance());
+                    getCoreActivity().getUserInfo().currentEarn.set(result.getTotalAmount());
+                }
+            });
+            getCoreService().stopTracking(request, lastLocations);
+
+
         }
     }
 }

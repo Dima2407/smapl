@@ -25,6 +25,10 @@ public class UserInfo extends BaseObservable {
 
     public final ObservableField<Double> drive = new ObservableField<>(0.0);
 
+    public final ObservableField<Double> currentEarn = new ObservableField<>(0.0);
+
+    public final ObservableField<Double> currentDrive = new ObservableField<>(0.0);
+
     public final ObservableField<Boolean> inDrive = new ObservableField<>();
 
     private UserResponse response;

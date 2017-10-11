@@ -21,7 +21,7 @@ public class TrackingService extends Service {
     private static final String EXTRA_LATITUDE = "_lat";
     private static final String EXTRA_LONGITUDE = "_long";
 
-    private List<Pair<Double, Double>> locations = new ArrayList<>();
+    private static final List<Pair<Double, Double>> locations = new ArrayList<>();
 
     public static void submitLocation(Context context, Location location){
         Intent intent = new Intent(context, TrackingService.class);
@@ -60,7 +60,10 @@ public class TrackingService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getCoreService().stopTracking(new ArrayList<>(locations));
         locations.clear();
+    }
+
+    public static List<Pair<Double, Double>> getLastLocations(){
+        return new ArrayList<>(locations);
     }
 }

@@ -240,7 +240,7 @@ public class CoreService {
         });
     }
 
-    public void stopTracking(List<Pair<Double, Double>> coordinates) {
+    public void stopTracking(final  CoreRequest<TrackingResponse> coreRequest, List<Pair<Double, Double>> coordinates) {
         String token = sessionStorage.getAuthKey();
         final CoordinateRequest request = CoordinateRequest.stop();
         for(Pair<Double, Double> location : coordinates){
@@ -248,10 +248,25 @@ public class CoreService {
         }
         networkServiceImpl.stopTracking(token, request, new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
             @Override
-            public void onResult(TrackingResponse result, Throwable error) {
-                if(error != null) return;
-                getUserInfo().drive.set(result.getTotalDistance());
-                getUserInfo().earn.set(result.getTotalAmount());
+            public void onResult(final TrackingResponse result, final Throwable error) {
+
+                if (coreRequest != null) {
+                    if (error != null) {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processError(error);
+                            }
+                        });
+                    } else {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processResult(result);
+                            }
+                        });
+                    }
+                }
             }
         });
     }
@@ -260,17 +275,27 @@ public class CoreService {
         return userInfo;
     }
 
-    public void startTracking(final  CoreRequest<TrackingResponse> coreRequest, List<Pair<Double, Double>> coordinates) {
-        String token = sessionStorage.getAuthKey();
-        final CoordinateRequest request = CoordinateRequest.start();
-        for(Pair<Double, Double> location : coordinates){
-            request.addCoordinate(location.first, location.second);
-        }
-        networkServiceImpl.startTracking(token, request, new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
+    public void startTracking(final  CoreRequest<TrackingResponse> coreRequest) {
+        final String token = sessionStorage.getAuthKey();
+        networkServiceImpl.startTracking(token, CoordinateRequest.start(), new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
             @Override
             public void onResult(final TrackingResponse result, final Throwable error) {
+                final NetworkService.OnResultCallback<TrackingResponse, Throwable> startCallback = this;
                 if (coreRequest != null) {
                     if (error != null) {
+                        if(error instanceof ErrorResponse){
+                            ErrorResponse errorResponse = (ErrorResponse) error;
+                            if(errorResponse.getCode() == 461){
+                                networkServiceImpl.stopTracking(token, CoordinateRequest.stop(), new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
+                                    @Override
+                                    public void onResult(TrackingResponse result, Throwable error) {
+                                        if(error != null) return;
+                                        networkServiceImpl.startTracking(token, CoordinateRequest.start(), startCallback);
+                                    }
+                                });
+                                return;
+                            }
+                        }
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -300,8 +325,8 @@ public class CoreService {
             @Override
             public void onResult(TrackingResponse result, Throwable error) {
                 if(error != null) return;
-                getUserInfo().drive.set(result.getTotalDistance());
-                getUserInfo().earn.set(result.getTotalAmount());
+                getUserInfo().currentDrive.set(result.getTotalDistance());
+                getUserInfo().currentEarn.set(result.getTotalAmount());
             }
         });
     }

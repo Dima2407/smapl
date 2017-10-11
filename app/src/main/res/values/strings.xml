@@ -31,7 +31,7 @@
     <string name="registration_registration">Регистрация</string>
     <string name="hint_interests">Интересы</string>
     <string name="last_name">Фамилия</string>
-    <string name="email">e-mail</string>
+    <string name="email">E-mail</string>
     <string name="load_photo">Загрузить фото</string>
     <string name="set_car">Машина</string>
     <string name="to_set_car">Редактировать информацию о машине</string>
@@ -55,8 +55,8 @@
     <string name="text_about_yourself_car_color">Цвет авто</string>
     <string name="text_about_yourself_menu">Обо мне</string>
     <string name="error_empty_name">Введите имя</string>
-    <string name="error_empty_email">Введите e-mail</string>
-    <string name="error_incorrect_email">Вы ввели некорректный e-mail</string>
+    <string name="error_empty_email">Введите E-mail</string>
+    <string name="error_incorrect_email">Вы ввели некорректный E-mail</string>
     <string name="error_empty_car_model">Введите модель автомобиля</string>
     <string name="error_empty_car_year">Введите год выпуска автомобиля</string>
     <string name="error_incorrect_car_year">Вы ввели некорректный год выпуска автомобиля</string>
