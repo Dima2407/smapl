@@ -7,6 +7,7 @@ import com.smapl_android.net.responses.ErrorResponse;
 import com.smapl_android.ui.base.CoreActivity;
 
 import java.lang.ref.WeakReference;
+import java.net.UnknownHostException;
 
 public class CoreRequest<T> {
 
@@ -30,6 +31,10 @@ public class CoreRequest<T> {
             }
             if (displayError) {
                 if (activity.get() != null) {
+                    if(error instanceof UnknownHostException){
+                        activity.get().showNoNetworkScreen();
+                        return;
+                    }
                     String message = error.getMessage();
                     if(error instanceof ErrorResponse){
                         ErrorResponse exception = (ErrorResponse) error;

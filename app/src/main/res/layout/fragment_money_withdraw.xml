@@ -5,6 +5,10 @@
     <data>
 
         <variable
+            name="card"
+            type="com.smapl_android.model.CardEditVM"/>
+
+        <variable
             name="user"
             type="com.smapl_android.model.UserInfo" />
 
@@ -13,100 +17,141 @@
             type="com.smapl_android.ui.fragments.MoneyWithdrawalFragment.Presenter" />
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/layout_padding_left"
-        android:paddingRight="@dimen/layout_padding_right"
-        android:paddingTop="@dimen/layout_padding_top"
-        android:paddingBottom="@dimen/layout_padding_bottom">
-
-        <com.smapl_android.ui.widgets.SimpleTopBar
-            android:id="@+id/linear_edit_car_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            custom:leftText="@string/back"
-            custom:centerText="@string/obtain_money"
-            custom:leftClick="@{() -> presenter.onClickBack()}"/>
-
-        <com.smapl_android.ui.widgets.UserInfoBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            custom:carInfo="@{user.carBrandModel}"
-            custom:carPhoto="@{user.carPhoto}"
-            custom:leftSpace="6dp"
-            custom:userName="@{user.name}" />
-
-        <TextView
-            android:id="@+id/current_balance_TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="46dp"
-            android:text="@{`` + user.earn}"
-            android:textColor="#FFFFFFFF"
-            android:textSize="20sp" />
+        android:fillViewport="true">
 
         <LinearLayout
-            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_background"
-            android:orientation="vertical"
-            android:paddingBottom="32dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingTop="32dp">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg"
+            android:orientation="vertical">
 
-            <TextView
+            <com.smapl_android.ui.widgets.SimpleTopBar
+                android:id="@+id/linear_edit_car_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="Введите данные кредитной карты:"
-                android:textColor="#FFFFFF" />
+                custom:centerText="@string/obtain_money"
+                custom:leftClick="@{() -> presenter.onClickBack()}"
+                custom:leftText="@string/back"
+                custom:rightClick="@{() -> presenter.onNextClicked()}"
+                custom:rightEnabled="@{card.nextActive}"
+                custom:rightText="@string/next" />
 
-            <EditText
-                android:layout_marginTop="20dp"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Имя на карте"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFFFF"
-                android:textSize="12sp"
-                android:backgroundTint="#FFFFFFFF"
-                />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Номер карты"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFFFF"
-                android:textSize="12sp"
-                android:backgroundTint="#FFFFFFFF"/>
+                <com.smapl_android.ui.widgets.UserInfoBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    custom:carInfo="@{user.carBrandModel}"
+                    custom:carPhoto="@{user.carPhoto}"
+                    custom:leftSpace="6dp"
+                    custom:userName="@{user.name}" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Банк"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFFFF"
-                android:textSize="12sp"
-                android:backgroundTint="#FFFFFFFF"/>
+                <TextView
+                    android:id="@+id/current_balance_TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/total_earn_withdraw_format(user.earn)}"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/rounded_background"
+                    android:orientation="vertical"
+                    android:paddingBottom="32dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="32dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:text="Введите данные кредитной карты:"
+                        android:textColor="#FFFFFF" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        custom:error="@{card.userError}"
+                        custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                        android:textColorHint="@android:color/white"
+                        custom:errorEnabled="true">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/name_on_card"
+                            android:inputType="text"
+                            android:text="@={card.user}"
+                            style="@style/AdRiderEditText" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        custom:error="@{card.numberError}"
+                        custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                        android:textColorHint="@android:color/white"
+                        custom:errorEnabled="true">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/card_number"
+                            android:inputType="number"
+                            android:maxLength="16"
+                            android:text="@={card.number}"
+                            style="@style/AdRiderEditText" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        custom:error="@{card.bankError}"
+                        custom:hintTextAppearance="@style/AdRiderInputTextAppearance"
+                        android:textColorHint="@android:color/white"
+                        custom:errorEnabled="true">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/card_bank"
+                            android:inputType="text"
+                            android:text="@={card.bank}"
+                            style="@style/AdRiderEditText" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="32dp"
+                    android:background="#7dcceb"
+                    android:text="Задать вопрос"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
         </LinearLayout>
-        <Button
-            android:layout_marginTop="32dp"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:text="Задать вопрос"
-            android:textSize="12sp"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFFFF"
-            android:background="#7dcceb"
-            />
+    </ScrollView>
 
-    </LinearLayout>
 </layout>

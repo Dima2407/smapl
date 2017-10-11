@@ -74,7 +74,10 @@
     <string name="woman">женщина</string>
     <string name="wrong_age">Некорректный возраст</string>
     <string name="balance_format">Баланс: %.2f баллов</string>
+    <string name="campaign_price_format">Стоимость: %d баллов</string>
+    <string name="total_earn_withdraw_format">Баланс: %.2f грн</string>
     <string name="total_earn_format">%.2f грн</string>
+    <string name="earn_format">%.2f</string>
     <string name="drive_format">%.3f км</string>
     <string name="campaign_list">Рекламные кампании</string>
     <string name="obtain_money">Вывод денег</string>
@@ -165,4 +168,12 @@
     <string name="api_error_452">Такой телефон уже есть в базе</string>
     <string name="api_error_453">Такой email уже есть в базе</string>
     <string name="api_error_454">Вам следует выбрать компанию и послать запрос «Принять участие»</string>
+    <string name="next">Далее</string>
+    <string name="name_on_card">Имя на карте</string>
+    <string name="card_number">Номер карты</string>
+    <string name="card_bank">Банк</string>
+    <string name="error_empty_card_user">Вы не ввели имя владельца карты</string>
+    <string name="error_empty_card_bank">Вы не ввели банк</string>
+    <string name="error_empty_card_number">Вы не ввели номер карты</string>
+    <string name="error_incorrect_card_number">Вы ввели не верный номер карты</string>
 </resources>

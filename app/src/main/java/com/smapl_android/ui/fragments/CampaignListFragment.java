@@ -62,7 +62,7 @@ public class CampaignListFragment extends BaseFragment {
         CampaignAdapter(List<GetCampaignListResponse.Campaign> result, Presenter presenter) {
             this.presenter = presenter;
             for (GetCampaignListResponse.Campaign c : result) {
-                items.add(new CampaignVM(c));
+                items.add(CampaignVM.forList(c));
             }
         }
 

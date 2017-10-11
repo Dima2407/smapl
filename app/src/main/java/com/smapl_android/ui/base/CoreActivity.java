@@ -21,6 +21,7 @@ import com.smapl_android.core.CoreService;
 import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.model.UserInfo;
 import com.smapl_android.services.GeolocationService;
+import com.smapl_android.ui.fragments.NoInternetScreenFragment;
 
 public abstract class CoreActivity extends AppCompatActivity {
 
@@ -248,5 +249,9 @@ public abstract class CoreActivity extends AppCompatActivity {
         } else {
             getSupportFragmentManager().popBackStack();
         }
+    }
+
+    public void showNoNetworkScreen() {
+        replaceContentWithHistory(new NoInternetScreenFragment());
     }
 }

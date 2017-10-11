@@ -130,7 +130,7 @@ public class CampaignDetailsFragment extends BaseFragment {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if (getItemViewType(position) == HEADER) {
                 HeaderVH headerVH = (HeaderVH) holder;
-                headerVH.bind(new CampaignVM(campaign));
+                headerVH.bind(CampaignVM.forDetails(campaign));
             } else {
                 StickerVM vm = new StickerVM();
                 int stickersStart = (position - 1) * 2;

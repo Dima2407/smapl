@@ -67,6 +67,8 @@ public class StickerFragment extends BaseFragment {
     public class Presenter extends BasePresenter{
 
         public final ObservableField<String> currentPhoto = new ObservableField<>();
+        public final ObservableField<Boolean> nextAvailable = new ObservableField<>();
+        public final ObservableField<Boolean> previousAvailable = new ObservableField<>();
 
         private int currentIndex;
         private List<String> stickers;
@@ -76,9 +78,12 @@ public class StickerFragment extends BaseFragment {
             currentIndex = stickers.indexOf(url);
             if(currentIndex < 0) {
                 currentPhoto.set(stickers.get(0));
+                currentIndex = 0;
             }else {
                 currentPhoto.set(stickers.get(currentIndex));
             }
+            previousAvailable.set(currentIndex != 0);
+            nextAvailable.set(currentIndex < stickers.size() -1);
         }
 
         public void onClickLeftButton() {
@@ -87,6 +92,8 @@ public class StickerFragment extends BaseFragment {
 
             currentIndex--;
             currentPhoto.set(stickers.get(currentIndex));
+            previousAvailable.set(currentIndex != 0);
+            nextAvailable.set(currentIndex < stickers.size() -1);
         }
 
 
@@ -94,6 +101,8 @@ public class StickerFragment extends BaseFragment {
             if (currentIndex >= stickers.size() - 1) return;
             currentIndex++;
             currentPhoto.set(stickers.get(currentIndex));
+            previousAvailable.set(currentIndex != 0);
+            nextAvailable.set(currentIndex < stickers.size() -1);
         }
     }
 

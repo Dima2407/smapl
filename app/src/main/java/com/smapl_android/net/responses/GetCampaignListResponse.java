@@ -18,28 +18,14 @@ public class GetCampaignListResponse extends ServerResponse<GetCampaignListRespo
 
         @SerializedName("name")
         private String name;
-        @SerializedName("client_id")
-        private int clientId;
-        @SerializedName("status")
-        private String status;
-        @SerializedName("budget")
-        private String budget;
-        @SerializedName("car_class")
-        private String carClass;
-        @SerializedName("car_color")
-        private String carColor;
-        @SerializedName("gender")
-        private String gender;
-        @SerializedName("age")
-        private String age;
+        @SerializedName("price")
+        private int price;
         @SerializedName("sticker")
         private List<String> stickers;
         @SerializedName("description")
         private String description;
-        @SerializedName("created_at")
-        private String createdAt;
-        @SerializedName("updated_at")
-        private String updatedAt;
+        @SerializedName("description_short")
+        private String descriptionShort;
         @SerializedName("id")
         private int id;
         @SerializedName("logo")
@@ -49,34 +35,6 @@ public class GetCampaignListResponse extends ServerResponse<GetCampaignListRespo
             return name;
         }
 
-        public int getClientId() {
-            return clientId;
-        }
-
-        public String getStatus() {
-            return status;
-        }
-
-        public String getBudget() {
-            return budget;
-        }
-
-        public String getCarClass() {
-            return carClass;
-        }
-
-        public String getCarColor() {
-            return carColor;
-        }
-
-        public String getGender() {
-            return gender;
-        }
-
-        public String getAge() {
-            return age;
-        }
-
         public List<String> getStickers() {
             if(stickers == null){
                 return Collections.emptyList();
@@ -84,16 +42,11 @@ public class GetCampaignListResponse extends ServerResponse<GetCampaignListRespo
             return stickers;
         }
 
-        public String getDescription() {
+        public String getDescription(boolean isShort) {
+            if(isShort){
+                return descriptionShort;
+            }
             return description;
-        }
-
-        public String getCreatedAt() {
-            return createdAt;
-        }
-
-        public String getUpdatedAt() {
-            return updatedAt;
         }
 
         public int getId() {
@@ -102,6 +55,10 @@ public class GetCampaignListResponse extends ServerResponse<GetCampaignListRespo
 
         public String getImage (){
             return logo;
+        }
+
+        public int getPrice(){
+            return price;
         }
     }
 

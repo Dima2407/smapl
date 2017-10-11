@@ -94,6 +94,7 @@ public class LoginFragment extends BaseFragment {
                 showMessage(e.getMessage());
                 return;
             }
+            hideKeyboard();
 
             final CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
                 @Override
@@ -117,6 +118,7 @@ public class LoginFragment extends BaseFragment {
                 showMessage(e.getMessage());
                 return;
             }
+            hideKeyboard();
 
             Fragment aboutYourselfFragment = AboutYourselfFragment.create(phoneNumber, password);
 
@@ -125,10 +127,12 @@ public class LoginFragment extends BaseFragment {
         }
 
         public void forgetPassword() {
+            hideKeyboard();
             getCoreActivity().replaceContentWithHistory(new ForgetPasswordFragment());
         }
 
         public void facebookLogin() {
+            hideKeyboard();
             AccessToken accessToken = AccessToken.getCurrentAccessToken();
             if (accessToken != null) {
                 goIntoApp();

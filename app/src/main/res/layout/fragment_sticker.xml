@@ -3,6 +3,7 @@
     <data>
 
 
+        <import type="android.view.View"/>
         <variable
             name="presenter"
             type="com.smapl_android.ui.fragments.StickerFragment.Presenter" />
@@ -42,6 +43,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:src="@drawable/right_button"
+            android:visibility="@{presenter.nextAvailable ? View.VISIBLE : View.GONE}"
             android:onClick="@{() -> presenter.onClickRightButton()}"/>
 
         <ImageView
@@ -52,6 +54,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:src="@drawable/left_button"
+            android:visibility="@{presenter.previousAvailable ? View.VISIBLE : View.GONE}"
             android:onClick="@{() -> presenter.onClickLeftButton()}"/>
 
     </RelativeLayout>
