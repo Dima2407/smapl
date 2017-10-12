@@ -21,10 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.smapl_android.R;
-import com.smapl_android.core.UploadService;
+import com.smapl_android.core.CoreRequest;
+import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.databinding.FragmentCarLoadPhotoBinding;
-import com.smapl_android.net.ApiService;
-import com.smapl_android.storage.SessionStorage;
 import com.smapl_android.ui.activities.MainActivity;
 import com.smapl_android.ui.base.BaseFragment;
 import com.smapl_android.ui.base.OnImageRequestListener;
@@ -32,22 +31,12 @@ import com.smapl_android.ui.base.OnImageRequestListener;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-
-import okhttp3.Headers;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 
 public class LoadCarPhotoFragment extends BaseFragment {
 
     public static final String TAG = LoadCarPhotoFragment.class.getSimpleName();
-    public static final String HEADER_CONTENT_DISPOSITION = "Content-Disposition";
-   // public static final String EXTRA_PATH = "path";
 
     private Presenter presenter;
 
@@ -115,56 +104,22 @@ public class LoadCarPhotoFragment extends BaseFragment {
     private void uploadPhoto() {
 
         if (!TextUtils.isEmpty(presenter.carPhoto.get())) {
-            uploadCarPhoto(presenter.carPhoto.get());
-        }
-//TODO wait result
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-    private void uploadCarPhoto(String path) {
-        final SessionStorage sessionStorage = new SessionStorage(getContext());
-        File file = new File(path);
-        final String name = file.getName();
-        final String extension = name.substring(name.lastIndexOf(".") + 1);
-
-        MultipartBody.Builder requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM);
-
-
-        String filePartHeader = String.format("form-data; name=\"image\"; filename=\"%s\"", file.getName(), file.getName());
-
-        requestBody.addPart(
-                Headers.of(HEADER_CONTENT_DISPOSITION, filePartHeader),
-                RequestBody.create(okhttp3.MediaType.parse("image/" + extension), file));
-
-
-        final Request request = new Request.Builder()
-                .url(ApiService.DEV_URL + "api/user/upload_image/" + sessionStorage.getUserId())
-                .addHeader("Authorization", sessionStorage.getAuthKey())
-                .post(requestBody.build())
-                .build();
-
-        OkHttpClient client = new OkHttpClient.Builder().build();
-
-
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-            String res = response.body().string();
-            Log.d(TAG, res);
-        } catch (IOException e) {
-            Log.e(TAG, "uploadCarPhoto: ", e);
+            CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
+                @Override
+                public void onSuccess(Boolean result) {
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            });
+            getCoreService().uploadCarPhoto(presenter.carPhoto.get(), request);
+        }else {
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
 
     }
-
-   /* public static void uploadCarPhoto(Context context, String filePath) {
-
-        context.startService(new Intent(context, UploadService.class)
-                .putExtra(EXTRA_PATH, filePath));
-    }*/
 
     private String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;

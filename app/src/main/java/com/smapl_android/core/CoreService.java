@@ -14,6 +14,7 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.smapl_android.model.UserInfo;
+import com.smapl_android.net.ApiService;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.requests.CoordinateRequest;
@@ -24,11 +25,24 @@ import com.smapl_android.net.responses.*;
 import com.smapl_android.storage.SessionStorage;
 import com.smapl_android.ui.base.CoreActivity;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Headers;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class CoreService {
+
+    private static final String HEADER_CONTENT_DISPOSITION = "Content-Disposition";
 
     private static final String TAG = CoreService.class.getSimpleName();
 
@@ -334,5 +348,58 @@ public class CoreService {
                 getUserInfo().currentEarn.set(result.getTotalAmount());
             }
         });
+    }
+
+    public void uploadCarPhoto(String path, final  CoreRequest<Boolean> coreRequest) {
+        File file = new File(path);
+        final String name = file.getName();
+        final String extension = name.substring(name.lastIndexOf(".") + 1);
+
+        MultipartBody.Builder requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);
+
+
+        String filePartHeader = String.format("form-data; name=\"image\"; filename=\"%s\"", file.getName(), file.getName());
+
+        requestBody.addPart(
+                Headers.of(HEADER_CONTENT_DISPOSITION, filePartHeader),
+                RequestBody.create(okhttp3.MediaType.parse("image/" + extension), file));
+
+
+        final Request request = new Request.Builder()
+                .url(ApiService.DEV_URL + "api/user/upload_image/" + sessionStorage.getUserId())
+                .addHeader("Authorization", sessionStorage.getAuthKey())
+                .post(requestBody.build())
+                .build();
+
+        OkHttpClient client = new OkHttpClient.Builder().build();
+
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, final IOException error) {
+                if (coreRequest != null) {
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            coreRequest.processError(error);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (coreRequest != null) {
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            coreRequest.processResult(response.isSuccessful());
+                        }
+                    });
+                }
+            }
+        });
+
     }
 }

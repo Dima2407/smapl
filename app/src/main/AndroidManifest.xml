@@ -67,7 +67,6 @@
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/camera_path"/>
         </provider>
 
-        <service android:name=".core.UploadService"/>
         <service
             android:name=".services.GeolocationService"
             android:enabled="true"
