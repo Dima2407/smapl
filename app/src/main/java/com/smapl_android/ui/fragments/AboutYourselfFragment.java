@@ -4,11 +4,15 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.smapl_android.R;
+import com.smapl_android.core.CoreRequest;
+import com.smapl_android.core.SuccessOutput;
+import com.smapl_android.core.UploadService;
 import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentAboutYourselfBinding;
@@ -41,10 +45,23 @@ public class AboutYourselfFragment extends BaseFragment {
 
         hideKeyboard();
 
-        Fragment loadCarPhotoFragment = LoadCarPhotoFragment.create(user);
+        final CoreRequest<Boolean> request = getCoreService()
+                .newRequest(getCoreActivity());
+        request
+                .withLoading(R.string.wait_login)
+                .handleErrorAsDialog()
+                .handleSuccess(new SuccessOutput<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean result) {
 
-        getCoreActivity().replaceContentWithHistory(loadCarPhotoFragment);
+                        if (result) {
+                            Fragment loadCarPhotoFragment = LoadCarPhotoFragment.create();
 
+                            getCoreActivity().replaceContentWithHistory(loadCarPhotoFragment);
+                        }
+                    }
+                });
+        getCoreService().registration(user.toRegistration(getContext()), request);
     }
 
     public static Fragment create(String phoneNumber, String password) {
