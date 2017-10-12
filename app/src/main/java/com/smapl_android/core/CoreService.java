@@ -39,6 +39,7 @@ public class CoreService {
     private final NetworkService networkServiceImpl;
 
     private Handler uiHandler;
+    private boolean isEmptyPage = false;
 
     public CoreService(Context rootContext) {
         this.networkServiceImpl = NetworkServiceFactory.create(false);
@@ -163,9 +164,9 @@ public class CoreService {
     }
 
 
-    public void getCampaigns(final CoreRequest<List<GetCampaignListResponse.Campaign>> coreRequest){
+    public void getCampaigns(final CoreRequest<List<GetCampaignListResponse.Campaign>> coreRequest) {
         String token = sessionStorage.getAuthKey();
-        networkServiceImpl.getCampaigns(token,  new NetworkService.OnResultCallback<GetCampaignListResponse, Throwable>() {
+        networkServiceImpl.getCampaigns(token, new NetworkService.OnResultCallback<GetCampaignListResponse, Throwable>() {
             @Override
             public void onResult(final GetCampaignListResponse result, final Throwable error) {
                 if (coreRequest != null) {
@@ -189,10 +190,10 @@ public class CoreService {
         });
     }
 
-    public void getHistory(final  CoreRequest<List<GetTrackingHistoryResponse.TrackingHistory>> coreRequest){
-        String token = sessionStorage.getAuthKey();
-        int userId = sessionStorage.getUserId();
-        networkServiceImpl.getHistory(token, userId, new NetworkService.OnResultCallback<GetTrackingHistoryResponse, Throwable>() {
+    public void getHistory(int page, final CoreRequest<List<GetTrackingHistoryResponse.TrackingHistory>> coreRequest) {
+        final String token = sessionStorage.getAuthKey();
+        final int userId = sessionStorage.getUserId();
+        networkServiceImpl.getHistory(token, userId, page, new NetworkService.OnResultCallback<GetTrackingHistoryResponse, Throwable>() {
             @Override
             public void onResult(final GetTrackingHistoryResponse result, final Throwable error) {
                 if (coreRequest != null) {
@@ -203,7 +204,11 @@ public class CoreService {
                                 coreRequest.processError(error);
                             }
                         });
+                        isEmptyPage = true;
                     } else {
+                        if (result.getHistory().length == 0) {
+                            isEmptyPage = true;
+                        }
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -217,11 +222,11 @@ public class CoreService {
     }
 
     public void restorePassword(String email, final CoreRequest<Boolean> request) {
-        networkServiceImpl.restorePassword(email,  getCallback(request));
+        networkServiceImpl.restorePassword(email, getCallback(request));
     }
 
     public void loginFacebook(Activity activity, CallbackManager facebookCallbackManager, final CoreRequest<Boolean> request) {
-        LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("email","user_photos","public_profile"));
+        LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("email", "user_photos", "public_profile"));
         LoginManager.getInstance().registerCallback(facebookCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -243,7 +248,7 @@ public class CoreService {
     public void stopTracking(final  CoreRequest<TrackingResponse> coreRequest, List<Pair<Double, Double>> coordinates) {
         String token = sessionStorage.getAuthKey();
         final CoordinateRequest request = CoordinateRequest.stop();
-        for(Pair<Double, Double> location : coordinates){
+        for (Pair<Double, Double> location : coordinates) {
             request.addCoordinate(location.first, location.second);
         }
         networkServiceImpl.stopTracking(token, request, new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
@@ -318,7 +323,7 @@ public class CoreService {
     public void updateTracking(List<Pair<Double, Double>> coordinates) {
         String token = sessionStorage.getAuthKey();
         final CoordinateRequest request = CoordinateRequest.inProgress();
-        for(Pair<Double, Double> location : coordinates){
+        for (Pair<Double, Double> location : coordinates) {
             request.addCoordinate(location.first, location.second);
         }
         networkServiceImpl.updateTracking(token, request, new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {

@@ -173,8 +173,8 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void getHistory(String token, int userId, OnResultCallback<GetTrackingHistoryResponse, Throwable> callback) {
-        Call<GetTrackingHistoryResponse> tracking = apiService.getHistory(userId, token, 1);
+    public void getHistory(String token, int userId, int page, OnResultCallback<GetTrackingHistoryResponse, Throwable> callback) {
+        Call<GetTrackingHistoryResponse> tracking = apiService.getHistory(userId, token, page);
         tracking.enqueue(createCallback(callback));
     }
 }
