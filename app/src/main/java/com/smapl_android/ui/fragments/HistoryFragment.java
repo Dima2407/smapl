@@ -21,6 +21,7 @@ import com.smapl_android.net.responses.GetTrackingHistoryResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -155,12 +156,11 @@ public class HistoryFragment extends BaseFragment {
     }
 
     public static final class CarHistory {
-        private static final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
+        private static final DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         public final ObservableField<String> date = new ObservableField<>();
         public final ObservableField<String> companyName = new ObservableField<>();
         public final ObservableField<Double> distancePassed = new ObservableField<>();
         public final ObservableField<Double> earnedPoints = new ObservableField<>();
-
 
         public CarHistory(Date date, String companyName, double distancePassed, double earnedPoints) {
             this.date.set(dateFormat.format(date));

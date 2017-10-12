@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:text="@{@string/total_earn + @string/drive_format(user.drive)}"
+                android:text="@{@string/total_drive + @string/drive_format(user.drive)}"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/car_brand_model_profile_size" />
 
