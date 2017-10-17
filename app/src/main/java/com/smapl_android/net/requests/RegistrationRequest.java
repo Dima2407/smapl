@@ -1,7 +1,6 @@
 package com.smapl_android.net.requests;
 
 import com.google.gson.annotations.SerializedName;
-import com.smapl_android.model.UserInfoViewModel;
 
 public class RegistrationRequest {
 
@@ -29,6 +28,8 @@ public class RegistrationRequest {
     private String age;
     @SerializedName("interest")
     private String interests = "";
+    @SerializedName("app_auth_key")
+    private String registrationId = "";
 
     public RegistrationRequest() {
         this.type = "driver";
@@ -116,6 +117,14 @@ public class RegistrationRequest {
 
     public String  getInterests() {
         return interests;
+    }
+
+    public String getRegistrationId() {
+        return registrationId;
+    }
+
+    public void setRegistrationId(String registrationId) {
+        this.registrationId = registrationId;
     }
 
     public void setInterests(String interests) {

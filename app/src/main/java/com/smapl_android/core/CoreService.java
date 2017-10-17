@@ -105,6 +105,8 @@ public class CoreService {
                             @Override
                             public void run() {
                                 successOutput.processError(error);
+                                Log.e(TAG, "THERE IS ERROR");
+                                error.printStackTrace();
                             }
                         });
                     } else {
@@ -240,23 +242,30 @@ public class CoreService {
     }
 
     public void loginFacebook(Activity activity, CallbackManager facebookCallbackManager, final CoreRequest<Boolean> request) {
-        LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("email", "user_photos", "public_profile"));
         LoginManager.getInstance().registerCallback(facebookCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 request.processResult(true);
+                Log.e(TAG,"SUCCESS");
             }
 
             @Override
             public void onCancel() {
                 request.processResult(false);
+                Log.e(TAG,"CANCEL");
             }
 
             @Override
             public void onError(FacebookException error) {
                 request.processError(error);
+                Log.e(TAG,error.toString());
+                error.printStackTrace();
             }
         });
+
+
+        LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("email", "user_photos", "public_profile"));
+
     }
 
     public void stopTracking(final  CoreRequest<TrackingResponse> coreRequest, List<Pair<Double, Double>> coordinates) {

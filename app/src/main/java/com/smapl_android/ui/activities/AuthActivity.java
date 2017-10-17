@@ -48,4 +48,12 @@ public class AuthActivity extends CoreActivity {
         Fragment fragment = new LoginFragment();
         replaceContent(fragment);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(LoginFragment.facebookCallbackManager != null){
+            LoginFragment.facebookCallbackManager.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 }
