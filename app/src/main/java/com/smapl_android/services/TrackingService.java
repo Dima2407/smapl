@@ -22,6 +22,7 @@ public class TrackingService extends Service {
     private static final String EXTRA_LONGITUDE = "_long";
 
     private static final List<Pair<Double, Double>> locations = new ArrayList<>();
+    static final String TAG = TrackingService.class.getSimpleName();
 
     public static void submitLocation(Context context, Location location){
         Intent intent = new Intent(context, TrackingService.class);
@@ -44,9 +45,9 @@ public class TrackingService extends Service {
     }
 
     private void processLocation(double lat, double lon) {
-        Log.d(TrackingService.class.getSimpleName(), "processLocation: " + lat + " " + lon);
+        Log.d(TAG, "processLocation: " + lat + " " + lon);
         locations.add(new Pair<>(lat, lon));
-        if(locations.size() > 10){
+        if(locations.size() > 3){
             getCoreService().updateTracking(new ArrayList<>(locations));
             locations.clear();
         }

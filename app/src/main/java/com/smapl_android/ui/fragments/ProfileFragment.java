@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,16 @@ import com.smapl_android.R;
 import com.smapl_android.core.CoreRequest;
 import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.databinding.FragmentProfileBinding;
+import com.smapl_android.net.responses.TrackingResponse;
+import com.smapl_android.services.GeolocationService;
+import com.smapl_android.services.TrackingService;
 import com.smapl_android.ui.activities.AuthActivity;
 import com.smapl_android.ui.base.BaseFragment;
 import com.smapl_android.ui.fragments.profile.AboutMeFragment;
 import com.smapl_android.ui.fragments.profile.ChangePasswordFragment;
 import com.smapl_android.ui.fragments.profile.SetCarFragment;
+
+import java.util.List;
 
 public class ProfileFragment extends BaseFragment {
 
@@ -54,9 +60,9 @@ public class ProfileFragment extends BaseFragment {
         }
 
         public void logout() {
-            final CoreRequest<Boolean> request = getCoreService().newRequest(getCoreActivity());
+            final CoreRequest<Boolean> logoutRequest = getCoreService().newRequest(getCoreActivity());
 
-            request.withLoading(R.string.wait_login)
+            logoutRequest.withLoading(R.string.wait_login)
                     .handleSuccess(new SuccessOutput<Boolean>() {
                         @Override
                         public void onSuccess(Boolean result) {
@@ -67,7 +73,24 @@ public class ProfileFragment extends BaseFragment {
                             startActivity(intent);
                         }
                     });
-            getCoreService().logout(request);
+
+            if (getCoreActivity().getUserInfo().inDrive.get()) {
+                List<Pair<Double, Double>> lastLocations = TrackingService.getLastLocations();
+                getCoreActivity().stopService(new Intent(getActivity(), GeolocationService.class));
+                getCoreActivity().stopService(new Intent(getActivity(), TrackingService.class));
+                CoreRequest<TrackingResponse> request = getCoreActivity().newWaitingRequest(new SuccessOutput<TrackingResponse>() {
+                    @Override
+                    public void onSuccess(TrackingResponse result) {
+                        getCoreActivity().getUserInfo().inDrive.set(false);
+                        getCoreActivity().getUserInfo().currentDrive.set(result.getTotalDistance());
+                        getCoreActivity().getUserInfo().currentEarn.set(result.getTotalAmount());
+                        getCoreService().logout(logoutRequest);
+                    }
+                });
+                getCoreService().stopTracking(request, lastLocations);
+            } else {
+                getCoreService().logout(logoutRequest);
+            }
         }
     }
 }
