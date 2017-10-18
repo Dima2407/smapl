@@ -74,9 +74,9 @@
     <string name="woman">женщина</string>
     <string name="wrong_age">Некорректный возраст</string>
     <string name="balance_format">Баланс: %.2f грн</string>
-    <string name="campaign_price_format">Стоимость: %d грн</string>
-    <string name="total_earn_withdraw_format">Баланс: %.2f грн</string>
-    <string name="total_earn_format">%.2f грн</string>
+    <string name="campaign_price_format">Стоимость: %d баллов</string>
+    <string name="total_earn_withdraw_format">Баланс: %.2f баллов</string>
+    <string name="total_earn_format">%.2f баллов</string>
     <string name="earn_format">%.2f</string>
     <string name="drive_format">%.3f км</string>
     <string name="campaign_list">Рекламные кампании</string>
