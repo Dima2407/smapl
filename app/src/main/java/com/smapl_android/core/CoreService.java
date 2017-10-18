@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.Pair;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -105,8 +106,6 @@ public class CoreService {
                             @Override
                             public void run() {
                                 successOutput.processError(error);
-                                Log.e(TAG, "THERE IS ERROR");
-                                error.printStackTrace();
                             }
                         });
                     } else {
@@ -245,27 +244,27 @@ public class CoreService {
         LoginManager.getInstance().registerCallback(facebookCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                request.processResult(true);
-                Log.e(TAG,"SUCCESS");
+                loginWithFacebook(AccessToken.getCurrentAccessToken(), request);
             }
 
             @Override
             public void onCancel() {
                 request.processResult(false);
-                Log.e(TAG,"CANCEL");
             }
 
             @Override
             public void onError(FacebookException error) {
                 request.processError(error);
-                Log.e(TAG,error.toString());
-                error.printStackTrace();
             }
         });
 
-
         LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("email", "user_photos", "public_profile"));
 
+    }
+
+    public void loginWithFacebook(AccessToken token, final CoreRequest<Boolean> request){
+        request.processResult(true);
+        Log.d(TAG, "loginWithFacebook: " + token.getToken());
     }
 
     public void stopTracking(final  CoreRequest<TrackingResponse> coreRequest, List<Pair<Double, Double>> coordinates) {

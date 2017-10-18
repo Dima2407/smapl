@@ -126,36 +126,32 @@ public class LoginFragment extends BaseFragment {
 
         public void facebookLogin() {
             hideKeyboard();
+            final CoreRequest<Boolean> request = getCoreService().newRequest(getCoreActivity());
+
+            request.handleErrorAsDialog()
+                    .handleSuccess(new SuccessOutput<Boolean>() {
+                        @Override
+                        public void onSuccess(Boolean result) {
+                            if (result) {
+                                goIntoApp();
+                            }
+                        }
+
+
+                    });
             AccessToken accessToken = AccessToken.getCurrentAccessToken();
             if (accessToken != null) {
-                goIntoApp();
+                getCoreService()
+                        .loginWithFacebook(accessToken, request);
             } else {
                 if (facebookCallbackManager == null) {
                     facebookCallbackManager = CallbackManager.Factory.create();
                 }
-
-                getCoreService().newRequest(getCoreActivity());
-
-                final CoreRequest<Boolean> request = getCoreService().newRequest(getCoreActivity());
-
-                        request.handleErrorAsDialog()
-                        .handleSuccess(new SuccessOutput<Boolean>() {
-                    @Override
-                    public void onSuccess(Boolean result) {
-                        if (result) {
-                            goIntoApp();
-                            Log.d("SUCCESS-GO INTO APP","");
-                        }else{
-                            Log.d("FAILE-GO INTO APP","");
-                        }
-                    }
-
-
-                });
                 getCoreService()
                         .loginFacebook(getActivity(), facebookCallbackManager, request);
             }
 
         }
     }
+
 }
