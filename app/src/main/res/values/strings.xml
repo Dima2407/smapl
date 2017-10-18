@@ -73,8 +73,8 @@
     <string name="man">мужчина</string>
     <string name="woman">женщина</string>
     <string name="wrong_age">Некорректный возраст</string>
-    <string name="balance_format">Баланс: %.2f баллов</string>
-    <string name="campaign_price_format">Стоимость: %d баллов</string>
+    <string name="balance_format">Баланс: %.2f грн</string>
+    <string name="campaign_price_format">Стоимость: %d грн</string>
     <string name="total_earn_withdraw_format">Баланс: %.2f грн</string>
     <string name="total_earn_format">%.2f грн</string>
     <string name="earn_format">%.2f</string>
@@ -99,12 +99,177 @@
         <item>Acura</item>
         <item>Alfa Romeo</item>
         <item>Alpina</item>
+        <item>Alpine</item>
         <item>Aro</item>
         <item>Asia</item>
         <item>Aston Martin</item>
         <item>Audi</item>
         <item>Austin</item>
         <item>BAW</item>
+        <item>Beijing</item>
+        <item>Bentley</item>
+        <item>BMW</item>
+        <item>Brilliance</item>
+        <item>Bristol</item>
+        <item>Bugatti</item>
+        <item>Buick</item>
+        <item>BYD</item>
+        <item>Богдан</item>
+        <item>Vector</item>
+        <item>Venturi</item>
+        <item>Volkswagen</item>
+        <item>Volvo</item>
+        <item>Vortex</item>
+        <item>Wartburg</item>
+        <item>Westfield</item>
+        <item>Wiesmann</item>
+        <item>Wuling</item>
+        <item>ВАЗ (Lada)</item>
+        <item>Geely</item>
+        <item>Geo</item>
+        <item>GMC</item>
+        <item>Great Wall</item>
+        <item>ГАЗ</item>
+        <item>Dacia</item>
+        <item>Dadi</item>
+        <item>Daewoo</item>
+        <item>Daihatsu</item>
+        <item>Daimler</item>
+        <item>Dallas</item>
+        <item>Derways</item>
+        <item>De Tomaso</item>
+        <item>Dodge</item>
+        <item>Dong Feng</item>
+        <item>Doninvest</item>
+        <item>Jeep</item>
+        <item>Jiangling</item>
+        <item>Jiangnan</item>
+        <item>Eagle</item>
+        <item>Zastava</item>
+        <item>ZX</item>
+        <item>ЗАЗ</item>
+        <item>ЗИЛ</item>
+        <item>Infiniti</item>
+        <item>Innocenti</item>
+        <item>Invicta</item>
+        <item>Iran Khodro</item>
+        <item>Isdera</item>
+        <item>Isuzu</item>
+        <item>IVECO</item>
+        <item>Xin Kai</item>
+        <item>ИЖ</item>
+        <item>Cadillac</item>
+        <item>Callaway</item>
+        <item>Carbodies</item>
+        <item>Caterham</item>
+        <item>Citroen</item>
+        <item>Cizeta</item>
+        <item>Coggiola</item>
+        <item>Kia</item>
+        <item>Koenigsegg</item>
+        <item>Qvale</item>
+        <item>КАМАЗ</item>
+        <item>Lamborghini</item>
+        <item>Lancia</item>
+        <item>Land Rover</item>
+        <item>Landwind</item>
+        <item>Lexus</item>
+        <item>Lifan</item>
+        <item>Lincoln</item>
+        <item>Lotus</item>
+        <item>LTI</item>
+        <item>Luxgen</item>
+        <item>ЛуАЗ</item>
+        <item>Mahindra</item>
+        <item>Marcos</item>
+        <item>Marlin</item>
+        <item>Marussia</item>
+        <item>Maruti</item>
+        <item>Maserati</item>
+        <item>Maybach</item>
+        <item>Mazda</item>
+        <item>McLaren</item>
+        <item>Mega</item>
+        <item>Mercedes-Benz</item>
+        <item>Mercury</item>
+        <item>Metrocab</item>
+        <item>MG</item>
+        <item>Minelli</item>
+        <item>Mini</item>
+        <item>Mitsubishi</item>
+        <item>Mitsuoka</item>
+        <item>Monte Carlo</item>
+        <item>Morgan</item>
+        <item>Москвич</item>
+        <item>Nissan</item>
+        <item>Noble</item>
+        <item>Oldsmobile</item>
+        <item>Opel</item>
+        <item>Pagani</item>
+        <item>Panoz</item>
+        <item>Paykan</item>
+        <item>Perodua</item>
+        <item>Peugeot</item>
+        <item>Plymouth</item>
+        <item>Pontiac</item>
+        <item>Porsche</item>
+        <item>Premier</item>
+        <item>Proton</item>
+        <item>Puma</item>
+        <item>Reliant</item>
+        <item>Renault</item>
+        <item>Rolls-Royce</item>
+        <item>Ronart</item>
+        <item>Rover</item>
+        <item>Saab</item>
+        <item>Saleen</item>
+        <item>Samsung</item>
+        <item>Saturn</item>
+        <item>Scion</item>
+        <item>SEAT</item>
+        <item>Skoda</item>
+        <item>SMA</item>
+        <item>Smart</item>
+        <item>Soueast</item>
+        <item>Spectre</item>
+        <item>SsangYong</item>
+        <item>Subaru</item>
+        <item>Suzuki</item>
+        <item>СеАЗ</item>
+        <item>Talbot</item>
+        <item>Tata</item>
+        <item>Tatra</item>
+        <item>Tianma</item>
+        <item>Tofas</item>
+        <item>Toyota</item>
+        <item>Trabant</item>
+        <item>TVR</item>
+        <item>ТагАЗ</item>
+        <item>УАЗ</item>
+        <item>FAW</item>
+        <item>Ferrari</item>
+        <item>Fiat</item>
+        <item>Ford</item>
+        <item>FSO</item>
+        <item>Fuqi</item>
+        <item>Hafei</item>
+        <item>Haima</item>
+        <item>Hindustan</item>
+        <item>Holden</item>
+        <item>Honda</item>
+        <item>HuangHai</item>
+        <item>Hummer</item>
+        <item>Hyundai</item>
+        <item>Chana</item>
+        <item>ChangFeng</item>
+        <item>Changhe</item>
+        <item>Chery</item>
+        <item>Chevrolet</item>
+        <item>Chrysler</item>
+        <item>Shifeng</item>
+        <item>ShuangHuan</item>
+        <item>JAC</item>
+        <item>Jaguar</item>
     </string-array>
 
     <string-array name="car_color">
@@ -176,4 +341,7 @@
     <string name="error_empty_card_bank">Вы не ввели банк</string>
     <string name="error_empty_card_number">Вы не ввели номер карты</string>
     <string name="error_incorrect_card_number">Вы ввели не верный номер карты</string>
+    <string name="gpsOffMessage">Для работы приложения необходимо включить функцию обнаружения местонахождения</string>
+    <string name="enableGps">Включить</string>
+    <string name="cancel">Закрыть</string>
 </resources>

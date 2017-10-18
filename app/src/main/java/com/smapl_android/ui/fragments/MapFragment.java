@@ -1,11 +1,17 @@
 package com.smapl_android.ui.fragments;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +30,8 @@ import com.smapl_android.ui.base.OnPermissionsRequestListener;
 import java.util.Collections;
 import java.util.List;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class MapFragment extends BaseFragment {
 
     @Nullable
@@ -40,6 +48,40 @@ public class MapFragment extends BaseFragment {
     public class Presenter{
 
         public void startGeolocationService() {
+
+            LocationManager lm = (LocationManager)getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+            boolean gps_enabled = false;
+
+            try {
+                gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            } catch(Exception ex) {}
+
+
+
+            if(!gps_enabled) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle(getContext().getResources().getString(R.string.app_name));
+                dialog.setMessage(getContext().getResources().getString(R.string.gpsOffMessage));
+                dialog.setPositiveButton(getContext().getResources().getString(R.string.enableGps), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                        // TODO Auto-generated method stub
+                        Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        getContext().startActivity(myIntent);
+                        //get gps
+                    }
+                });
+                dialog.setNegativeButton(getContext().getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+                dialog.show();
+            return;
+            }
             getCoreActivity().runWithPermissions(new OnPermissionsRequestListener() {
                 @Override
                 public void onSuccess() {

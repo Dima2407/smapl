@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ public class LoginFragment extends BaseFragment {
     public static final String TAG = LoginFragment.class.getSimpleName();
     private final AuthVM authVM = new AuthVM();
 
-    private CallbackManager facebookCallbackManager;
+    public static CallbackManager facebookCallbackManager;
 
     @Nullable
     @Override
@@ -62,15 +63,7 @@ public class LoginFragment extends BaseFragment {
     @Override
     public void onStop() {
         super.onStop();
-        AppEventsLogger.deactivateApp(getCoreActivity().getApplication());
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            facebookCallbackManager.onActivityResult(requestCode, resultCode, data);
-        }
+        //AppEventsLogger.deactivateApp(getCoreActivity().getApplication());
     }
 
     public class Presenter {
@@ -133,25 +126,32 @@ public class LoginFragment extends BaseFragment {
 
         public void facebookLogin() {
             hideKeyboard();
+            final CoreRequest<Boolean> request = getCoreService().newRequest(getCoreActivity());
+
+            request.handleErrorAsDialog()
+                    .handleSuccess(new SuccessOutput<Boolean>() {
+                        @Override
+                        public void onSuccess(Boolean result) {
+                            if (result) {
+                                goIntoApp();
+                            }
+                        }
+
+
+                    });
             AccessToken accessToken = AccessToken.getCurrentAccessToken();
             if (accessToken != null) {
-                goIntoApp();
+                getCoreService()
+                        .loginWithFacebook(accessToken, request);
             } else {
                 if (facebookCallbackManager == null) {
                     facebookCallbackManager = CallbackManager.Factory.create();
                 }
-                final CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
-                    @Override
-                    public void onSuccess(Boolean result) {
-                        if (result) {
-                            goIntoApp();
-                        }
-                    }
-                });
                 getCoreService()
                         .loginFacebook(getActivity(), facebookCallbackManager, request);
             }
 
         }
     }
+
 }
