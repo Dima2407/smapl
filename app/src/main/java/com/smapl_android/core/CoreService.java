@@ -20,6 +20,7 @@ import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.requests.CoordinateRequest;
 import com.smapl_android.net.requests.EditProfileRequest;
+import com.smapl_android.net.requests.MoneyWithdrawRequest;
 import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
@@ -409,5 +410,27 @@ public class CoreService {
             }
         });
 
+    }
+
+    public void withdrawMoney(MoneyWithdrawRequest moneyWithdrawRequest, final CoreRequest<Boolean> coreRequest) {
+        String token = sessionStorage.getAuthKey();
+        networkServiceImpl.withdrawMoney(token, moneyWithdrawRequest, new NetworkService.OnResultCallback<ServerResponse<String>, Throwable>() {
+
+            @Override
+            public void onResult(ServerResponse<String> result, Throwable error) {
+                if (error == null) {
+                    if (result.isSuccess()) {
+                        Log.d(TAG, "onResult.success: " + result.getResult());
+                        coreRequest.processResult(true);
+                    } else {
+                        Log.d(TAG, "onResult.!success: " + result.getMessageError());
+                        coreRequest.processResult(false);
+                    }
+                } else {
+                    Log.e(TAG, "onResult.error: " + error.getMessage());
+                    coreRequest.processError(error);
+                }
+            }
+        });
     }
 }

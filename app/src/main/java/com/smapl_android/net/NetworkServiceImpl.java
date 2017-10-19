@@ -2,6 +2,7 @@ package com.smapl_android.net;
 
 import com.google.gson.Gson;
 import com.smapl_android.net.requests.CoordinateRequest;
+import com.smapl_android.net.requests.MoneyWithdrawRequest;
 import com.smapl_android.net.requests.UserRequestBody;
 import com.smapl_android.net.requests.EditProfileRequest;
 import com.smapl_android.net.requests.LoginRequest;
@@ -176,5 +177,11 @@ class NetworkServiceImpl implements NetworkService {
     public void getHistory(String token, int userId, int page, OnResultCallback<GetTrackingHistoryResponse, Throwable> callback) {
         Call<GetTrackingHistoryResponse> tracking = apiService.getHistory(userId, token, page);
         tracking.enqueue(createCallback(callback));
+    }
+
+    @Override
+    public void withdrawMoney(String token, MoneyWithdrawRequest request, OnResultCallback<ServerResponse<String>, Throwable> callback) {
+        Call<ServerResponse<String>> responseCall = apiService.withdrawMoney(token, request);
+        responseCall.enqueue(createCallback(callback));
     }
 }

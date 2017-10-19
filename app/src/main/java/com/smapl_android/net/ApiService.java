@@ -52,4 +52,7 @@ public interface ApiService {
 
     @GET("api/trackings/user/{id}")
     Call<GetTrackingHistoryResponse> getHistory(@Path("id") int userId, @Query("access_token") String token, @Query("page") int page);
+
+    @POST("api/user/cash")
+    Call<ServerResponse<String>> withdrawMoney(@Query("access_token") String token, @Body MoneyWithdrawRequest request);
 }

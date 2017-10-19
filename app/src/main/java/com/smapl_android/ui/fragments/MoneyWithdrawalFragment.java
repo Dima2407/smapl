@@ -6,19 +6,16 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.smapl_android.R;
 
 import com.smapl_android.core.CoreRequest;
+import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.databinding.FragmentMoneyWithdrawBinding;
 import com.smapl_android.model.CardEditVM;
-import com.smapl_android.net.responses.GetCampaignListResponse;
+import com.smapl_android.net.requests.MoneyWithdrawRequest;
 import com.smapl_android.ui.base.BaseFragment;
-
-import java.util.List;
-
 
 public class MoneyWithdrawalFragment extends BaseFragment {
 
@@ -39,9 +36,28 @@ public class MoneyWithdrawalFragment extends BaseFragment {
 
         public void onNextClicked(){
 
+            final CoreRequest<Boolean> request = getCoreService()
+                    .newRequest(getCoreActivity());
+
+            request
+                    .withLoading(R.string.wait_login)
+                    .handleErrorAsDialog()
+                    .handleSuccess(new SuccessOutput<Boolean>() {
+                        @Override
+                        public void onSuccess(Boolean result) {
+
+                            if (result) {
+                                Toast.makeText(getContext(), getResources().getString(R.string.result_ok), Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getContext(), getResources().getString(R.string.result_error), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+            MoneyWithdrawRequest moneyWithdrawRequest = new MoneyWithdrawRequest(getCoreService().getUserInfo().earn.get(), cardEditVM.number.get(), cardEditVM.bank.get());
+            getCoreService().withdrawMoney(moneyWithdrawRequest, request);
         }
 
     }
-
 
 }

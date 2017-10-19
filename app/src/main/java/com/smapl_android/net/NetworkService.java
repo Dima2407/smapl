@@ -2,6 +2,7 @@ package com.smapl_android.net;
 
 import com.smapl_android.net.requests.CoordinateRequest;
 import com.smapl_android.net.requests.EditProfileRequest;
+import com.smapl_android.net.requests.MoneyWithdrawRequest;
 import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
@@ -40,8 +41,9 @@ public interface NetworkService {
 
     void getHistory(String token, int userId, int page, OnResultCallback<GetTrackingHistoryResponse, Throwable> callback);
 
+    void withdrawMoney(String token, MoneyWithdrawRequest request, final OnResultCallback<ServerResponse<String>, Throwable> callback);
+
     interface OnResultCallback<T, E> {
         void onResult(T result, E error);
     }
-
 }
