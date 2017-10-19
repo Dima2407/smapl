@@ -1,6 +1,7 @@
 package com.smapl_android.model;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.BaseObservable;
 import android.databinding.Observable;
 import android.databinding.ObservableField;
@@ -183,10 +184,14 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
             request.setInterests("");
         }
 
+        SharedPreferences sharedPreferences = context.getSharedPreferences("UserInfoViewModel", Context.MODE_PRIVATE);
+        String registration_id = sharedPreferences.getString("registration_id", "Bad RegistationID");
+
         request.setCarMark(carBrand.get());
         request.setCarColor(carColor.get());
         request.setCarYear(Integer.parseInt(carYear.get()));
         request.setCarModel(carModel.get());
+        request.setRegistrationId(registration_id);
 
         return request;
     }
