@@ -46,6 +46,8 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
     public final ObservableField<String> ageError = new ObservableField<>();
     public final ObservableField<String> carBrandError = new ObservableField<>();
     public final ObservableField<String> carColorError = new ObservableField<>();
+    public final ObservableField<String> phoneError = new ObservableField<>();
+    public final ObservableField<String> passwordError = new ObservableField<>();
 
     public final ObservableField<Boolean> nextActive = new ObservableField<>(false);
     private Validator<String> nameValidator;
@@ -56,8 +58,12 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
     private Validator<String> carColorValidator;
     private Validator<String> genderValidator;
     private Validator<String> ageValidator;
+    private Validator<String> phoneValidator;
+    private Validator<String> passwordValidator;
 
     private SparseBooleanArray errorSum = new SparseBooleanArray();
+
+    private String fbToken;
 
     public UserInfoViewModel() {
     }
@@ -74,6 +80,7 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         carYear.set(in.readString());
         carColor.set(in.readString());
         interests.set(in.readString());
+        fbToken = in.readString();
     }
 
     public void init(Context context) {
@@ -85,6 +92,8 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         carYearValidator = Validators.getCarYearValidator(context);
         carBrandValidator = Validators.getCarBrandValidator(context);
         carColorValidator = Validators.getCarColorValidator(context);
+        phoneValidator = Validators.getPhoneValidator(context);
+        passwordValidator = Validators.getPasswordValidator(context);
 
         addErrorWatching(name, nameError, nameValidator);
         addErrorWatching(email, emailError, emailValidator);
@@ -95,7 +104,17 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         addErrorWatching(carModel, carModelError, carModelValidator);
         addErrorWatching(carYear, carYearError, carYearValidator);
         addErrorWatching(carColor, carColorError, carColorValidator);
+        addErrorWatching(phone, phoneError, phoneValidator);
+        addErrorWatching(password, passwordError, passwordValidator);
 
+    }
+
+    public String getFbToken() {
+        return fbToken;
+    }
+
+    public void setFbToken(String fbToken) {
+        this.fbToken = fbToken;
     }
 
     private void addErrorWatching(final ObservableField<String> field, final ObservableField<String> fieldError, final Validator<String> fieldValidator) {
@@ -120,10 +139,10 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         });
     }
 
-    private void updateErrorSum(){
-        for(int i = 0; i < errorSum.size(); i++){
+    private void updateErrorSum() {
+        for (int i = 0; i < errorSum.size(); i++) {
             int key = errorSum.keyAt(i);
-            if(!errorSum.get(key)){
+            if (!errorSum.get(key)) {
                 nextActive.set(false);
                 return;
             }
@@ -161,6 +180,7 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         dest.writeString(carYear.get());
         dest.writeString(carColor.get());
         dest.writeString(interests.get());
+        dest.writeString(fbToken);
     }
 
     public RegistrationRequest toRegistration(Context context) {
@@ -175,12 +195,12 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         }
         if (context.getString(R.string.man).equalsIgnoreCase(gender.get())) {
             request.setGender(GENDER_MAN);
-        }else {
+        } else {
             request.setGender(GENDER_WOMAN);
         }
-        if(!TextUtils.isEmpty(interests.get())){
+        if (!TextUtils.isEmpty(interests.get())) {
             request.setInterests(interests.get());
-        }else {
+        } else {
             request.setInterests("");
         }
 
@@ -192,6 +212,7 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         request.setCarYear(Integer.parseInt(carYear.get()));
         request.setCarModel(carModel.get());
         request.setRegistrationId(registration_id);
+        request.setFbToken(fbToken);
 
         return request;
     }

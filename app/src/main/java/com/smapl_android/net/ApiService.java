@@ -55,4 +55,7 @@ public interface ApiService {
 
     @POST("api/user/cash")
     Call<ServerResponse<String>> withdrawMoney(@Query("access_token") String token, @Body MoneyWithdrawRequest request);
+
+    @POST("api/user/fb_login")
+    Call<LoginResponse> fbLogin(@Body FbLoginRequest request);
 }

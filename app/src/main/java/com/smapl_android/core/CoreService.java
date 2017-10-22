@@ -2,6 +2,7 @@ package com.smapl_android.core;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -12,20 +13,29 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.smapl_android.R;
 import com.smapl_android.model.UserInfo;
+import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.net.ApiService;
 import com.smapl_android.net.NetworkService;
 import com.smapl_android.net.NetworkServiceFactory;
 import com.smapl_android.net.requests.CoordinateRequest;
 import com.smapl_android.net.requests.EditProfileRequest;
+import com.smapl_android.net.requests.FbLoginRequest;
 import com.smapl_android.net.requests.MoneyWithdrawRequest;
 import com.smapl_android.net.requests.RegistrationRequest;
 import com.smapl_android.net.requests.UpdateCarRequest;
 import com.smapl_android.net.responses.*;
 import com.smapl_android.storage.SessionStorage;
 import com.smapl_android.ui.base.CoreActivity;
+import com.smapl_android.ui.fragments.AboutYourselfFragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,6 +57,7 @@ public class CoreService {
     private static final String HEADER_CONTENT_DISPOSITION = "Content-Disposition";
 
     private static final String TAG = CoreService.class.getSimpleName();
+    public static final int RESPONSE_NO_RELATED_FB_ACCOUNT = 471;
 
     private final SessionStorage sessionStorage;
 
@@ -241,11 +252,11 @@ public class CoreService {
         networkServiceImpl.restorePassword(email, getCallback(request));
     }
 
-    public void loginFacebook(Activity activity, CallbackManager facebookCallbackManager, final CoreRequest<Boolean> request) {
+    public void loginFacebook(final Activity activity, CallbackManager facebookCallbackManager, final CoreRequest<Boolean> request) {
         LoginManager.getInstance().registerCallback(facebookCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                loginWithFacebook(AccessToken.getCurrentAccessToken(), request);
+                loginWithFacebook((CoreActivity) activity, new FbLoginRequest(loginResult.getAccessToken().getUserId()), request);
             }
 
             @Override
@@ -259,16 +270,73 @@ public class CoreService {
             }
         });
 
-        LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("email", "user_photos", "public_profile"));
+        LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("email", "user_birthday", "user_mobile_phone", "public_profile"));
+    }
+
+    public void loginWithFacebook(final CoreActivity coreActivity, final FbLoginRequest fbRequest, final CoreRequest<Boolean> coreRequest) {
+
+        networkServiceImpl.fbLogin(fbRequest, new NetworkService.OnResultCallback<LoginResponse, Throwable>() {
+            @Override
+            public void onResult(LoginResponse result, Throwable error) {
+
+                if (error == null) {
+                    if (result.isSuccess()) {
+                        Log.d(TAG, "onResult.success: " + result.getResult());
+                        sessionStorage.saveUserId(result.getUserId());
+                        sessionStorage.saveAuthKey(result.getId());
+                        coreRequest.processResult(true);
+                    } else {
+                        Log.d(TAG, "onResult: " + result);
+                        coreRequest.processResult(false);
+                    }
+                } else {
+                    Log.e(TAG, "onResult: error = " + error.getMessage());
+
+                    if (error instanceof ErrorResponse) {
+                        ErrorResponse errorResponse = (ErrorResponse) error;
+                        if (errorResponse.getCode() == RESPONSE_NO_RELATED_FB_ACCOUNT) {
+
+                            GraphRequest graphRequest = GraphRequest.newMeRequest(
+                                    AccessToken.getCurrentAccessToken(),
+                                    new GraphRequest.GraphJSONObjectCallback() {
+                                        @Override
+                                        public void onCompleted(JSONObject object, GraphResponse response) {
+                                            Log.d(TAG, "onCompleted: ");
+                                            UserInfoViewModel user = new UserInfoViewModel();
+                                            try {
+                                                user.name.set(object.getString("name"));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            try {
+                                                user.email.set(object.getString("email"));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            try {
+                                                user.gender.set(object.getString("gender").equals("male") ?
+                                                        coreActivity.getString(R.string.man) : coreActivity.getString(R.string.woman));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            user.setFbToken(AccessToken.getCurrentAccessToken().getUserId());
+                                            coreActivity.replaceContentWithHistory(AboutYourselfFragment.create(user));
+                                        }
+                                    });
+                            Bundle parameters = new Bundle();
+                            parameters.putString("fields", "gender,birthday,name,email");
+                            graphRequest.setParameters(parameters);
+                            graphRequest.executeAsync();
+
+                        }
+                    }
+                }
+            }
+        });
 
     }
 
-    public void loginWithFacebook(AccessToken token, final CoreRequest<Boolean> request){
-        request.processResult(true);
-        Log.d(TAG, "loginWithFacebook: " + token.getToken());
-    }
-
-    public void stopTracking(final  CoreRequest<TrackingResponse> coreRequest, List<Pair<Double, Double>> coordinates) {
+    public void stopTracking(final CoreRequest<TrackingResponse> coreRequest, List<Pair<Double, Double>> coordinates) {
         String token = sessionStorage.getAuthKey();
         final CoordinateRequest request = CoordinateRequest.stop();
         for (Pair<Double, Double> location : coordinates) {
@@ -303,7 +371,7 @@ public class CoreService {
         return userInfo;
     }
 
-    public void startTracking(final  CoreRequest<TrackingResponse> coreRequest) {
+    public void startTracking(final CoreRequest<TrackingResponse> coreRequest) {
         final String token = sessionStorage.getAuthKey();
         networkServiceImpl.startTracking(token, CoordinateRequest.start(), new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
             @Override
@@ -311,13 +379,13 @@ public class CoreService {
                 final NetworkService.OnResultCallback<TrackingResponse, Throwable> startCallback = this;
                 if (coreRequest != null) {
                     if (error != null) {
-                        if(error instanceof ErrorResponse){
+                        if (error instanceof ErrorResponse) {
                             ErrorResponse errorResponse = (ErrorResponse) error;
-                            if(errorResponse.getCode() == 461){
+                            if (errorResponse.getCode() == 461) {
                                 networkServiceImpl.stopTracking(token, CoordinateRequest.stop(), new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
                                     @Override
                                     public void onResult(TrackingResponse result, Throwable error) {
-                                        if(error != null) return;
+                                        if (error != null) return;
                                         networkServiceImpl.startTracking(token, CoordinateRequest.start(), startCallback);
                                     }
                                 });
@@ -352,14 +420,14 @@ public class CoreService {
         networkServiceImpl.updateTracking(token, request, new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
             @Override
             public void onResult(TrackingResponse result, Throwable error) {
-                if(error != null) return;
+                if (error != null) return;
                 getUserInfo().currentDrive.set(result.getTotalDistance());
                 getUserInfo().currentEarn.set(result.getTotalAmount());
             }
         });
     }
 
-    public void uploadCarPhoto(String path, final  CoreRequest<Boolean> coreRequest) {
+    public void uploadCarPhoto(String path, final CoreRequest<Boolean> coreRequest) {
         File file = new File(path);
         final String name = file.getName();
         final String extension = name.substring(name.lastIndexOf(".") + 1);

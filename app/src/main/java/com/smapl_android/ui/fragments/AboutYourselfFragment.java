@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,16 @@ public class AboutYourselfFragment extends BaseFragment {
         binding.setUser(user);
         binding.setPresenter(presenter);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (TextUtils.isEmpty(user.phone.get()) || TextUtils.isEmpty(user.password.get())) {
+            view.findViewById(R.id.layout_phone_number_about_yourself).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.layout_password_about_yourself).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -60,13 +71,10 @@ public class AboutYourselfFragment extends BaseFragment {
         getCoreService().registration(user.toRegistration(getContext()), request);
     }
 
-    public static Fragment create(String phoneNumber, String password) {
+    public static Fragment create(UserInfoViewModel userInfoViewModel) {
         Bundle bundle = new Bundle();
-        UserInfoViewModel infoViewModel = new UserInfoViewModel();
-        infoViewModel.phone.set(phoneNumber);
-        infoViewModel.password.set(password);
 
-        bundle.putParcelable("user", infoViewModel);
+        bundle.putParcelable("user", userInfoViewModel);
 
         Fragment fragment = new AboutYourselfFragment();
         fragment.setArguments(bundle);

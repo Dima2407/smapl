@@ -30,6 +30,8 @@ public class RegistrationRequest {
     private String interests = "";
     @SerializedName("app_auth_key")
     private String registrationId = "";
+    @SerializedName("fb_token")
+    private String fbToken;
 
     public RegistrationRequest() {
         this.type = "driver";
@@ -129,5 +131,13 @@ public class RegistrationRequest {
 
     public void setInterests(String interests) {
         this.interests = interests;
+    }
+
+    public String getFbToken() {
+        return fbToken;
+    }
+
+    public void setFbToken(String fbToken) {
+        this.fbToken = fbToken;
     }
 }

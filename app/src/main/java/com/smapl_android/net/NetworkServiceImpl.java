@@ -2,6 +2,7 @@ package com.smapl_android.net;
 
 import com.google.gson.Gson;
 import com.smapl_android.net.requests.CoordinateRequest;
+import com.smapl_android.net.requests.FbLoginRequest;
 import com.smapl_android.net.requests.MoneyWithdrawRequest;
 import com.smapl_android.net.requests.UserRequestBody;
 import com.smapl_android.net.requests.EditProfileRequest;
@@ -182,6 +183,12 @@ class NetworkServiceImpl implements NetworkService {
     @Override
     public void withdrawMoney(String token, MoneyWithdrawRequest request, OnResultCallback<ServerResponse<String>, Throwable> callback) {
         Call<ServerResponse<String>> responseCall = apiService.withdrawMoney(token, request);
+        responseCall.enqueue(createCallback(callback));
+    }
+
+    @Override
+    public void fbLogin(FbLoginRequest request, OnResultCallback<LoginResponse, Throwable> callback) {
+        Call<LoginResponse> responseCall = apiService.fbLogin(request);
         responseCall.enqueue(createCallback(callback));
     }
 }

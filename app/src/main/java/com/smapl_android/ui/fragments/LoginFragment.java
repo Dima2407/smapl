@@ -1,15 +1,15 @@
 package com.smapl_android.ui.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -21,6 +21,8 @@ import com.smapl_android.core.validation.ValidationException;
 import com.smapl_android.core.validation.Validators;
 import com.smapl_android.databinding.FragmentLoginBinding;
 import com.smapl_android.model.AuthVM;
+import com.smapl_android.model.UserInfoViewModel;
+import com.smapl_android.net.requests.FbLoginRequest;
 import com.smapl_android.ui.activities.MainActivity;
 import com.smapl_android.ui.base.BaseFragment;
 
@@ -89,14 +91,7 @@ public class LoginFragment extends BaseFragment {
             }
             hideKeyboard();
 
-            final CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
-                @Override
-                public void onSuccess(Boolean result) {
-                    goIntoApp();
-                }
-            });
-            getCoreService()
-                    .login(authVM.phone.get(), authVM.password.get(), request);
+            login(authVM.phone.get(), authVM.password.get());
         }
 
         private void onRegistrationClicked() {
@@ -113,7 +108,11 @@ public class LoginFragment extends BaseFragment {
             }
             hideKeyboard();
 
-            Fragment aboutYourselfFragment = AboutYourselfFragment.create(phoneNumber, password);
+            UserInfoViewModel user = new UserInfoViewModel();
+            user.phone.set(phoneNumber);
+            user.password.set(password);
+
+            Fragment aboutYourselfFragment = AboutYourselfFragment.create(user);
 
 
             getCoreActivity().replaceContentWithHistory(aboutYourselfFragment);
@@ -134,15 +133,15 @@ public class LoginFragment extends BaseFragment {
                         public void onSuccess(Boolean result) {
                             if (result) {
                                 goIntoApp();
+                            } else {
+                                Toast.makeText(getContext(), getString(R.string.error), Toast.LENGTH_LONG).show();
                             }
                         }
-
-
                     });
             AccessToken accessToken = AccessToken.getCurrentAccessToken();
             if (accessToken != null) {
                 getCoreService()
-                        .loginWithFacebook(accessToken, request);
+                        .loginWithFacebook(getCoreActivity(), new FbLoginRequest(accessToken.getUserId()), request);
             } else {
                 if (facebookCallbackManager == null) {
                     facebookCallbackManager = CallbackManager.Factory.create();
@@ -152,6 +151,21 @@ public class LoginFragment extends BaseFragment {
             }
 
         }
+    }
+
+    private void login(String phone, String password) {
+        final CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
+            @Override
+            public void onSuccess(Boolean result) {
+                if (result) {
+                    goIntoApp();
+                } else {
+                    Toast.makeText(getContext(), getString(R.string.error), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        getCoreService()
+                .login(phone, password, request);
     }
 
 }
