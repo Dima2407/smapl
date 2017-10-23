@@ -35,8 +35,6 @@ public interface ApiService {
 
 
     @POST("api/user/forgot_password")
-    @FormUrlEncoded
-    @Headers("api_key: " + API_KEY)
     Call<EmptyResponse> restorePassword(@Query("login") String email);
 
 
@@ -54,7 +52,7 @@ public interface ApiService {
     Call<GetTrackingHistoryResponse> getHistory(@Path("id") int userId, @Query("access_token") String token, @Query("page") int page);
 
     @POST("api/user/cash")
-    Call<EmptyResponse> withdrawMoney(@Query("access_token") String token, @Body MoneyWithdrawRequest request);
+    Call<EmptyStringResponse> withdrawMoney(@Query("access_token") String token, @Body MoneyWithdrawRequest request);
 
     @POST("api/user/fb_login")
     Call<LoginResponse> fbLogin(@Body FbLoginRequest request);

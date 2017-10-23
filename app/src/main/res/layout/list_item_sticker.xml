@@ -27,7 +27,7 @@
             android:background="@drawable/round_white_strip"
             android:padding="1dp"
             android:onClick="@{()->presenter.onLeftStickerClicked(item)}"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             bind:roundedSquarePhoto="@{item.photoLeft}" />
 
         <android.support.v4.widget.Space
@@ -42,7 +42,7 @@
             android:padding="1dp"
             android:background="@drawable/round_white_strip"
             android:onClick="@{()->presenter.onRightStickerClicked(item)}"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             bind:roundedSquarePhoto="@{item.photoRight}" />
     </LinearLayout>
 </layout>

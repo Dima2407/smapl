@@ -72,6 +72,29 @@ class NetworkServiceImpl implements NetworkService {
         return apiCallback;
     }
 
+    private static Callback<EmptyStringResponse> createStringEmptyBody(final OnResultCallback<Boolean, Throwable> callback) {
+        final Callback<EmptyStringResponse> apiCallback = new Callback<EmptyStringResponse>() {
+            @Override
+            public void onResponse(Call<EmptyStringResponse> call, Response<EmptyStringResponse> response) {
+                Response<Boolean> converted = null;
+                if (response.isSuccessful()) {
+                    converted = Response.success(response.body().isSuccess());
+                } else {
+                    converted = Response.error(response.code(), response.errorBody());
+                }
+                processResponse(converted, callback);
+            }
+
+            @Override
+            public void onFailure(Call<EmptyStringResponse> call, Throwable t) {
+                if (callback != null) {
+                    callback.onResult(null, t);
+                }
+            }
+        };
+        return apiCallback;
+    }
+
 
     private static <T> void processResponse(Response<T> response, OnResultCallback<T, Throwable> callback) {
         if (response.isSuccessful()) {
@@ -188,8 +211,8 @@ class NetworkServiceImpl implements NetworkService {
 
     @Override
     public void withdrawMoney(String token, MoneyWithdrawRequest request, OnResultCallback<Boolean, Throwable> callback) {
-        Call<EmptyResponse> responseCall = apiService.withdrawMoney(token, request);
-        responseCall.enqueue(createBooleanEmptyBody(callback));
+        Call<EmptyStringResponse> responseCall = apiService.withdrawMoney(token, request);
+        responseCall.enqueue(createStringEmptyBody(callback));
     }
 
     @Override

@@ -487,6 +487,8 @@ public class CoreService {
 
     public void withdrawMoney(MoneyWithdrawRequest moneyWithdrawRequest, final CoreRequest<Boolean> coreRequest) {
         String token = sessionStorage.getAuthKey();
+        Log.d(TAG, "withdrawMoney: " + new com.google.gson.Gson().toJson(moneyWithdrawRequest));
+        Log.d(TAG, "withdrawMoney: " + token);
         networkServiceImpl.withdrawMoney(token, moneyWithdrawRequest, getCallback(coreRequest));
     }
 }

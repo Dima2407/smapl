@@ -1,7 +1,9 @@
 package com.smapl_android.ui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,7 @@ import com.smapl_android.model.CampaignVM;
 import com.smapl_android.net.responses.GetCampaignListResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
+import java.net.URI;
 import java.util.List;
 
 public class CampaignDetailsFragment extends BaseFragment {
@@ -98,6 +101,12 @@ public class CampaignDetailsFragment extends BaseFragment {
                 }
             });
             getCoreService().joinCampaign(campaign.getId(), request);
+        }
+
+        public void askClicked(){
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:+380504017778"));
+            getCoreActivity().startActivity(intent);
         }
     }
 

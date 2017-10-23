@@ -337,7 +337,7 @@
     <string name="name_on_card">Имя на карте</string>
     <string name="card_number">Номер карты</string>
     <string name="card_bank">Банк</string>
-    <string name="error_empty_card_user">Вы не ввели имя владельца карты</string>
+    <string name="error_empty_card_user">Вы не ввели сумму которую хотите вывести</string>
     <string name="error_empty_card_bank">Вы не ввели банк</string>
     <string name="error_empty_card_number">Вы не ввели номер карты</string>
     <string name="error_incorrect_card_number">Вы ввели не верный номер карты</string>
