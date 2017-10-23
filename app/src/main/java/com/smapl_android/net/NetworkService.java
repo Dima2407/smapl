@@ -18,6 +18,8 @@ public interface NetworkService {
 
     void logout(String token, OnResultCallback<Boolean, Throwable> callback);
 
+    void joinCampaign(int id, String token, OnResultCallback<Boolean, Throwable> callback);
+
     void editPassword(String token, String oldPassword, String newPassword,
                       final NetworkService.OnResultCallback<Boolean, Throwable> callback);
 
@@ -42,7 +44,7 @@ public interface NetworkService {
 
     void getHistory(String token, int userId, int page, OnResultCallback<GetTrackingHistoryResponse, Throwable> callback);
 
-    void withdrawMoney(String token, MoneyWithdrawRequest request, final OnResultCallback<ServerResponse<String>, Throwable> callback);
+    void withdrawMoney(String token, MoneyWithdrawRequest request, final OnResultCallback<Boolean, Throwable> callback);
 
     void fbLogin(FbLoginRequest request, OnResultCallback<LoginResponse, Throwable> callback);
 

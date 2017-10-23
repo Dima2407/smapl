@@ -133,8 +133,6 @@ public class LoginFragment extends BaseFragment {
                         public void onSuccess(Boolean result) {
                             if (result) {
                                 goIntoApp();
-                            } else {
-                                Toast.makeText(getContext(), getString(R.string.error), Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -159,8 +157,6 @@ public class LoginFragment extends BaseFragment {
             public void onSuccess(Boolean result) {
                 if (result) {
                     goIntoApp();
-                } else {
-                    Toast.makeText(getContext(), getString(R.string.error), Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -14,7 +14,7 @@ public final class Validators {
     private static GenericEmptyValidator carColorValidator;
     private static GenericEmptyValidator genderValidator;
     private static GenericEmptyValidator ageValidator;
-    private static GenericEmptyValidator cardUserValidator;
+    private static CardAmountValidator cardAmountValidator;
     private static GenericEmptyValidator cardBankValidator;
     private static CardNumberValidator cardNumberValidator;
 
@@ -97,11 +97,11 @@ public final class Validators {
         return carColorValidator;
     }
 
-    public static Validator<String> getCardUserValidator(Context context) {
-        if( cardUserValidator== null){
-            cardUserValidator = new GenericEmptyValidator(context.getString(R.string.error_empty_card_user));
+    public static Validator<String> getCardAmountValidator(Context context) {
+        if( cardAmountValidator == null){
+            cardAmountValidator = new CardAmountValidator(context.getString(R.string.error_empty_card_user));
         }
-        return cardUserValidator;
+        return cardAmountValidator;
     }
 
     public static Validator<String> getCardBankValidator(Context context) {

@@ -157,6 +157,12 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
+    public void joinCampaign(int id, String token, OnResultCallback<Boolean, Throwable> callback) {
+        final Call<EmptyResponse> call = apiService.joinCampaign(id,token);
+        call.enqueue(createBooleanEmptyBody(callback));
+    }
+
+    @Override
     public void startTracking(String token, CoordinateRequest request, OnResultCallback<TrackingResponse, Throwable> callback) {
         Call<TrackingResponse> tracking = apiService.tracking(token, request);
         tracking.enqueue(createCallback(callback));
@@ -181,9 +187,9 @@ class NetworkServiceImpl implements NetworkService {
     }
 
     @Override
-    public void withdrawMoney(String token, MoneyWithdrawRequest request, OnResultCallback<ServerResponse<String>, Throwable> callback) {
-        Call<ServerResponse<String>> responseCall = apiService.withdrawMoney(token, request);
-        responseCall.enqueue(createCallback(callback));
+    public void withdrawMoney(String token, MoneyWithdrawRequest request, OnResultCallback<Boolean, Throwable> callback) {
+        Call<EmptyResponse> responseCall = apiService.withdrawMoney(token, request);
+        responseCall.enqueue(createBooleanEmptyBody(callback));
     }
 
     @Override

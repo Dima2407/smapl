@@ -134,6 +134,11 @@ public class CoreService {
         networkServiceImpl.logout(token, getCallback(request));
     }
 
+    public void joinCampaign(int campaignId, final CoreRequest<Boolean> request) {
+        String token = sessionStorage.getAuthKey();
+        networkServiceImpl.joinCampaign(campaignId, token, getCallback(request));
+    }
+
     public void getUser(final CoreRequest<UserResponse> coreRequest) {
         int userId = sessionStorage.getUserId();
         String token = sessionStorage.getAuthKey();
@@ -482,23 +487,6 @@ public class CoreService {
 
     public void withdrawMoney(MoneyWithdrawRequest moneyWithdrawRequest, final CoreRequest<Boolean> coreRequest) {
         String token = sessionStorage.getAuthKey();
-        networkServiceImpl.withdrawMoney(token, moneyWithdrawRequest, new NetworkService.OnResultCallback<ServerResponse<String>, Throwable>() {
-
-            @Override
-            public void onResult(ServerResponse<String> result, Throwable error) {
-                if (error == null) {
-                    if (result.isSuccess()) {
-                        Log.d(TAG, "onResult.success: " + result.getResult());
-                        coreRequest.processResult(true);
-                    } else {
-                        Log.d(TAG, "onResult.!success: " + result.getMessageError());
-                        coreRequest.processResult(false);
-                    }
-                } else {
-                    Log.e(TAG, "onResult.error: " + error.getMessage());
-                    coreRequest.processError(error);
-                }
-            }
-        });
+        networkServiceImpl.withdrawMoney(token, moneyWithdrawRequest, getCallback(coreRequest));
     }
 }

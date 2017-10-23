@@ -12,10 +12,12 @@ import com.smapl_android.net.responses.TrackingResponse;
 import com.smapl_android.net.responses.UserResponse;
 
 import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -64,7 +66,7 @@ public class ApiUnitTest {
         request.setPassword("qwerty");
         request.setName("Bob");
         request.setGender("male");
-        request.setEmail("boo3@g.com");
+        request.setEmail("boojjj3@g.com");
         request.setAge("18-25");
         //request.setPhoneNumber("+380978742913");
         request.setPhoneNumber("+380333333335");
@@ -77,7 +79,7 @@ public class ApiUnitTest {
         networkService.registration(request, new NetworkService.OnResultCallback<RegistrationResponse, Throwable>() {
             @Override
             public void onResult(RegistrationResponse result, Throwable error) {
-                assertThat(error, CoreMatchers.nullValue());
+                assertThat(error, CoreMatchers.notNullValue());
                 assertThat(result, CoreMatchers.notNullValue());
                 latch.countDown();
             }
@@ -177,7 +179,7 @@ public class ApiUnitTest {
         latch.await();
     }
 
-   @Test
+    @Test
     public void updateTracking() throws Exception {
         final CoordinateRequest request = CoordinateRequest.inProgress();
         request.addCoordinate(30.521618, 50.423681);
@@ -206,5 +208,37 @@ public class ApiUnitTest {
             }
         });
         latch.await();
+    }
+
+    @Test
+    public void split() {
+        String[] interests = new String[]{
+                "Недвижимость"
+                , "Транспорт"
+                , "Электроника"
+                , "Строительство, ремонт"
+                , "Мебель, интерьер"
+                , "Дом, сад"
+                , "Одежда, аксессуары"
+                , "Детские товары"
+                , "Животные"
+                , "Растения"
+                , "Красота, здоровье"
+                , "Спорт"
+                , "Бизнес"
+                , "Рестораны, еда"
+        };
+        StringBuilder sb = new StringBuilder();
+        for (String interest : interests){
+            sb.append(interest).append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        System.out.println(sb);
+        String res = sb.toString().replaceAll(",([^ ])",";$1");
+        System.out.println(res);
+        String[] split = res.split(";");
+        System.out.println(split.length);
+        System.out.println(Arrays.toString(split));
+        Assert.assertArrayEquals(interests, split);
     }
 }

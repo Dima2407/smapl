@@ -54,8 +54,11 @@ public interface ApiService {
     Call<GetTrackingHistoryResponse> getHistory(@Path("id") int userId, @Query("access_token") String token, @Query("page") int page);
 
     @POST("api/user/cash")
-    Call<ServerResponse<String>> withdrawMoney(@Query("access_token") String token, @Body MoneyWithdrawRequest request);
+    Call<EmptyResponse> withdrawMoney(@Query("access_token") String token, @Body MoneyWithdrawRequest request);
 
     @POST("api/user/fb_login")
     Call<LoginResponse> fbLogin(@Body FbLoginRequest request);
+
+    @POST("api/campaign/join/{campaignId}")
+    Call<EmptyResponse> joinCampaign(@Path("campaignId") int id, @Query("access_token") String token);
 }

@@ -12,14 +12,14 @@ import com.smapl_android.core.validation.Validators;
 
 public class CardEditVM {
 
-    public final ObservableField<String> user = new ObservableField<>();
+    public final ObservableField<String> amount = new ObservableField<>();
 
     public final ObservableField<String> number = new ObservableField<>();
 
     public final ObservableField<String> bank = new ObservableField<>();
 
 
-    public final ObservableField<String> userError = new ObservableField<>();
+    public final ObservableField<String> amountError = new ObservableField<>();
 
     public final ObservableField<String> numberError = new ObservableField<>();
 
@@ -28,23 +28,23 @@ public class CardEditVM {
     public final ObservableField<Boolean> nextActive = new ObservableField<>(false);
 
     private Observable.OnPropertyChangedCallback errorWatcher;
-    private Validator<String> cardUserValidator;
+    private Validator<String> cardAmountValidator;
     private Validator<String> cardBankValidator;
     private Validator<String> cardNumberValidator;
 
     public void init(Context context) {
-        cardUserValidator = Validators.getCardUserValidator(context);
+        cardAmountValidator = Validators.getCardAmountValidator(context);
         cardNumberValidator = Validators.getCardNumberValidator(context);
         cardBankValidator = Validators.getCardBankValidator(context);
-        user.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+        amount.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 try {
-                    if (cardUserValidator.validate(user.get())) {
-                        userError.set("");
+                    if (cardAmountValidator.validate(amount.get())) {
+                        amountError.set("");
                     }
                 } catch (ValidationException e) {
-                    userError.set(e.getMessage());
+                    amountError.set(e.getMessage());
                 }
             }
         });
@@ -76,15 +76,20 @@ public class CardEditVM {
         errorWatcher = new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                nextActive.set(TextUtils.isEmpty(userError.get())
+                nextActive.set(TextUtils.isEmpty(amountError.get())
                         && TextUtils.isEmpty(numberError.get())
                         && TextUtils.isEmpty(bankError.get()));
             }
         };
-        userError.addOnPropertyChangedCallback(errorWatcher);
+        amountError.addOnPropertyChangedCallback(errorWatcher);
         numberError.addOnPropertyChangedCallback(errorWatcher);
         bankError.addOnPropertyChangedCallback(errorWatcher);
 
+    }
+
+
+    public final double obtainAmount() {
+        return Double.valueOf(amount.get());
     }
 
 }

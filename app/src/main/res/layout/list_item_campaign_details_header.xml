@@ -7,6 +7,10 @@
         <variable
             name="item"
             type="com.smapl_android.model.CampaignVM" />
+
+        <variable
+            name="presenter"
+            type="com.smapl_android.ui.fragments.CampaignDetailsFragment.Presenter" />
     </data>
 
     <RelativeLayout
@@ -26,6 +30,7 @@
             android:layout_marginTop="13dp"
             android:layout_toEndOf="@+id/campaign_details_image"
             android:background="#7dcceb"
+            android:onClick="@{()-> presenter.joinClicked()}"
             android:text="@string/participate"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
@@ -35,42 +40,42 @@
             android:id="@+id/txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="41dp"
             android:layout_below="@+id/campaign_details_image"
-            android:textSize="22sp"
+            android:layout_marginTop="41dp"
             android:text="@{item.name}"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/txt_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/campaign_price_format(item.budget)}"
             android:layout_below="@+id/txt_name"
-            android:textColor="@android:color/white"
             android:layout_marginTop="6dp"
-            android:textSize="13sp"/>
+            android:text="@{@string/campaign_price_format(item.budget)}"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/txt_description"
-            android:layout_below="@+id/txt_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_price"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_background"
             android:paddingBottom="30dp"
-            android:paddingStart="15dp"
             android:paddingEnd="30dp"
+            android:paddingStart="15dp"
             android:paddingTop="15dp"
-            android:textSize="13sp"
             android:text="@{item.description}"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/btn_ask"
-            android:layout_below="@+id/txt_description"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_below="@+id/txt_description"
             android:layout_gravity="center"
             android:layout_marginTop="23dp"
             android:background="#7dcceb"
@@ -80,13 +85,13 @@
             android:textSize="13sp" />
 
         <TextView
-            android:layout_below="@+id/btn_ask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_ask"
             android:layout_marginTop="45dp"
             android:text="@string/stickers"
-            android:textSize="15sp"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
     </RelativeLayout>
 
 </layout>

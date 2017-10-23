@@ -7,11 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.smapl_android.R;
+import com.smapl_android.core.CoreRequest;
+import com.smapl_android.core.SuccessOutput;
 import com.smapl_android.databinding.FragmentCampaignDetailsBinding;
 import com.smapl_android.databinding.ListItemCampaignDetailsHeaderBinding;
 import com.smapl_android.databinding.ListItemStickerBinding;
@@ -84,6 +87,18 @@ public class CampaignDetailsFragment extends BaseFragment {
         public void onRightStickerClicked(StickerVM sticker) {
             getCoreActivity().replaceContentWithHistory(StickerFragment.newInstance(getCampaign(), sticker.photoRight.get()));
         }
+
+        public void joinClicked() {
+            GetCampaignListResponse.Campaign campaign = getCampaign();
+            CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
+                @Override
+                public void onSuccess(Boolean result) {
+                    getCoreActivity().showMessage(getString(R.string.app_name),
+                            getString(R.string.join_campaign));
+                }
+            });
+            getCoreService().joinCampaign(campaign.getId(), request);
+        }
     }
 
     private class CampaignsDetailsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -130,7 +145,7 @@ public class CampaignDetailsFragment extends BaseFragment {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if (getItemViewType(position) == HEADER) {
                 HeaderVH headerVH = (HeaderVH) holder;
-                headerVH.bind(CampaignVM.forDetails(campaign));
+                headerVH.bind(CampaignVM.forDetails(campaign),presenter);
             } else {
                 StickerVM vm = new StickerVM();
                 int stickersStart = (position - 1) * 2;
@@ -178,8 +193,9 @@ public class CampaignDetailsFragment extends BaseFragment {
             this.binding = binding;
         }
 
-        private void bind(CampaignVM item) {
+        private void bind(CampaignVM item, CampaignDetailsFragment.Presenter presenter) {
             binding.setItem(item);
+            binding.setPresenter(presenter);
             binding.executePendingBindings();
         }
     }

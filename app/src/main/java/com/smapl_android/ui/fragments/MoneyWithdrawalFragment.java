@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.smapl_android.R;
 
@@ -36,25 +35,18 @@ public class MoneyWithdrawalFragment extends BaseFragment {
 
         public void onNextClicked(){
 
-            final CoreRequest<Boolean> request = getCoreService()
-                    .newRequest(getCoreActivity());
+            final CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
+                @Override
+                public void onSuccess(Boolean result) {
 
-            request
-                    .withLoading(R.string.wait_login)
-                    .handleErrorAsDialog()
-                    .handleSuccess(new SuccessOutput<Boolean>() {
-                        @Override
-                        public void onSuccess(Boolean result) {
+                    if (result) {
+                        getCoreActivity().showMessage(getString(R.string.app_name),
+                                getString(R.string.withdraw_success));
+                    }
+                }
+            });
 
-                            if (result) {
-                                Toast.makeText(getContext(), getResources().getString(R.string.result_ok), Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(getContext(), getResources().getString(R.string.result_error), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-
-            MoneyWithdrawRequest moneyWithdrawRequest = new MoneyWithdrawRequest(getCoreService().getUserInfo().earn.get(), cardEditVM.number.get(), cardEditVM.bank.get());
+            MoneyWithdrawRequest moneyWithdrawRequest = new MoneyWithdrawRequest(cardEditVM.obtainAmount(), cardEditVM.number.get(), cardEditVM.bank.get());
             getCoreService().withdrawMoney(moneyWithdrawRequest, request);
         }
 

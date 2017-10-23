@@ -1,5 +1,7 @@
 package com.smapl_android.net.requests;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
 
 public class RegistrationRequest {
@@ -27,7 +29,7 @@ public class RegistrationRequest {
     @SerializedName("age")
     private String age;
     @SerializedName("interest")
-    private String interests = "";
+    private String[] interests = new String[0];
     @SerializedName("app_auth_key")
     private String registrationId = "";
     @SerializedName("fb_token")
@@ -35,10 +37,6 @@ public class RegistrationRequest {
 
     public RegistrationRequest() {
         this.type = "driver";
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public void setEmail(String email) {
@@ -53,10 +51,6 @@ public class RegistrationRequest {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -69,60 +63,28 @@ public class RegistrationRequest {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getCarYear() {
-        return carYear;
-    }
-
     public void setCarYear(int carYear) {
         this.carYear = carYear;
-    }
-
-    public String getCarMark() {
-        return carMark;
     }
 
     public void setCarMark(String carMark) {
         this.carMark = carMark;
     }
 
-    public String getCarModel() {
-        return carModel;
-    }
-
     public void setCarModel(String carModel) {
         this.carModel = carModel;
-    }
-
-    public String getCarColor() {
-        return carColor;
     }
 
     public void setCarColor(String carColor) {
         this.carColor = carColor;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
     public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public String getAge() {
-        return age;
-    }
-
     public void setAge(String age) {
         this.age = age;
-    }
-
-    public String  getInterests() {
-        return interests;
-    }
-
-    public String getRegistrationId() {
-        return registrationId;
     }
 
     public void setRegistrationId(String registrationId) {
@@ -130,11 +92,11 @@ public class RegistrationRequest {
     }
 
     public void setInterests(String interests) {
-        this.interests = interests;
-    }
-
-    public String getFbToken() {
-        return fbToken;
+        if (interests != null && interests.length() > 0) {
+            this.interests = interests.replaceAll(",([^ ])", ";$1").split(";");
+        } else {
+            this.interests = new String[0];
+        }
     }
 
     public void setFbToken(String fbToken) {

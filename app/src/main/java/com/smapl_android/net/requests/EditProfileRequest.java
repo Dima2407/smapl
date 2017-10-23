@@ -17,45 +17,29 @@ public class EditProfileRequest {
     private String gender;
 
     @SerializedName("interest")
-    private String interests;
-
-    public String getName() {
-        return name;
-    }
+    private String[] interests= new String[0];
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getAge() {
-        return age;
-    }
-
     public void setAge(String age) {
         this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public String getInterests() {
-        return interests;
-    }
-
     public void setInterests(String interests) {
-        this.interests = interests;
+        if (interests != null && interests.length() > 0) {
+            this.interests = interests.replaceAll(",([^ ])", ";$1").split(";");
+        } else {
+            this.interests = new String[0];
+        }
     }
 }

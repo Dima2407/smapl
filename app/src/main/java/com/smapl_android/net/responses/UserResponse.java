@@ -1,6 +1,10 @@
 package com.smapl_android.net.responses;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Arrays;
 
 public class UserResponse extends ServerResponse<UserResponse>{
 
@@ -32,7 +36,7 @@ public class UserResponse extends ServerResponse<UserResponse>{
     private String carPhoto;
 
     @SerializedName("interest")
-    private String interests;
+    private String[] interests;
 
     @SerializedName("created_at")
     private String createdAt;
@@ -45,6 +49,9 @@ public class UserResponse extends ServerResponse<UserResponse>{
 
     @SerializedName("total_amount")
     private Double totalAmount;
+
+    @SerializedName("balance")
+    private Double balance;
 
     @SerializedName("total_distance")
     private Double totalDistance;
@@ -78,7 +85,7 @@ public class UserResponse extends ServerResponse<UserResponse>{
     }
 
     public String getInterests() {
-        return getResult().interests;
+        return TextUtils.join(",", getResult().interests);
     }
 
     public String getAge() {
@@ -101,5 +108,10 @@ public class UserResponse extends ServerResponse<UserResponse>{
     public double getTotalDistance() {
         Double totalDistance = getResult().totalDistance;
         return totalDistance != null ? totalDistance : 0;
+    }
+
+    public double getBalance() {
+        Double balance = getResult().balance;
+        return balance != null ? balance : 0;
     }
 }

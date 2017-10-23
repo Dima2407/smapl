@@ -330,8 +330,8 @@
     <string name="history">Список поездок</string>
     <string name="api_error_450">Такого email нет в базе</string>
     <string name="api_error_451">Неверный телефон, или пароль</string>
-    <string name="api_error_452">Такой телефон уже есть в базе</string>
-    <string name="api_error_453">Такой email уже есть в базе</string>
+    <string name="api_error_453">Такой телефон уже есть в базе</string>
+    <string name="api_error_452">Такой email уже есть в базе</string>
     <string name="api_error_454">Вам следует выбрать компанию и послать запрос «Принять участие»</string>
     <string name="next">Далее</string>
     <string name="name_on_card">Имя на карте</string>
@@ -347,4 +347,7 @@
     <string name="result_ok">Операция прошла успешно</string>
     <string name="result_error">Ошибка. Операция отменена</string>
     <string name="error">Ошибка</string>
+    <string name="join_campaign">Запрос на участие в кампании отправлен, Администратор свяжется с вами в ближайшее время.</string>
+    <string name="withdraw_amount">Сумма</string>
+    <string name="withdraw_success">Запрос выполнен. Вам на почту придет подтверждение</string>
 </resources>
