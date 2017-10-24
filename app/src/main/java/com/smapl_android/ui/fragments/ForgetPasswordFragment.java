@@ -47,12 +47,14 @@ public class ForgetPasswordFragment extends BaseFragment {
                 @Override
                 public void onSuccess(Boolean result) {
                     if (result) {
-                        showMessage(getString(R.string.password_changed), new Runnable() {
+                        getCoreActivity().showMessage(getString(R.string.app_name), getString(R.string.password_rest_send), new Runnable() {
                             @Override
                             public void run() {
                                 onClickBack();
                             }
                         });
+                    }else {
+                        getCoreActivity().showMessage(getString(R.string.app_name), getString(R.string.password_rest_not_send));
                     }
                 }
             });

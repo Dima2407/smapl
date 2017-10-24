@@ -352,4 +352,6 @@
     <string name="join_campaign">Запрос на участие в кампании отправлен, Администратор свяжется с вами в ближайшее время.</string>
     <string name="withdraw_amount">Сумма</string>
     <string name="withdraw_success">Запрос выполнен. Вам на почту придет подтверждение</string>
+    <string name="password_rest_send">На Ваш email прийдет новый пароль</string>
+    <string name="password_rest_not_send">Проверьте имейл</string>
 </resources>

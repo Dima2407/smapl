@@ -34,10 +34,7 @@
                 android:layout_height="wrap_content"
                 custom:centerText="@string/obtain_money"
                 custom:leftClick="@{() -> presenter.onClickBack()}"
-                custom:leftText="@string/back"
-                custom:rightClick="@{() -> presenter.onNextClicked()}"
-                custom:rightEnabled="@{card.nextActive}"
-                custom:rightText="@string/next" />
+                custom:leftText="@string/back"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,7 +47,6 @@
                 <com.smapl_android.ui.widgets.UserInfoBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
                     custom:carInfo="@{user.carBrandModel}"
                     custom:carPhoto="@{user.carPhoto}"
                     custom:leftSpace="6dp"
@@ -149,6 +145,7 @@
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:onClick="@{() -> presenter.onNextClicked()}"
+                    android:enabled="@{card.nextActive}"
                     android:textSize="12sp" />
             </LinearLayout>
 

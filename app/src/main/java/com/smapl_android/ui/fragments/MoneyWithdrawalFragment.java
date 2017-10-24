@@ -41,7 +41,12 @@ public class MoneyWithdrawalFragment extends BaseFragment {
 
                     if (result) {
                         getCoreActivity().showMessage(getString(R.string.app_name),
-                                getString(R.string.withdraw_success));
+                                getString(R.string.withdraw_success), new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        onClickBack();
+                                    }
+                                });
                     }
                 }
             });
