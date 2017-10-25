@@ -143,7 +143,7 @@
                     android:background="#7dcceb"
                     android:text="Запросить вывод денег"
                     android:textAllCaps="false"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/btn_withdraw_color"
                     android:onClick="@{() -> presenter.onNextClicked()}"
                     android:enabled="@{card.nextActive}"
                     android:textSize="12sp" />
