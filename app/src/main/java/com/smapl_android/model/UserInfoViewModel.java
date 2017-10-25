@@ -47,7 +47,6 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
     public final ObservableField<String> carBrandError = new ObservableField<>();
     public final ObservableField<String> carColorError = new ObservableField<>();
     public final ObservableField<String> phoneError = new ObservableField<>();
-    public final ObservableField<String> passwordError = new ObservableField<>();
 
     public final ObservableField<Boolean> nextActive = new ObservableField<>(false);
     private Validator<String> nameValidator;
@@ -59,7 +58,6 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
     private Validator<String> genderValidator;
     private Validator<String> ageValidator;
     private Validator<String> phoneValidator;
-    private Validator<String> passwordValidator;
 
     private SparseBooleanArray errorSum = new SparseBooleanArray();
 
@@ -93,7 +91,6 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         carBrandValidator = Validators.getCarBrandValidator(context);
         carColorValidator = Validators.getCarColorValidator(context);
         phoneValidator = Validators.getPhoneValidator(context);
-        passwordValidator = Validators.getPasswordValidator(context);
 
         addErrorWatching(name, nameError, nameValidator);
         addErrorWatching(email, emailError, emailValidator);
@@ -105,7 +102,6 @@ public class UserInfoViewModel extends BaseObservable implements Parcelable {
         addErrorWatching(carYear, carYearError, carYearValidator);
         addErrorWatching(carColor, carColorError, carColorValidator);
         addErrorWatching(phone, phoneError, phoneValidator);
-        addErrorWatching(password, passwordError, passwordValidator);
 
     }
 

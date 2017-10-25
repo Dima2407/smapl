@@ -16,6 +16,8 @@ import com.smapl_android.databinding.FragmentAboutYourselfBinding;
 import com.smapl_android.model.UserInfoViewModel;
 import com.smapl_android.ui.base.BaseFragment;
 
+import java.util.UUID;
+
 
 public class AboutYourselfFragment extends BaseFragment {
 
@@ -36,10 +38,13 @@ public class AboutYourselfFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (TextUtils.isEmpty(user.phone.get()) || TextUtils.isEmpty(user.password.get())) {
+        if (TextUtils.isEmpty(user.phone.get())) {
             view.findViewById(R.id.layout_phone_number_about_yourself).setVisibility(View.VISIBLE);
-            view.findViewById(R.id.layout_password_about_yourself).setVisibility(View.VISIBLE);
         }
+    }
+
+    public String generateRandomPassword() {
+        return UUID.randomUUID().toString().substring(0, 7);
     }
 
     @Override
@@ -68,6 +73,9 @@ public class AboutYourselfFragment extends BaseFragment {
                         }
                     }
                 });
+        if (TextUtils.isEmpty(user.password.get())) {
+            user.password.set(generateRandomPassword());
+        }
         getCoreService().registration(user.toRegistration(getContext()), request);
     }
 
