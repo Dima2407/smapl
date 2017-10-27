@@ -12,25 +12,27 @@ public interface NetworkService {
 
     //region auth
 
-    void login(String login, String password, final NetworkServiceImpl.OnResultCallback<LoginResponse, Throwable> callback);
+    void login(String login, String password, final OnResultCallback<LoginResponse, Throwable> callback);
 
-    void registration(RegistrationRequest request, final NetworkService.OnResultCallback<RegistrationResponse, Throwable> callback);
+    void registration(RegistrationRequest request, final OnResultCallback<RegistrationResponse, Throwable> callback);
 
     void logout(String token, OnResultCallback<Boolean, Throwable> callback);
 
     void joinCampaign(int id, String token, OnResultCallback<Boolean, Throwable> callback);
 
+    void getCampaign(int id, String token, OnResultCallback<GetCampaignResponse, Throwable> callback);
+
     void editPassword(String token, String oldPassword, String newPassword,
-                      final NetworkService.OnResultCallback<Boolean, Throwable> callback);
+                      final OnResultCallback<Boolean, Throwable> callback);
 
     //endregion
 
-    void getUserById(int id, String token, NetworkService.OnResultCallback<UserResponse, Throwable> callback);
+    void getUserById(int id, String token, OnResultCallback<UserResponse, Throwable> callback);
 
-    void restorePassword(String login, final NetworkService.OnResultCallback<Boolean, Throwable> callback);
+    void restorePassword(String login, final OnResultCallback<Boolean, Throwable> callback);
 
 
-    void editProfile(int userId, String token, EditProfileRequest request, final NetworkService.OnResultCallback<UserResponse, Throwable> callback);
+    void editProfile(int userId, String token, EditProfileRequest request, final OnResultCallback<UserResponse, Throwable> callback);
 
     void updateCar(int userId, String token, UpdateCarRequest updateUserRequest, OnResultCallback<UserResponse, Throwable> callback);
 

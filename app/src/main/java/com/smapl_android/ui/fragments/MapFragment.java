@@ -45,20 +45,20 @@ public class MapFragment extends BaseFragment {
     }
 
 
-    public class Presenter{
+    public class Presenter {
 
         public void startGeolocationService() {
 
-            LocationManager lm = (LocationManager)getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+            LocationManager lm = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
             boolean gps_enabled = false;
 
             try {
                 gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            } catch(Exception ex) {}
+            } catch (Exception ex) {
+            }
 
 
-
-            if(!gps_enabled) {
+            if (!gps_enabled) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                 dialog.setTitle(getContext().getResources().getString(R.string.app_name));
                 dialog.setMessage(getContext().getResources().getString(R.string.gpsOffMessage));
@@ -66,7 +66,7 @@ public class MapFragment extends BaseFragment {
                     @Override
                     public void onClick(DialogInterface paramDialogInterface, int paramInt) {
                         // TODO Auto-generated method stub
-                        Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         getContext().startActivity(myIntent);
                         //get gps
                     }
@@ -80,7 +80,7 @@ public class MapFragment extends BaseFragment {
                     }
                 });
                 dialog.show();
-            return;
+                return;
             }
             getCoreActivity().runWithPermissions(new OnPermissionsRequestListener() {
                 @Override
@@ -115,6 +115,8 @@ public class MapFragment extends BaseFragment {
                     getCoreActivity().getUserInfo().inDrive.set(false);
                     getCoreActivity().getUserInfo().currentDrive.set(result.getTotalDistance());
                     getCoreActivity().getUserInfo().currentEarn.set(result.getTotalAmount());
+                    getCoreActivity().showMessage(getString(R.string.trip_end),
+                            getString(R.string.trip_end_message, result.getTotalDistance(), result.getTotalAmount()));
                 }
             });
             getCoreService().stopTracking(request, lastLocations);

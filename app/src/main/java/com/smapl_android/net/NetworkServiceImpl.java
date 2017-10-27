@@ -220,4 +220,9 @@ class NetworkServiceImpl implements NetworkService {
         Call<LoginResponse> responseCall = apiService.fbLogin(request);
         responseCall.enqueue(createCallback(callback));
     }
+
+    @Override
+    public void getCampaign(int id, String token, OnResultCallback<GetCampaignResponse, Throwable> callback) {
+        apiService.getCampaign(id, token).enqueue(createCallback(callback));
+    }
 }

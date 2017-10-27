@@ -112,20 +112,20 @@
 
                 <TextView
                     android:id="@+id/income_points_TextView"
-                    android:layout_width="106dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@{@string/total_earn_format(user.currentEarn)}"
+                    android:text="@{@string/total_earn_format(user.price)}"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
-                    android:textSize="22.2sp" />
+                    android:textSize="@dimen/name_profile_size" />
 
                 <TextView
                     android:id="@+id/distance_TextView"
-                    android:layout_width="106dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/income_points_TextView"
                     android:ellipsize="end"
                     android:maxLines="1"
@@ -136,9 +136,11 @@
 
                 <TextView
                     android:id="@+id/income_points_name_TextView"
-                    android:layout_width="106dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignRight="@+id/income_points_TextView"
+                    android:layout_alignLeft="@+id/income_points_TextView"
+                    android:gravity="center"
                     android:layout_below="@id/income_points_TextView"
                     android:ellipsize="end"
                     android:maxLines="1"
@@ -150,9 +152,11 @@
 
                 <TextView
                     android:id="@+id/distance_name_TextView"
-                    android:layout_width="106dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:layout_alignLeft="@+id/distance_TextView"
+                    android:layout_alignRight="@+id/distance_TextView"
                     android:layout_below="@id/distance_TextView"
                     android:layout_gravity="fill"
                     android:ellipsize="end"

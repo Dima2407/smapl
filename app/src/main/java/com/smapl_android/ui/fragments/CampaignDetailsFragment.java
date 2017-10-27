@@ -23,6 +23,7 @@ import com.smapl_android.databinding.ListItemStickerBinding;
 import com.smapl_android.model.StickerVM;
 import com.smapl_android.model.CampaignVM;
 import com.smapl_android.net.responses.GetCampaignListResponse;
+import com.smapl_android.net.responses.GetCampaignResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
 import java.net.URI;
@@ -30,7 +31,7 @@ import java.util.List;
 
 public class CampaignDetailsFragment extends BaseFragment {
     private RecyclerView stickersRecycleView;
-    private final static String EXTRA_CAMPAIGN = GetCampaignListResponse.Campaign.class.getName();
+    private final static String EXTRA_CAMPAIGN = GetCampaignResponse.Campaign.class.getName();
     private Presenter presenter;
 
     @Nullable
@@ -52,15 +53,15 @@ public class CampaignDetailsFragment extends BaseFragment {
         stickersRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        GetCampaignListResponse.Campaign campaign = getCampaign();
+        GetCampaignResponse.Campaign campaign = getCampaign();
 
         CampaignsDetailsListAdapter campaignsDetailsListAdapter = new CampaignsDetailsListAdapter(campaign, presenter);
 
         stickersRecycleView.setAdapter(campaignsDetailsListAdapter);
     }
 
-    private GetCampaignListResponse.Campaign getCampaign() {
-        return (GetCampaignListResponse.Campaign) getArguments().getSerializable(EXTRA_CAMPAIGN);
+    private GetCampaignResponse.Campaign getCampaign() {
+        return (GetCampaignResponse.Campaign) getArguments().getSerializable(EXTRA_CAMPAIGN);
     }
 
     @Override
@@ -68,7 +69,7 @@ public class CampaignDetailsFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    public static Fragment newInstance(GetCampaignListResponse.Campaign campaign) {
+    public static Fragment newInstance(GetCampaignResponse.Campaign campaign) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(EXTRA_CAMPAIGN, campaign);
         CampaignDetailsFragment fragment = new CampaignDetailsFragment();
@@ -92,7 +93,7 @@ public class CampaignDetailsFragment extends BaseFragment {
         }
 
         public void joinClicked() {
-            GetCampaignListResponse.Campaign campaign = getCampaign();
+            GetCampaignResponse.Campaign campaign = getCampaign();
             CoreRequest<Boolean> request = getCoreActivity().newWaitingRequest(new SuccessOutput<Boolean>() {
                 @Override
                 public void onSuccess(Boolean result) {
@@ -113,11 +114,11 @@ public class CampaignDetailsFragment extends BaseFragment {
     private class CampaignsDetailsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private static final int HEADER = 0;
         private static final int ITEM = 1;
-        private GetCampaignListResponse.Campaign campaign;
+        private GetCampaignResponse.Campaign campaign;
         private Presenter presenter;
 
 
-        public CampaignsDetailsListAdapter(GetCampaignListResponse.Campaign campaign, Presenter presenter) {
+        public CampaignsDetailsListAdapter(GetCampaignResponse.Campaign campaign, Presenter presenter) {
 
             this.campaign = campaign;
             this.presenter = presenter;

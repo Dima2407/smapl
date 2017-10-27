@@ -16,6 +16,7 @@ import com.smapl_android.databinding.FragmentCampaignListBinding;
 import com.smapl_android.databinding.ListItemCampaignBinding;
 import com.smapl_android.model.CampaignVM;
 import com.smapl_android.net.responses.GetCampaignListResponse;
+import com.smapl_android.net.responses.GetCampaignResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -44,9 +45,9 @@ public class CampaignListFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final CoreRequest<List<GetCampaignListResponse.Campaign>> request = getCoreActivity().newWaitingRequest(new SuccessOutput<List<GetCampaignListResponse.Campaign>>() {
+        final CoreRequest<List<GetCampaignResponse.Campaign>> request = getCoreActivity().newWaitingRequest(new SuccessOutput<List<GetCampaignResponse.Campaign>>() {
                     @Override
-                    public void onSuccess(List<GetCampaignListResponse.Campaign> result) {
+                    public void onSuccess(List<GetCampaignResponse.Campaign> result) {
                         campaignRecycleView.setAdapter(new CampaignAdapter(result, presenter));
                     }
                 });
@@ -59,9 +60,9 @@ public class CampaignListFragment extends BaseFragment {
         private final List<CampaignVM> items = new ArrayList<>();
         private final Presenter presenter;
 
-        CampaignAdapter(List<GetCampaignListResponse.Campaign> result, Presenter presenter) {
+        CampaignAdapter(List<GetCampaignResponse.Campaign> result, Presenter presenter) {
             this.presenter = presenter;
-            for (GetCampaignListResponse.Campaign c : result) {
+            for (GetCampaignResponse.Campaign c : result) {
                 items.add(CampaignVM.forList(c));
             }
         }

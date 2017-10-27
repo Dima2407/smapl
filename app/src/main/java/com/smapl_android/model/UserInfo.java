@@ -33,6 +33,8 @@ public class UserInfo extends BaseObservable {
 
     public final ObservableField<Boolean> inDrive = new ObservableField<>(false);
 
+    public final ObservableField<Double> price = new ObservableField<Double>(0.0);
+
     private UserResponse response;
 
     public void apply(Resources resources, UserResponse response){

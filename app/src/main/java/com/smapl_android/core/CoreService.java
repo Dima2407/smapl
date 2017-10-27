@@ -39,7 +39,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -196,7 +195,7 @@ public class CoreService {
     }
 
 
-    public void getCampaigns(final CoreRequest<List<GetCampaignListResponse.Campaign>> coreRequest) {
+    public void getCampaigns(final CoreRequest<List<GetCampaignResponse.Campaign>> coreRequest) {
         String token = sessionStorage.getAuthKey();
         networkServiceImpl.getCampaigns(token, new NetworkService.OnResultCallback<GetCampaignListResponse, Throwable>() {
             @Override
@@ -214,6 +213,32 @@ public class CoreService {
                             @Override
                             public void run() {
                                 coreRequest.processResult(Arrays.asList(result.getCampaigns()));
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    public void getCampaign(final CoreRequest<GetCampaignResponse.Campaign> coreRequest) {
+        String token = sessionStorage.getAuthKey();
+        networkServiceImpl.getCampaign(getUserInfo().getResponse().getCampaignId(), token, new NetworkService.OnResultCallback<GetCampaignResponse, Throwable>() {
+            @Override
+            public void onResult(final GetCampaignResponse result, final Throwable error) {
+                if (coreRequest != null) {
+                    if (error != null) {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processError(error);
+                            }
+                        });
+                    } else {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                coreRequest.processResult(result.getCampaign());
                             }
                         });
                     }
@@ -380,7 +405,7 @@ public class CoreService {
         final String token = sessionStorage.getAuthKey();
         networkServiceImpl.startTracking(token, CoordinateRequest.start(), new NetworkService.OnResultCallback<TrackingResponse, Throwable>() {
             @Override
-            public void onResult(final TrackingResponse result, final Throwable error) {
+            public void onResult(final TrackingResponse trackingResult, final Throwable error) {
                 final NetworkService.OnResultCallback<TrackingResponse, Throwable> startCallback = this;
                 if (coreRequest != null) {
                     if (error != null) {
@@ -404,12 +429,25 @@ public class CoreService {
                             }
                         });
                     } else {
-                        uiHandler.post(new Runnable() {
+                        networkServiceImpl.getCampaign(getUserInfo().getResponse().getCampaignId(), token, new NetworkService.OnResultCallback<GetCampaignResponse, Throwable>() {
                             @Override
-                            public void run() {
-                                coreRequest.processResult(result);
+                            public void onResult(GetCampaignResponse result, Throwable error) {
+                                final double price;
+                                if(error != null){
+                                    price = 0.0;
+                                }else {
+                                    price = result.getCampaign().getPrice();
+                                }
+                                uiHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        getUserInfo().price.set(price);
+                                        coreRequest.processResult(trackingResult);
+                                    }
+                                });
                             }
                         });
+
                     }
                 }
             }

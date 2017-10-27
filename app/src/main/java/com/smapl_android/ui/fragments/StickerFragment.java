@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.smapl_android.R;
 import com.smapl_android.databinding.FragmentStickerBinding;
 import com.smapl_android.net.responses.GetCampaignListResponse;
+import com.smapl_android.net.responses.GetCampaignResponse;
 import com.smapl_android.ui.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -40,8 +41,8 @@ public class StickerFragment extends BaseFragment {
     }
 
 
-    private GetCampaignListResponse.Campaign getCampaign() {
-        return (GetCampaignListResponse.Campaign) getArguments().getSerializable(EXTRA_CAMPAIGN);
+    private GetCampaignResponse.Campaign getCampaign() {
+        return (GetCampaignResponse.Campaign) getArguments().getSerializable(EXTRA_CAMPAIGN);
     }
 
 
@@ -54,7 +55,7 @@ public class StickerFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    public static Fragment newInstance(GetCampaignListResponse.Campaign campaign, String url) {
+    public static Fragment newInstance(GetCampaignResponse.Campaign campaign, String url) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(EXTRA_CAMPAIGN, campaign);
         bundle.putString(EXTRA_URL, url);
@@ -73,7 +74,7 @@ public class StickerFragment extends BaseFragment {
         private int currentIndex;
         private List<String> stickers;
 
-        public Presenter(GetCampaignListResponse.Campaign campaign, String url) {
+        public Presenter(GetCampaignResponse.Campaign campaign, String url) {
             stickers = campaign.getStickers();
             currentIndex = stickers.indexOf(url);
             if(currentIndex < 0) {

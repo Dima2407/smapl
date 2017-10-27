@@ -59,4 +59,7 @@ public interface ApiService {
 
     @POST("api/campaign/join/{campaignId}")
     Call<EmptyResponse> joinCampaign(@Path("campaignId") int id, @Query("access_token") String token);
+
+    @GET("api/campaign/{campaignId}")
+    Call<GetCampaignResponse> getCampaign(@Path("campaignId") int id, @Query("access_token") String token);
 }

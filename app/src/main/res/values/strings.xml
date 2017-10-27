@@ -73,7 +73,7 @@
     <string name="man">мужчина</string>
     <string name="woman">женщина</string>
     <string name="wrong_age">Некорректный возраст</string>
-    <string name="balance_format">Баланс: %.2f грн</string>
+    <string name="balance_format">Баланс: %.2f баллов</string>
     <string name="campaign_price_format">Стоимость: %d баллов</string>
     <string name="total_earn_withdraw_format">Баланс: %.2f баллов</string>
     <string name="total_earn_format">%.2f баллов</string>
@@ -354,4 +354,6 @@
     <string name="withdraw_success">Запрос выполнен. Вам на почту придет подтверждение</string>
     <string name="password_rest_send">На Ваш email прийдет новый пароль</string>
     <string name="password_rest_not_send">Проверьте имейл</string>
+    <string name="trip_end">Поездка оконченна</string>
+    <string name="trip_end_message" formatted="false">Проехали: %.3f км%nЗаработали: %.2f баллов</string>
 </resources>

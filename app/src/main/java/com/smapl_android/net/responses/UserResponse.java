@@ -56,6 +56,9 @@ public class UserResponse extends ServerResponse<UserResponse>{
     @SerializedName("total_distance")
     private Double totalDistance;
 
+    @SerializedName("campaign_id")
+    private Integer campaignId;
+
     public String getName() {
         return getResult().name;
     }
@@ -113,5 +116,10 @@ public class UserResponse extends ServerResponse<UserResponse>{
     public double getBalance() {
         Double balance = getResult().balance;
         return balance != null ? balance : 0;
+    }
+
+    public int getCampaignId() {
+        Integer id = getResult().campaignId;
+        return id != null ? id : 0;
     }
 }
